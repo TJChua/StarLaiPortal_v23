@@ -160,6 +160,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ChangePasswordValidationControllers.cs" />
+    <Compile Include="Controllers\ChangePasswordValidationControllers.Designer.cs">
+      <DependentUpon>ChangePasswordValidationControllers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\WebModificationControllers.cs">
       <SubType>Component</SubType>
     </Compile>
