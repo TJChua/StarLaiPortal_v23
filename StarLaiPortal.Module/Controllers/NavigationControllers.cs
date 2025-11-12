@@ -34,6 +34,7 @@ using System.Web.UI.WebControls;
 // 2024-02-04 - add global item inquiry - ver 1.0.22
 // 2025-08-18 - add Item Bin Inquiry Status - ver 1.0.24
 // 2025-09-22 - add Container Tracking Inquiry - ver 1.0.25
+// 2025-11-04 - Add Security control - ver 1.0.26
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -546,6 +547,36 @@ namespace StarLaiPortal.Module.Controllers
                 e.Handled = true;
             }
             // End ver 1.0.25
+
+            // Start ver 1.0.2
+            if (e.ActionArguments.SelectedChoiceActionItem.Id == "SecurityControl_ListView")
+            {
+                IObjectSpace objectSpace = Application.CreateObjectSpace(typeof(SecurityControl));
+                SecurityControl securitycontrol = objectSpace.FindObject<SecurityControl>(new BinaryOperator("Oid", 1));
+
+                if (securitycontrol != null)
+                {
+                    DetailView detailView = Application.CreateDetailView(objectSpace, securitycontrol);
+                    detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+                    e.ActionArguments.ShowViewParameters.CreatedView = detailView;
+
+                    e.Handled = true;
+                }
+                else
+                {
+                    SecurityControl newsecurity = objectSpace.CreateObject<SecurityControl>();
+
+                    DetailView detailView = Application.CreateDetailView(objectSpace, newsecurity);
+                    detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+
+                    objectSpace.CommitChanges();
+                    objectSpace.Refresh();
+
+                    e.ActionArguments.ShowViewParameters.CreatedView = detailView;
+                    e.Handled = true;
+                }
+            }
+            // End ver 1.0.2
 
             // Start ver 1.0.15
             if (DateTime.Now.Minute.ToString("00").Substring(1, 1) == "0" ||

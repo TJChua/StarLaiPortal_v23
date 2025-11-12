@@ -15,7 +15,8 @@ using System.Web;
 using System.Net.Http;
 using Microsoft.Owin;
 
-// 2024-04-04 add login new loginpage ver 1.0.15
+// 2024-04-04 - add login new loginpage - ver 1.0.15
+// 2025-11-04 - Add Security control - ver 1.0.26
 
 namespace StarLaiPortal.Web {
     // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Web.WebApplication
@@ -61,6 +62,10 @@ namespace StarLaiPortal.Web {
             // Start ver 1.0.15
             this.LoggedOff += Application_LoggedOff;
             // End ver 1.0.15
+            // Start ver 1.0.26
+            this.LoggedOn += Application_LoggedOn;
+            this.LoggingOff += Application_LoggingOff;
+            // End ver 1.0.26
         }
 
         protected override void OnLoggingOn(LogonEventArgs args)
@@ -202,6 +207,82 @@ namespace StarLaiPortal.Web {
 
         protected override bool OnLogonFailed(object logonParameters, Exception e)
         {
+             // Start ver 1.0.26
+            string query = "";
+            string error = "";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
+
+            query = "SELECT ISNULL(AccLocked, 0) FROM [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..PermissionPolicyUser " +
+                "WHERE UserName = '" + logonParameters.GetType().GetProperty("UserName").GetValue(logonParameters) + "'";
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
+            SqlCommand cmdsecurity = new SqlCommand(query, conn);
+            SqlDataReader readersecurity = cmdsecurity.ExecuteReader();
+            while (readersecurity.Read())
+            {
+                if (readersecurity.GetBoolean(0) == true)
+                {
+                    if (error == "")
+                    {
+                        error = "Your user ID has been locked. Please contact the system administrator to have it unlocked.";
+                    }
+                }
+            }
+            cmdsecurity.Dispose();
+            conn.Close();
+
+            if (e.Message != null)
+            {
+                if (logonParameters.GetType().GetProperty("UserName").GetValue(logonParameters).ToString().ToUpper() != "ADMIN")
+                {
+                    query = "UPDATE T0 SET T0.LoginFailedCount = ISNULL(T0.LoginFailedCount, 0) + 1, " +
+                        "T0.AccLocked = CASE WHEN ISNULL(T0.LoginFailedCount, 0) + 1 >= T1.FailedLoginCount THEN 1 ELSE 0 END " +
+                        "FROM [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..PermissionPolicyUser T0 " +
+                        "INNER JOIN [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..SecurityControl T1 on T1.OID = 1 " +
+                        "WHERE T0.UserName = '" + logonParameters.GetType().GetProperty("UserName").GetValue(logonParameters) + "'";
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmdUpd = new SqlCommand(query, conn);
+                    SqlDataReader readerUpd = cmdUpd.ExecuteReader();
+                    cmdUpd.Dispose();
+                    conn.Close();
+
+                    if (error == "")
+                    {
+                        error = e.Message;
+                    }
+                }
+
+                if (error == "")
+                {
+                    error = e.Message;
+                }
+            }
+
+            if (error != "")
+            {
+                query = "INSERT INTO [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..LoginHistory VALUES " +
+                    "(GETDATE(), '" + logonParameters.GetType().GetProperty("UserName").GetValue(logonParameters) + "', '', 'Fail', 'Login')";
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+                SqlCommand cmdinsHis = new SqlCommand(query, conn);
+                SqlDataReader readerinsHis = cmdinsHis.ExecuteReader();
+                cmdinsHis.Dispose();
+                conn.Close();
+
+                throw new UserFriendlyException(error);
+            }
+            // End ver 1.0.26
+
             return false;
         }
 
@@ -211,5 +292,79 @@ namespace StarLaiPortal.Web {
             Redirect(ConfigurationManager.AppSettings["CommonUrl"].ToString());
         }
         // End ver 1.0.15
+
+        // Start ver 1.0.26
+        private void Application_LoggedOn(object sender, EventArgs e)
+        {
+            string query = "";
+            string FromTime = "";
+            string ToTime = "";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
+            ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+            if (!user.IsUserInRole("Administrators"))
+            {
+                query = "SELECT AccessRestrictedFrom, AccessRestrictedTo " +
+                    "FROM [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..SecurityControl " +
+                    "WHERE OID = 1 AND GCRecord is null";
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+                SqlCommand cmdsecurity = new SqlCommand(query, conn);
+                SqlDataReader readersecurity = cmdsecurity.ExecuteReader();
+                while (readersecurity.Read())
+                {
+                    FromTime = readersecurity.GetString(0);
+                    ToTime = readersecurity.GetString(1);
+                }
+                cmdsecurity.Dispose();
+                conn.Close();
+
+                if (!(DateTime.Now.TimeOfDay < TimeSpan.Parse(ToTime) && DateTime.Now.TimeOfDay > TimeSpan.Parse(FromTime)))
+                {
+                    throw new UserFriendlyException("Access Restricted. Operation portal is available only between " + DateTime.Parse(FromTime).ToString("hh:mm") + " AM " +
+                        "and " + DateTime.Parse(ToTime).ToString("hh:mm") + " PM.");
+                }
+
+                if (user.AccLocked == true)
+                {
+                    throw new UserFriendlyException("Your user ID has been locked. Please contact the system administrator to have it unlocked.");
+                }
+            }
+
+            query = "INSERT INTO [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..LoginHistory VALUES " +
+                "(GETDATE(), '" + user.UserName + "', '" + user.Staff.StaffName + "', 'Success', 'Login')";
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
+            SqlCommand cmdinsHis = new SqlCommand(query, conn);
+            SqlDataReader readerinsHis = cmdinsHis.ExecuteReader();
+            cmdinsHis.Dispose();
+            conn.Close();
+        }
+
+        private void Application_LoggingOff(object sender, LoggingOffEventArgs e)
+        {
+            string query = "";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
+            ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+            query = "INSERT INTO [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..LoginHistory VALUES " +
+                "(GETDATE(), '" + user.UserName + "', '" + user.Staff.StaffName + "', 'Success', 'Logout')";
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
+            SqlCommand cmdinsHis = new SqlCommand(query, conn);
+            SqlDataReader readerinsHis = cmdinsHis.ExecuteReader();
+            cmdinsHis.Dispose();
+            conn.Close();
+        }
+        // End ver 1.0.26
     }
 }

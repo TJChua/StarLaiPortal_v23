@@ -287,6 +287,7 @@
     <Compile Include="BusinessObjects\Setup\ItemInquiryDefault.cs" />
     <Compile Include="BusinessObjects\Setup\PaymentType.cs" />
     <Compile Include="BusinessObjects\Setup\PriorityType.cs" />
+    <Compile Include="BusinessObjects\Setup\SecurityControl.cs" />
     <Compile Include="BusinessObjects\Setup\Series.cs" />
     <Compile Include="BusinessObjects\Setup\StaffInfo.cs" />
     <Compile Include="BusinessObjects\Setup\Transporter.cs" />
