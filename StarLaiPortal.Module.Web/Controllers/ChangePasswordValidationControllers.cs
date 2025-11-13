@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Text;
+using StarLaiPortal.Module.BusinessObjects;
 
 namespace StarLaiPortal.Module.Web.Controllers
 {
@@ -53,7 +54,9 @@ namespace StarLaiPortal.Module.Web.Controllers
         private void AcceptAction_Executing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             ChangePasswordOnLogonParameters parameters = View.CurrentObject as ChangePasswordOnLogonParameters;
+            ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
             string query = "";
+            string error = "";
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
 
@@ -70,30 +73,62 @@ namespace StarLaiPortal.Module.Web.Controllers
             {
                 if (parameters != null && parameters.NewPassword.Length < readersecurity.GetInt32(0))
                 {
-                    throw new UserFriendlyException("Password too short.");
+                    if (error == "")
+                    {
+                        error = "Password too short.";
+                    }
                 }
 
                 if (parameters != null && parameters.NewPassword.Count(char.IsUpper) < readersecurity.GetInt32(1))
                 {
-                    throw new UserFriendlyException("Password must contain at least " + readersecurity.GetInt32(1) + " upper case.");
+                    if (error == "")
+                    {
+                        error = "Password must contain at least " + readersecurity.GetInt32(1) + " upper case.";
+                    }
                 }
 
                 if (parameters != null && parameters.NewPassword.Count(char.IsLower) < readersecurity.GetInt32(2))
                 {
-                    throw new UserFriendlyException("Password must contain at least " + readersecurity.GetInt32(2) + " lower case.");
+                    if (error == "")
+                    {
+                        error = "Password must contain at least " + readersecurity.GetInt32(2) + " lower case.";
+                    }
                 }
 
                 if (parameters != null && parameters.NewPassword.Count(char.IsDigit) < readersecurity.GetInt32(3))
                 {
-                    throw new UserFriendlyException("Password must contain at least " + readersecurity.GetInt32(3) + " digit.");
+                    if (error == "")
+                    {
+                        error = "Password must contain at least " + readersecurity.GetInt32(3) + " digit.";
+                    }
                 }
 
                 if (parameters != null && parameters.NewPassword.Where(x => !char.IsLetterOrDigit(x)).Count() < readersecurity.GetInt32(4))
                 {
-                    throw new UserFriendlyException("Password must contain at least " + readersecurity.GetInt32(4) + " special character.");
+                    if (error == "")
+                    {
+                        error = "Password must contain at least " + readersecurity.GetInt32(4) + " special character.";
+                    }
                 }
             }
             cmdsecurity.Dispose();
+            conn.Close();
+
+            if (error != "")
+            {
+                throw new UserFriendlyException(error);
+            }
+
+            query = "UPDATE [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..PermissionPolicyUser set LastPasswordChanged = GETDATE() " +
+                "WHERE Oid = '" + user.Oid + "'";
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
+            SqlCommand cmdUpd = new SqlCommand(query, conn);
+            SqlDataReader readerUpd = cmdUpd.ExecuteReader();
+            cmdUpd.Dispose();
             conn.Close();
         }
     }
