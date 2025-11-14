@@ -179,7 +179,7 @@ namespace StarLaiPortal.Module.Controllers
                 }
             // Start ver 1.0.23
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 DocNum = null;
                 return DocNum;

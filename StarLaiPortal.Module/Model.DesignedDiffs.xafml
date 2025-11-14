@@ -6303,6 +6303,36 @@
       </Columns>
     </ListView>
     <ListView Id="SalesReturns_SalesReturnDetails_ListView" AllowEdit="True" />
+    <DetailView Id="SecurityControl_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="SecurityControl" RelativeSize="100">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="18.018018018018019" Caption="Access Restricted" IsNewNode="True">
+                <LayoutItem Id="AccessRestrictedFrom" ViewItem="AccessRestrictedFrom" Index="0" RelativeSize="49.78102189781022" IsNewNode="True" />
+                <LayoutItem Id="AccessRestrictedTo" ViewItem="AccessRestrictedTo" Index="1" RelativeSize="50.21897810218978" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto3d8eddd4-813c-461a-b76c-15ea57b12ea0" ShowCaption="False" Caption="Auto3d8eddd4-813c-461a-b76c-15ea57b12ea0(7)" Direction="Vertical" Index="1" RelativeSize="81.981981981981988" IsNewNode="True">
+                <LayoutGroup Id="Auto7fb3be4e-063e-433d-b0fc-da9e7339c09d" ShowCaption="False" Caption="Auto7fb3be4e-063e-433d-b0fc-da9e7339c09d(8)" Index="0" RelativeSize="100" Direction="Vertical" IsNewNode="True">
+                  <LayoutGroup Id="Auto392df224-c309-4406-86f9-9249c11ea3cb" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="8.791208791208792" IsNewNode="True">
+                    <LayoutItem Id="PasswordExpiredPeriod" ViewItem="PasswordExpiredPeriod" Index="0" RelativeSize="49.929278642149931" IsNewNode="True" />
+                    <LayoutItem Id="Item2" Index="1" RelativeSize="50.070721357850069" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Auto65d416d2-3198-4030-a9eb-2f603e34b77c" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="91.208791208791212" IsNewNode="True">
+                    <LayoutItem Id="FailedLoginCount" ViewItem="FailedLoginCount" Index="0" RelativeSize="49.929278642149931" IsNewNode="True" />
+                    <LayoutItem Id="Item3" Index="1" RelativeSize="50.070721357850069" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="PasswordExpiredPeriod" Index="1" RelativeSize="5.8558558558558556" Removed="True" />
+              <LayoutItem Id="FailedLoginCount" Index="2" RelativeSize="76.126126126126124" Removed="True" />
+              <LayoutItem Id="AccessRestrictedFrom" Removed="True" />
+              <LayoutItem Id="AccessRestrictedTo" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="Series_AuditTrail_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
       <Columns>
         <ColumnInfo Id="PropertyName" Index="-1" />

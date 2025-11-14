@@ -415,7 +415,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         private vwEIVClass _EIVClassification;
         [NoForeignKey]
         [XafDisplayName("Classification")]
-        [RuleRequiredField(DefaultContexts.Save)]
+        //[RuleRequiredField(DefaultContexts.Save)]
         [Index(30), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public vwEIVClass EIVClassification
         {

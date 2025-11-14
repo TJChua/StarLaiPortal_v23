@@ -162,7 +162,7 @@ namespace StarLaiPortal.Module.Controllers
             SalesRefundRequests trx = (SalesRefundRequests)masterview.CurrentObject;
             // End ver 1.0.22
 
-            if (trx.IsNew == true)
+            if (trx.DocNum == null)
             {
                 string docprefix = genCon.GetDocPrefix();
                 trx.DocNum = genCon.GenerateDocNum(DocTypeList.SRF, ObjectSpace, TransferType.NA, 0, docprefix);

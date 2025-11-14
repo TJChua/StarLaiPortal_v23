@@ -360,6 +360,10 @@ namespace StarLaiPortal.Module.Controllers
                         }
 
                         srr.Reference = invoiceno;
+
+                        ObjectSpace.CommitChanges();
+                        ObjectSpace.Refresh();
+                        
                         if (srr.DocNum == null)
                         {
                             string docprefix = genCon.GetDocPrefix();
