@@ -252,6 +252,9 @@ namespace StarLaiPortal.Module.Controllers
         {
             StockCountSheet trx = (StockCountSheet)View.CurrentObject;
 
+            ObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
+
             var os = Application.CreateObjectSpace();
             var solution = os.CreateObject<ImportData>();
             solution.Option = new ImportOption();
@@ -285,6 +288,9 @@ namespace StarLaiPortal.Module.Controllers
         private void ImportSheetCountedItems_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
         {
             StockCountSheet trx = (StockCountSheet)View.CurrentObject;
+
+            ObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
 
             var os = Application.CreateObjectSpace();
             var solution = os.CreateObject<ImportData>();

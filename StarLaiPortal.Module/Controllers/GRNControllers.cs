@@ -1047,6 +1047,9 @@ namespace StarLaiPortal.Module.Controllers
         {
             GRN trx = (GRN)View.CurrentObject;
 
+            ObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
+
             var os = Application.CreateObjectSpace();
             var solution = os.CreateObject<ImportData>();
             solution.Option = new ImportOption();

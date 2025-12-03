@@ -1843,6 +1843,9 @@ namespace StarLaiPortal.Module.Controllers
         {
             SalesQuotation trx = (SalesQuotation)View.CurrentObject;
 
+            ObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
+
             var os = Application.CreateObjectSpace();
             var solution = os.CreateObject<ImportData>();
             solution.Option = new ImportOption();
