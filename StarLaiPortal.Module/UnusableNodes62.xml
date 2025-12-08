@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="ItemInquiry_DetailView_Report">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ContainerTracking_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ContainerTracking">
+              <LayoutGroup Id="ContainerTracking_col1">
+                <LayoutItem Id="AccStakeOnDateTime" RelativeSize="2.8077753779697625" Index="9" Removed="True" />
+                <LayoutItem Id="AccStorageFreeDays" RelativeSize="73.866090712742974" Index="9" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ContainerTracking_col2">
+                <LayoutItem Id="AccDemmurrageFreeDays" RelativeSize="2.8077753779697625" Index="5" Removed="True" />
+                <LayoutItem Id="AccDetentionFreeDays" RelativeSize="2.8888888888888888" Index="5" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemInquiry_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

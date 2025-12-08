@@ -47,6 +47,7 @@ using static System.Net.Mime.MediaTypeNames;
 // 2025-04-25 - not allow add detail after submit - ver 1.0.22
 // 2025-07-11 - Fix generate Doc num for SO - ver 1.0.23
 // 2025-10-06 - Fix copy to recipient button - ver 1.0.25
+// 2025-12-08 - add require approve - ver 1.0.26
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -701,6 +702,11 @@ namespace StarLaiPortal.Module.Controllers
                     {
                         newsq.Customer = newsq.Session.GetObjectByKey<vwBusniessPartner>(sq.Customer.BPCode);
                     }
+
+                    // Start ver 1.0.26
+                    newsq.CustomerName = sq.CustomerName;
+                    // End ver 1.0.26
+
                     if (sq.Transporter != null)
                     {
                         newsq.Transporter = newsq.Session.GetObjectByKey<vwTransporter>(sq.Transporter.TransporterID);
@@ -2149,7 +2155,17 @@ namespace StarLaiPortal.Module.Controllers
                         #endregion
                     }
                     openNewView(os, trx, ViewEditMode.View);
+
+                    // Start ver 1.0.26
+                    //if (trx.AppStatus == ApprovalStatusType.Required_Approval && trx.Status == DocStatus.Submitted)
+                    //{
+                    //    showMsg("Successful", "Submit Done. This Sales Quotation require approval.", InformationType.Success);
+                    //}
+                    //else
+                    //{
                     showMsg("Successful", "Submit Done.", InformationType.Success);
+                    //}
+                    // End ver 1.0.26
                     // Start ver 1.0.23
                     //}
                     //else

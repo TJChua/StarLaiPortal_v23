@@ -43,6 +43,7 @@
             this.ExportPOFormat = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ImportPO = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.ImportUpdatePO = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitPOAction = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // SubmitPO
             // 
@@ -191,6 +192,15 @@
             this.ImportUpdatePO.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.ImportUpdatePO_CustomizePopupWindowParams);
             this.ImportUpdatePO.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.ImportUpdatePO_Execute);
             // 
+            // SubmitPOAction
+            // 
+            this.SubmitPOAction.Caption = "Submit";
+            this.SubmitPOAction.Category = "ObjectsCreation";
+            this.SubmitPOAction.ConfirmationMessage = null;
+            this.SubmitPOAction.Id = "SubmitPOAction";
+            this.SubmitPOAction.ToolTip = null;
+            this.SubmitPOAction.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitPOAction_Execute);
+            // 
             // PurchaseOrderControllers
             // 
             this.Actions.Add(this.SubmitPO);
@@ -207,6 +217,7 @@
             this.Actions.Add(this.ExportPOFormat);
             this.Actions.Add(this.ImportPO);
             this.Actions.Add(this.ImportUpdatePO);
+            this.Actions.Add(this.SubmitPOAction);
 
         }
 
@@ -226,5 +237,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction ExportPOFormat;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ImportPO;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ImportUpdatePO;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitPOAction;
     }
 }

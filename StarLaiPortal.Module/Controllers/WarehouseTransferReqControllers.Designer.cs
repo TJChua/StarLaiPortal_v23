@@ -40,6 +40,7 @@
             this.ApproveAppWTR_Pop = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.ExportWHReq = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ImportWHReq = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitWTRAction = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // WTRInquiryItem
             // 
@@ -155,6 +156,15 @@
             this.ImportWHReq.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.ImportWHReq_CustomizePopupWindowParams);
             this.ImportWHReq.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.ImportWHReq_Execute);
             // 
+            // SubmitWTRAction
+            // 
+            this.SubmitWTRAction.Caption = "Submit";
+            this.SubmitWTRAction.Category = "ObjectsCreation";
+            this.SubmitWTRAction.ConfirmationMessage = null;
+            this.SubmitWTRAction.Id = "SubmitWTRAction";
+            this.SubmitWTRAction.ToolTip = null;
+            this.SubmitWTRAction.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitWTRAction_Execute);
+            // 
             // WarehouseTransferReqControllers
             // 
             this.Actions.Add(this.WTRInquiryItem);
@@ -168,6 +178,7 @@
             this.Actions.Add(this.ApproveAppWTR_Pop);
             this.Actions.Add(this.ExportWHReq);
             this.Actions.Add(this.ImportWHReq);
+            this.Actions.Add(this.SubmitWTRAction);
 
         }
 
@@ -184,5 +195,6 @@
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ApproveAppWTR_Pop;
         private DevExpress.ExpressApp.Actions.SimpleAction ExportWHReq;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ImportWHReq;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitWTRAction;
     }
 }

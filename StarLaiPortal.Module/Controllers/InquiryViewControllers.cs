@@ -2007,6 +2007,7 @@ namespace StarLaiPortal.Module.Controllers
                             result.DMFreeDelayDay = int.Parse(row.Values[27].ToString());
                             result.DTFreeDelayDay = int.Parse(row.Values[28].ToString());
                             result.Oid = int.Parse(row.Values[29].ToString());
+                            result.CreateDate = DateTime.Parse(row.Values[30].ToString());
 
                             currObject.Results.Add(result);
                         }

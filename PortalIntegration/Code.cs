@@ -2365,6 +2365,7 @@ namespace PortalIntegration
                                 GeneralControllers genCon = new GeneralControllers();
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
+                                newSO.INTQuotation = header["DocNum"].ToString();
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -2578,6 +2579,7 @@ namespace PortalIntegration
                                 GeneralControllers genCon = new GeneralControllers();
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
+                                newSO.INTQuotation = header["DocNum"].ToString();
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -2791,6 +2793,7 @@ namespace PortalIntegration
                                 GeneralControllers genCon = new GeneralControllers();
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
+                                newSO.INTQuotation = header["DocNum"].ToString();
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -3004,6 +3007,7 @@ namespace PortalIntegration
                                 GeneralControllers genCon = new GeneralControllers();
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
+                                newSO.INTQuotation = header["DocNum"].ToString();
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -3217,6 +3221,7 @@ namespace PortalIntegration
                                 GeneralControllers genCon = new GeneralControllers();
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
+                                newSO.INTQuotation = header["DocNum"].ToString();
 
                                 if (header["Customer"].ToString() != "")
                                 {

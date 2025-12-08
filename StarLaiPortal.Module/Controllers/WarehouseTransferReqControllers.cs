@@ -34,11 +34,12 @@ using System.Web;
 
 // 2023-08-16 - add stock 3 and stock 4 - ver 1.0.8
 // 2023-08-25 - export and import function - ver 1.0.9
-// 2023-09-12 - add warehouse transfer req no ver 1.0.9
+// 2023-09-12 - add warehouse transfer req no - ver 1.0.9
 // 2023-09-25 - add stock balance checking - ver 1.0.10
 // 2024-03-15 - do not check stock balance if same warehouse - ver 1.0.14
-// 2024-04-04 - Update available qty ver 1.0.15
-// 2024-06-11 - fixed disable edit and delete button ver 1.0.17
+// 2024-04-04 - Update available qty - ver 1.0.15
+// 2024-06-11 - fixed disable edit and delete button - ver 1.0.17
+// 2025-12-05 - add submit WTR action button - ver 1.0.26
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -68,6 +69,9 @@ namespace StarLaiPortal.Module.Controllers
             this.ExportWHReq.Active.SetItemValue("Enabled", false);
             this.ImportWHReq.Active.SetItemValue("Enabled", false);
             // End ver 1.0.9
+            // Start ver 1.0.26
+            this.SubmitWTRAction.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.26
 
             // Start ver 1.0.17
             if (View.ObjectTypeInfo.Type == typeof(WarehouseTransferReq))
@@ -111,17 +115,27 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
+                    // Start ver 1.0.26
                     this.SubmitWTR.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.26
                     this.CancelWTR.Active.SetItemValue("Enabled", true);
                     this.PreviewWTR.Active.SetItemValue("Enabled", true);
                     this.WTRCopyToWT.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.26
+                    //this.SubmitWTRAction.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.26
                 }
                 else
                 {
+                    // Start ver 1.0.26
                     this.SubmitWTR.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.26
                     this.CancelWTR.Active.SetItemValue("Enabled", false);
                     this.PreviewWTR.Active.SetItemValue("Enabled", false);
                     this.WTRCopyToWT.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.26
+                    //this.SubmitWTRAction.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.26
                 }
 
                 if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
@@ -207,6 +221,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.ExportWHReq.Active.SetItemValue("Enabled", false);
                 this.ImportWHReq.Active.SetItemValue("Enabled", false);
                 // End ver 1.0.9
+                // Start ver 1.0.26
+                this.SubmitWTRAction.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.26
             }
 
             // Start ver 1.0.15
@@ -1079,5 +1096,115 @@ namespace StarLaiPortal.Module.Controllers
             e.View = view;
         }
         // End ver 1.0.9
+
+        // Start 1.0.26
+        private void SubmitWTRAction_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            WarehouseTransferReq selectedObject = (WarehouseTransferReq)e.CurrentObject;
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+            // Start ver 1.0.10
+            foreach (WarehouseTransferReqDetails dtl in selectedObject.WarehouseTransferReqDetails)
+            {
+                // Start ver 1.0.14
+                if (selectedObject.FromWarehouse.WarehouseCode != selectedObject.ToWarehouse.WarehouseCode)
+                {
+                    // End ver 1.0.14
+                    vwStockBalance available = ObjectSpace.FindObject<vwStockBalance>(CriteriaOperator.Parse("ItemCode = ? and WhsCode = ?",
+                        dtl.ItemCode, selectedObject.FromWarehouse.WarehouseCode));
+
+                    if (available != null)
+                    {
+                        if (available.InStock < (double)dtl.Quantity)
+                        {
+                            showMsg("Error", "Insufficient onhand quantity.", InformationType.Error);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        showMsg("Error", "Insufficient onhand quantity.", InformationType.Error);
+                        return;
+                    }
+                    // Start ver 1.0.14
+                }
+                // End ver 1.0.14
+
+                if (dtl.FromBin != null)
+                {
+                    if (dtl.FromBin.InStock < dtl.Quantity)
+                    {
+                        showMsg("Error", "Bin not enough stock.", InformationType.Error);
+                        return;
+                    }
+                }
+            }
+            // End ver 1.0.10
+
+            if (selectedObject.IsValid == true)
+            {
+                selectedObject.Status = DocStatus.Submitted;
+                WarehouseTransferReqDocTrail ds = ObjectSpace.CreateObject<WarehouseTransferReqDocTrail>();
+                ds.DocStatus = DocStatus.Submitted;
+                ds.DocRemarks = "";
+                selectedObject.WarehouseTransferReqDocTrail.Add(ds);
+
+                ObjectSpace.CommitChanges();
+                ObjectSpace.Refresh();
+
+                #region Get approval
+                List<string> ToEmails = new List<string>();
+                string emailbody = "";
+                string emailsubject = "";
+                string emailaddress = "";
+                Guid emailuser;
+                DateTime emailtime = DateTime.Now;
+
+                string getapproval = "EXEC sp_GetApproval '" + selectedObject.CreateUser.Oid + "', '" + selectedObject.Oid + "', 'WarehouseTransferRequest'";
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(getapproval, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader.GetString(1) != "")
+                    {
+                        emailbody = "Dear Sir/Madam, " + System.Environment.NewLine + System.Environment.NewLine +
+                               reader.GetString(3) + System.Environment.NewLine + GeneralSettings.appurl + reader.GetString(2) +
+                               System.Environment.NewLine + System.Environment.NewLine;
+
+                        emailsubject = "Warehouse Transfer Request Approval";
+                        emailaddress = reader.GetString(1);
+                        emailuser = reader.GetGuid(0);
+
+                        ToEmails.Add(emailaddress);
+                    }
+                }
+                cmd.Dispose();
+                conn.Close();
+
+                if (ToEmails.Count > 0)
+                {
+                    if (genCon.SendEmail(emailsubject, emailbody, ToEmails) == 1)
+                    {
+                    }
+                }
+
+                #endregion
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                WarehouseTransferReq trx = os.FindObject<WarehouseTransferReq>(new BinaryOperator("Oid", selectedObject.Oid));
+                openNewView(os, trx, ViewEditMode.View);
+                showMsg("Successful", "Submit Done.", InformationType.Success);
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.26
     }
 }

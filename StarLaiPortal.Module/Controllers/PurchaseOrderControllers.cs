@@ -35,8 +35,9 @@ using System.Web;
 
 // 2023-08-16 - add stock 3 and stock 4 - ver 1.0.8
 // 2023-10-30 - amend validation - ver 1.0.12
-// 2024-01-30 - Add import update button ver 1.0.14
-// 2024-10-08 - Add import update button ver 1.0.21
+// 2024-01-30 - Add import update button - ver 1.0.14
+// 2024-10-08 - Add import update button - ver 1.0.21
+// 2025-12-05 - Add action submit button - ver 1.0.26
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -69,6 +70,9 @@ namespace StarLaiPortal.Module.Controllers
             // Start ver 1.0.14
             this.ImportUpdatePO.Active.SetItemValue("Enabled", false);
             // End ver 1.0.14
+            // Start ver 1.0.26
+            this.SubmitPOAction.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.26
         }
         protected override void OnViewControlsCreated()
         {
@@ -81,23 +85,33 @@ namespace StarLaiPortal.Module.Controllers
                 //this.BackToInquiry.Active.SetItemValue("Enabled", true);
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
+                    // Start ver 1.0.26
                     this.SubmitPO.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.26
                     this.CancelPO.Active.SetItemValue("Enabled", true);
                     this.PreviewPO.Active.SetItemValue("Enabled", true);
                     //Start ver 1.0.21
                     //this.DuplicatePO.Active.SetItemValue("Enabled", true);
                     // End ver 1.0.21
                     this.PreviewPONoCost.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.26
+                    //this.SubmitPOAction.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.26
                 }
                 else
                 {
+                    // Start ver 1.0.26
                     this.SubmitPO.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.26
                     this.CancelPO.Active.SetItemValue("Enabled", false);
                     this.PreviewPO.Active.SetItemValue("Enabled", false);
                     // Start ver 1.0.21
                     this.DuplicatePO.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.21
                     this.PreviewPONoCost.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.26
+                    //this.SubmitPOAction.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.26
                 }
 
                 if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
@@ -144,7 +158,9 @@ namespace StarLaiPortal.Module.Controllers
             }
             else
             {
+                // Start ver 1.0.26
                 this.SubmitPO.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.26
                 this.CancelPO.Active.SetItemValue("Enabled", false);
                 this.PreviewPO.Active.SetItemValue("Enabled", false);
                 this.POInquiryItem.Active.SetItemValue("Enabled", false);
@@ -162,6 +178,9 @@ namespace StarLaiPortal.Module.Controllers
                 // Start ver 1.0.14
                 this.ImportUpdatePO.Active.SetItemValue("Enabled", false);
                 // End ver 1.0.14
+                // Start ver 1.0.26
+                this.SubmitPOAction.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.26
             }
 
             if (View.Id == "PurchaseOrders_PurchaseOrderDetails_ListView")
@@ -1427,5 +1446,233 @@ namespace StarLaiPortal.Module.Controllers
             }
         }
         // End ver 1.0.14
+
+        // Start ver 1.0.26
+        private void SubmitPOAction_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            bool sellingprice = false;
+            bool zerototal = false;
+            string sellingitem = null;
+            // Start ver 1.0.12
+            bool backpo = false;
+            bool nonbackpo = false;
+            string nonbackpoitem = null;
+            // End ver 1.0.12
+
+            PurchaseOrders selectedObject = (PurchaseOrders)e.CurrentObject;
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+            if (selectedObject.PurchaseOrderDetails.Sum(s => s.Total) <= 0)
+            {
+                zerototal = true;
+            }
+
+            // Start ver 1.0.12
+            if (selectedObject.PurchaseOrderDetails.Where(x => x.AdjustedPrice > 0 && x.FOC == true).Count() > 0)
+            {
+                showMsg("Error", "Unit price not allow more than 0 for FOC item.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.PurchaseOrderDetails.Where(x => x.AdjustedPrice == 0 && x.FOC == false).Count() > 0)
+            {
+                showMsg("Error", "Unit price 0 must tick FOC.", InformationType.Error);
+                return;
+            }
+            // End ver 1.0.12
+
+            foreach (PurchaseOrderDetails dtl in selectedObject.PurchaseOrderDetails)
+            {
+                if (dtl.AdjustedPrice > dtl.SellingPrice && dtl.BaseDoc != null)
+                {
+                    if (dtl.Series == "BackOrdS")
+                    {
+                        sellingprice = true;
+                        if (sellingitem == null)
+                        {
+                            sellingitem = dtl.ItemCode.ItemCode;
+                        }
+                        else
+                        {
+                            sellingitem = sellingitem + ", " + dtl.ItemCode.ItemCode;
+                        }
+                    }
+                }
+            }
+
+            // Start ver 1.0.12
+            if (selectedObject.Series.SeriesName == "BackOrdP")
+            {
+                if (selectedObject.PurchaseOrderDetails.Where(x => x.AdjustedPrice > x.SellingPrice && x.BaseDoc != null).Count() > 0)
+                {
+                    backpo = true;
+                }
+            }
+
+            if (selectedObject.Series.SeriesName != "BackOrdP")
+            {
+                if (selectedObject.PurchaseOrderDetails.Where(x => x.AdjustedPrice > x.SellingPrice && x.BaseDoc != null).Count() > 0)
+                {
+                    nonbackpo = true;
+                }
+
+                if (nonbackpo == true)
+                {
+                    foreach (PurchaseOrderDetails dtl in selectedObject.PurchaseOrderDetails)
+                    {
+                        if (dtl.AdjustedPrice > dtl.SellingPrice && dtl.BaseDoc != null)
+                        {
+                            if (nonbackpoitem == null)
+                            {
+                                nonbackpoitem = dtl.ItemCode.ItemCode;
+                            }
+                            else
+                            {
+                                nonbackpoitem = nonbackpoitem + ", " + dtl.ItemCode.ItemCode;
+                            }
+                        }
+                    }
+
+                    showMsg("Error", "Non Back to Back PO - Item: " + nonbackpoitem + " adjusted price higher than selling price.", InformationType.Error);
+                    return;
+                }
+            }
+            // End ver 1.0.12
+
+            if (sellingprice == false)
+            {
+                if (selectedObject.IsValid == false)
+                {
+                    if (selectedObject.IsValid1 == true)
+                    {
+                        selectedObject.Status = DocStatus.Submitted;
+
+                        PurchaseOrderDocTrail ds = ObjectSpace.CreateObject<PurchaseOrderDocTrail>();
+                        ds.DocStatus = DocStatus.Submitted;
+                        ds.DocRemarks = "";
+                        selectedObject.PurchaseOrderDocTrail.Add(ds);
+
+                        ObjectSpace.CommitChanges();
+                        ObjectSpace.Refresh();
+
+                        #region Get approval
+                        List<string> ToEmails = new List<string>();
+                        string emailbody = "";
+                        string emailsubject = "";
+                        string emailaddress = "";
+                        Guid emailuser;
+                        DateTime emailtime = DateTime.Now;
+
+                        string getapproval = "EXEC sp_GetApproval '" + selectedObject.CreateUser.Oid + "', '" + selectedObject.Oid + "', 'PurchaseOrders'";
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(getapproval, conn);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            if (reader.GetString(1) != "")
+                            {
+                                emailbody = "Dear Sir/Madam, " + System.Environment.NewLine + System.Environment.NewLine +
+                                       reader.GetString(3) + System.Environment.NewLine + GeneralSettings.appurl + reader.GetString(2) +
+                                       System.Environment.NewLine + System.Environment.NewLine;
+
+                                emailsubject = "Purchase Order Approval";
+                                emailaddress = reader.GetString(1);
+                                emailuser = reader.GetGuid(0);
+
+                                ToEmails.Add(emailaddress);
+                            }
+                        }
+                        cmd.Dispose();
+                        conn.Close();
+
+                        if (ToEmails.Count > 0)
+                        {
+                            if (genCon.SendEmail(emailsubject, emailbody, ToEmails) == 1)
+                            {
+                            }
+                        }
+
+                        #endregion
+
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        PurchaseOrders trx = os.FindObject<PurchaseOrders>(new BinaryOperator("Oid", selectedObject.Oid));
+
+                        if (trx.AppStatus == ApprovalStatusType.Not_Applicable && trx.Status == DocStatus.Submitted)
+                        {
+                            trx.Status = DocStatus.PendPost;
+                            os.CommitChanges();
+                            os.Refresh();
+                        }
+
+                        IObjectSpace pos = Application.CreateObjectSpace();
+                        PurchaseOrders ptrx = pos.FindObject<PurchaseOrders>(new BinaryOperator("Oid", selectedObject.Oid));
+                        openNewView(pos, ptrx, ViewEditMode.View);
+                        // Start ver 1.0.12
+                        //if (sellingprice == false && zerototal == false)
+                        if (sellingprice == false && zerototal == false && backpo == false)
+                        // End ver 1.0.12
+                        {
+                            showMsg("Successful", "Submit Done.", InformationType.Success);
+                        }
+                        else
+                        {
+                            //    if (sellingprice == true && zerototal == false)
+                            //    {
+                            //        showMsg("Warning", "Submit Done. Item: " + sellingitem + " adjusted price higher than selling price.", InformationType.Warning);
+                            //    }
+
+                            //    if (sellingprice == false && zerototal == true)
+                            //    {
+                            //        showMsg("Warning", "Submit Done. Document with 0 amount.", InformationType.Warning);
+                            //    }
+
+                            //    if (sellingprice == true && zerototal == true)
+                            //    {
+                            //        showMsg("Warning", "Submit Done. Item: " + sellingitem + " adjusted price higher than selling price."
+                            //            + System.Environment.NewLine + System.Environment.NewLine +
+                            //            "Document with 0 amount.", InformationType.Warning);
+                            //    }
+                            //}
+
+                            if (zerototal == false)
+                            {
+                                // Start ver 1.0.12
+                                if (backpo == false)
+                                {
+                                    // End ver 1.0.12
+                                    showMsg("Successful", "Submit Done.", InformationType.Success);
+                                    // Start ver 1.0.12
+                                }
+                                else
+                                {
+                                    showMsg("Warning", "Back to Back PO - Item: " + sellingitem + " adjusted price higher than selling price.", InformationType.Warning);
+                                }
+                            }
+                            else
+                            {
+                                showMsg("Warning", "Submit Done. Document with 0 amount.", InformationType.Warning);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        showMsg("Error", "No Content.", InformationType.Error);
+                    }
+                }
+                else
+                {
+                    showMsg("Error", "Multiple warehouse in same document.", InformationType.Error);
+                }
+            }
+            else
+            {
+                showMsg("Error", "Back to Back Sales - Item: " + sellingitem + " adjusted price higher than selling price.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.26
     }
 }

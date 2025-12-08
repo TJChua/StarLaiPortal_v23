@@ -235,19 +235,19 @@ namespace StarLaiPortal.Module.Controllers
             //}
             // End ver 1.0.15
 
-            // Start ver 1.0.25
-            ExportController exportController = Frame.GetController<ExportController>();
-            if (exportController != null)
-            {
-                PermissionPolicyRole exportdaterole = ObjectSpace.FindObject<PermissionPolicyRole>(CriteriaOperator.Parse("IsCurrentUserInRole('ExportDataRole')"));
+            //// Start ver 1.0.25
+            //ExportController exportController = Frame.GetController<ExportController>();
+            //if (exportController != null)
+            //{
+            //    PermissionPolicyRole exportdaterole = ObjectSpace.FindObject<PermissionPolicyRole>(CriteriaOperator.Parse("IsCurrentUserInRole('ExportDataRole')"));
 
-                if (exportdaterole == null)
-                {
-                    // Deactivate the ExportAction
-                    exportController.ExportAction.Active.SetItemValue("HideExportButtonInListView", false);
-                }    
-            }
-            // End ver 1.0.25
+            //    if (exportdaterole == null)
+            //    {
+            //        // Deactivate the ExportAction
+            //        exportController.ExportAction.Active.SetItemValue("HideExportButtonInListView", false);
+            //    }    
+            //}
+            //// End ver 1.0.25
         }
         protected override void OnViewControlsCreated()
         {
@@ -366,13 +366,13 @@ namespace StarLaiPortal.Module.Controllers
                 }
             }
 
-            // Start ver 1.0.25
-            ExportController exportController = Frame.GetController<ExportController>();
-            if (exportController != null)
-            {
-                exportController.ExportAction.Active.RemoveItem("HideExportButtonInListView");
-            }
-            // End ver 1.0.25
+            //// Start ver 1.0.25
+            //ExportController exportController = Frame.GetController<ExportController>();
+            //if (exportController != null)
+            //{
+            //    exportController.ExportAction.Active.RemoveItem("HideExportButtonInListView");
+            //}
+            //// End ver 1.0.25
 
             // Unsubscribe from previously subscribed events and release other references and resources.
             base.OnDeactivated();

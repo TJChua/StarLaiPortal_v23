@@ -73,7 +73,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         private DateTime? _CreateDate;
         [XafDisplayName("Create Date")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [Index(301), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Index(301), VisibleInListView(false), VisibleInDetailView(true), VisibleInLookupListView(false)]
         [Appearance("CreateDate", Enabled = false)]
         public DateTime? CreateDate
         {
@@ -135,7 +135,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private DateTime _DocDate;
-        [XafDisplayName("Doc Date")]
+        [XafDisplayName("Supplier Doc Date")]
         [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public DateTime DocDate
         {
@@ -227,7 +227,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private string _ShipmentInvoiceNo;
-        [XafDisplayName("Shipment Invoice No")]
+        [XafDisplayName("Supplier Invoice No")]
         [Appearance("ShipmentInvoiceNo", Enabled = false, Criteria = "IsValidHdr = 0")]
         [Index(18), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public string ShipmentInvoiceNo
@@ -339,7 +339,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Softcopy BL Rec. From Supplier")]
         [Index(35), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("SoftcopyBLRec", Enabled = false, Criteria = "PurchaseDeptStatus = 1 or IsValidPurc = 0")]
         public DateTime SoftcopyBLRec
         {
@@ -359,7 +359,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Softcopy Packing List Rec. From Supplier")]
         [Index(38), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("SoftcopyPLRec", Enabled = false, Criteria = "PurchaseDeptStatus = 1 or IsValidPurc = 0")]
         public DateTime SoftcopyPLRec
         {
@@ -379,7 +379,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Softcopy Invoice Rec. From Supplier")]
         [Index(40), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("SoftcopyInvoice", Enabled = false, Criteria = "PurchaseDeptStatus = 1 or IsValidPurc = 0")]
         public DateTime SoftcopyInvoice
         {
@@ -487,7 +487,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Softcopy BL Rec. From Pur. Dept.")]
         [Index(55), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("SoftcopyBLRecFrmPur", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime SoftcopyBLRecFrmPur
         {
@@ -513,7 +513,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Softcopy Packing List Rec. From Pur. Dept.")]
         [Index(58), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("SoftcopyPLRecFrmPur", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime SoftcopyPLRecFrmPur
         {
@@ -528,7 +528,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Softcopy Invoice Rec. From Pur. Dept.")]
         [Index(60), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("SoftcopyInvoiceFrmPur", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime SoftcopyInvoiceFrmPur
         {
@@ -597,9 +597,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         private DateTime _AccStakeOnDateTime;
         [ImmediatePostData]
         [XafDisplayName("Stake On Date Time")]
-        [Index(73), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Index(73), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("AccStakeOnDateTime", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime AccStakeOnDateTime
         {
@@ -617,7 +617,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         private int _AccStorageFreeDays;
         [ImmediatePostData]
         [XafDisplayName("Storage Free Days")]
-        [Index(75), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Index(75), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("AccStorageFreeDays", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public int AccStorageFreeDays
         {
@@ -635,7 +635,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         private int _AccDemmurrageFreeDays;
         [ImmediatePostData]
         [XafDisplayName("Demmurrage Free Days")]
-        [Index(78), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Index(78), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("AccDemmurrageFreeDays", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public int AccDemmurrageFreeDays
         {
@@ -653,7 +653,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         private int _AccDetentionFreeDays;
         [ImmediatePostData]
         [XafDisplayName("Detention Free Days")]
-        [Index(80), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Index(80), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("AccDetentionFreeDays", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public int AccDetentionFreeDays
         {
@@ -720,7 +720,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private DateTime _InvSettDate;
-        [XafDisplayName("Invoice Sett. Date")]
+        [XafDisplayName("Invoice Settlement Date")]
         [Index(90), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("InvSettDate", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime InvSettDate
@@ -733,10 +733,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private DateTime _ForwardedSubmission;
-        [XafDisplayName("Forwarded Submission DateTime")]
+        [XafDisplayName("Forwarder Submission Date Time")]
         [Index(93), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("ForwardedSubmission", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime ForwardedSubmission
         {
@@ -748,10 +748,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private DateTime _DutyDraftFrmForwarded;
-        [XafDisplayName("Duty Draft From Forwarded")]
+        [XafDisplayName("Duty Draft from Forwarder")]
         [Index(95), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("DutyDraftFrmForwarded", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime DutyDraftFrmForwarded
         {
@@ -766,7 +766,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Duty Settlement Date")]
         [Index(98), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("DutySettDate", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime DutySettDate
         {
@@ -809,7 +809,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Stake On Date Time")]
         [Index(105), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("WhsStakeOnDateTime", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
         public DateTime WhsStakeOnDateTime
         {
@@ -887,7 +887,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Request Pull Out From Port")]
         [Index(115), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("ReqPullOutDateTime", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
         public DateTime ReqPullOutDateTime
         {
@@ -914,7 +914,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Actual Pull Out From Port/Arrive Whs")]
         [Index(118), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("ActualPullOutDateTime", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
         public DateTime ActualPullOutDateTime
         {
@@ -959,7 +959,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Request Return Back to Port")]
         [Index(120), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("ReqReturnBack", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
         public DateTime ReqReturnBack
         {
@@ -1004,7 +1004,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Actual Return Back to Port")]
         [Index(123), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("ActualReturnBack", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
         public DateTime ActualReturnBack
         {
@@ -1091,7 +1091,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Storage Free Due Date Time")]
         [Index(140), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("StorageFreeDue", Enabled = false)]
         public DateTime StorageFreeDue
         {
@@ -1106,7 +1106,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Demmurrage Free Due Date Time")]
         [Index(143), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
-        [ModelDefault("EditMask", "MM/dd/yyyy hh:mm")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm")]
         [Appearance("DemmurrageFreeDue", Enabled = false)]
         public DateTime DemmurrageFreeDue
         {

@@ -4339,13 +4339,21 @@ namespace StarLaiPortal.Module.BusinessObjects
 
         [XafDisplayName("Document No.")]
         [Appearance("PortalNo", Enabled = false)]
-        [Index(3)]
+        [Index(2)]
         public string PortalNo
         {
             get; set;
         }
 
-        [XafDisplayName("Doc. Date")]
+        [XafDisplayName("Create Date")]
+        [Appearance("CreateDate", Enabled = false)]
+        [Index(3)]
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Supplier Doc Date")]
         [Appearance("DocDate", Enabled = false)]
         [Index(4)]
         public DateTime DocDate
@@ -4369,7 +4377,7 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
 
-        [XafDisplayName("Shipment Invoice No")]
+        [XafDisplayName("Supplier Invoice No")]
         [Appearance("ShipmentInvNo", Enabled = false)]
         [Index(10)]
         public string ShipmentInvNo
