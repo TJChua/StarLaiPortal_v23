@@ -557,7 +557,6 @@ namespace StarLaiPortal.Module.Controllers
 
             if (e.ActionArguments.SelectedChoiceActionItem.Id == "Container Tracking Report")
             {
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
                 ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
 
                 string strServer;
@@ -571,13 +570,13 @@ namespace StarLaiPortal.Module.Controllers
                     ReportDocument doc = new ReportDocument();
                     strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
                     doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\ContainerTrackingReport.rpt"));
-                    strDatabase = conn.Database;
+                    strDatabase = ConfigurationManager.AppSettings.Get("PortalDB").ToString();
                     strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
                     strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
                     doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
                     doc.Refresh();
 
-                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + ConfigurationManager.AppSettings["PortalDB"].ToString()
                         + "_" + user.UserName + "_CTR_"
                         + DateTime.Today.Date.ToString("yyyyMMdd") + ".pdf";
 
@@ -586,7 +585,7 @@ namespace StarLaiPortal.Module.Controllers
                     doc.Dispose();
 
                     string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + ConfigurationManager.AppSettings["PortalDB"].ToString()
                         + "_" + user.UserName + "_CTR_"
                         + DateTime.Today.Date.ToString("yyyyMMdd") + ".pdf";
                     var script = "window.open('" + url + "');";

@@ -2321,7 +2321,7 @@ namespace PortalIntegration
                     using (SqlDataAdapter daheader = new SqlDataAdapter("", conn))
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
-                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T0.Customer, '') as Customer, " +
+                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2351,6 +2351,7 @@ namespace PortalIntegration
                             "WHERE D1.Loc1Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
                             "WHERE T0.Status = 1 AND ISNULL(T0.GeneratedINT, 0) = 0 AND T0.GCRecord is null";
                         DataTable dtheader = new DataTable();
                         daheader.Fill(dtheader);
@@ -2535,7 +2536,7 @@ namespace PortalIntegration
                     using (SqlDataAdapter daheader = new SqlDataAdapter("", conn))
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
-                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T0.Customer, '') as Customer, " +
+                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2565,6 +2566,7 @@ namespace PortalIntegration
                             "WHERE D1.Loc2Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
                             "WHERE T0.Status = 1 AND ISNULL(T0.GeneratedINT, 0) = 0 AND T0.GCRecord is null";
                         DataTable dtheader = new DataTable();
                         daheader.Fill(dtheader);
@@ -2749,7 +2751,7 @@ namespace PortalIntegration
                     using (SqlDataAdapter daheader = new SqlDataAdapter("", conn))
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
-                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T0.Customer, '') as Customer, " +
+                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2778,7 +2780,8 @@ namespace PortalIntegration
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails D1 on D0.OID = D1.SalesQuotation " +
                             "WHERE D1.Loc3Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
-                            ") T1 on T0.OID = T1.SalesQuotation " + 
+                            ") T1 on T0.OID = T1.SalesQuotation " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
                             "WHERE T0.Status = 1 AND ISNULL(T0.GeneratedINT, 0) = 0 AND T0.GCRecord is null";
                         DataTable dtheader = new DataTable();
                         daheader.Fill(dtheader);
@@ -2963,7 +2966,7 @@ namespace PortalIntegration
                     using (SqlDataAdapter daheader = new SqlDataAdapter("", conn))
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
-                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T0.Customer, '') as Customer, " +
+                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2993,6 +2996,7 @@ namespace PortalIntegration
                             "WHERE D1.Loc4Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
                             "WHERE T0.Status = 1 AND ISNULL(T0.GeneratedINT, 0) = 0 AND T0.GCRecord is null";
                         DataTable dtheader = new DataTable();
                         daheader.Fill(dtheader);
@@ -3177,7 +3181,7 @@ namespace PortalIntegration
                     using (SqlDataAdapter daheader = new SqlDataAdapter("", conn))
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
-                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T0.Customer, '') as Customer, " +
+                        daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -3207,6 +3211,7 @@ namespace PortalIntegration
                             "WHERE D1.Loc5Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
                             "WHERE T0.Status = 1 AND ISNULL(T0.GeneratedINT, 0) = 0 AND T0.GCRecord is null";
                         DataTable dtheader = new DataTable();
                         daheader.Fill(dtheader);

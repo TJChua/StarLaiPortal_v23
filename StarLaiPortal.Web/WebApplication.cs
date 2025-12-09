@@ -353,17 +353,20 @@ namespace StarLaiPortal.Web {
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
             ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
 
-            query = "INSERT INTO [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..LoginHistory VALUES " +
-                "(GETDATE(), '" + user.UserName + "', '" + user.Staff.StaffName + "', 'Success', 'Logout')";
-            if (conn.State == ConnectionState.Open)
+            if (user != null)
             {
+                query = "INSERT INTO [" + ConfigurationManager.AppSettings["PortalDB"].ToString() + "]..LoginHistory VALUES " +
+                    "(GETDATE(), '" + user.UserName + "', '" + user.Staff.StaffName + "', 'Success', 'Logout')";
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+                SqlCommand cmdinsHis = new SqlCommand(query, conn);
+                SqlDataReader readerinsHis = cmdinsHis.ExecuteReader();
+                cmdinsHis.Dispose();
                 conn.Close();
             }
-            conn.Open();
-            SqlCommand cmdinsHis = new SqlCommand(query, conn);
-            SqlDataReader readerinsHis = cmdinsHis.ExecuteReader();
-            cmdinsHis.Dispose();
-            conn.Close();
         }
         // End ver 1.0.26
     }
