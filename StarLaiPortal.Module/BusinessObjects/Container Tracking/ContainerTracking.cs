@@ -819,8 +819,8 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 SetPropertyValue("WhsStakeOnDateTime", ref _WhsStakeOnDateTime, value);
                 if (!IsLoading)
                 {
-                    StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays);
-                    DemmurrageFreeDue = WhsStakeOnDateTime.AddDays(WhsDemmurrageFreeDays);
+                    StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays - 1);
+                    DemmurrageFreeDue = WhsStakeOnDateTime.AddDays(WhsDemmurrageFreeDays - 1);
                 }
             }
         }
@@ -838,7 +838,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 SetPropertyValue("WhsStorageFreeDays", ref _WhsStorageFreeDays, value);
                 if (!IsLoading)
                 {
-                    StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays);
+                    StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays - 1);
                 }
             }
         }
@@ -856,7 +856,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 SetPropertyValue("WhsDemmurrageFreeDays", ref _WhsDemmurrageFreeDays, value);
                 if (!IsLoading)
                 {
-                    DemmurrageFreeDue = WhsStakeOnDateTime.AddDays(WhsDemmurrageFreeDays);
+                    DemmurrageFreeDue = WhsStakeOnDateTime.AddDays(WhsDemmurrageFreeDays - 1);
                     if (ActualPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ActualReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
                         DetentionFreeDelay = WhsDemmurrageFreeDays - ((ActualPullOutDateTime - ActualReturnBack).Days);
@@ -899,11 +899,11 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 {
                     if (ActualPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ReqPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        ForwardedFrmPort = (ActualPullOutDateTime - ReqPullOutDateTime).Days;
+                        ForwardedFrmPort = (ActualPullOutDateTime - ReqPullOutDateTime).Days + 1;
                     }
                     else
                     {
-                        ForwardedFrmPort = 0;
+                        ForwardedFrmPort = 1;
                     }
                 }
             }
@@ -935,20 +935,20 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
 
                     if (ActualPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ReqPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        ForwardedFrmPort = (ActualPullOutDateTime - ReqPullOutDateTime).Days;
+                        ForwardedFrmPort = (ActualPullOutDateTime - ReqPullOutDateTime).Days + 1;
                     }
                     else
                     {
-                        ForwardedFrmPort = 0;
+                        ForwardedFrmPort = 1;
                     }
 
                     if (ReqReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ActualPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        WhsUnload = (ReqReturnBack - ActualPullOutDateTime).Days;
+                        WhsUnload = (ReqReturnBack - ActualPullOutDateTime).Days + 1;
                     }
                     else
                     {
-                        WhsUnload = 0;
+                        WhsUnload = 1;
                     }
                 }
             }
@@ -971,29 +971,29 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 {
                     if (ReqReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ActualPullOutDateTime.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        WhsUnload = (ReqReturnBack - ActualPullOutDateTime).Days;
+                        WhsUnload = (ReqReturnBack - ActualPullOutDateTime).Days + 1;
                     }
                     else
                     {
-                        WhsUnload = 0;
+                        WhsUnload = 1;
                     }
 
                     if (ActualReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ReqReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        ForwardedToPort = (ActualReturnBack - ReqReturnBack).Days;
+                        ForwardedToPort = (ActualReturnBack - ReqReturnBack).Days + 1;
                     }
                     else
                     {
-                        ForwardedToPort = 0;
+                        ForwardedToPort = 1;
                     }
 
                     if (GRPOReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ReqReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        WhsProcessing = (GRPOReturnBack - ReqReturnBack).Days;
+                        WhsProcessing = (GRPOReturnBack - ReqReturnBack).Days + 1;
                     }
                     else
                     {
-                        WhsProcessing = 0;
+                        WhsProcessing = 1;
                     }
                 }
             }
@@ -1025,11 +1025,11 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
 
                     if (ActualReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ReqReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        ForwardedToPort = (ActualReturnBack - ReqReturnBack).Days;
+                        ForwardedToPort = (ActualReturnBack - ReqReturnBack).Days + 1;
                     }
                     else
                     {
-                        ForwardedToPort = 0;
+                        ForwardedToPort = 1;
                     }
                 }
             }
@@ -1050,11 +1050,11 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 {
                     if (GRPOReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && ReqReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                     {
-                        WhsProcessing = (GRPOReturnBack - ReqReturnBack).Days;
+                        WhsProcessing = (GRPOReturnBack - ReqReturnBack).Days + 1;
                     }
                     else
                     {
-                        WhsProcessing = 0;
+                        WhsProcessing = 1;
                     }
                 }
             }
@@ -1145,7 +1145,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private int _ForwardedFrmPort;
-        [XafDisplayName("Forwarded From Port Duration")]
+        [XafDisplayName("Forwarder From Port Duration")]
         [Index(150), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("ForwardedFrmPort", Enabled = false)]
         public int ForwardedFrmPort
@@ -1171,7 +1171,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private int _ForwardedToPort;
-        [XafDisplayName("Forwarded To Port Duration")]
+        [XafDisplayName("Forwarder To Port Duration")]
         [Index(155), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("ForwardedToPort", Enabled = false)]
         public int ForwardedToPort
