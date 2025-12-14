@@ -16,6 +16,7 @@ using System.Text;
 
 // 2023-08-25 - export and import function - ver 1.0.9
 // 2023-09-08 - allow cancel after submit - ver 1.0.9
+// 2025-12-05 - Add action submit button - ver 1.0.26
 
 namespace StarLaiPortal.Module.BusinessObjects.Warehouse_Transfer
 {
@@ -30,8 +31,12 @@ namespace StarLaiPortal.Module.BusinessObjects.Warehouse_Transfer
     [Appearance("HideEdit1", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitWTR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitWTR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.26
+    //[Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitWTR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    //[Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitWTR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitWTRAction", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitWTRAction", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.26
 
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelWTR", Criteria = "not (Status in (0, 1))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     // Start ver 1.0.9

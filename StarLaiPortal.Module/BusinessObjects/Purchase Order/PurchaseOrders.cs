@@ -18,7 +18,7 @@ using System.Text;
 // 2023-09-25 - change date format - ver 1.0.10
 // 2024-01-30 - Add import update button - ver 1.0.14
 // 2025-07-22 - change exchangerate to 6 decimal - ver 1.0.23
-// 2025-12-05 - Add action submit button - ver 1.0.25
+// 2025-12-05 - Add action submit button - ver 1.0.26
 
 namespace StarLaiPortal.Module.BusinessObjects.Purchase_Order
 {

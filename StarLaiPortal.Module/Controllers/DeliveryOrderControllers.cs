@@ -31,6 +31,7 @@ using StarLaiPortal.Module.BusinessObjects.Sales_Quotation;
 // 2023-07-28 - add print button and do not add count in preview ver 0.1
 // 2023-12-04 - add daily delivery summary ver 1.0.13
 // 2023-10-09 - update DOPrintBy ver 1.0.21
+// 2025-12-14 - add EM DO printing ver 1.0.25
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -50,6 +51,9 @@ namespace StarLaiPortal.Module.Controllers
             ChoiceActionItem Invoice = new ChoiceActionItem("Invoice", "Invoice", null);
             ChoiceActionItem BundleDO = new ChoiceActionItem("BundleDO", "Bundle DO", null);
             ChoiceActionItem DMBundle = new ChoiceActionItem("DMBundle", "DM Bundle", null);
+            // Start ver 1.0.25
+            ChoiceActionItem EMDO = new ChoiceActionItem("EMDO", "EM DO", null);
+            // End ver 1.0.25
 
             ChoicePrintDelivery.Items.Add(NA);
             ChoicePrintDelivery.Items.Add(ViewDO);
@@ -57,6 +61,9 @@ namespace StarLaiPortal.Module.Controllers
             ChoicePrintDelivery.Items.Add(Invoice);
             ChoicePrintDelivery.Items.Add(BundleDO);
             ChoicePrintDelivery.Items.Add(DMBundle);
+            // Start ver 1.0.25
+            ChoicePrintDelivery.Items.Add(EMDO);
+            // End ver 1.0.25
             // End ver 1.0.15
         }
         protected override void OnActivated()
@@ -1090,6 +1097,63 @@ namespace StarLaiPortal.Module.Controllers
                     showMsg("Fail", "Please select one DO only.", InformationType.Error);
                 }
             }
+
+            // Start ver 1.0.25
+            if (e.SelectedChoiceActionItem.Id == "EMDO")
+            {
+                if (e.SelectedObjects.Count == 1)
+                {
+                    string strServer;
+                    string strDatabase;
+                    string strUserID;
+                    string strPwd;
+                    string filename;
+
+                    SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                    DeliveryOrder delivery = (DeliveryOrder)View.CurrentObject;
+                    ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                    try
+                    {
+                        ReportDocument doc = new ReportDocument();
+                        strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\DeliveryEM.rpt"));
+                        strDatabase = conn.Database;
+                        strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                        strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                        doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                        doc.Refresh();
+
+                        doc.SetParameterValue("dockey@", delivery.Oid);
+                        doc.SetParameterValue("dbName@", conn.Database);
+
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                            + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                        doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                        doc.Close();
+                        doc.Dispose();
+
+                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                            + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        var script = "window.open('" + url + "');";
+
+                        WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                    }
+                    catch (Exception ex)
+                    {
+                        showMsg("Fail", ex.Message, InformationType.Error);
+                    }
+                }
+                else
+                {
+                    showMsg("Fail", "Please select one DO only.", InformationType.Error);
+                }
+            }
+            // End ver 1.0.25
         }
         // End ver 1.0.15
     }

@@ -86,7 +86,7 @@ namespace StarLaiPortal.Module.Controllers
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
                     // Start ver 1.0.26
-                    this.SubmitPO.Active.SetItemValue("Enabled", true);
+                    //this.SubmitPO.Active.SetItemValue("Enabled", true);
                     // End ver 1.0.26
                     this.CancelPO.Active.SetItemValue("Enabled", true);
                     this.PreviewPO.Active.SetItemValue("Enabled", true);
@@ -95,13 +95,13 @@ namespace StarLaiPortal.Module.Controllers
                     // End ver 1.0.21
                     this.PreviewPONoCost.Active.SetItemValue("Enabled", true);
                     // Start ver 1.0.26
-                    //this.SubmitPOAction.Active.SetItemValue("Enabled", true);
+                    this.SubmitPOAction.Active.SetItemValue("Enabled", true);
                     // End ver 1.0.26
                 }
                 else
                 {
                     // Start ver 1.0.26
-                    this.SubmitPO.Active.SetItemValue("Enabled", false);
+                    //this.SubmitPO.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.26
                     this.CancelPO.Active.SetItemValue("Enabled", false);
                     this.PreviewPO.Active.SetItemValue("Enabled", false);
@@ -110,7 +110,7 @@ namespace StarLaiPortal.Module.Controllers
                     // End ver 1.0.21
                     this.PreviewPONoCost.Active.SetItemValue("Enabled", false);
                     // Start ver 1.0.26
-                    //this.SubmitPOAction.Active.SetItemValue("Enabled", false);
+                    this.SubmitPOAction.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.26
                 }
 

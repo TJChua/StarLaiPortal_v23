@@ -116,25 +116,25 @@ namespace StarLaiPortal.Module.Controllers
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
                     // Start ver 1.0.26
-                    this.SubmitWTR.Active.SetItemValue("Enabled", true);
+                    //this.SubmitWTR.Active.SetItemValue("Enabled", true);
                     // End ver 1.0.26
                     this.CancelWTR.Active.SetItemValue("Enabled", true);
                     this.PreviewWTR.Active.SetItemValue("Enabled", true);
                     this.WTRCopyToWT.Active.SetItemValue("Enabled", true);
                     // Start ver 1.0.26
-                    //this.SubmitWTRAction.Active.SetItemValue("Enabled", true);
+                    this.SubmitWTRAction.Active.SetItemValue("Enabled", true);
                     // End ver 1.0.26
                 }
                 else
                 {
                     // Start ver 1.0.26
-                    this.SubmitWTR.Active.SetItemValue("Enabled", false);
+                    //this.SubmitWTR.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.26
                     this.CancelWTR.Active.SetItemValue("Enabled", false);
                     this.PreviewWTR.Active.SetItemValue("Enabled", false);
                     this.WTRCopyToWT.Active.SetItemValue("Enabled", false);
                     // Start ver 1.0.26
-                    //this.SubmitWTRAction.Active.SetItemValue("Enabled", false);
+                    this.SubmitWTRAction.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.26
                 }
 

@@ -980,6 +980,10 @@ namespace StarLaiPortal.Module.Controllers
             apps.AppRemarks = "Approved";
             selectedObject.SalesQuotationAppStatus.Add(apps);
 
+            // Start ver 1.0.25
+            selectedObject.UpdateDate = DateTime.Now;
+            // End ver 1.0.25
+
             ObjectSpace.CommitChanges();
             ObjectSpace.Refresh();
 
@@ -1202,6 +1206,10 @@ namespace StarLaiPortal.Module.Controllers
                                         ds.AppRemarks = System.Environment.NewLine + "(Approved User: " + user.Staff.StaffName + ") - " + p.ParamString;
                                     }
                                     sq.SalesQuotationAppStatus.Add(ds);
+
+                                    // Start ver 1.0.25
+                                    sq.UpdateDate = DateTime.Now;
+                                    // End ver 1.0.25
 
                                     sos.CommitChanges();
                                     sos.Refresh();
@@ -1557,6 +1565,10 @@ namespace StarLaiPortal.Module.Controllers
                             ds.AppRemarks = System.Environment.NewLine + "(Approved User: " + user.Staff.StaffName + ") - " + p.ParamString;
                         }
                         sq.SalesQuotationAppStatus.Add(ds);
+
+                        // Start ver 1.0.25
+                        sq.UpdateDate = DateTime.Now;
+                        // End ver 1.0.25
 
                         sos.CommitChanges();
                         sos.Refresh();
