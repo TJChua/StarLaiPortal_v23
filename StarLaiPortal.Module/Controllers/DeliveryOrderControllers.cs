@@ -52,7 +52,7 @@ namespace StarLaiPortal.Module.Controllers
             ChoiceActionItem BundleDO = new ChoiceActionItem("BundleDO", "Bundle DO", null);
             ChoiceActionItem DMBundle = new ChoiceActionItem("DMBundle", "DM Bundle", null);
             // Start ver 1.0.25
-            ChoiceActionItem EMDO = new ChoiceActionItem("EMDO", "EM DO", null);
+            ChoiceActionItem EMDO = new ChoiceActionItem("EMDO", "EM Container DO", null);
             // End ver 1.0.25
 
             ChoicePrintDelivery.Items.Add(NA);
@@ -86,6 +86,9 @@ namespace StarLaiPortal.Module.Controllers
             // Start ver 1.0.15
             this.ChoicePrintDelivery.Active.SetItemValue("Enabled", false);
             // End ver 1.0.15
+            // Start ver 1.0.25
+            this.PrintEMDO.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.25
 
             // Start ver 1.0.15
             if (typeof(DeliveryOrder).IsAssignableFrom(View.ObjectTypeInfo.Type))
@@ -123,6 +126,9 @@ namespace StarLaiPortal.Module.Controllers
                     this.PrintDO.Active.SetItemValue("Enabled", true);
                     // End ver 0.1
                     this.PrintDMBundleDO.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.25
+                    this.PrintEMDO.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.25
                 }
                 else
                 {
@@ -135,6 +141,9 @@ namespace StarLaiPortal.Module.Controllers
                     this.PrintDO.Active.SetItemValue("Enabled", false);
                     // End ver 0.1
                     this.PrintDMBundleDO.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.25
+                    this.PrintEMDO.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.25
                 }
 
                 if (((DetailView)View).ViewEditMode == ViewEditMode.Edit)
@@ -177,6 +186,9 @@ namespace StarLaiPortal.Module.Controllers
                 // Start ver 1.0.13
                 this.PrintDailyDeliveryS.Active.SetItemValue("Enabled", false);
                 // End ver 1.0.13
+                // Start ver 1.0.25
+                this.PrintEMDO.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.25
             }
         }
         protected override void OnDeactivated()
@@ -1156,5 +1168,62 @@ namespace StarLaiPortal.Module.Controllers
             // End ver 1.0.25
         }
         // End ver 1.0.15
+
+        // Start ver 1.0.25
+        private void PrintEMDO_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            if (e.SelectedObjects.Count == 1)
+            {
+                string strServer;
+                string strDatabase;
+                string strUserID;
+                string strPwd;
+                string filename;
+
+                SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                DeliveryOrder delivery = (DeliveryOrder)View.CurrentObject;
+                ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                try
+                {
+                    ReportDocument doc = new ReportDocument();
+                    strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\DeliveryEM.rpt"));
+                    strDatabase = conn.Database;
+                    strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                    strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                    doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                    doc.Refresh();
+
+                    doc.SetParameterValue("dockey@", delivery.Oid);
+                    doc.SetParameterValue("dbName@", conn.Database);
+
+                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
+                        + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                    doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                    doc.Close();
+                    doc.Dispose();
+
+                    string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
+                        + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                    var script = "window.open('" + url + "');";
+
+                    WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                }
+                catch (Exception ex)
+                {
+                    showMsg("Fail", ex.Message, InformationType.Error);
+                }
+            }
+            else
+            {
+                showMsg("Fail", "Please select one DO only.", InformationType.Error);
+            }
+        }
+        // End 1.0.25
     }
 }

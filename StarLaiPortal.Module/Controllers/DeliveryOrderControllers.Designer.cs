@@ -39,6 +39,7 @@
             this.PrintDMBundleDO = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.PrintDailyDeliveryS = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ChoicePrintDelivery = new DevExpress.ExpressApp.Actions.SingleChoiceAction(this.components);
+            this.PrintEMDO = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // DOCopyFromLoading
             // 
@@ -139,6 +140,15 @@
             this.ChoicePrintDelivery.ToolTip = null;
             this.ChoicePrintDelivery.Execute += new DevExpress.ExpressApp.Actions.SingleChoiceActionExecuteEventHandler(this.ChoicePrintDelivery_Execute);
             // 
+            // PrintEMDO
+            // 
+            this.PrintEMDO.Caption = "EM Container DO";
+            this.PrintEMDO.Category = "ObjectsCreation";
+            this.PrintEMDO.ConfirmationMessage = null;
+            this.PrintEMDO.Id = "PrintEMDO";
+            this.PrintEMDO.ToolTip = null;
+            this.PrintEMDO.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PrintEMDO_Execute);
+            // 
             // DeliveryOrderControllers
             // 
             this.Actions.Add(this.DOCopyFromLoading);
@@ -151,6 +161,7 @@
             this.Actions.Add(this.PrintDMBundleDO);
             this.Actions.Add(this.PrintDailyDeliveryS);
             this.Actions.Add(this.ChoicePrintDelivery);
+            this.Actions.Add(this.PrintEMDO);
 
         }
 
@@ -166,5 +177,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction PrintDMBundleDO;
         private DevExpress.ExpressApp.Actions.SimpleAction PrintDailyDeliveryS;
         private DevExpress.ExpressApp.Actions.SingleChoiceAction ChoicePrintDelivery;
+        private DevExpress.ExpressApp.Actions.SimpleAction PrintEMDO;
     }
 }
