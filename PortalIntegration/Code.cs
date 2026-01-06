@@ -203,17 +203,7 @@ namespace PortalIntegration
                     WriteLog("[INFO]", "--Automation Picking Start--");
 
                     #region Automation Picking 
-                    string getAutoSo = "SELECT T0.OID, T0.DocNum, T0.Transporter, T1.U_Type " +
-                        "FROM SalesOrder T0 " +
-                        "INNER JOIN vwTransporter T1 on T0.Transporter = T1.TransporterID COLLATE DATABASE_DEFAULT " +
-                        "LEFT JOIN " +
-                        "( " +
-                        "SELECT SONumber " +
-                        "FROM PickList P0 " +
-                        "WHERE P0.GCRecord is null and P0.SONumber is not null " +
-                        "GROUP BY P0.SONumber " +
-                        ") T2 on T0.DocNum = T2.SONumber " +
-                        "WHERE T1.U_Type = 'OC' and T0.Sap = 1 and T0.SAPDocNum is not null and T0.[Status] = 6 and T2.SONumber is null";
+                    string getAutoSo = "EXEC sp_GetAutoPickList 'Auto'";
                     if (conn.State == ConnectionState.Open)
                     {
                         conn.Close();
