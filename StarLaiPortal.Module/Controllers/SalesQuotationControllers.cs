@@ -1935,6 +1935,30 @@ namespace StarLaiPortal.Module.Controllers
             }
             // End ver 1.0.7
 
+            // Start ver 1.0.26
+            if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+            {
+                showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+            {
+                showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVBuyerEmail))
+            {
+                System.ComponentModel.DataAnnotations.EmailAddressAttribute emailAddressValidator = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+                if (!emailAddressValidator.IsValid(selectedObject.EIVBuyerEmail))
+                {
+                    showMsg("Failed", "Invalid buyer email.", InformationType.Error);
+                    return;
+                }
+            }
+            // End ver 1.0.26
+
             if (selectedObject.IsValid == false)
             {
                 if (selectedObject.IsValid1 == true)
@@ -2169,14 +2193,14 @@ namespace StarLaiPortal.Module.Controllers
                     openNewView(os, trx, ViewEditMode.View);
 
                     // Start ver 1.0.26
-                    //if (trx.AppStatus == ApprovalStatusType.Required_Approval && trx.Status == DocStatus.Submitted)
-                    //{
-                    //    showMsg("Successful", "Submit Done. This Sales Quotation require approval.", InformationType.Success);
-                    //}
-                    //else
-                    //{
-                    showMsg("Successful", "Submit Done.", InformationType.Success);
-                    //}
+                    if (trx.AppStatus == ApprovalStatusType.Required_Approval && trx.Status == DocStatus.Submitted)
+                    {
+                        showMsg("Successful", "Submit Done. This Sales Quotation require approval.", InformationType.Success);
+                    }
+                    else
+                    {
+                        showMsg("Successful", "Submit Done.", InformationType.Success);
+                    }
                     // End ver 1.0.26
                     // Start ver 1.0.23
                     //}

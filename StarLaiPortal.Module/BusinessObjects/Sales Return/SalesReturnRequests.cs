@@ -21,6 +21,8 @@ using System.Text;
 // 2024-01-29 default payment method credit note ver 1.0.14
 // 2024-06-12 - e-invoice - ver 1.0.18
 // 2025-01-23 - new enhancement - ver 1.0.22
+// 2026-01-12 - add attachment - ver 1.0.26
+// 2026-01-12 - field validation - ver 1.0.26
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
 {
@@ -45,7 +47,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
     [Appearance("HideCopyTo1", AppearanceItemType.Action, "True", TargetItems = "SRRCopyToSR", Criteria = "(not (Status in (1))) or ((Status in (1)) and (not AppStatus in (0, 1)))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideCopyTo2", AppearanceItemType.Action, "True", TargetItems = "SRRCopyToSR", Criteria = "CopyTo = 1", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
-    [Appearance("HideItemInq", AppearanceItemType.Action, "True", TargetItems = "SRRInquiryItem", Criteria = "Customer = null or IsValid4 = 1 or IsValid11 = 1 or IsValid7", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.26
+    //[Appearance("HideItemInq", AppearanceItemType.Action, "True", TargetItems = "SRRInquiryItem", Criteria = "Customer = null or IsValid4 = 1 or IsValid11 = 1 or IsValid7", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideItemInq", AppearanceItemType.Action, "True", TargetItems = "SRRInquiryItem", Criteria = "Customer = null or IsValid4 = 1 or IsValid11 = 1 or IsValid7 or Salesperson = null", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.26
 
     // Start ver 1.0.18
     [RuleCriteria("EIVSRRBilling", DefaultContexts.Save, "IsValid4 = 0", "Please fill in Buyer TIN and Buyer Reg. Num.")]
@@ -275,6 +280,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
 
         private vwSalesPerson _Salesperson;
         [NoForeignKey]
+        // Start ver 1.0.26
+        [ImmediatePostData]
+        // End ver 1.0.26
         [XafDisplayName("Salesperson")]
         [LookupEditorMode(LookupEditorMode.AllItems)]
         [DataSourceCriteria("Active = 'Y'")]
@@ -630,6 +638,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         private string _EIVBuyerRegNum;
         [XafDisplayName("Registration No.*")]
         [ImmediatePostData]
+        // Start ver 1.0.26
+        [Size(20)]
+        // End ver 1.0.26
         [Index(55), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public string EIVBuyerRegNum
         {
@@ -1928,6 +1939,15 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         {
             get { return GetCollection<SalesReturnRequestAppStatus>("SalesReturnRequestAppStatus"); }
         }
+
+        // Start ver 1.0.26
+        [Association("SalesReturnRequests-SalesReturnReqAttachment")]
+        [XafDisplayName("Attachment")]
+        public XPCollection<SalesReturnReqAttachment> SalesReturnReqAttachment
+        {
+            get { return GetCollection<SalesReturnReqAttachment>("SalesReturnReqAttachment"); }
+        }
+        // End ver 1.0.26
 
         private XPCollection<AuditDataItemPersistent> auditTrail;
         public XPCollection<AuditDataItemPersistent> AuditTrail

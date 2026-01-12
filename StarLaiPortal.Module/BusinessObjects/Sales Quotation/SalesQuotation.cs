@@ -36,6 +36,7 @@ using DevExpress.Web.Internal.XmlProcessor;
 // 2024-06-12 - e-invoice - ver 1.0.18
 // 2024-10-09 - new enhancement - ver 1.0.21
 // 2025-01-23 - new enhancement - ver 1.0.22
+// 2026-01-12 - field validation - ver 1.0.26
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
 {
@@ -977,6 +978,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
         private string _EIVBuyerRegNum;
         [XafDisplayName("Registration No.*")]
         [ImmediatePostData]
+        // Start ver 1.0.26
+        [Size(20)]
+        // End ver 1.0.26
         [Index(75), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public string EIVBuyerRegNum
         {

@@ -3427,6 +3427,32 @@ namespace PortalIntegration
 
                     #endregion
                 }
+
+                #region Update INT DocNum
+                SqlCommand INTTransactionNotification = new SqlCommand("", conn);
+                INTTransactionNotification.CommandTimeout = 600;
+
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+
+                try
+                {
+                    conn.Open();
+
+                    INTTransactionNotification.CommandText = "EXEC sp_UpdINTDocNum '" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "'";
+
+                    SqlDataReader reader = INTTransactionNotification.ExecuteReader();
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    WriteLog("[Error]", "Message:" + ex.Message);
+                    conn.Close();
+                }
+                #endregion
+
                 // End ver 1.0.26
             }
             catch (Exception ex)

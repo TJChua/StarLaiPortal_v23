@@ -114,6 +114,7 @@
     <Reference Include="System">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -271,6 +272,7 @@
     <Compile Include="BusinessObjects\Sales Refund\SalesRefundReqDocTrail.cs" />
     <Compile Include="BusinessObjects\Sales Refund\SalesRefundRequests.cs" />
     <Compile Include="BusinessObjects\Sales Refund\SalesRefunds.cs" />
+    <Compile Include="BusinessObjects\Sales Return\SalesReturnReqAttachment.cs" />
     <Compile Include="BusinessObjects\Sales Return\SalesReturnDetails.cs" />
     <Compile Include="BusinessObjects\Sales Return\SalesReturnDocTrail.cs" />
     <Compile Include="BusinessObjects\Sales Return\SalesReturnRequestAppStage.cs" />

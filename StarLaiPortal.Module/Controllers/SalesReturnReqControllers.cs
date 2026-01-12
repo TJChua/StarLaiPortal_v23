@@ -30,6 +30,7 @@ using System.Text;
 // 2024-06-12 - e-invoice - ver 1.0.18
 // 2024-07-18 - add basedoc - ver 1.0.19
 // 2025-02-04 - not allow submit if posting period locked - ver 1.0.22
+// 2026-01-12 - add field validation - ver 1.0.26
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -243,6 +244,15 @@ namespace StarLaiPortal.Module.Controllers
                         // Start ver 1.0.18
                         int count = 0;
                         // End ver 1.0.18
+
+                        // Start ver 1.0.26
+                        if (srr.Salesperson == null)
+                        {
+                            showMsg("Failed", "Salesperson cannot blank.", InformationType.Error);
+                            return;
+                        }
+                        // End ver 1.0.26
+
                         foreach (vwInvoice dtl in e.PopupWindowViewSelectedObjects)
                         {
                             if (dupinv != dtl.SAPDocNum)
@@ -361,9 +371,6 @@ namespace StarLaiPortal.Module.Controllers
 
                         srr.Reference = invoiceno;
 
-                        ObjectSpace.CommitChanges();
-                        ObjectSpace.Refresh();
-                        
                         if (srr.DocNum == null)
                         {
                             string docprefix = genCon.GetDocPrefix();
@@ -413,6 +420,30 @@ namespace StarLaiPortal.Module.Controllers
                 showMsg("Error", "Unit Cost cannot zero.", InformationType.Error);
                 return;
             }
+
+            // Start ver 1.0.26
+            if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+            {
+                showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+            {
+                showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVBuyerEmail))
+            {
+                System.ComponentModel.DataAnnotations.EmailAddressAttribute emailAddressValidator = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+                if (!emailAddressValidator.IsValid(selectedObject.EIVBuyerEmail))
+                {
+                    showMsg("Failed", "Invalid buyer email.", InformationType.Error);
+                    return;
+                }
+            }
+            // End ver 1.0.26
 
             if (selectedObject.IsValid == true)
             {

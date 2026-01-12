@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 
 // 2023-08-16 - add stock 3 and stock 4 - ver 1.0.8
+// 2026-01-12 - add field validation - ver 1.0.26
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -253,6 +254,30 @@ namespace StarLaiPortal.Module.Controllers
                 showMsg("Failed", "Salesperson already inactive.", InformationType.Error);
                 return;
             }
+
+            // Start ver 1.0.26
+            if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+            {
+                showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+            {
+                showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVBuyerEmail))
+            {
+                System.ComponentModel.DataAnnotations.EmailAddressAttribute emailAddressValidator = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+                if (!emailAddressValidator.IsValid(selectedObject.EIVBuyerEmail))
+                {
+                    showMsg("Failed", "Invalid buyer email.", InformationType.Error);
+                    return;
+                }
+            }
+            // End ver 1.0.26
 
             if (selectedObject.IsValid == true)
             {

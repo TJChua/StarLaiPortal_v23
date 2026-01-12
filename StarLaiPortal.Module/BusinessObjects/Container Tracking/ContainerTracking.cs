@@ -51,7 +51,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
             }
             CreateDate = DateTime.Now;
 
-            DocDate = DateTime.Now;
+            //DocDate = DateTime.Now;
             DocType = DocTypeList.CT;
             Status = DocStatus.New;
         }
@@ -136,6 +136,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
 
         private DateTime _DocDate;
         [XafDisplayName("Supplier Doc Date")]
+        [RuleRequiredField(DefaultContexts.Save)]
         [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public DateTime DocDate
         {

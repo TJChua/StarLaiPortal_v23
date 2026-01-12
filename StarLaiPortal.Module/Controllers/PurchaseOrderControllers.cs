@@ -101,7 +101,7 @@ namespace StarLaiPortal.Module.Controllers
                 else
                 {
                     // Start ver 1.0.26
-                    //this.SubmitPO.Active.SetItemValue("Enabled", false);
+                    this.SubmitPO.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.26
                     this.CancelPO.Active.SetItemValue("Enabled", false);
                     this.PreviewPO.Active.SetItemValue("Enabled", false);

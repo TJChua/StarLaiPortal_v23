@@ -128,7 +128,7 @@ namespace StarLaiPortal.Module.Controllers
                 else
                 {
                     // Start ver 1.0.26
-                    //this.SubmitWTR.Active.SetItemValue("Enabled", false);
+                    this.SubmitWTR.Active.SetItemValue("Enabled", false);
                     // End ver 1.0.26
                     this.CancelWTR.Active.SetItemValue("Enabled", false);
                     this.PreviewWTR.Active.SetItemValue("Enabled", false);
