@@ -1983,31 +1983,64 @@ namespace StarLaiPortal.Module.Controllers
                             result.ContainerNo = row.Values[3].ToString();
                             result.ShipmentInvNo = row.Values[4].ToString();
                             result.Whse = row.Values[5].ToString();
-                            result.ArrivePortDate = DateTime.Parse(row.Values[6].ToString());
-                            result.StakeOnDate = DateTime.Parse(row.Values[7].ToString());
-                            result.RecvGatePassDate = DateTime.Parse(row.Values[8].ToString());
+                            if (DateTime.Parse(row.Values[6].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.ArrivePortDate = DateTime.Parse(row.Values[6].ToString());
+                            }
+                            if (DateTime.Parse(row.Values[7].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.StakeOnDate = DateTime.Parse(row.Values[7].ToString());
+                            }
+                            if (DateTime.Parse(row.Values[8].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.RecvGatePassDate = DateTime.Parse(row.Values[8].ToString());
+                            }
                             result.PendingDocDays = int.Parse(row.Values[9].ToString());
-                            result.ReqPullOut = DateTime.Parse(row.Values[10].ToString());
-                            result.ActualPullOut = DateTime.Parse(row.Values[11].ToString());
+                            if (DateTime.Parse(row.Values[10].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.ReqPullOut = DateTime.Parse(row.Values[10].ToString());
+                            }
+                            if (DateTime.Parse(row.Values[11].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.ActualPullOut = DateTime.Parse(row.Values[11].ToString());
+                            }
                             result.StorageParkDays = int.Parse(row.Values[12].ToString());
                             result.PenaltyDays = int.Parse(row.Values[13].ToString());
-                            result.ReqReturnBack = DateTime.Parse(row.Values[14].ToString());
-                            result.ActualReturnBack = DateTime.Parse(row.Values[15].ToString());
+                            if (DateTime.Parse(row.Values[14].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.ReqReturnBack = DateTime.Parse(row.Values[14].ToString());
+                            }
+                            if (DateTime.Parse(row.Values[15].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.ActualReturnBack = DateTime.Parse(row.Values[15].ToString());
+                            }
                             result.ContainerUnloadDays = int.Parse(row.Values[16].ToString());
-                            result.GRPOCompleteDate = DateTime.Parse(row.Values[17].ToString());
+                            if (DateTime.Parse(row.Values[17].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.GRPOCompleteDate = DateTime.Parse(row.Values[17].ToString());
+                            }
                             result.SystemStockinDays = int.Parse(row.Values[18].ToString());
                             result.DemmurrageFreeDays = int.Parse(row.Values[19].ToString());
                             result.DetentionFreeDays = int.Parse(row.Values[20].ToString());
                             result.FreeTimeExpiry = int.Parse(row.Values[21].ToString());
                             result.Remarks = row.Values[22].ToString();
                             result.ParkingAtPort = int.Parse(row.Values[23].ToString());
-                            result.DMFreeDueDate = DateTime.Parse(row.Values[24].ToString());
-                            result.DTFreeDueDate = DateTime.Parse(row.Values[25].ToString());
+                            if (DateTime.Parse(row.Values[24].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.DMFreeDueDate = DateTime.Parse(row.Values[24].ToString());
+                            }
+                            if (DateTime.Parse(row.Values[25].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.DTFreeDueDate = DateTime.Parse(row.Values[25].ToString());
+                            }
                             result.StorageChargeDay = int.Parse(row.Values[26].ToString());
                             result.DMFreeDelayDay = int.Parse(row.Values[27].ToString());
                             result.DTFreeDelayDay = int.Parse(row.Values[28].ToString());
                             result.Oid = int.Parse(row.Values[29].ToString());
-                            result.CreateDate = DateTime.Parse(row.Values[30].ToString());
+                            if (DateTime.Parse(row.Values[30].ToString()).Date.ToString("MM/dd/yyyy") != "01/01/1900")
+                            {
+                                result.CreateDate = DateTime.Parse(row.Values[30].ToString());
+                            }
 
                             currObject.Results.Add(result);
                         }
