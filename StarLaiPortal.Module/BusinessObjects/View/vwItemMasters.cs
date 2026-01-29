@@ -15,6 +15,7 @@ using System.Text;
 
 // 2023-09-25 add printing uom ver 1.0.10
 // 2024-06-12 e-invoice - ver 1.0.18
+// 2025-01-29 add FOC udf - ver 1.0.26
 
 namespace StarLaiPortal.Module.BusinessObjects.View
 {
@@ -201,6 +202,16 @@ namespace StarLaiPortal.Module.BusinessObjects.View
             get; set;
         }
         // End ver 1.0.18
+
+        // Start ver 1.0.26
+        [XafDisplayName("FOCItem")]
+        [Appearance("FOCItem", Enabled = false)]
+        [Index(45), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        public string FOCItem
+        {
+            get; set;
+        }
+        // End ver 1.0.26
 
         [Index(30), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
         public string BoFullName

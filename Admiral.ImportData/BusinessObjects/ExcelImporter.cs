@@ -581,6 +581,14 @@ namespace Admiral.ImportData
                                                 {
                                                     value = list[0];
                                                 }
+
+                                                if (field.Caption == "Item Code")
+                                                {
+                                                    if (value.GetType().GetProperty("frozenFor").GetValue(value).ToString() == "Y")
+                                                    {
+                                                        result.AddErrorMessage(string.Format("Item Code inactive.", fields[3]), cell);
+                                                    }
+                                                }
                                             }
                                         }
                                         catch (Exception exception1)

@@ -575,6 +575,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Refund
 
         private string _EIVPostalZoneB;
         [XafDisplayName("Buyer's Postcode")]
+        // Start ver 1.0.26
+        [Size(5)]
+        // End ver 1.0.26
         [Index(43), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public string EIVPostalZoneB
         {
@@ -717,6 +720,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Refund
 
         private string _EIVPostalZoneS;
         [XafDisplayName("Recipient's Postcode")]
+        // Start ver 1.0.26
+        [Size(5)]
+        // End ver 1.0.26
         [Index(54), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public string EIVPostalZoneS
         {

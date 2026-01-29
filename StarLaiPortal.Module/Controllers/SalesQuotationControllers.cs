@@ -291,7 +291,6 @@ namespace StarLaiPortal.Module.Controllers
             Application.ShowViewStrategy.ShowMessage(options);
         }
 
-
         private void BackToInquiry_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             SalesOrder selectedObject = (SalesOrder)e.CurrentObject;
@@ -2201,7 +2200,7 @@ namespace StarLaiPortal.Module.Controllers
                     // Start ver 1.0.26
                     if (trx.AppStatus == ApprovalStatusType.Required_Approval && trx.Status == DocStatus.Submitted)
                     {
-                        showMsg("Successful", "Submit Done. This Sales Quotation require approval.", InformationType.Success);
+                        showMsg("Successful", "Submit Done. This Sales Quotation require approval.", InformationType.Warning);
                     }
                     else
                     {

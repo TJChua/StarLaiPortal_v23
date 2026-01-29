@@ -14,6 +14,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+// 2025-01-29 - FOC item allow zero price - ver 1.0.26
+
 namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
 {
     [DefaultClassOptions]
@@ -423,7 +425,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
             {
                 if (this.BaseDoc == null || !IsNew)
                 {
-                    if (Price <= 0)
+                    // Start ver 1.0.26
+                    //if (Price <= 0)
+                    if (Price <= 0 && ItemCode.FOCItem == "N")
+                    // End ver 1.0.26
                     {
                         return true;
                     }

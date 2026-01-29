@@ -2465,7 +2465,9 @@ namespace PortalIntegration
                                         "T1.Price, ISNULL(T1.EIVClassification, '') as EIVClassification, T1.Loc1Quantity, T1.OID, T0.DocNum, ISNULL(T2.Loc1, '') as Loc " +
                                         "From [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation T0 " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails T1 on T0.OID = T1.SalesQuotation " +
-                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SQDefaultWhs T2 on T0.DocType = T2.DocType " + 
+                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwBusniessPartner T3 on T1.Customer = T3.BPCode COLLATE DATABASE_DEFAULT " +
+                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SQDefaultWhs T2 on T0.DocType = T2.DocType " +
+                                        "AND T3.U_ALLOCSEQ = T2.SeqCode COLLATE DATABASE_DEFAULT " + 
                                         "WHERE T1.SalesQuotation = '" + header["OID"].ToString() + "' AND T1.Loc1Quantity > 0 " +
                                         "AND ISNULL(T1.GeneratedLoc1, 0) = 0 AND T1.GCRecord is null ";
                                     DataTable dtline = new DataTable();
@@ -2680,7 +2682,9 @@ namespace PortalIntegration
                                         "T1.Price, ISNULL(T1.EIVClassification, '') as EIVClassification, T1.Loc2Quantity, T1.OID, T0.DocNum, ISNULL(T2.Loc2, '') as Loc " +
                                         "From [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation T0 " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails T1 on T0.OID = T1.SalesQuotation " +
+                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwBusniessPartner T3 on T1.Customer = T3.BPCode COLLATE DATABASE_DEFAULT " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SQDefaultWhs T2 on T0.DocType = T2.DocType " +
+                                        "AND T3.U_ALLOCSEQ = T2.SeqCode COLLATE DATABASE_DEFAULT " +
                                         "WHERE T1.SalesQuotation = '" + header["OID"].ToString() + "' AND T1.Loc2Quantity > 0 " +
                                         "AND ISNULL(T1.GeneratedLoc2, 0) = 0 AND T1.GCRecord is null ";
                                     DataTable dtline = new DataTable();
@@ -2895,7 +2899,9 @@ namespace PortalIntegration
                                         "T1.Price, ISNULL(T1.EIVClassification, '') as EIVClassification, T1.Loc3Quantity, T1.OID, T0.DocNum, ISNULL(T2.Loc3, '') as Loc " +
                                         "From [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation T0 " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails T1 on T0.OID = T1.SalesQuotation " +
+                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwBusniessPartner T3 on T1.Customer = T3.BPCode COLLATE DATABASE_DEFAULT " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SQDefaultWhs T2 on T0.DocType = T2.DocType " +
+                                        "AND T3.U_ALLOCSEQ = T2.SeqCode COLLATE DATABASE_DEFAULT " +
                                         "WHERE T1.SalesQuotation = '" + header["OID"].ToString() + "' AND T1.Loc3Quantity > 0 " +
                                         "AND ISNULL(T1.GeneratedLoc3, 0) = 0 AND T1.GCRecord is null ";
                                     DataTable dtline = new DataTable();
@@ -3110,7 +3116,9 @@ namespace PortalIntegration
                                         "T1.Price, ISNULL(T1.EIVClassification, '') as EIVClassification, T1.Loc4Quantity, T1.OID, T0.DocNum, ISNULL(T2.Loc4, '') as Loc " +
                                         "From [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation T0 " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails T1 on T0.OID = T1.SalesQuotation " +
+                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwBusniessPartner T3 on T1.Customer = T3.BPCode COLLATE DATABASE_DEFAULT " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SQDefaultWhs T2 on T0.DocType = T2.DocType " +
+                                        "AND T3.U_ALLOCSEQ = T2.SeqCode COLLATE DATABASE_DEFAULT " +
                                         "WHERE T1.SalesQuotation = '" + header["OID"].ToString() + "' AND T1.Loc4Quantity > 0 " +
                                         "AND ISNULL(T1.GeneratedLoc4, 0) = 0 AND T1.GCRecord is null ";
                                     DataTable dtline = new DataTable();
@@ -3325,7 +3333,9 @@ namespace PortalIntegration
                                         "T1.Price, ISNULL(T1.EIVClassification, '') as EIVClassification, T1.Loc5Quantity, T1.OID, T0.DocNum, ISNULL(T2.Loc5, '') as Loc " +
                                         "From [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation T0 " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails T1 on T0.OID = T1.SalesQuotation " +
+                                        "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwBusniessPartner T3 on T1.Customer = T3.BPCode COLLATE DATABASE_DEFAULT " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SQDefaultWhs T2 on T0.DocType = T2.DocType " +
+                                        "AND T3.U_ALLOCSEQ = T2.SeqCode COLLATE DATABASE_DEFAULT " +
                                         "WHERE T1.SalesQuotation = '" + header["OID"].ToString() + "' AND T1.Loc5Quantity > 0 " +
                                         "AND ISNULL(T1.GeneratedLoc5, 0) = 0 AND T1.GCRecord is null ";
                                     DataTable dtline = new DataTable();

@@ -103,6 +103,7 @@
     <Reference Include="DevExpress.Xpo.v23.1">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.XtraBars.v23.1, Version=23.1.14.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v23.1, Version=23.1.14.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Charts.v23.1.Core, Version=23.1.14.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v23.1, Version=23.1.14.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -483,6 +484,10 @@
     </Compile>
     <Compile Include="Controllers\MemoryManagementController.Designer.cs">
       <DependentUpon>MemoryManagementController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\MyChangePasswordViewController.cs" />
+    <Compile Include="Controllers\MyChangePasswordViewController.Designer.cs">
+      <DependentUpon>MyChangePasswordViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\NavigationControllers.cs">
       <SubType>Component</SubType>

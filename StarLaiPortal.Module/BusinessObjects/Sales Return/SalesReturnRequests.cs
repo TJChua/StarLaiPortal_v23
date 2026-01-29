@@ -905,6 +905,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         private string _EIVPostalZoneB;
         [ImmediatePostData]
         [XafDisplayName("Buyer's Postcode")]
+        // Start ver 1.0.26
+        [Size(5)]
+        // End ver 1.0.26
         [Index(63), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public string EIVPostalZoneB
         {
@@ -1370,6 +1373,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         private string _EIVPostalZoneS;
         [ImmediatePostData]
         [XafDisplayName("Recipient's Postcode")]
+        // Start ver 1.0.26
+        [Size(5)]
+        // End ver 1.0.26
         [Index(74), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public string EIVPostalZoneS
         {
