@@ -256,16 +256,22 @@ namespace StarLaiPortal.Module.Controllers
             }
 
             // Start ver 1.0.26
-            if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+            if (!string.IsNullOrEmpty(selectedObject.EIVPostalZoneB))
             {
-                showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
-                return;
+                if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+                {
+                    showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
+                    return;
+                }
             }
 
-            if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+            if (!string.IsNullOrEmpty(selectedObject.EIVPostalZoneS))
             {
-                showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
-                return;
+                if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+                {
+                    showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
+                    return;
+                }
             }
 
             if (!string.IsNullOrEmpty(selectedObject.EIVBuyerEmail))
