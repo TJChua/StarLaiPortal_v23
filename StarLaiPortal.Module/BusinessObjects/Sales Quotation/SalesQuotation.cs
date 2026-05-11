@@ -37,6 +37,7 @@ using DevExpress.Web.Internal.XmlProcessor;
 // 2024-10-09 - new enhancement - ver 1.0.21
 // 2025-01-23 - new enhancement - ver 1.0.22
 // 2026-01-12 - field validation - ver 1.0.26
+// 2026-05-07 - change posting date and delivery date format - ver 1.0.28
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
 {
@@ -513,6 +514,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
         [ImmediatePostData]
         // End ver 1.0.15
         [XafDisplayName("Posting Date")]
+        // Start ver 1.0.28
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.28
         [Index(24), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PostingDate
         {
@@ -564,6 +568,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
 
         private DateTime _DeliveryDate;
         [XafDisplayName("Delivery Date")]
+        // Start ver 1.0.28
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.28
         [Index(25), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime DeliveryDate
         {

@@ -22,6 +22,7 @@ using System.Text;
 // 2023-10-16 hide seach function ver 1.0.11
 // 2024-06-12 e-invoice - ver 1.0.18
 // 2025-10-29 add INTQuotation - ver 1.0.26
+// 2026-05-07 - change posting date and delivery date format - ver 1.0.28
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Order
 {
@@ -306,6 +307,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Order
 
         private DateTime _PostingDate;
         [XafDisplayName("Posting Date")]
+        // Start ver 1.0.28
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.28
         [Index(24), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PostingDate
         {
@@ -318,6 +322,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Order
 
         private DateTime _DeliveryDate;
         [XafDisplayName("Delivery Date")]
+        // Start ver 1.0.28
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.28
         [Index(25), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime DeliveryDate
         {

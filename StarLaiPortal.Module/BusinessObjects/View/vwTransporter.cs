@@ -13,6 +13,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+// 2026-05-07 - add new posting date and delivery date control - ver 1.0.28
+
 namespace StarLaiPortal.Module.BusinessObjects.View
 {
     [DefaultClassOptions]
@@ -67,5 +69,56 @@ namespace StarLaiPortal.Module.BusinessObjects.View
         {
             get; set;
         }
+
+        // Start ver 1.0.28
+        [XafDisplayName("U_CutOffTime")]
+        [Appearance("U_CutOffTime", Enabled = false)]
+        [Index(18)]
+        public string U_CutOffTime
+        {
+            get; set;
+        }
+
+        [XafDisplayName("U_UrgentDay")]
+        [Appearance("U_UrgentDay", Enabled = false)]
+        [Index(20)]
+        public int U_UrgentDay
+        {
+            get; set;
+        }
+
+        [XafDisplayName("U_UrgentTime")]
+        [Appearance("U_UrgentTime", Enabled = false)]
+        [Index(23)]
+        public string U_UrgentTime
+        {
+            get; set;
+        }
+
+        [XafDisplayName("U_NormalDay")]
+        [Appearance("U_NormalDay", Enabled = false)]
+        [Index(25)]
+        public int U_NormalDay
+        {
+            get; set;
+        }
+
+        [XafDisplayName("U_NormalTime")]
+        [Appearance("U_NormalTime", Enabled = false)]
+        [Index(28)]
+        public string U_NormalTime
+        {
+            get; set;
+        }
+
+
+        [XafDisplayName("U_LeadTimeBasis")]
+        [Appearance("U_LeadTimeBasis", Enabled = false)]
+        [Index(30)]
+        public string U_LeadTimeBasis
+        {
+            get; set;
+        }
+        // End ver 1.0.28
     }
 }

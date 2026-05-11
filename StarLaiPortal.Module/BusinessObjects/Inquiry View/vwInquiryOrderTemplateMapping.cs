@@ -14,6 +14,8 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 
+// 2026-05-06 - add 52 stock - ver 1.0.28
+
 namespace StarLaiPortal.Module.BusinessObjects.Inquiry_View
 {
     [DefaultClassOptions]
@@ -109,6 +111,18 @@ namespace StarLaiPortal.Module.BusinessObjects.Inquiry_View
         {
             get; set;
         }
+
+        // Start ver 1.0.28
+        [XafDisplayName("52 Stock")]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:n2}")]
+        [Appearance("Stock52", Enabled = false)]
+        [Index(15)]
+        public decimal Stock52
+        {
+            get; set;
+        }
+        // End ver 1.0.28
 
         [XafDisplayName("Other Stock")]
         [DbType("numeric(18,6)")]

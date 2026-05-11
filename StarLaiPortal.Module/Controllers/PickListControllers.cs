@@ -51,6 +51,7 @@ using System.Web;
 // 2024-05-29 get SO remarks ver 1.0.16
 // 2024-06-12 e-invoice - ver 1.0.18
 // 2025-09-11 print multiple document in one pdf - ver 1.0.25
+// 2026-05-06 block submit if picker is blank - ver 1.0.28
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -697,6 +698,14 @@ namespace StarLaiPortal.Module.Controllers
             cmdso.Dispose();
             conn.Close();
             // End ver 1.0.14
+
+            // Start ver 1.0.28
+            if (selectedObject.Picker == null)
+            {
+                showMsg("Error", "Picker no allow blank.", InformationType.Error);
+                return;
+            }
+            // End ver 1.0.28
 
             if (selectedObject.IsValid == true)
             {

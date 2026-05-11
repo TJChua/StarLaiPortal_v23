@@ -17,6 +17,7 @@ using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
 using DevExpress.Web;
 using DevExpress.Web.Internal.XmlProcessor;
+using DevExpress.XtraReports.Templates;
 using StarLaiPortal.Module.BusinessObjects;
 using StarLaiPortal.Module.BusinessObjects.Item_Inquiry;
 using StarLaiPortal.Module.BusinessObjects.Sales_Order;
@@ -28,6 +29,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -48,6 +50,7 @@ using static System.Net.Mime.MediaTypeNames;
 // 2025-07-11 - Fix generate Doc num for SO - ver 1.0.23
 // 2025-10-06 - Fix copy to recipient button - ver 1.0.25
 // 2025-12-08 - add require approve - ver 1.0.26
+// 2026-05-07 - enhance posting date and delivery date format - ver 1.0.28
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -901,6 +904,10 @@ namespace StarLaiPortal.Module.Controllers
             //newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
             newSO.DocNum = genCon.GenerateSODocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
             // End ver 1.0.23
+            // Start ver 1.0.28
+            newSO.PostingDate = selectedObject.PostingDate;
+            newSO.DeliveryDate = selectedObject.DeliveryDate;
+            // End ver 1.0.28
 
             if (selectedObject.Customer != null)
             {
@@ -1289,6 +1296,10 @@ namespace StarLaiPortal.Module.Controllers
                                         //newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
                                         newSO.DocNum = genCon.GenerateSODocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
                                         // End ver 1.0.23
+                                        // Start ver 1.0.28
+                                        newSO.PostingDate = trx.PostingDate;
+                                        newSO.DeliveryDate = trx.DeliveryDate;
+                                        // End ver 1.0.28
 
                                         if (trx.Customer != null)
                                         {
@@ -1653,6 +1664,10 @@ namespace StarLaiPortal.Module.Controllers
                             //newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
                             newSO.DocNum = genCon.GenerateSODocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
                             // Start ver 1.0.23
+                            // Start ver 1.0.28
+                            newSO.PostingDate = trx.PostingDate;
+                            newSO.DeliveryDate = trx.DeliveryDate;
+                            // End ver 1.0.28
 
                             if (trx.Customer != null)
                             {
@@ -2023,6 +2038,82 @@ namespace StarLaiPortal.Module.Controllers
                     // End ver 1.0.23
 
                     selectedObject.Status = DocStatus.Submitted;
+                    // Start ver 1.0.28
+                    selectedObject.PostingDate = DateTime.Now;
+                    if (selectedObject.Priority.PriorityName == "Urgent")
+                    {
+                        if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
+                        {
+                            if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_UrgentDay - 1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
+                            else
+                            {
+                                selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_UrgentDay - 1);
+                            }
+                        }
+                        else
+                        {
+                            selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_UrgentDay);
+                            if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
+                            else
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
+                        }
+
+                        if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                        {
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                        }
+                    }
+                    else
+                    {
+                        if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
+                        {
+                            if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
+                            {
+                                if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_NormalDay - 1);
+                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_NormalDay - 1);
+                                }
+                            }
+                            else
+                            {
+                                selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_NormalDay);
+                                if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+
+                            if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
+                        }
+                    }
+                    // End ver 1.0.28
 
                     SalesQuotationDocTrail ds = ObjectSpace.CreateObject<SalesQuotationDocTrail>();
                     ds.DocStatus = DocStatus.Submitted;
@@ -2089,6 +2180,10 @@ namespace StarLaiPortal.Module.Controllers
                         //newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
                         newSO.DocNum = genCon.GenerateSODocNum(DocTypeList.SO, sos, TransferType.NA, 0, docprefix);
                         // End ver 1.0.23
+                        // Start ver 1.0.28
+                        newSO.PostingDate = selectedObject.PostingDate;
+                        newSO.DeliveryDate = selectedObject.DeliveryDate;
+                        // End ver 1.0.28
 
                         if (selectedObject.Customer != null)
                         {

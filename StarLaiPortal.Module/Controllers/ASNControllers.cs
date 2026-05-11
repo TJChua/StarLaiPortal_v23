@@ -32,6 +32,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
+using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
+using DevExpress.Web.Internal.XmlProcessor;
 
 // 2023-08-25 add validation for qty when submit ver 1.0.9
 // 2023-09-25 add copyto qty ver 1.0.10
@@ -39,6 +41,7 @@ using System.Web;
 // 2023-12-04 avoid copy same asn ver 1.0.13
 // 2025-08-18 Add ASN Container Printing ver 1.0.24
 // 2025-10-29 add PO line Num ver 1.0.24
+// 2026-05-06 block submit if same PO line ver 1.0.28
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -575,6 +578,10 @@ namespace StarLaiPortal.Module.Controllers
         {
             ASN selectedObject = (ASN)e.CurrentObject;
             StringParameters p = (StringParameters)e.PopupWindow.View.CurrentObject;
+            // Start ver 1.0.28
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+            string duppoline = "";
+            // End ver 1.0.28
             if (p.IsErr) return;
 
             // Start ver 1.0.9
@@ -587,6 +594,40 @@ namespace StarLaiPortal.Module.Controllers
                 }
             }
             // End ver 1.0.9
+
+            // Start ver 1.0.28
+            string getduppo = "SELECT ItemCode, BaseDoc, BaseId, PONo " +
+                "FROM ASNDetails T0 " +
+                "WHERE ASN = 8030 " +
+                "GROUP BY ItemCode, BaseDoc, BaseId, PONo " +
+                "HAVING COUNT(BaseId) > 1";
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            conn.Open();
+            SqlCommand cmdpo = new SqlCommand(getduppo, conn);
+            SqlDataReader readerpo = cmdpo.ExecuteReader();
+            while (readerpo.Read())
+            {
+                if (duppoline == "")
+                {
+                    duppoline = readerpo.GetString(3) + ": " + readerpo.GetString(0);
+                }
+                else
+                {
+                    duppoline = duppoline + ", " + readerpo.GetString(3) + ": " + readerpo.GetString(0);
+                }
+            }
+            cmdpo.Dispose();
+            conn.Close();
+
+            if (duppoline != "")
+            {
+                showMsg("Error", "Duplicate line - " + duppoline, InformationType.Error);
+                return;
+            }
+            // End ver 1.0.28
 
             if (selectedObject.IsValid == true)
             {

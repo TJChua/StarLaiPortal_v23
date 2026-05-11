@@ -66,6 +66,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 // 2025-09-12 Auto create picking for SO with transporter with OC type - ver 1.0.25
 // 2025-10-30 Auto create INT Quotation from B2B portal - ver 1.0.26
 // 2026-03-18 Update loading missing doc num - ver 1.0.27
+// 2026-05-07 enhance posting date and delivery date format - ver 1.0.28
 
 namespace PortalIntegration
 {
@@ -138,7 +139,7 @@ namespace PortalIntegration
                 while (readerload.Read())
                 {
                     IObjectSpace updload = ObjectSpaceProvider.CreateObjectSpace();
-                    Load updloadtrx = updload.FindObject<Load>(new BinaryOperator("Oid", readerso.GetInt32(0)));
+                    Load updloadtrx = updload.FindObject<Load>(new BinaryOperator("Oid", readerload.GetInt32(0)));
 
                     string docprefix = GetDocPrefix();
                     updloadtrx.DocNum = GenerateSODocNum(DocTypeList.Load, updload, TransferType.NA, 0, docprefix);
@@ -2338,6 +2339,9 @@ namespace PortalIntegration
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
                         daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
+                            // Start ver 1.0.28
+                            "T0.PostingDate, T0.DeliveryDate, " +
+                            // End ver 1.0.28
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2383,6 +2387,10 @@ namespace PortalIntegration
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
                                 newSO.INTQuotation = header["DocNum"].ToString();
+                                // Start ver 1.0.28
+                                newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -2555,6 +2563,9 @@ namespace PortalIntegration
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
                         daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
+                            // Start ver 1.0.28
+                            "T0.PostingDate, T0.DeliveryDate, " +
+                            // End ver 1.0.28
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2600,6 +2611,10 @@ namespace PortalIntegration
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
                                 newSO.INTQuotation = header["DocNum"].ToString();
+                                // Start ver 1.0.28
+                                newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -2772,6 +2787,9 @@ namespace PortalIntegration
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
                         daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
+                            // Start ver 1.0.28
+                            "T0.PostingDate, T0.DeliveryDate, " +
+                            // End ver 1.0.28
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -2817,6 +2835,10 @@ namespace PortalIntegration
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
                                 newSO.INTQuotation = header["DocNum"].ToString();
+                                // Start ver 1.0.28
+                                newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -2989,6 +3011,9 @@ namespace PortalIntegration
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
                         daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
+                            // Start ver 1.0.28
+                            "T0.PostingDate, T0.DeliveryDate, " +
+                            // End ver 1.0.28
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -3034,6 +3059,10 @@ namespace PortalIntegration
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
                                 newSO.INTQuotation = header["DocNum"].ToString();
+                                // Start ver 1.0.28
+                                newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
                                 {
@@ -3206,6 +3235,9 @@ namespace PortalIntegration
                     {
                         daheader.SelectCommand.CommandTimeout = 0;
                         daheader.SelectCommand.CommandText = "SELECT ISNULL(T0.DocNum,'') as DocNum, ISNULL(T2.CustomerCode, '') as Customer, " +
+                            // Start ver 1.0.28
+                            "T0.PostingDate, T0.DeliveryDate, " +
+                            // End ver 1.0.28
                             "ISNULL(T0.CustomerName, '') as CustomerName, " +
                             "ISNULL(T0.Transporter, '') as Transporter, ISNULL(T0.ContactNo, '') as ContactNo, ISNULL(T0.ContactPerson, '') as ContactPerson, " +
                             "ISNULL(T0.Balance, 0) as Balance, ISNULL(T0.PaymentTerm, '') as PaymentTerm, ISNULL(T0.Series, '') as Series, " +
@@ -3251,6 +3283,10 @@ namespace PortalIntegration
                                 string docprefix = GetDocPrefix();
                                 newSO.DocNum = genCon.GenerateDocNum(DocTypeList.SO, salesos, TransferType.NA, 0, docprefix);
                                 newSO.INTQuotation = header["DocNum"].ToString();
+                                // Start ver 1.0.28
+                                newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
                                 {
