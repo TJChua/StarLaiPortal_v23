@@ -1227,6 +1227,80 @@ namespace StarLaiPortal.Module.Controllers
                                     sq.UpdateDate = DateTime.Now;
                                     // End ver 1.0.25
 
+                                    // Start ver 1.0.28
+                                    sq.PostingDate = DateTime.Now;
+                                    if (sq.Priority.PriorityName == "Urgent")
+                                    {
+                                        if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                                        {
+                                            if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                            {
+                                                sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_UrgentDay - 1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+                                            else
+                                            {
+                                                sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_UrgentDay - 1);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_UrgentDay);
+                                            if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+                                            else
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+                                        }
+
+                                        if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                        {
+                                            sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                                        {
+                                            if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                            {
+                                                sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_NormalDay - 1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+                                            else
+                                            {
+                                                sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_NormalDay - 1);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_NormalDay);
+                                            if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+                                            else
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+                                        }
+
+                                        if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                        {
+                                            sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                        }
+                                    }
+                                    // End ver 1.0.28
+
                                     sos.CommitChanges();
                                     sos.Refresh();
 
@@ -1599,6 +1673,80 @@ namespace StarLaiPortal.Module.Controllers
                         // Start ver 1.0.25
                         sq.UpdateDate = DateTime.Now;
                         // End ver 1.0.25
+
+                        // Start ver 1.0.28
+                        sq.PostingDate = DateTime.Now;
+                        if (sq.Priority.PriorityName == "Urgent")
+                        {
+                            if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                            {
+                                if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_UrgentDay - 1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_UrgentDay - 1);
+                                }
+                            }
+                            else
+                            {
+                                sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_UrgentDay);
+                                if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+
+                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            }
+                        }
+                        else
+                        {
+                            if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                            {
+                                if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_NormalDay - 1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_NormalDay - 1);
+                                }
+                            }
+                            else
+                            {
+                                sq.DeliveryDate = sq.PostingDate.Date.AddDays(sq.Transporter.U_NormalDay);
+                                if (sq.Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+
+                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            }
+                        }
+                        // End ver 1.0.28
 
                         sos.CommitChanges();
                         sos.Refresh();
@@ -2072,45 +2220,42 @@ namespace StarLaiPortal.Module.Controllers
                         {
                             selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
                             selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
                         }
                     }
                     else
                     {
                         if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
                         {
-                            if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
+                            if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
                             {
-                                if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
-                                {
-                                    selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_NormalDay - 1);
-                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
-                                }
-                                else
-                                {
-                                    selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_NormalDay - 1);
-                                }
+                                selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_NormalDay - 1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                             }
                             else
                             {
-                                selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_NormalDay);
-                                if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
-                                {
-                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
-                                }
-                                else
-                                {
-                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                                    selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
-                                }
+                                selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_NormalDay - 1);
                             }
-
-                            if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                        }
+                        else
+                        {
+                            selectedObject.DeliveryDate = selectedObject.PostingDate.Date.AddDays(selectedObject.Transporter.U_NormalDay);
+                            if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
                             {
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                             }
+                            else
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
+                        }
+                        
+                        if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                        {
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
                         }
                     }
                     // End ver 1.0.28

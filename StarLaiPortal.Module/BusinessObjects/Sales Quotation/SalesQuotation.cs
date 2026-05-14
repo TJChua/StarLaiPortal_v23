@@ -25,6 +25,7 @@ using DevExpress.Xpo.DB.Helpers;
 using DevExpress.Persistent.Base.Security;
 using System.Runtime.Remoting.Lifetime;
 using DevExpress.Web.Internal.XmlProcessor;
+using System.Globalization;
 
 // 2023-07-28 block submit if no address for OC and OS ver 1.0.7
 // 2023-12-01 change to action for create SO button ver 1.0.13
@@ -395,6 +396,70 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
             set
             {
                 SetPropertyValue("Transporter", ref _Transporter, value);
+                // Start ver 1.0.28
+                if (!IsLoading && value != null)
+                {
+                    if (Priority != null)
+                    {
+                        if (Priority.PriorityName == "Urgent")
+                        {
+                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                            else
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                            else
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        DeliveryDate = DateTime.Now;
+                    }
+                }
+                else if (!IsLoading && value == null)
+                {
+                    DeliveryDate = DateTime.Now;
+                }
+                // End ver 1.0.28
             }
         }
 
@@ -506,6 +571,77 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
             set
             {
                 SetPropertyValue("Priority", ref _Priority, value);
+                // Start ver 1.0.28
+                if (!IsLoading && value != null)
+                {
+                    if (Priority.PriorityName == "Urgent")
+                    {
+                        if (Transporter != null)
+                        {
+                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                            else
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            DeliveryDate = DateTime.Now;
+                        }
+                    }
+                    else
+                    {
+                        if (Transporter != null)
+                        {
+                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                            else
+                            {
+                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay);
+                                if (Transporter.U_LeadTimeBasis == "BOD")
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            DeliveryDate = DateTime.Now;
+                        }
+                    }
+                }
+                else
+                {
+                    DeliveryDate = DateTime.Now;
+                }
+                // End ver 1.0.28
             }
         }
 
@@ -516,6 +652,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
         [XafDisplayName("Posting Date")]
         // Start ver 1.0.28
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [Appearance("PostingDate", Enabled = false)]
         // End ver 1.0.28
         [Index(24), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PostingDate
@@ -570,6 +707,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
         [XafDisplayName("Delivery Date")]
         // Start ver 1.0.28
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [Appearance("DeliveryDate", Enabled = false)]
         // End ver 1.0.28
         [Index(25), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime DeliveryDate

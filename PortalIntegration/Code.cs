@@ -2389,7 +2389,7 @@ namespace PortalIntegration
                                 newSO.INTQuotation = header["DocNum"].ToString();
                                 // Start ver 1.0.28
                                 newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
-                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["DeliveryDate"].ToString());
                                 // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
@@ -2613,7 +2613,7 @@ namespace PortalIntegration
                                 newSO.INTQuotation = header["DocNum"].ToString();
                                 // Start ver 1.0.28
                                 newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
-                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["DeliveryDate"].ToString());
                                 // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
@@ -2837,7 +2837,7 @@ namespace PortalIntegration
                                 newSO.INTQuotation = header["DocNum"].ToString();
                                 // Start ver 1.0.28
                                 newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
-                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["DeliveryDate"].ToString());
                                 // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
@@ -3061,7 +3061,7 @@ namespace PortalIntegration
                                 newSO.INTQuotation = header["DocNum"].ToString();
                                 // Start ver 1.0.28
                                 newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
-                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["DeliveryDate"].ToString());
                                 // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
@@ -3285,7 +3285,7 @@ namespace PortalIntegration
                                 newSO.INTQuotation = header["DocNum"].ToString();
                                 // Start ver 1.0.28
                                 newSO.PostingDate = DateTime.Parse(header["PostingDate"].ToString());
-                                newSO.DeliveryDate = DateTime.Parse(header["PostingDate"].ToString());
+                                newSO.DeliveryDate = DateTime.Parse(header["DeliveryDate"].ToString());
                                 // End ver 1.0.28
 
                                 if (header["Customer"].ToString() != "")
