@@ -404,8 +404,10 @@
           <Item Id="SalesOrder_ListView" Index="0" />
           <Item Id="SalesOrderCollection_ListView" Index="1" />
           <Item Id="SalesOrderCollectionReport_ListView" Index="2" />
-          <Item Id="vwInquirySalesOrder_ListView" Index="3" />
-          <Item Id="vwInquiryARDownpayment_ListView" Visible="False" />
+          <Item Id="vwInquirySalesOrder_ListView" Index="3" QuickAccessItem="False" Visible="False" />
+          <Item Id="SalesOrderInquiry_ListView" Index="4" />
+          <Item Id="vwInquiryARDownpayment_ListView" Visible="False" Index="5" />
+          <Item Id="ARDownpaymentInquiry_ListView" Index="6" />
           <Item Id="vwInquirySalesOrderDetails_ListView" Visible="False" />
         </Items>
       </Item>
@@ -4482,6 +4484,33 @@
     <DetailView Id="SalesOrderCollectionDetails_DetailView" AllowEdit="True" />
     <DetailView Id="SalesOrderCollectionDocStatus_DetailView" AllowEdit="False" />
     <DetailView Id="SalesOrderDocStatus_DetailView" AllowEdit="False" />
+    <DetailView Id="SalesOrderInquiry_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="Auto0580c55d-f4ea-4c9d-9790-217b11a6a59e" ShowCaption="False" Caption="Auto0580c55d-f4ea-4c9d-9790-217b11a6a59e(2)" Direction="Horizontal" Index="0" RelativeSize="15.529411764705882" IsNewNode="True">
+            <LayoutGroup Id="Auto6103016c-4ac5-477e-a490-372ba9cac989" ShowCaption="False" Caption="Auto6103016c-4ac5-477e-a490-372ba9cac989(3)" Index="0" RelativeSize="50.142045454545453" IsNewNode="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto3198c68e-e557-45c2-8652-b59f0ddfb8fc" ShowCaption="False" Caption="" Index="1" RelativeSize="49.857954545454547" IsNewNode="True">
+              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="84.470588235294116" Index="1">
+            <LayoutItem Id="Results" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="9.433962264150944" Removed="True">
+            <LayoutGroup Id="SalesOrderInquiry" Caption="SalesOrderInquiry" Direction="Vertical" RelativeSize="100" Removed="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="20.768136557610241" Removed="True" />
+              <LayoutItem Id="Status" Index="1" RelativeSize="49.928876244665716" Removed="True" />
+              <LayoutItem Id="DateTo" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesOrderInquiryResult_DetailView" AllowEdit="False" />
     <ListView Id="SalesQuotation_AuditTrail_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
       <Columns>
         <ColumnInfo Id="PropertyName" Index="-1" />

@@ -20,6 +20,7 @@ using System.Text;
 // 2025-08-18 - add Item Bin Inquiry Status - ver 1.0.24
 // 2025-09-22 - add Container Tracking Inquiry - ver 1.0.25
 // 2026-02-06 - add new field - ver 1.0.27
+// 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -4606,4 +4607,237 @@ namespace StarLaiPortal.Module.BusinessObjects
     }
     #endregion
     // End ver 1.0.25
+
+    // Start ver 1.0.29
+    #region Sales Order Inquiry
+    [DomainComponent]
+    [NavigationItem("Sales Order")]
+    [DefaultProperty("PortalNo")]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave", AppearanceItemType.Action, "True", TargetItems = "Save", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&Close", AppearanceItemType = "Action", TargetItems = "SaveAndClose", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "Cancel", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideValidate", AppearanceItemType.Action, "True", TargetItems = "ShowAllContexts", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideResetViewSetting", AppearanceItemType.Action, "True", TargetItems = "ResetViewSettings", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideExport", AppearanceItemType.Action, "True", TargetItems = "Export", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideRefresh", AppearanceItemType.Action, "True", TargetItems = "Refresh", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+
+    [XafDisplayName("Sales Order Inquiry (SP)")]
+    public class SalesOrderInquiry
+    {
+        [Key(AutoGenerate = true), Browsable(false)]
+        public int Oid;
+
+        [XafDisplayName("Date From")]
+        [Index(0), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public DateTime DateFrom { get; set; }
+
+        [XafDisplayName("Date To")]
+        [Index(1), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public DateTime DateTo { get; set; }
+
+        [XafDisplayName("Status")]
+        //[LookupEditorMode(LookupEditorMode.AllItems)]
+        [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public InquiryViewStatus Status { get; set; }
+
+        public SalesOrderInquiry()
+        {
+            _Results = new BindingList<SalesOrderInquiryResult>();
+
+            DateTo = DateTime.Today;
+            DateFrom = DateTo.AddDays(-7);
+        }
+
+        private BindingList<SalesOrderInquiryResult> _Results;
+
+        public BindingList<SalesOrderInquiryResult> Results { get { return _Results; } }
+    }
+
+    [DomainComponent]
+    [NonPersistent]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave", AppearanceItemType.Action, "True", TargetItems = "Save", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideValidate", AppearanceItemType.Action, "True", TargetItems = "ShowAllContexts", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [XafDisplayName("Sales Order Inquiry Result")]
+    public class SalesOrderInquiryResult
+    {
+        [DevExpress.ExpressApp.Data.Key, Browsable(false)]
+        public string PriKey;
+
+        [XafDisplayName("Portal SO No.")]
+        [Appearance("PortalNo", Enabled = false)]
+        [Index(3)]
+        public string PortalNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Portal SQ No.")]
+        [Appearance("PortalSQNo", Enabled = false)]
+        [Index(4)]
+        public string PortalSQNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Series")]
+        [Appearance("Series", Enabled = false)]
+        [Index(5)]
+        public string Series
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SAP SO No.")]
+        [Appearance("SAPNo", Enabled = false)]
+        [Index(8)]
+        public string SAPNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Posting Date")]
+        [Appearance("DocDate", Enabled = false)]
+        [Index(10)]
+        public DateTime DocDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Expected Delivery Date")]
+        [Appearance("DueDate", Enabled = false)]
+        [Index(13)]
+        public DateTime DueDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Status")]
+        [Appearance("Status", Enabled = false)]
+        [Index(15)]
+        public string Status
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Approval Status")]
+        [Appearance("ApprovalStatus", Enabled = false)]
+        [Index(18)]
+        public string ApprovalStatus
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Group")]
+        [Appearance("CardGroup", Enabled = false)]
+        [Index(20)]
+        public string CardGroup
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Code")]
+        [Appearance("CardCode", Enabled = false)]
+        [Index(23)]
+        public string CardCode
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Name")]
+        [Appearance("CardName", Enabled = false)]
+        [Index(25)]
+        [Size(200)]
+        public string CardName
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Transporter")]
+        [Appearance("Transporter", Enabled = false)]
+        [Index(28)]
+        public string Transporter
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Amount")]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:n2}")]
+        [Appearance("Amount", Enabled = false)]
+        [Index(30)]
+        public decimal Amount
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Pick List No.")]
+        [Appearance("PickListNo", Enabled = false)]
+        [Index(33)]
+        public string PickListNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Pack List No.")]
+        [Appearance("PackListNo", Enabled = false)]
+        [Index(35)]
+        public string PackListNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Loading No.")]
+        [Appearance("LoadingNo", Enabled = false)]
+        [Index(38)]
+        public string LoadingNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Portal DO No.")]
+        [Appearance("PortalDONo", Enabled = false)]
+        [Index(40)]
+        public string PortalDONo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SAP DO No.")]
+        [Appearance("SAPDONo", Enabled = false)]
+        [Index(43)]
+        public string SAPDONo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SAP Invoice No.")]
+        [Appearance("SAPInvNo", Enabled = false)]
+        [Index(45)]
+        public string SAPInvNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SAP SO Status")]
+        [Appearance("SAPStatus", Enabled = false)]
+        [Index(48)]
+        public string SAPStatus
+        {
+            get; set;
+        }
+    }
+    #endregion
+    // End ver 1.0.29
 }

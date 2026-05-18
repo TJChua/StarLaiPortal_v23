@@ -403,7 +403,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                     {
                         if (Priority.PriorityName == "Urgent")
                         {
-                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
                                 DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")
@@ -427,7 +427,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                         }
                         else
                         {
-                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
                                 DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")
@@ -578,7 +578,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                     {
                         if (Transporter != null)
                         {
-                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
                                 DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")
@@ -609,7 +609,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                     {
                         if (Transporter != null)
                         {
-                            if (PostingDate.TimeOfDay <= TimeSpan.Parse(Transporter.U_CutOffTime))
+                            if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
                                 DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")

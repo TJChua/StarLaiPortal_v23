@@ -1231,7 +1231,7 @@ namespace StarLaiPortal.Module.Controllers
                                     sq.PostingDate = DateTime.Now;
                                     if (sq.Priority.PriorityName == "Urgent")
                                     {
-                                        if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                                        if (sq.PostingDate.TimeOfDay <= TimeSpan.ParseExact(sq.Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                                         {
                                             if (sq.Transporter.U_LeadTimeBasis == "BOD")
                                             {
@@ -1266,7 +1266,7 @@ namespace StarLaiPortal.Module.Controllers
                                     }
                                     else
                                     {
-                                        if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                                        if (sq.PostingDate.TimeOfDay <= TimeSpan.ParseExact(sq.Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                                         {
                                             if (sq.Transporter.U_LeadTimeBasis == "BOD")
                                             {
@@ -1678,7 +1678,7 @@ namespace StarLaiPortal.Module.Controllers
                         sq.PostingDate = DateTime.Now;
                         if (sq.Priority.PriorityName == "Urgent")
                         {
-                            if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                            if (sq.PostingDate.TimeOfDay <= TimeSpan.ParseExact(sq.Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
                                 if (sq.Transporter.U_LeadTimeBasis == "BOD")
                                 {
@@ -1713,7 +1713,7 @@ namespace StarLaiPortal.Module.Controllers
                         }
                         else
                         {
-                            if (sq.PostingDate.TimeOfDay <= TimeSpan.Parse(sq.Transporter.U_CutOffTime))
+                            if (sq.PostingDate.TimeOfDay <= TimeSpan.ParseExact(sq.Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
                                 if (sq.Transporter.U_LeadTimeBasis == "BOD")
                                 {
@@ -2190,7 +2190,7 @@ namespace StarLaiPortal.Module.Controllers
                     selectedObject.PostingDate = DateTime.Now;
                     if (selectedObject.Priority.PriorityName == "Urgent")
                     {
-                        if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
+                        if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.ParseExact(selectedObject.Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                         {
                             if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
                             {
@@ -2225,7 +2225,7 @@ namespace StarLaiPortal.Module.Controllers
                     }
                     else
                     {
-                        if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.Parse(selectedObject.Transporter.U_CutOffTime))
+                        if (selectedObject.PostingDate.TimeOfDay <= TimeSpan.ParseExact(selectedObject.Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                         {
                             if (selectedObject.Transporter.U_LeadTimeBasis == "BOD")
                             {

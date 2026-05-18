@@ -20,6 +20,7 @@ using System.Text;
 // 2023-04-09 fix speed issue ver 1.0.8.1
 // 2023-11-27 add validation to block submit if pickqty is zero ver 1.0.13
 // 2023-12-01 show createtime in list view ver 1.0.13
+// 2026-05-18 - change delivery date format - ver 1.0.29
 
 namespace StarLaiPortal.Module.BusinessObjects.Pick_List
 {
@@ -149,6 +150,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Pick_List
 
         private DateTime _DeliveryDate;
         [XafDisplayName("Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [Appearance("DeliveryDate", Enabled = false)]
+        // End ver 1.0.29
         [Index(4), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         [RuleRequiredField(DefaultContexts.Save)]
         public DateTime DeliveryDate

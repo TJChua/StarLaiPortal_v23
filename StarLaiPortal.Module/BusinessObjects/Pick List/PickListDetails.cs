@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 
 // 2024-05-16 - enhance speed - ver 1.0.15
+// 2026-05-18 - change delivery date format - ver 1.0.29
 
 namespace StarLaiPortal.Module.BusinessObjects.Pick_List
 {
@@ -390,6 +391,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Pick_List
 
         private DateTime _SODeliveryDate;
         [XafDisplayName("Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [Appearance("SODeliveryDate", Enabled = false)]
+        // End ver 1.0.29
         [Index(40), VisibleInListView(true), VisibleInDetailView(false), VisibleInLookupListView(false)]
         public DateTime SODeliveryDate
         {

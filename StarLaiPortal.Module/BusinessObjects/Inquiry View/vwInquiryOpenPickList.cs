@@ -13,6 +13,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+// 2026-05-18 - change delivery date format - ver 1.0.29
+
 namespace StarLaiPortal.Module.BusinessObjects.Inquiry_View
 {
     [DefaultClassOptions]
@@ -77,6 +79,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Inquiry_View
         }
 
         [XafDisplayName("Expected Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
         [Appearance("DueDate", Enabled = false)]
         [Index(10)]
         public DateTime DueDate

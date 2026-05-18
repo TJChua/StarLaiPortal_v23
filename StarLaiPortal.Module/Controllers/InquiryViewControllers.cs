@@ -53,6 +53,7 @@ using System.Collections;
 // 2025-08-18 - add Item Bin Inquiry Status - ver 1.0.24
 // 2025-09-22 - add Container Tracking Inquiry - ver 1.0.25
 // 2026-02-06 - add new field - ver 1.0.26
+// 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -511,6 +512,24 @@ namespace StarLaiPortal.Module.Controllers
                 }
             }
             // End ver 1.0.25
+
+            // Start ver 1.0.29
+            if (typeof(SalesOrderInquiry).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiry))
+                {
+                    this.InquirySearch.Active.SetItemValue("Enabled", true);
+                }
+            }
+
+            if (typeof(SalesOrderInquiryResult).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
+                {
+                    this.PreviewSOInquiry.Active.SetItemValue("Enabled", true);
+                }
+            }
+            // End ver 1.0.29
         }
         protected override void OnViewControlsCreated()
         {
@@ -2062,6 +2081,60 @@ namespace StarLaiPortal.Module.Controllers
                 persistentObjectSpace.Dispose();
             }
             // End ver 1.0.25
+
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiry))
+            {
+                SalesOrderInquiry currObject = (SalesOrderInquiry)e.CurrentObject;
+                currObject.Results.Clear();
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
+                    new OperandValue(currObject.DateFrom.Date),
+                    new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("SalesOrderInquiry"),
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+
+                if (sprocData.ResultSet.Count() > 0)
+                {
+                    if (sprocData.ResultSet[0].Rows.Count() > 0)
+                    {
+                        foreach (SelectStatementResultRow row in sprocData.ResultSet[0].Rows)
+                        {
+                            SalesOrderInquiryResult result = new SalesOrderInquiryResult();
+
+                            result.PriKey = row.Values[0].ToString();
+                            result.PortalNo = row.Values[1].ToString();
+                            result.PortalSQNo = row.Values[2].ToString();
+                            result.Series = row.Values[3].ToString();
+                            result.SAPNo = row.Values[4].ToString();
+                            result.DocDate = DateTime.Parse(row.Values[5].ToString());
+                            result.DueDate = DateTime.Parse(row.Values[6].ToString());
+                            result.Status = row.Values[7].ToString();
+                            result.ApprovalStatus = row.Values[8].ToString();
+                            result.CardGroup = row.Values[9].ToString();
+                            result.CardCode = row.Values[10].ToString();
+                            result.CardName = row.Values[11].ToString();
+                            result.Transporter = row.Values[12].ToString();
+                            result.Amount = decimal.Parse(row.Values[13].ToString());
+                            result.PickListNo = row.Values[14].ToString();
+                            result.PackListNo = row.Values[15].ToString();
+                            result.LoadingNo = row.Values[16].ToString();
+                            result.PortalDONo = row.Values[17].ToString();
+                            result.SAPDONo = row.Values[18].ToString();
+                            result.SAPInvNo = row.Values[19].ToString();
+                            result.SAPStatus = row.Values[20].ToString();
+
+                            currObject.Results.Add(result);
+                        }
+                    }
+                }
+
+                ObjectSpace.Refresh();
+                View.Refresh();
+
+                persistentObjectSpace.Session.DropIdentityMap();
+                persistentObjectSpace.Dispose();
+            }
+            // End ver 1.0.29
         }
 
         private void PrintDOInquiry_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -2213,66 +2286,139 @@ namespace StarLaiPortal.Module.Controllers
         // Start ver 1.0.17
         private void PreviewSOInquiry_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
-            if (e.SelectedObjects.Count == 1)
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrder))
             {
-                string strServer;
-                string strDatabase;
-                string strUserID;
-                string strPwd;
-                string filename;
-
-                SqlConnection conn = new SqlConnection(genCon.getConnectionString());
-                vwInquirySalesOrder currobject = (vwInquirySalesOrder)View.CurrentObject;
-                ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
-
-                if (currobject.PortalNo == "")
+            // End ver ver 1.0.29
+                if (e.SelectedObjects.Count == 1)
                 {
-                    showMsg("Fail", "SO number not found.", InformationType.Error);
-                    return;
+                    string strServer;
+                    string strDatabase;
+                    string strUserID;
+                    string strPwd;
+                    string filename;
+
+                    SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                    vwInquirySalesOrder currobject = (vwInquirySalesOrder)View.CurrentObject;
+                    ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                    if (currobject.PortalNo == "")
+                    {
+                        showMsg("Fail", "SO number not found.", InformationType.Error);
+                        return;
+                    }
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    SalesOrder so = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", currobject.PortalNo));
+
+                    try
+                    {
+                        ReportDocument doc = new ReportDocument();
+                        strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\SalesOrder.rpt"));
+                        strDatabase = conn.Database;
+                        strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                        strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                        doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                        doc.Refresh();
+
+                        doc.SetParameterValue("dockey@", so.Oid);
+                        doc.SetParameterValue("dbName@", conn.Database);
+
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                            + "_" + so.Oid + "_" + user.UserName + "_SO_"
+                            + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                        doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                        doc.Close();
+                        doc.Dispose();
+
+                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                            + "_" + so.Oid + "_" + user.UserName + "_SO_"
+                            + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        var script = "window.open('" + url + "');";
+
+                        WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                    }
+                    catch (Exception ex)
+                    {
+                        showMsg("Fail", ex.Message, InformationType.Error);
+                    }
                 }
-
-                IObjectSpace os = Application.CreateObjectSpace();
-                SalesOrder so = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", currobject.PortalNo));
-
-                try
+                else
                 {
-                    ReportDocument doc = new ReportDocument();
-                    strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
-                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\SalesOrder.rpt"));
-                    strDatabase = conn.Database;
-                    strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
-                    strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
-                    doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
-                    doc.Refresh();
-
-                    doc.SetParameterValue("dockey@", so.Oid);
-                    doc.SetParameterValue("dbName@", conn.Database);
-
-                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
-                        + "_" + so.Oid + "_" + user.UserName + "_SO_"
-                        + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
-
-                    doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
-                    doc.Close();
-                    doc.Dispose();
-
-                    string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
-                        + "_" + so.Oid + "_" + user.UserName + "_SO_"
-                        + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
-                    var script = "window.open('" + url + "');";
-
-                    WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                    showMsg("Fail", "Please select one SO only.", InformationType.Error);
                 }
-                catch (Exception ex)
+            // Start ver 1.0.29
+            }
+            // End ver 1.0.29
+
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
+            {
+                if (e.SelectedObjects.Count == 1)
                 {
-                    showMsg("Fail", ex.Message, InformationType.Error);
+                    string strServer;
+                    string strDatabase;
+                    string strUserID;
+                    string strPwd;
+                    string filename;
+
+                    SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                    SalesOrderInquiryResult currobject = (SalesOrderInquiryResult)View.CurrentObject;
+                    ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                    if (currobject.PortalNo == "")
+                    {
+                        showMsg("Fail", "SO number not found.", InformationType.Error);
+                        return;
+                    }
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    SalesOrder so = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", currobject.PortalNo));
+
+                    try
+                    {
+                        ReportDocument doc = new ReportDocument();
+                        strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\SalesOrder.rpt"));
+                        strDatabase = conn.Database;
+                        strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                        strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                        doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                        doc.Refresh();
+
+                        doc.SetParameterValue("dockey@", so.Oid);
+                        doc.SetParameterValue("dbName@", conn.Database);
+
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                            + "_" + so.Oid + "_" + user.UserName + "_SO_"
+                            + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                        doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                        doc.Close();
+                        doc.Dispose();
+
+                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                            + "_" + so.Oid + "_" + user.UserName + "_SO_"
+                            + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        var script = "window.open('" + url + "');";
+
+                        WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                    }
+                    catch (Exception ex)
+                    {
+                        showMsg("Fail", ex.Message, InformationType.Error);
+                    }
+                }
+                else
+                {
+                    showMsg("Fail", "Please select one SO only.", InformationType.Error);
                 }
             }
-            else
-            {
-                showMsg("Fail", "Please select one SO only.", InformationType.Error);
-            }
+            // End ver 1.0.29
         }
         // End ver 1.0.17
 

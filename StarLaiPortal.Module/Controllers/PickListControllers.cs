@@ -52,6 +52,7 @@ using System.Web;
 // 2024-06-12 e-invoice - ver 1.0.18
 // 2025-09-11 print multiple document in one pdf - ver 1.0.25
 // 2026-05-06 block submit if picker is blank - ver 1.0.28
+// 2026-05-18 - change delivery date format - ver 1.0.29
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -378,6 +379,9 @@ namespace StarLaiPortal.Module.Controllers
                         // Start ver 1.0.16
                         pl.Remarks = dtl.Remarks;
                         // End ver 1.0.16
+                        // Start ver 1.0.29
+                        pl.DeliveryDate = dtl.DeliveryDate;
+                        // End ver 1.0.29
 
                         newplitem.ItemCode = newplitem.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode);
                         newplitem.ItemDesc = dtl.ItemDesc;
@@ -1421,6 +1425,9 @@ namespace StarLaiPortal.Module.Controllers
                             // Start ver 1.0.16
                             pl.Remarks = dtl.Remarks;
                             // End ver 1.0.16
+                            // Start ver 1.0.29
+                            pl.DeliveryDate = dtl.DeliveryDate;
+                            // End ver 1.0.29
 
                             newplitem.ItemCode = newplitem.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode);
                             newplitem.ItemDesc = dtl.ItemDesc;

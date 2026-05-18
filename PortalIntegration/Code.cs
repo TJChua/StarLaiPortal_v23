@@ -261,6 +261,9 @@ namespace PortalIntegration
                             newpl.CustomerGroup = getobj.Customer.GroupName;
                             newpl.Customer = getobj.Customer.BPCode;
                             newpl.CustomerName = getobj.CustomerName;
+                            // Start ver 1.0.28
+                            newpl.DeliveryDate = getobj.DeliveryDate;
+                            // End ver 1.0.28
                             newpl.SONumber = getobj.DocNum;
                             newpl.SODeliveryDate = getobj.DeliveryDate.Date.ToString("dd/MM/yyyy");
                             if (getobj.Priority != null)
