@@ -405,9 +405,14 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                         {
                             if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
-                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")
                                 {
+                                    DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = PostingDate.AddDays(Transporter.U_UrgentDay - 1);
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
@@ -428,10 +433,15 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                         else
                         {
                             if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
-                            {
-                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
+                            {;
                                 if (Transporter.U_LeadTimeBasis == "BOD")
                                 {
+                                    DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = PostingDate.AddDays(Transporter.U_NormalDay - 1);
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
@@ -580,9 +590,14 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                         {
                             if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
-                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")
                                 {
+                                    DeliveryDate = PostingDate.Date.AddDays(Transporter.U_UrgentDay - 1);
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = PostingDate.AddDays(Transporter.U_UrgentDay - 1);
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
@@ -611,9 +626,14 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                         {
                             if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
                             {
-                                DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
                                 if (Transporter.U_LeadTimeBasis == "BOD")
                                 {
+                                    DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
+                                    DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
+                                else
+                                {
+                                    DeliveryDate = PostingDate.AddDays(Transporter.U_NormalDay - 1);
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }

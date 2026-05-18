@@ -1688,6 +1688,7 @@ namespace StarLaiPortal.Module.Controllers
                                 else
                                 {
                                     sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_UrgentDay - 1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
                             else
@@ -1723,6 +1724,7 @@ namespace StarLaiPortal.Module.Controllers
                                 else
                                 {
                                     sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_NormalDay - 1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
                             else
@@ -2200,6 +2202,7 @@ namespace StarLaiPortal.Module.Controllers
                             else
                             {
                                 selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_UrgentDay - 1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                             }
                         }
                         else
@@ -2235,6 +2238,7 @@ namespace StarLaiPortal.Module.Controllers
                             else
                             {
                                 selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_NormalDay - 1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                             }
                         }
                         else
