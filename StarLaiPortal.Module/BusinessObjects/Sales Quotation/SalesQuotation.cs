@@ -429,11 +429,18 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
+
+                            if (DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                DeliveryDate = DeliveryDate.Date.AddDays(1);
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            }
                         }
                         else
                         {
                             if (PostingDate.TimeOfDay <= TimeSpan.ParseExact(Transporter.U_CutOffTime, "hhmm", CultureInfo.InvariantCulture))
-                            {;
+                            {
                                 if (Transporter.U_LeadTimeBasis == "BOD")
                                 {
                                     DeliveryDate = PostingDate.Date.AddDays(Transporter.U_NormalDay - 1);
@@ -457,6 +464,13 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
+                            }
+
+                            if (DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                DeliveryDate = DeliveryDate.Date.AddDays(1);
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
                             }
                         }
                     }
@@ -614,6 +628,13 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
                             }
+
+                            if (DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                DeliveryDate = DeliveryDate.Date.AddDays(1);
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            }
                         }
                         else
                         {
@@ -649,6 +670,13 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                     DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact(Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
+                            }
+
+                            if (DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                DeliveryDate = DeliveryDate.Date.AddDays(1);
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                DeliveryDate = DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
                             }
                         }
                         else

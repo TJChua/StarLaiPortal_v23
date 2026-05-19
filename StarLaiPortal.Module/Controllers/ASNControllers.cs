@@ -598,7 +598,7 @@ namespace StarLaiPortal.Module.Controllers
             // Start ver 1.0.28
             string getduppo = "SELECT ItemCode, BaseDoc, BaseId, PONo " +
                 "FROM ASNDetails T0 " +
-                "WHERE ASN = 8030 " +
+                "WHERE ASN = " + selectedObject.Oid + " " +
                 "GROUP BY ItemCode, BaseDoc, BaseId, PONo " +
                 "HAVING COUNT(BaseId) > 1";
             if (conn.State == ConnectionState.Open)

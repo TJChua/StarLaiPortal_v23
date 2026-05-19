@@ -44,6 +44,7 @@
             this.PreviewSOInquiry = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.PrintBundleInquiry = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.PrintCTInquiry = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.ChoicePreviewOption = new DevExpress.ExpressApp.Actions.SingleChoiceAction(this.components);
             // 
             // ViewOpenPickList
             // 
@@ -198,6 +199,15 @@
             this.PrintCTInquiry.ToolTip = null;
             this.PrintCTInquiry.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PrintCTInquiry_Execute);
             // 
+            // ChoicePreviewOption
+            // 
+            this.ChoicePreviewOption.Caption = "Preview";
+            this.ChoicePreviewOption.Category = "ObjectsCreation";
+            this.ChoicePreviewOption.ConfirmationMessage = null;
+            this.ChoicePreviewOption.Id = "ChoicePreviewOption";
+            this.ChoicePreviewOption.ToolTip = null;
+            this.ChoicePreviewOption.Execute += new DevExpress.ExpressApp.Actions.SingleChoiceActionExecuteEventHandler(this.ChoicePreviewOption_Execute);
+            // 
             // InquiryViewControllers
             // 
             this.Actions.Add(this.ViewOpenPickList);
@@ -215,6 +225,7 @@
             this.Actions.Add(this.PreviewSOInquiry);
             this.Actions.Add(this.PrintBundleInquiry);
             this.Actions.Add(this.PrintCTInquiry);
+            this.Actions.Add(this.ChoicePreviewOption);
 
         }
 
@@ -235,5 +246,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction PreviewSOInquiry;
         private DevExpress.ExpressApp.Actions.SimpleAction PrintBundleInquiry;
         private DevExpress.ExpressApp.Actions.SimpleAction PrintCTInquiry;
+        private DevExpress.ExpressApp.Actions.SingleChoiceAction ChoicePreviewOption;
     }
 }

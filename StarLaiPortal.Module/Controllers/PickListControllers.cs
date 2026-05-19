@@ -537,7 +537,7 @@ namespace StarLaiPortal.Module.Controllers
             SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList", 
                 new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode), 
                 new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName), 
-                new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.ToString("yyyy-MM-dd")), new OperandValue("Line"));
+                new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.AddDays(1).ToString("yyyy-MM-dd")), new OperandValue("Line"));
             {
                 if (sprocData.ResultSet[0].Rows.Count() > 0)
                 {
@@ -1611,7 +1611,7 @@ namespace StarLaiPortal.Module.Controllers
             SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList",
                 new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode),
                 new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName),
-                new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.ToString("yyyy-MM-dd")), new OperandValue("Group"));
+                new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.AddDays(1).ToString("yyyy-MM-dd")), new OperandValue("Group"));
             {
                 if (sprocData.ResultSet[0].Rows.Count() > 0)
                 {
