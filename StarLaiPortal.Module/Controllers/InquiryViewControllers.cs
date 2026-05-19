@@ -77,12 +77,14 @@ namespace StarLaiPortal.Module.Controllers
 
             // Start ver 1.0.29
             ChoiceActionItem NA = new ChoiceActionItem("NA", "Preview Option", null);
+            ChoiceActionItem PreviewSO = new ChoiceActionItem("PreviewSO", "Preview SO", null);
             ChoiceActionItem PreviewQuotation = new ChoiceActionItem("PreviewQuotation", "Preview Quotation", null);
             ChoiceActionItem PreviewPickList = new ChoiceActionItem("PreviewPickList", "Preview Pick List", null);
             ChoiceActionItem PreviewDO = new ChoiceActionItem("PreviewDO", "Preview DO", null);
             ChoiceActionItem PreviewInvoice = new ChoiceActionItem("PreviewInvoice", "Preview Invoice", null);
 
             ChoicePreviewOption.Items.Add(NA);
+            ChoicePreviewOption.Items.Add(PreviewSO);
             ChoicePreviewOption.Items.Add(PreviewQuotation);
             ChoicePreviewOption.Items.Add(PreviewPickList);
             ChoicePreviewOption.Items.Add(PreviewDO);
@@ -2598,6 +2600,73 @@ namespace StarLaiPortal.Module.Controllers
         // Start ver 1.0.29
         private void ChoicePreviewOption_Execute(object sender, SingleChoiceActionExecuteEventArgs e)
         {
+            if (e.SelectedChoiceActionItem.Id == "PreviewSO")
+            {
+                if (e.SelectedObjects.Count == 1)
+                {
+                    string strServer;
+                    string strDatabase;
+                    string strUserID;
+                    string strPwd;
+                    string filename;
+
+                    SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                    SalesOrderInquiryResult result = (SalesOrderInquiryResult)View.CurrentObject;
+                    ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                    if (result.PortalNo == "")
+                    {
+                        showMsg("Fail", "SO number not found.", InformationType.Error);
+                        return;
+                    }
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    SalesOrder so = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", result.PortalNo));
+
+                    if (so != null)
+                    {
+                        try
+                        {
+                            ReportDocument doc = new ReportDocument();
+                            strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                            doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\SalesOrder.rpt"));
+                            strDatabase = conn.Database;
+                            strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                            strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                            doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                            doc.Refresh();
+
+                            doc.SetParameterValue("dockey@", so.Oid);
+                            doc.SetParameterValue("dbName@", conn.Database);
+
+                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                                + "_" + so.Oid + "_" + user.UserName + "_SO_"
+                                + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                            doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                            doc.Close();
+                            doc.Dispose();
+
+                            string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                                + "_" + so.Oid + "_" + user.UserName + "_SO_"
+                                + DateTime.Parse(so.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            var script = "window.open('" + url + "');";
+
+                            WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                        }
+                        catch (Exception ex)
+                        {
+                            showMsg("Fail", ex.Message, InformationType.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    showMsg("Fail", "Please select one SO only.", InformationType.Error);
+                }
+            }
+
             if (e.SelectedChoiceActionItem.Id == "PreviewQuotation")
             {
                 if (e.SelectedObjects.Count == 1)

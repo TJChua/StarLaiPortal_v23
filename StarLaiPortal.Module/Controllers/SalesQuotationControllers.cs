@@ -1241,6 +1241,13 @@ namespace StarLaiPortal.Module.Controllers
                                             else
                                             {
                                                 sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_UrgentDay - 1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+
+                                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Date.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                             }
                                         }
                                         else
@@ -1255,13 +1262,13 @@ namespace StarLaiPortal.Module.Controllers
                                                 sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                                 sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                             }
-                                        }
 
-                                        if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
-                                        {
-                                            sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
-                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                            }
                                         }
                                     }
                                     else
@@ -1276,6 +1283,13 @@ namespace StarLaiPortal.Module.Controllers
                                             else
                                             {
                                                 sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_NormalDay - 1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                            }
+
+                                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Date.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                             }
                                         }
                                         else
@@ -1290,13 +1304,13 @@ namespace StarLaiPortal.Module.Controllers
                                                 sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                                 sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                             }
-                                        }
 
-                                        if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
-                                        {
-                                            sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
-                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                                            sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                            {
+                                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                            }
                                         }
                                     }
                                     // End ver 1.0.28
@@ -1690,6 +1704,12 @@ namespace StarLaiPortal.Module.Controllers
                                     sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_UrgentDay - 1);
                                     sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
+
+                                if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Date.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
                             }
                             else
                             {
@@ -1703,13 +1723,13 @@ namespace StarLaiPortal.Module.Controllers
                                     sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                     sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
-                            }
 
-                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
-                            {
-                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
-                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                }
                             }
                         }
                         else
@@ -1726,6 +1746,12 @@ namespace StarLaiPortal.Module.Controllers
                                     sq.DeliveryDate = sq.PostingDate.AddDays(sq.Transporter.U_NormalDay - 1);
                                     sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
+
+                                if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Date.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                                }
                             }
                             else
                             {
@@ -1739,13 +1765,13 @@ namespace StarLaiPortal.Module.Controllers
                                     sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                     sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact(sq.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                                 }
-                            }
 
-                            if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
-                            {
-                                sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
-                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                                sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    sq.DeliveryDate = sq.DeliveryDate.Date.AddDays(1);
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                    sq.DeliveryDate = sq.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                                }
                             }
                         }
                         // End ver 1.0.28
@@ -2204,6 +2230,12 @@ namespace StarLaiPortal.Module.Controllers
                                 selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_UrgentDay - 1);
                                 selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                             }
+
+                            if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
                         }
                         else
                         {
@@ -2217,13 +2249,13 @@ namespace StarLaiPortal.Module.Controllers
                                 selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                 selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_UrgentTime, "hhmm", CultureInfo.InvariantCulture));
                             }
-                        }
 
-                        if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
-                        {
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            }
                         }
                     }
                     else
@@ -2240,6 +2272,12 @@ namespace StarLaiPortal.Module.Controllers
                                 selectedObject.DeliveryDate = selectedObject.PostingDate.AddDays(selectedObject.Transporter.U_NormalDay - 1);
                                 selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                             }
+
+                            if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
+                            }
                         }
                         else
                         {
@@ -2253,14 +2291,14 @@ namespace StarLaiPortal.Module.Controllers
                                 selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
                                 selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact(selectedObject.Transporter.U_NormalTime, "hhmm", CultureInfo.InvariantCulture));
                             }
-                        }
-                        
-                        if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
-                        {
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
-                            selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
-                        }
+
+                            if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
+                            {
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Date.AddDays(1);
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0900", "hhmm", CultureInfo.InvariantCulture));
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.Add(TimeSpan.ParseExact("0200", "hhmm", CultureInfo.InvariantCulture));
+                            }
+                        } 
                     }
                     // End ver 1.0.28
 
