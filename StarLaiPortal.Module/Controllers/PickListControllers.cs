@@ -534,10 +534,15 @@ namespace StarLaiPortal.Module.Controllers
             CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(PickListSO), listViewId);
 
             XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+            // Start ver 1.0.29
+            //SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList", 
+            //    new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode), 
+            //    new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName), 
+            //    new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.AddDays(1).ToString("yyyy-MM-dd")), new OperandValue("Line"));
             SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList", 
                 new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode), 
-                new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName), 
-                new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.AddDays(1).ToString("yyyy-MM-dd")), new OperandValue("Line"));
+                new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName), new OperandValue("Line"));
+            // End ver 1.0.29
             {
                 if (sprocData.ResultSet[0].Rows.Count() > 0)
                 {
@@ -1608,10 +1613,15 @@ namespace StarLaiPortal.Module.Controllers
             CollectionSourceBase collectionSource = Application.CreateCollectionSource(os, typeof(PickListSOGroup), listViewId);
 
             XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
-            SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList",
-                new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode),
-                new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName),
-                new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.AddDays(1).ToString("yyyy-MM-dd")), new OperandValue("Group"));
+            // Start ver 1.0.29
+            //SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList",
+            //    new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode),
+            //    new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName),
+            //    new OperandValue(pl.DeliveryDate.ToString("yyyy-MM-dd") == "0001-01-01" ? "1900-01-01" : pl.DeliveryDate.AddDays(1).ToString("yyyy-MM-dd")), new OperandValue("Group"));
+            SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetPickList", 
+                new OperandValue(pl.Warehouse == null ? "" : pl.Warehouse.WarehouseCode), 
+                new OperandValue(pl.Transporter == null ? "" : pl.Transporter.TransporterName), new OperandValue("Group"));
+            // End ver 1.0.29
             {
                 if (sprocData.ResultSet[0].Rows.Count() > 0)
                 {
