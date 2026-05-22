@@ -4157,7 +4157,7 @@ namespace StarLaiPortal.Module.BusinessObjects
     [Appearance("HideExport", AppearanceItemType.Action, "True", TargetItems = "Export", Visibility = ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideRefresh", AppearanceItemType.Action, "True", TargetItems = "Refresh", Visibility = ViewItemVisibility.Hide, Context = "Any")]
 
-    [XafDisplayName("Item Bin Inquiry")]
+    [XafDisplayName("Item Bin Inquiry (SP)")]
     public class ItemBinInquiry
     {
         [Key(AutoGenerate = true), Browsable(false)]

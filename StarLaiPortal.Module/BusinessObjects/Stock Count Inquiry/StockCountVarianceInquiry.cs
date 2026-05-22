@@ -18,7 +18,7 @@ using System.Text;
 namespace StarLaiPortal.Module.BusinessObjects.Stock_Count_Inquiry
 {
     [DefaultClassOptions]
-    [XafDisplayName("Stock Count Variance Inquiry")]
+    [XafDisplayName("Stock Count Variance Inquiry (SP)")]
     [NavigationItem("Stock Count")]
 
     [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]

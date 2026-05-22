@@ -1255,7 +1255,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                             if (sundaycnt != 0)
                                             {
-                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                                int finaldelivery = 0;
+                                                for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                                {
+                                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                                    {
+                                                        finaldelivery++;
+                                                    }
+                                                }
+
+                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                             }
 
                                             if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1287,7 +1296,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                             if (sundaycnt != 0)
                                             {
-                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                                int finaldelivery = 0;
+                                                for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                                {
+                                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                                    {
+                                                        finaldelivery++;
+                                                    }
+                                                }
+
+                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                             }
 
                                             if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1323,7 +1341,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                             if (sundaycnt != 0)
                                             {
-                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                                int finaldelivery = 0;
+                                                for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                                {
+                                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                                    {
+                                                        finaldelivery++;
+                                                    }
+                                                }
+
+                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                             }
 
                                             if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1355,7 +1382,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                             if (sundaycnt != 0)
                                             {
-                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                                int finaldelivery = 0;
+                                                for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                                {
+                                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                                    {
+                                                        finaldelivery++;
+                                                    }
+                                                }
+
+                                                sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                             }
 
                                             if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1769,7 +1805,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                 if (sundaycnt != 0)
                                 {
-                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                    int finaldelivery = 0;
+                                    for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                    {
+                                        if (date.DayOfWeek == DayOfWeek.Sunday)
+                                        {
+                                            finaldelivery++;
+                                        }
+                                    }
+
+                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                 }
 
                                 if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1801,7 +1846,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                 if (sundaycnt != 0)
                                 {
-                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                    int finaldelivery = 0;
+                                    for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                    {
+                                        if (date.DayOfWeek == DayOfWeek.Sunday)
+                                        {
+                                            finaldelivery++;
+                                        }
+                                    }
+
+                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                 }
 
                                 if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1837,7 +1891,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                 if (sundaycnt != 0)
                                 {
-                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                    int finaldelivery = 0;
+                                    for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                    {
+                                        if (date.DayOfWeek == DayOfWeek.Sunday)
+                                        {
+                                            finaldelivery++;
+                                        }
+                                    }
+
+                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                 }
 
                                 if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -1869,7 +1932,16 @@ namespace StarLaiPortal.Module.Controllers
 
                                 if (sundaycnt != 0)
                                 {
-                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(sundaycnt);
+                                    int finaldelivery = 0;
+                                    for (DateTime date = sq.PostingDate.Date; date <= sq.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                    {
+                                        if (date.DayOfWeek == DayOfWeek.Sunday)
+                                        {
+                                            finaldelivery++;
+                                        }
+                                    }
+
+                                    sq.DeliveryDate = sq.DeliveryDate.AddDays(finaldelivery);
                                 }
 
                                 if (sq.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -2348,7 +2420,16 @@ namespace StarLaiPortal.Module.Controllers
 
                             if (sundaycnt != 0)
                             {
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(sundaycnt);
+                                int finaldelivery = 0;
+                                for (DateTime date = selectedObject.PostingDate.Date; date <= selectedObject.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                {
+                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        finaldelivery++;
+                                    }
+                                }
+
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(finaldelivery);
                             }
 
                             if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -2380,7 +2461,16 @@ namespace StarLaiPortal.Module.Controllers
 
                             if (sundaycnt != 0)
                             {
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(sundaycnt);
+                                int finaldelivery = 0;
+                                for (DateTime date = selectedObject.PostingDate.Date; date <= selectedObject.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                {
+                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        finaldelivery++;
+                                    }
+                                }
+
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(finaldelivery);
                             }
 
                             if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -2416,7 +2506,16 @@ namespace StarLaiPortal.Module.Controllers
 
                             if (sundaycnt != 0)
                             {
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(sundaycnt);
+                                int finaldelivery = 0;
+                                for (DateTime date = selectedObject.PostingDate.Date; date <= selectedObject.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                {
+                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        finaldelivery++;
+                                    }
+                                }
+
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(finaldelivery);
                             }
 
                             if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
@@ -2448,7 +2547,16 @@ namespace StarLaiPortal.Module.Controllers
 
                             if (sundaycnt != 0)
                             {
-                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(sundaycnt);
+                                int finaldelivery = 0;
+                                for (DateTime date = selectedObject.PostingDate.Date; date <= selectedObject.DeliveryDate.Date.AddDays(sundaycnt); date = date.AddDays(1))
+                                {
+                                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        finaldelivery++;
+                                    }
+                                }
+
+                                selectedObject.DeliveryDate = selectedObject.DeliveryDate.AddDays(finaldelivery);
                             }
 
                             if (selectedObject.DeliveryDate.DayOfWeek.ToString() == "Sunday")
