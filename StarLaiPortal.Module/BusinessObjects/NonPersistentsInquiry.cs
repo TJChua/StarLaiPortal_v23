@@ -4646,6 +4646,18 @@ namespace StarLaiPortal.Module.BusinessObjects
         [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
         public InquiryViewStatus Status { get; set; }
 
+        [XafDisplayName("Portal SQ")]
+        [Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalSQ { get; set; }
+
+        [XafDisplayName("Portal SO")]
+        [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalSO { get; set; }
+
+        [XafDisplayName("SAP SO number")]
+        [Index(5), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string SAPNo { get; set; }
+
         public SalesOrderInquiry()
         {
             _Results = new BindingList<SalesOrderInquiryResult>();

@@ -4487,17 +4487,19 @@
     <DetailView Id="SalesOrderInquiry_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="Auto0580c55d-f4ea-4c9d-9790-217b11a6a59e" ShowCaption="False" Caption="Auto0580c55d-f4ea-4c9d-9790-217b11a6a59e(2)" Direction="Horizontal" Index="0" RelativeSize="15.529411764705882" IsNewNode="True">
-            <LayoutGroup Id="Auto6103016c-4ac5-477e-a490-372ba9cac989" ShowCaption="False" Caption="Auto6103016c-4ac5-477e-a490-372ba9cac989(3)" Index="0" RelativeSize="50.142045454545453" IsNewNode="True">
-              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
-              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+          <LayoutGroup Id="Auto0580c55d-f4ea-4c9d-9790-217b11a6a59e" ShowCaption="False" Caption="Auto0580c55d-f4ea-4c9d-9790-217b11a6a59e(2)" Direction="Horizontal" Index="0" RelativeSize="18.699186991869919" IsNewNode="True">
+            <LayoutGroup Id="Auto6103016c-4ac5-477e-a490-372ba9cac989" ShowCaption="False" Caption="Auto6103016c-4ac5-477e-a490-372ba9cac989(3)" Index="0" RelativeSize="47.234042553191486" IsNewNode="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="Auto3198c68e-e557-45c2-8652-b59f0ddfb8fc" ShowCaption="False" Caption="" Index="1" RelativeSize="49.857954545454547" IsNewNode="True">
-              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
-              <LayoutItem Id="Item1" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+            <LayoutGroup Id="Auto3198c68e-e557-45c2-8652-b59f0ddfb8fc" ShowCaption="False" Caption="Auto3198c68e-e557-45c2-8652-b59f0ddfb8fc(6)" Index="1" RelativeSize="52.765957446808514" IsNewNode="True">
+              <LayoutItem Id="PortalSQ" ViewItem="PortalSQ" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="SAPNo" ViewItem="SAPNo" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="84.470588235294116" Index="1">
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="81.300813008130078" Index="1">
             <LayoutItem Id="Results" RelativeSize="100" />
           </LayoutGroup>
           <LayoutGroup Id="SimpleEditors" RelativeSize="9.433962264150944" Removed="True">

@@ -554,6 +554,9 @@ namespace StarLaiPortal.Module.Controllers
                     ChoicePreviewOption.CustomizeControl += Previewaction_CustomizeControl;
 
                     ChoicePreviewOption.SelectedIndex = 0;
+
+                    this.ViewSalesOrderInquiry.Active.SetItemValue("Enabled", true);
+                    this.ViewSalesOrderInquiry.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
                 }
             }
             // End ver 1.0.29
@@ -789,26 +792,79 @@ namespace StarLaiPortal.Module.Controllers
         // Start ver 1.0.11
         private void ViewSalesOrderInquiry_Execute(object sender, PopupWindowShowActionExecuteEventArgs e)
         {
-            vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)e.CurrentObject;
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrder))
+            {
+            // End ver 1.0.29
+                vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)e.CurrentObject;
 
-            IObjectSpace os = Application.CreateObjectSpace();
-            SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
-            openNewView(os, trx, ViewEditMode.View);
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+                openNewView(os, trx, ViewEditMode.View);
+            // Start ver 1.0.29
+            }
+            // End ver 1.0.29
+
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
+            {
+                SalesOrderInquiryResult selectedObject = (SalesOrderInquiryResult)e.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+
+                //openNewView(os, trx, ViewEditMode.View);
+                DetailView dv = Application.CreateDetailView(os, trx);
+                dv.ViewEditMode = ViewEditMode.View;
+                DevExpress.ExpressApp.View view = dv;
+                DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
+                DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
+                string url = webApplication.ViewUrlManager.GetUrl(shortcut); ;
+                string script = $"window.open('{url}', '_blank');";
+
+                // Execute script depending on the XAF UI Framework
+                DevExpress.ExpressApp.Web.WebWindow.CurrentRequestWindow.RegisterClientScript("openNewTab", script);
+            }
+            // End ver 1.0.29
         }
 
         private void ViewSalesOrderInquiry_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
         {
-            vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)View.CurrentObject;
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrder))
+            {
+            // End ver 1.0.29
+                vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)View.CurrentObject;
 
-            IObjectSpace os = Application.CreateObjectSpace();
-            SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
 
-            DetailView detailView = Application.CreateDetailView(os, "SalesOrder_DetailView_Dashboard", true, trx);
-            detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
-            e.View = detailView;
-            e.DialogController.AcceptAction.Caption = "Go To Document";
-            e.Maximized = true;
-            //e.DialogController.CancelAction.Active["NothingToCancel"] = false;
+                DetailView detailView = Application.CreateDetailView(os, "SalesOrder_DetailView_Dashboard", true, trx);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+                e.View = detailView;
+                e.DialogController.AcceptAction.Caption = "Go To Document";
+                e.Maximized = true;
+                //e.DialogController.CancelAction.Active["NothingToCancel"] = false;
+            // Start ver 1.0.29
+            }
+            // End ver 1.0.29
+
+            // Start ver 1.0.29
+            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
+            {
+                SalesOrderInquiryResult selectedObject = (SalesOrderInquiryResult)View.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+
+                DetailView detailView = Application.CreateDetailView(os, "SalesOrder_DetailView_Dashboard", true, trx);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+                e.View = detailView;
+                e.DialogController.AcceptAction.Caption = "Go To Document";
+                e.Maximized = true;
+                //e.DialogController.CancelAction.Active["NothingToCancel"] = false;
+            }
+            // End ver 1.0.29
         }
         // End ver 1.0.11
 
@@ -897,8 +953,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("SalesQuotationInquiry"),
                     // Start ver 1.0.24
                      //new OperandValue(""));
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
+                     // End ver 1.0.24
+                     // Start ver 1.0.29
                      new OperandValue(""), new OperandValue(""), new OperandValue(""));
-                    // End ver 1.0.24
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -962,8 +1021,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("ARDownpaymentInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(""));
-                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""), 
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1021,8 +1083,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PickListDetailsInquiry"),
                     // Start ver 1.0.24
                     //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                    new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                     // End ver 1.0.24
+                    // Start ver 1.0.29
+                    new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                    // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1095,8 +1160,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(""), new OperandValue("BundleIDInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1155,8 +1223,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PackListInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1213,8 +1284,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("LoadingInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(""));
-                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1275,8 +1349,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("DeliveryInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1344,8 +1421,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("InvoiceInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1408,8 +1488,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PurchaseOrderInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(""));
-                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1480,8 +1563,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("GRPOInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1551,8 +1637,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("ASNInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1627,8 +1716,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PurchaseReturnInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1698,8 +1790,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("SalesReturnRequestInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1770,8 +1865,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("CreditMemoInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""), 
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1846,8 +1944,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("WarehouseTransferDetailsInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1912,8 +2013,11 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("StockAdjustmentDetailsInquiry"),
                      // Start ver 1.0.24
                      //new OperandValue(itemcode));
-                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                      // End ver 1.0.24
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -1984,7 +2088,10 @@ namespace StarLaiPortal.Module.Controllers
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(DateTime.Now),
                     new OperandValue(DateTime.Now.AddDays(1).Date), new OperandValue(""), new OperandValue("ItemBinInquiry"),
-                     new OperandValue(itemcode), new OperandValue(legacyitemcode), new OperandValue(currObject.Warehouse.WarehouseCode));
+                     new OperandValue(itemcode), new OperandValue(legacyitemcode), new OperandValue(currObject.Warehouse.WarehouseCode),
+                     // Start ver 1.0.29
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -2027,7 +2134,10 @@ namespace StarLaiPortal.Module.Controllers
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("ContainerTracking"),
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
+                     // Start ver 1.0.29
                      new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -2128,11 +2238,32 @@ namespace StarLaiPortal.Module.Controllers
             {
                 SalesOrderInquiry currObject = (SalesOrderInquiry)e.CurrentObject;
                 currObject.Results.Clear();
+
+                string PortalSO = "";
+                string PortalSQ = "";
+                string SAPSO = "";
+
+                if (!string.IsNullOrEmpty(currObject.PortalSO))
+                {
+                    PortalSO = currObject.PortalSO;
+                }
+
+                if (!string.IsNullOrEmpty(currObject.PortalSQ))
+                {
+                    PortalSQ = currObject.PortalSQ;
+                }
+
+                if (!string.IsNullOrEmpty(currObject.SAPNo))
+                {
+                    SAPSO = currObject.SAPNo;
+                }
+
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("SalesOrderInquiry"),
-                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
+                     new OperandValue(PortalSO), new OperandValue(PortalSQ), new OperandValue(SAPSO));
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
