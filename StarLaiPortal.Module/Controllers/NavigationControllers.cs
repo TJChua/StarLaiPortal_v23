@@ -44,6 +44,7 @@ using System.Web.UI.WebControls;
 // 2025-09-22 - add Container Tracking Inquiry - ver 1.0.25
 // 2025-11-04 - Add Security control - ver 1.0.26
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
+// 2026-05-28 - enhance picking inquiry to SP - ver 1.0.29
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -609,6 +610,32 @@ namespace StarLaiPortal.Module.Controllers
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 var nonPersistentOS = Application.CreateObjectSpace(typeof(SalesOrderInquiry));
                 SalesOrderInquiry list = nonPersistentOS.CreateObject<SalesOrderInquiry>();
+
+                DetailView detailView = Application.CreateDetailView(nonPersistentOS, list);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.Edit;
+
+                e.ActionArguments.ShowViewParameters.CreatedView = detailView;
+                e.Handled = true;
+            }
+
+            if (e.ActionArguments.SelectedChoiceActionItem.Id == "OpenPickListInquiry_ListView")
+            {
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                var nonPersistentOS = Application.CreateObjectSpace(typeof(OpenPickListInquiry));
+                OpenPickListInquiry list = nonPersistentOS.CreateObject<OpenPickListInquiry>();
+
+                DetailView detailView = Application.CreateDetailView(nonPersistentOS, list);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.Edit;
+
+                e.ActionArguments.ShowViewParameters.CreatedView = detailView;
+                e.Handled = true;
+            }
+
+            if (e.ActionArguments.SelectedChoiceActionItem.Id == "PickListInquiry_ListView")
+            {
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                var nonPersistentOS = Application.CreateObjectSpace(typeof(PickListInquiry));
+                PickListInquiry list = nonPersistentOS.CreateObject<PickListInquiry>();
 
                 DetailView detailView = Application.CreateDetailView(nonPersistentOS, list);
                 detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.Edit;

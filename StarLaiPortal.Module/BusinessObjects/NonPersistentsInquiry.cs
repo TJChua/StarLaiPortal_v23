@@ -21,6 +21,7 @@ using System.Text;
 // 2025-09-22 - add Container Tracking Inquiry - ver 1.0.25
 // 2026-02-06 - add new field - ver 1.0.27
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
+// 2026-05-28 - enhance picking inquiry to SP - ver 1.0.29
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -532,10 +533,11 @@ namespace StarLaiPortal.Module.BusinessObjects
         [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
         public InquiryViewStatus Status { get; set; }
 
-        [XafDisplayName("ItemCode")]
-        [Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
-        public vwItemMasters ItemCode { get; set; }
-
+        // Start ver 1.0.29
+        //[XafDisplayName("ItemCode")]
+        //[Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        //public vwItemMasters ItemCode { get; set; }
+        // End ver 1.0.29
         public PickListDetailsInquiry()
         {
             _Results = new BindingList<PickListDetailsInquiryResult>();
@@ -590,6 +592,9 @@ namespace StarLaiPortal.Module.BusinessObjects
         }
 
         [XafDisplayName("Expected Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
         [Appearance("DueDate", Enabled = false)]
         [Index(10)]
         public DateTime DueDate
@@ -4846,6 +4851,442 @@ namespace StarLaiPortal.Module.BusinessObjects
         [Appearance("SAPStatus", Enabled = false)]
         [Index(48)]
         public string SAPStatus
+        {
+            get; set;
+        }
+    }
+    #endregion
+
+    #region Open Pick List Inquiry
+    [DomainComponent]
+    [NavigationItem("Pick List")]
+    [DefaultProperty("PortalNo")]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave", AppearanceItemType.Action, "True", TargetItems = "Save", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&Close", AppearanceItemType = "Action", TargetItems = "SaveAndClose", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "Cancel", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideValidate", AppearanceItemType.Action, "True", TargetItems = "ShowAllContexts", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideResetViewSetting", AppearanceItemType.Action, "True", TargetItems = "ResetViewSettings", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideExport", AppearanceItemType.Action, "True", TargetItems = "Export", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideRefresh", AppearanceItemType.Action, "True", TargetItems = "Refresh", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+
+    [XafDisplayName("Open Pick List (SP)")]
+    public class OpenPickListInquiry
+    {
+        [Key(AutoGenerate = true), Browsable(false)]
+        public int Oid;
+
+        [XafDisplayName("Date From")]
+        [Index(0), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public DateTime DateFrom { get; set; }
+
+        [XafDisplayName("Date To")]
+        [Index(1), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public DateTime DateTo { get; set; }
+
+        [XafDisplayName("Status")]
+        //[LookupEditorMode(LookupEditorMode.AllItems)]
+        [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public InquiryViewStatus Status { get; set; }
+
+        public OpenPickListInquiry()
+        {
+            _Results = new BindingList<OpenPickListInquiryResult>();
+
+            DateTo = DateTime.Today;
+            DateFrom = DateTo.AddMonths(-3);
+            Status = InquiryViewStatus.Draft;
+        }
+
+        private BindingList<OpenPickListInquiryResult> _Results;
+
+        public BindingList<OpenPickListInquiryResult> Results { get { return _Results; } }
+    }
+
+    [DomainComponent]
+    [NonPersistent]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave", AppearanceItemType.Action, "True", TargetItems = "Save", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideValidate", AppearanceItemType.Action, "True", TargetItems = "ShowAllContexts", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [XafDisplayName("ASN Inquiry Result")]
+    public class OpenPickListInquiryResult
+    {
+        [DevExpress.ExpressApp.Data.Key, Browsable(false)]
+        public string PriKey;
+
+        [XafDisplayName("Portal Pick List No.")]
+        [Appearance("PortalNo", Enabled = false)]
+        [Index(3)]
+        public string PortalNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Series")]
+        [Appearance("Series", Enabled = false)]
+        [Index(5)]
+        public string Series
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Posting Date")]
+        [Appearance("DocDate", Enabled = false)]
+        [Index(8)]
+        public DateTime DocDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Expected Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
+        [Appearance("DueDate", Enabled = false)]
+        [Index(10)]
+        public DateTime DueDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Status")]
+        [Appearance("Status", Enabled = false)]
+        [Index(13)]
+        public string Status
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Transporter")]
+        [Appearance("Transporter", Enabled = false)]
+        [Index(15)]
+        public string Transporter
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Priority")]
+        [Appearance("Priority", Enabled = false)]
+        [Index(14)]
+        public string Priority
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Picker")]
+        [Appearance("Picker", Enabled = false)]
+        [Index(18)]
+        public string Picker
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Warehouse")]
+        [Appearance("Warehouse", Enabled = false)]
+        [Index(20)]
+        public string Warehouse
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Group")]
+        [Appearance("CardGroup", Enabled = false)]
+        [Index(23)]
+        public string CardGroup
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Code")]
+        [Appearance("CardCode", Enabled = false)]
+        [Index(25)]
+        public string CardCode
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Name")]
+        [Appearance("CardName", Enabled = false)]
+        [Index(28)]
+        [Size(200)]
+        public string CardName
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Portal SO No.")]
+        [Appearance("PortalSONo", Enabled = false)]
+        [Index(30)]
+        public string PortalSONo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SAP SO No.")]
+        [Appearance("SAPSONo", Enabled = false)]
+        [Index(33)]
+        public string SAPSONo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Remark")]
+        [Appearance("Remark", Enabled = false)]
+        [Index(35)]
+        [Size(254)]
+        public string Remark
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SO Delivery Date")]
+        [Appearance("SODeliveryDate", Enabled = false)]
+        [Index(38)]
+        public DateTime SODeliveryDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Print Status")]
+        [Appearance("PrintStatus", Enabled = false)]
+        [Index(40)]
+        public string PrintStatus
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Print Count")]
+        [Appearance("PrintCount", Enabled = false)]
+        [Index(43)]
+        public int PrintCount
+        {
+            get; set;
+        }
+    }
+    #endregion
+
+    #region Pick List Inquiry
+    [DomainComponent]
+    [NavigationItem("Pick List")]
+    [DefaultProperty("PortalNo")]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave", AppearanceItemType.Action, "True", TargetItems = "Save", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&Close", AppearanceItemType = "Action", TargetItems = "SaveAndClose", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "Cancel", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideValidate", AppearanceItemType.Action, "True", TargetItems = "ShowAllContexts", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideResetViewSetting", AppearanceItemType.Action, "True", TargetItems = "ResetViewSettings", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideExport", AppearanceItemType.Action, "True", TargetItems = "Export", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideRefresh", AppearanceItemType.Action, "True", TargetItems = "Refresh", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+
+    [XafDisplayName("Pick List Inquiry (SP)")]
+    public class PickListInquiry
+    {
+        [Key(AutoGenerate = true), Browsable(false)]
+        public int Oid;
+
+        [XafDisplayName("Date From")]
+        [Index(0), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public DateTime DateFrom { get; set; }
+
+        [XafDisplayName("Date To")]
+        [Index(1), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public DateTime DateTo { get; set; }
+
+        [XafDisplayName("Status")]
+        //[LookupEditorMode(LookupEditorMode.AllItems)]
+        [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public InquiryViewStatus Status { get; set; }
+
+        public PickListInquiry()
+        {
+            _Results = new BindingList<PickListInquiryResult>();
+
+            DateTo = DateTime.Today;
+            DateFrom = DateTo.AddDays(-7);
+            Status = InquiryViewStatus.Draft;
+        }
+
+        private BindingList<PickListInquiryResult> _Results;
+
+        public BindingList<PickListInquiryResult> Results { get { return _Results; } }
+    }
+
+    [DomainComponent]
+    [NonPersistent]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideLink", AppearanceItemType.Action, "True", TargetItems = "Link", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideUnlink", AppearanceItemType.Action, "True", TargetItems = "Unlink", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave", AppearanceItemType.Action, "True", TargetItems = "Save", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSave&New", AppearanceItemType.Action, "True", TargetItems = "SaveAndNew", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideValidate", AppearanceItemType.Action, "True", TargetItems = "ShowAllContexts", Visibility = ViewItemVisibility.Hide, Context = "Any")]
+    [XafDisplayName("Pick List Inquiry Result")]
+    public class PickListInquiryResult
+    {
+        [DevExpress.ExpressApp.Data.Key, Browsable(false)]
+        public string PriKey;
+
+        [XafDisplayName("Portal Pick List No.")]
+        [Appearance("PortalNo", Enabled = false)]
+        [Index(3)]
+        public string PortalNo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Series")]
+        [Appearance("Series", Enabled = false)]
+        [Index(5)]
+        public string Series
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Posting Date")]
+        [Appearance("DocDate", Enabled = false)]
+        [Index(8)]
+        public DateTime DocDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Expected Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
+        [Appearance("DueDate", Enabled = false)]
+        [Index(10)]
+        public DateTime DueDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Status")]
+        [Appearance("Status", Enabled = false)]
+        [Index(13)]
+        public string Status
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Transporter")]
+        [Appearance("Transporter", Enabled = false)]
+        [Index(15)]
+        public string Transporter
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Priority")]
+        [Appearance("Priority", Enabled = false)]
+        [Index(14)]
+        public string Priority
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Picker")]
+        [Appearance("Picker", Enabled = false)]
+        [Index(18)]
+        public string Picker
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Warehouse")]
+        [Appearance("Warehouse", Enabled = false)]
+        [Index(20)]
+        public string Warehouse
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Group")]
+        [Appearance("CardGroup", Enabled = false)]
+        [Index(23)]
+        public string CardGroup
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Code")]
+        [Appearance("CardCode", Enabled = false)]
+        [Index(25)]
+        public string CardCode
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Customer Name")]
+        [Appearance("CardName", Enabled = false)]
+        [Index(28)]
+        [Size(200)]
+        public string CardName
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Portal SO No.")]
+        [Appearance("PortalSONo", Enabled = false)]
+        [Index(30)]
+        public string PortalSONo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SAP SO No.")]
+        [Appearance("SAPSONo", Enabled = false)]
+        [Index(33)]
+        public string SAPSONo
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Remark")]
+        [Appearance("Remark", Enabled = false)]
+        [Index(35)]
+        [Size(254)]
+        public string Remark
+        {
+            get; set;
+        }
+
+        [XafDisplayName("SO Delivery Date")]
+        [Appearance("SODeliveryDate", Enabled = false)]
+        [Index(38)]
+        public DateTime SODeliveryDate
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Print Status")]
+        [Appearance("PrintStatus", Enabled = false)]
+        [Index(40)]
+        public string PrintStatus
+        {
+            get; set;
+        }
+
+        [XafDisplayName("Print Count")]
+        [Appearance("PrintCount", Enabled = false)]
+        [Index(43)]
+        public int PrintCount
         {
             get; set;
         }

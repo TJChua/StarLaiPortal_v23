@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="ItemInquiry_DetailView_Report">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemInquiry_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PickListDetailsInquiry_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PickListDetailsInquiry">
+              <LayoutItem Id="ItemCode" Index="2" RelativeSize="35.416666666666664" Removed="True" />
+              <LayoutGroup Id="Autof88ca6ae-b7be-4a1c-a959-11c53758e976">
+                <LayoutItem Id="ItemCode" ViewItem="ItemCode" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

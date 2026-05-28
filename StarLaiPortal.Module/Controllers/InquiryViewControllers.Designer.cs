@@ -45,6 +45,7 @@
             this.PrintBundleInquiry = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.PrintCTInquiry = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ChoicePreviewOption = new DevExpress.ExpressApp.Actions.SingleChoiceAction(this.components);
+            this.ViewNewTab = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // ViewOpenPickList
             // 
@@ -208,6 +209,15 @@
             this.ChoicePreviewOption.ToolTip = null;
             this.ChoicePreviewOption.Execute += new DevExpress.ExpressApp.Actions.SingleChoiceActionExecuteEventHandler(this.ChoicePreviewOption_Execute);
             // 
+            // ViewNewTab
+            // 
+            this.ViewNewTab.Caption = "View";
+            this.ViewNewTab.Category = "ListView";
+            this.ViewNewTab.ConfirmationMessage = null;
+            this.ViewNewTab.Id = "ViewNewTab";
+            this.ViewNewTab.ToolTip = null;
+            this.ViewNewTab.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.ViewNewTab_Execute);
+            // 
             // InquiryViewControllers
             // 
             this.Actions.Add(this.ViewOpenPickList);
@@ -226,6 +236,7 @@
             this.Actions.Add(this.PrintBundleInquiry);
             this.Actions.Add(this.PrintCTInquiry);
             this.Actions.Add(this.ChoicePreviewOption);
+            this.Actions.Add(this.ViewNewTab);
 
         }
 
@@ -247,5 +258,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction PrintBundleInquiry;
         private DevExpress.ExpressApp.Actions.SimpleAction PrintCTInquiry;
         private DevExpress.ExpressApp.Actions.SingleChoiceAction ChoicePreviewOption;
+        private DevExpress.ExpressApp.Actions.SimpleAction ViewNewTab;
     }
 }

@@ -127,6 +127,9 @@ namespace StarLaiPortal.Module.Controllers
             // Start ver 1.0.29
             this.ChoicePreviewOption.Active.SetItemValue("Enabled", false);
             // End ver 1.0.29
+            // Start ver 1.0.29
+            this.ViewNewTab.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.29
 
             if (typeof(vwInquiryOpenPickList).IsAssignableFrom(View.ObjectTypeInfo.Type))
             {
@@ -548,15 +551,31 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
                 {
-                    this.PreviewSOInquiry.Active.SetItemValue("Enabled", true);
-                    //this.ChoicePreviewOption.Active.SetItemValue("Enabled", true);
+                    //this.PreviewSOInquiry.Active.SetItemValue("Enabled", true);
+                    this.ChoicePreviewOption.Active.SetItemValue("Enabled", true);
                     ChoicePreviewOption.PaintStyle = DevExpress.ExpressApp.Templates.ActionItemPaintStyle.Caption;
                     ChoicePreviewOption.CustomizeControl += Previewaction_CustomizeControl;
 
                     ChoicePreviewOption.SelectedIndex = 0;
 
-                    this.ViewSalesOrderInquiry.Active.SetItemValue("Enabled", true);
-                    this.ViewSalesOrderInquiry.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+                    this.ViewNewTab.Active.SetItemValue("Enabled", true);
+                    this.ViewNewTab.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+                }
+            }
+
+            if (typeof(OpenPickListInquiry).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(OpenPickListInquiry))
+                {
+                    this.InquirySearch.Active.SetItemValue("Enabled", true);
+                }
+            }
+
+            if (typeof(PickListInquiry).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(PickListInquiry))
+                {
+                    this.InquirySearch.Active.SetItemValue("Enabled", true);
                 }
             }
             // End ver 1.0.29
@@ -792,79 +811,26 @@ namespace StarLaiPortal.Module.Controllers
         // Start ver 1.0.11
         private void ViewSalesOrderInquiry_Execute(object sender, PopupWindowShowActionExecuteEventArgs e)
         {
-            // Start ver 1.0.29
-            if (View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrder))
-            {
-            // End ver 1.0.29
-                vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)e.CurrentObject;
+            vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)e.CurrentObject;
 
-                IObjectSpace os = Application.CreateObjectSpace();
-                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
-                openNewView(os, trx, ViewEditMode.View);
-            // Start ver 1.0.29
-            }
-            // End ver 1.0.29
-
-            // Start ver 1.0.29
-            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
-            {
-                SalesOrderInquiryResult selectedObject = (SalesOrderInquiryResult)e.CurrentObject;
-
-                IObjectSpace os = Application.CreateObjectSpace();
-                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
-
-                //openNewView(os, trx, ViewEditMode.View);
-                DetailView dv = Application.CreateDetailView(os, trx);
-                dv.ViewEditMode = ViewEditMode.View;
-                DevExpress.ExpressApp.View view = dv;
-                DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
-                DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
-                string url = webApplication.ViewUrlManager.GetUrl(shortcut); ;
-                string script = $"window.open('{url}', '_blank');";
-
-                // Execute script depending on the XAF UI Framework
-                DevExpress.ExpressApp.Web.WebWindow.CurrentRequestWindow.RegisterClientScript("openNewTab", script);
-            }
-            // End ver 1.0.29
+            IObjectSpace os = Application.CreateObjectSpace();
+            SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+            openNewView(os, trx, ViewEditMode.View);
         }
 
         private void ViewSalesOrderInquiry_CustomizePopupWindowParams(object sender, CustomizePopupWindowParamsEventArgs e)
         {
-            // Start ver 1.0.29
-            if (View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrder))
-            {
-            // End ver 1.0.29
-                vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)View.CurrentObject;
+            vwInquirySalesOrder selectedObject = (vwInquirySalesOrder)View.CurrentObject;
 
-                IObjectSpace os = Application.CreateObjectSpace();
-                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+            IObjectSpace os = Application.CreateObjectSpace();
+            SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
 
-                DetailView detailView = Application.CreateDetailView(os, "SalesOrder_DetailView_Dashboard", true, trx);
-                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
-                e.View = detailView;
-                e.DialogController.AcceptAction.Caption = "Go To Document";
-                e.Maximized = true;
-                //e.DialogController.CancelAction.Active["NothingToCancel"] = false;
-            // Start ver 1.0.29
-            }
-            // End ver 1.0.29
-
-            // Start ver 1.0.29
-            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
-            {
-                SalesOrderInquiryResult selectedObject = (SalesOrderInquiryResult)View.CurrentObject;
-
-                IObjectSpace os = Application.CreateObjectSpace();
-                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
-
-                DetailView detailView = Application.CreateDetailView(os, "SalesOrder_DetailView_Dashboard", true, trx);
-                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
-                e.View = detailView;
-                e.DialogController.AcceptAction.Caption = "Go To Document";
-                e.Maximized = true;
-                //e.DialogController.CancelAction.Active["NothingToCancel"] = false;
-            }
-            // End ver 1.0.29
+            DetailView detailView = Application.CreateDetailView(os, "SalesOrder_DetailView_Dashboard", true, trx);
+            detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.View;
+            e.View = detailView;
+            e.DialogController.AcceptAction.Caption = "Go To Document";
+            e.Maximized = true;
+            //e.DialogController.CancelAction.Active["NothingToCancel"] = false;
         }
         // End ver 1.0.11
 
@@ -1066,24 +1032,13 @@ namespace StarLaiPortal.Module.Controllers
                 PickListDetailsInquiry currObject = (PickListDetailsInquiry)e.CurrentObject;
                 currObject.Results.Clear();
 
-                string itemcode = null;
-
-                if (currObject.ItemCode != null)
-                {
-                    itemcode = currObject.ItemCode.ItemCode;
-                }
-                else
-                {
-                    itemcode = "All";
-                }
-
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PickListDetailsInquiry"),
                     // Start ver 1.0.24
                     //new OperandValue(itemcode));
-                    new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
+                    new OperandValue(""), new OperandValue(""), new OperandValue(""),
                     // End ver 1.0.24
                     // Start ver 1.0.29
                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
@@ -2306,6 +2261,116 @@ namespace StarLaiPortal.Module.Controllers
                 persistentObjectSpace.Session.DropIdentityMap();
                 persistentObjectSpace.Dispose();
             }
+
+            if (View.ObjectTypeInfo.Type == typeof(OpenPickListInquiry))
+            {
+                OpenPickListInquiry currObject = (OpenPickListInquiry)e.CurrentObject;
+                currObject.Results.Clear();
+
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
+                    new OperandValue(currObject.DateFrom.Date),
+                    new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("OpenPickListInquiry"),
+                    new OperandValue(""), new OperandValue(""), new OperandValue(""),
+                    new OperandValue(""), new OperandValue(""), new OperandValue(""));
+
+                if (sprocData.ResultSet.Count() > 0)
+                {
+                    if (sprocData.ResultSet[0].Rows.Count() > 0)
+                    {
+                        foreach (SelectStatementResultRow row in sprocData.ResultSet[0].Rows)
+                        {
+                            OpenPickListInquiryResult result = new OpenPickListInquiryResult();
+
+                            result.PriKey = row.Values[0].ToString();
+                            result.PortalNo = row.Values[1].ToString();
+                            result.Series = row.Values[2].ToString();
+                            result.DocDate = DateTime.Parse(row.Values[3].ToString());
+                            result.DueDate = DateTime.Parse(row.Values[4].ToString());
+                            result.Status = row.Values[5].ToString();
+                            result.Transporter = row.Values[6].ToString();
+                            result.Picker = row.Values[7].ToString();
+                            result.Warehouse = row.Values[8].ToString();
+                            result.CardGroup = row.Values[9].ToString();
+                            result.CardCode = row.Values[10].ToString();
+                            result.CardName = row.Values[11].ToString();
+                            result.PortalSONo = row.Values[12].ToString();
+                            result.SAPSONo = row.Values[13].ToString();
+                            result.Remark = row.Values[14].ToString();
+                            if (DateTime.Parse(row.Values[15].ToString()).Date != DateTime.Parse("1900-01-01").Date)
+                            {
+                                result.SODeliveryDate = DateTime.Parse(row.Values[15].ToString());
+                            }
+                            result.PrintStatus = row.Values[16].ToString();
+                            result.PrintCount = int.Parse(row.Values[17].ToString());
+                            result.Priority = row.Values[18].ToString();
+
+                            currObject.Results.Add(result);
+                        }
+                    }
+                }
+
+                ObjectSpace.Refresh();
+                View.Refresh();
+
+                persistentObjectSpace.Session.DropIdentityMap();
+                persistentObjectSpace.Dispose();
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(PickListInquiry))
+            {
+                PickListInquiry currObject = (PickListInquiry)e.CurrentObject;
+                currObject.Results.Clear();
+
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
+                    new OperandValue(currObject.DateFrom.Date),
+                    new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PickListInquiry"),
+                    new OperandValue(""), new OperandValue(""), new OperandValue(""),
+                    new OperandValue(""), new OperandValue(""), new OperandValue(""));
+
+                if (sprocData.ResultSet.Count() > 0)
+                {
+                    if (sprocData.ResultSet[0].Rows.Count() > 0)
+                    {
+                        foreach (SelectStatementResultRow row in sprocData.ResultSet[0].Rows)
+                        {
+                            PickListInquiryResult result = new PickListInquiryResult();
+
+                            result.PriKey = row.Values[0].ToString();
+                            result.PortalNo = row.Values[1].ToString();
+                            result.Series = row.Values[2].ToString();
+                            result.DocDate = DateTime.Parse(row.Values[3].ToString());
+                            result.DueDate = DateTime.Parse(row.Values[4].ToString());
+                            result.Status = row.Values[5].ToString();
+                            result.Transporter = row.Values[6].ToString();
+                            result.Picker = row.Values[7].ToString();
+                            result.Warehouse = row.Values[8].ToString();
+                            result.CardGroup = row.Values[9].ToString();
+                            result.CardCode = row.Values[10].ToString();
+                            result.CardName = row.Values[11].ToString();
+                            result.PortalSONo = row.Values[12].ToString();
+                            result.SAPSONo = row.Values[13].ToString();
+                            result.Remark = row.Values[14].ToString();
+                            if (DateTime.Parse(row.Values[15].ToString()).Date != DateTime.Parse("1900-01-01").Date)
+                            {
+                                result.SODeliveryDate = DateTime.Parse(row.Values[15].ToString());
+                            }
+                            result.PrintStatus = row.Values[16].ToString();
+                            result.PrintCount = int.Parse(row.Values[17].ToString());
+                            result.Priority = row.Values[18].ToString();
+
+                            currObject.Results.Add(result);
+                        }
+                    }
+                }
+
+                ObjectSpace.Refresh();
+                View.Refresh();
+
+                persistentObjectSpace.Session.DropIdentityMap();
+                persistentObjectSpace.Dispose();
+            }
             // End ver 1.0.29
         }
 
@@ -3064,6 +3129,29 @@ namespace StarLaiPortal.Module.Controllers
                 {
                     showMsg("Fail", "Please select one Invoice only.", InformationType.Error);
                 }
+            }
+        }
+
+        private void ViewNewTab_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            if (View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult))
+            {
+                SalesOrderInquiryResult selectedObject = (SalesOrderInquiryResult)e.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+
+                //openNewView(os, trx, ViewEditMode.View);
+                DetailView dv = Application.CreateDetailView(os, trx);
+                dv.ViewEditMode = ViewEditMode.View;
+                DevExpress.ExpressApp.View view = dv;
+                DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
+                DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
+                string url = webApplication.ViewUrlManager.GetUrl(shortcut); ;
+                string script = $"window.open('{url}', '_blank');";
+
+                // Execute script depending on the XAF UI Framework
+                DevExpress.ExpressApp.Web.WebWindow.CurrentRequestWindow.RegisterClientScript("openNewTab", script);
             }
         }
         // End ver 1.0.29

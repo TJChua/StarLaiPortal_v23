@@ -428,10 +428,12 @@
         <Items>
           <Item Id="PickList_ListView" Index="0" Visible="False" />
           <Item Id="Pick List By Date" Caption="Pick List By Date" Index="1" ViewId="PickList_ListView_ByDate" IsNewNode="True" />
-          <Item Id="vwInquiryOpenPickList_ListView" Index="2" />
-          <Item Id="vwInquiryPickList_ListView" Index="3" />
+          <Item Id="vwInquiryOpenPickList_ListView" Index="2" Visible="True" />
+          <Item Id="vwInquiryPickList_ListView" Index="3" Visible="True" />
           <Item Id="vwInquiryPickListDetails_ListView" QuickAccessItem="False" Visible="True" Index="4" />
-          <Item Id="PickListDetailsInquiry_ListView" Visible="False" />
+          <Item Id="OpenPickListInquiry_ListView" Index="5" Visible="False" />
+          <Item Id="PickListInquiry_ListView" Index="6" Visible="False" />
+          <Item Id="PickListDetailsInquiry_ListView" Visible="False" Index="7" />
         </Items>
       </Item>
       <Item Id="Pack List" Index="11" Visible="True">
@@ -2640,6 +2642,36 @@
       </Layout>
     </DetailView>
     <DetailView Id="LoadingInquiryResult_DetailView" AllowEdit="False" />
+    <DetailView Id="OpenPickListInquiry_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="13.414634146341463">
+            <LayoutGroup Id="OpenPickListInquiry" Caption="OpenPickListInquiry" Direction="Horizontal" RelativeSize="100">
+              <LayoutGroup Id="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1" ShowCaption="False" Caption="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1(4)" Index="0" RelativeSize="50.281690140845072" IsNewNode="True">
+                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autof4c37342-b84e-4215-8e39-3f0eae16c7de" ShowCaption="False" Caption="Autof4c37342-b84e-4215-8e39-3f0eae16c7de(7)" Index="1" RelativeSize="49.718309859154928" IsNewNode="True">
+                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+                <LayoutItem Id="Item1" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Status" Index="1" RelativeSize="20.56338028169014" Removed="True" />
+              <LayoutItem Id="DateFrom" Removed="True" />
+              <LayoutItem Id="DateTo" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="86.58536585365853">
+            <LayoutItem Id="Results" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="OpenPickListInquiry_Results_ListView">
+      <Columns>
+        <ColumnInfo Id="CardName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <DetailView Id="OpenPickListInquiryResult_DetailView" AllowEdit="False" />
     <DetailView Id="OrderStatus_DetailView" AllowEdit="False" />
     <DetailView Id="OrderStatusList_DetailView" AllowEdit="True" />
     <ListView Id="OrderStatusList_Orderstatus_ListView" DataAccessMode="Client">
@@ -3005,7 +3037,6 @@
                 <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.428571428571431" IsNewNode="True" />
                 <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="1" RelativeSize="48.571428571428569" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="ItemCode" Index="2" RelativeSize="35.416666666666664" Removed="True" />
               <LayoutItem Id="DateFrom" Removed="True" />
               <LayoutItem Id="DateTo" RelativeSize="27.083333333333332" Removed="True" />
               <LayoutItem Id="Status" Removed="True" />
@@ -3024,6 +3055,36 @@
     </ListView>
     <DetailView Id="PickListDetailsInquiryResult_DetailView" AllowEdit="False" />
     <DetailView Id="PickListDocTrail_DetailView" AllowEdit="False" />
+    <DetailView Id="PickListInquiry_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="13.414634146341463">
+            <LayoutGroup Id="PickListInquiry" Caption="PickListInquiry" Direction="Horizontal" RelativeSize="100">
+              <LayoutGroup Id="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b" ShowCaption="False" Caption="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b(4)" Index="0" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto2689612c-dded-4664-bc44-7bb59d6324e6" ShowCaption="False" Caption="Auto2689612c-dded-4664-bc44-7bb59d6324e6(7)" Index="1" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+                <LayoutItem Id="Item1" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Status" Index="1" RelativeSize="53.943661971830984" Removed="True" />
+              <LayoutItem Id="DateFrom" Removed="True" />
+              <LayoutItem Id="DateTo" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="86.58536585365853">
+            <LayoutItem Id="Results" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PickListInquiry_Results_ListView">
+      <Columns>
+        <ColumnInfo Id="CardName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PickListInquiryResult_DetailView" AllowEdit="False" />
     <DetailView Id="PickListSO_DetailView" AllowEdit="False" />
     <ListView Id="PickListSO_ListView">
       <Columns>
