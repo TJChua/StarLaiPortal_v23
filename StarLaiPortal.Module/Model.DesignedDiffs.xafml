@@ -5710,6 +5710,37 @@
       </Layout>
     </DetailView>
     <DetailView Id="SalesReturnDocTrail_DetailView" AllowEdit="False" />
+    <DetailView Id="SalesReturnPickerInquiry_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="15.529411764705882">
+            <LayoutGroup Id="SalesReturnPickerInquiry" Caption="SalesReturnPickerInquiry" Direction="Horizontal" RelativeSize="100">
+              <LayoutGroup Id="Autob29bcddb-8551-40e3-8049-eddf243fe42b" ShowCaption="False" Caption="Autob29bcddb-8551-40e3-8049-eddf243fe42b(4)" Index="0" RelativeSize="49.790209790209794" IsNewNode="True">
+                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto1e3b436c-a71b-4382-9d88-c93e97f8618d" ShowCaption="False" Caption="Auto1e3b436c-a71b-4382-9d88-c93e97f8618d(7)" Index="1" RelativeSize="50.209790209790206" IsNewNode="True">
+                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+                <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Status" Index="1" RelativeSize="20.41958041958042" Removed="True" />
+              <LayoutItem Id="DateFrom" Removed="True" />
+              <LayoutItem Id="DateTo" Removed="True" />
+              <LayoutItem Id="ItemCode" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="84.470588235294116">
+            <LayoutItem Id="Results" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesReturnPickerInquiry_Results_ListView">
+      <Columns>
+        <ColumnInfo Id="PickerName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesReturnPickerInquiryResult_DetailView" AllowEdit="False" />
     <DetailView Id="SalesReturnRequestAppStage_DetailView" AllowEdit="False" />
     <DetailView Id="SalesReturnRequestAppStatus_DetailView" AllowEdit="False" />
     <DetailView Id="SalesReturnRequestDetails_DetailView">

@@ -578,6 +578,14 @@ namespace StarLaiPortal.Module.Controllers
                     this.InquirySearch.Active.SetItemValue("Enabled", true);
                 }
             }
+
+            if (typeof(SalesReturnPickerInquiry).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(SalesReturnPickerInquiry))
+                {
+                    this.InquirySearch.Active.SetItemValue("Enabled", true);
+                }
+            }
             // End ver 1.0.29
         }
         protected override void OnViewControlsCreated()
@@ -2371,6 +2379,81 @@ namespace StarLaiPortal.Module.Controllers
                 persistentObjectSpace.Session.DropIdentityMap();
                 persistentObjectSpace.Dispose();
             }
+
+            if (View.ObjectTypeInfo.Type == typeof(SalesReturnPickerInquiry))
+            {
+                SalesReturnPickerInquiry currObject = (SalesReturnPickerInquiry)e.CurrentObject;
+                currObject.Results.Clear();
+
+                string itemcode = null;
+
+                if (currObject.ItemCode != null)
+                {
+                    itemcode = currObject.ItemCode.ItemCode;
+                }
+                else
+                {
+                    itemcode = "All";
+                }
+
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
+                    new OperandValue(currObject.DateFrom.Date),
+                    new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("SalesReturnPickerInquiry"),
+                     new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
+                     new OperandValue(""), new OperandValue(""), new OperandValue(""));
+
+                if (sprocData.ResultSet.Count() > 0)
+                {
+                    if (sprocData.ResultSet[0].Rows.Count() > 0)
+                    {
+                        foreach (SelectStatementResultRow row in sprocData.ResultSet[0].Rows)
+                        {
+                            SalesReturnPickerInquiryResult result = new SalesReturnPickerInquiryResult();
+
+                            result.PriKey = row.Values[0].ToString();
+                            result.PortalNo = row.Values[1].ToString();
+                            result.PortalReturnNo = row.Values[2].ToString();
+                            result.SAPReturnNo = row.Values[3].ToString();
+                            result.SAPCNNo = row.Values[4].ToString();
+                            result.DocDate = DateTime.Parse(row.Values[5].ToString());
+                            result.TaxDate = DateTime.Parse(row.Values[6].ToString());
+                            result.Status = row.Values[7].ToString();
+                            result.CardCode = row.Values[8].ToString();
+                            result.CardName = row.Values[9].ToString();
+                            result.Reference = row.Values[10].ToString();
+                            result.Transporter = row.Values[11].ToString();
+                            result.Remarks = row.Values[12].ToString();
+                            result.ItemCode = row.Values[13].ToString();
+                            result.ItemName = row.Values[14].ToString();
+                            result.LegacyItemCode = row.Values[15].ToString();
+                            result.CatalogNo = row.Values[16].ToString();
+                            result.Model = row.Values[17].ToString();
+                            result.Brand = row.Values[18].ToString();
+                            result.Quantity = decimal.Parse(row.Values[19].ToString());
+                            result.UOM = row.Values[20].ToString();
+                            result.ReturnReason = row.Values[21].ToString();
+                            result.Warehouse = row.Values[22].ToString();
+                            result.Bin = row.Values[23].ToString();
+                            result.Price = decimal.Parse(row.Values[24].ToString());
+                            result.Amount = decimal.Parse(row.Values[25].ToString());
+                            result.PortalSONo = row.Values[28].ToString();
+                            result.SODocDate = DateTime.Parse(row.Values[29].ToString());
+                            result.DeliveryNo = row.Values[30].ToString();
+                            result.PickListNo = row.Values[31].ToString();
+                            result.PickerName = row.Values[32].ToString();
+
+                            currObject.Results.Add(result);
+                        }
+                    }
+                }
+
+                ObjectSpace.Refresh();
+                View.Refresh();
+
+                persistentObjectSpace.Session.DropIdentityMap();
+                persistentObjectSpace.Dispose();
+            }
             // End ver 1.0.29
         }
 
@@ -3147,7 +3230,7 @@ namespace StarLaiPortal.Module.Controllers
                 DevExpress.ExpressApp.View view = dv;
                 DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
                 DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
-                string url = webApplication.ViewUrlManager.GetUrl(shortcut); ;
+                string url = webApplication.ViewUrlManager.GetUrl(shortcut);
                 string script = $"window.open('{url}', '_blank');";
 
                 // Execute script depending on the XAF UI Framework

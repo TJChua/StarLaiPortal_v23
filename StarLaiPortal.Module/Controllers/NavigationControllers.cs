@@ -643,6 +643,19 @@ namespace StarLaiPortal.Module.Controllers
                 e.ActionArguments.ShowViewParameters.CreatedView = detailView;
                 e.Handled = true;
             }
+
+            if (e.ActionArguments.SelectedChoiceActionItem.Id == "SalesReturnPickerInquiry_ListView")
+            {
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                var nonPersistentOS = Application.CreateObjectSpace(typeof(SalesReturnPickerInquiry));
+                SalesReturnPickerInquiry list = nonPersistentOS.CreateObject<SalesReturnPickerInquiry>();
+
+                DetailView detailView = Application.CreateDetailView(nonPersistentOS, list);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.Edit;
+
+                e.ActionArguments.ShowViewParameters.CreatedView = detailView;
+                e.Handled = true;
+            }
             // End ver 1.0.29
 
             // Start ver 1.0.2
