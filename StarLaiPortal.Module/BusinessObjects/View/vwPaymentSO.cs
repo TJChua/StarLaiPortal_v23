@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 
 // 2023-08-25 add FirstBinZone ver 1.0.9
+// 2026-05-18 - change delivery date format - ver 1.0.29
 
 namespace StarLaiPortal.Module.BusinessObjects.View
 {
@@ -85,6 +86,9 @@ namespace StarLaiPortal.Module.BusinessObjects.View
 
         [XafDisplayName("Delivery Date")]
         [Appearance("DeliveryDateStr", Enabled = false)]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
         [Appearance("DeliveryDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
         [Index(7)]
         public string DeliveryDateStr

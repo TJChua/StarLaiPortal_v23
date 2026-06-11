@@ -428,12 +428,12 @@
         <Items>
           <Item Id="PickList_ListView" Index="0" Visible="False" />
           <Item Id="Pick List By Date" Caption="Pick List By Date" Index="1" ViewId="PickList_ListView_ByDate" IsNewNode="True" />
-          <Item Id="vwInquiryOpenPickList_ListView" Index="2" Visible="True" />
-          <Item Id="vwInquiryPickList_ListView" Index="3" Visible="True" />
-          <Item Id="vwInquiryPickListDetails_ListView" QuickAccessItem="False" Visible="True" Index="4" />
-          <Item Id="OpenPickListInquiry_ListView" Index="5" Visible="False" />
-          <Item Id="PickListInquiry_ListView" Index="6" Visible="False" />
-          <Item Id="PickListDetailsInquiry_ListView" Visible="False" Index="7" />
+          <Item Id="vwInquiryOpenPickList_ListView" Index="2" Visible="False" />
+          <Item Id="vwInquiryPickList_ListView" Index="3" Visible="False" />
+          <Item Id="vwInquiryPickListDetails_ListView" QuickAccessItem="False" Visible="False" Index="4" />
+          <Item Id="OpenPickListInquiry_ListView" Index="5" Visible="True" />
+          <Item Id="PickListInquiry_ListView" Index="6" Visible="True" />
+          <Item Id="PickListDetailsInquiry_ListView" Visible="True" Index="7" />
         </Items>
       </Item>
       <Item Id="Pack List" Index="11" Visible="True">
