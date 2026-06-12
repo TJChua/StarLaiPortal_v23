@@ -918,42 +918,49 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Quotation
                 SetPropertyValue("PostingDate", ref _PostingDate, value);
                 if (!IsLoading)
                 {
-                    bool update = false;
-                    foreach (SalesQuotationDetails dtl in this.SalesQuotationDetails)
+                    // Start ver 1.0.29
+                    if (Status != DocStatus.Submitted)
                     {
-                        vwPriceWithVolumeDiscount tempprice = Session.FindObject<vwPriceWithVolumeDiscount>(CriteriaOperator.Parse(
-                        "ItemCode = ? and ListNum = ? and ? >= FromDate and ? <= ToDate and ? >= FromQty and ? <= ToQty",
-                        dtl.ItemCode, Customer.ListNum, PostingDate.Date, PostingDate.Date, dtl.Quantity, dtl.Quantity));
-
-                        if (tempprice != null)
+                    // End ver 1.0.29
+                        bool update = false;
+                        foreach (SalesQuotationDetails dtl in this.SalesQuotationDetails)
                         {
-                            dtl.Price = tempprice.Price;
-                            dtl.AdjustedPrice = tempprice.Price;
-                        }
-                        else
-                        {
-                            vwPrice temppricelist = Session.FindObject<vwPrice>(CriteriaOperator.Parse("ItemCode = ? and PriceList = ?",
-                                dtl.ItemCode.ItemCode, Customer.ListNum));
+                            vwPriceWithVolumeDiscount tempprice = Session.FindObject<vwPriceWithVolumeDiscount>(CriteriaOperator.Parse(
+                            "ItemCode = ? and ListNum = ? and ? >= FromDate and ? <= ToDate and ? >= FromQty and ? <= ToQty",
+                            dtl.ItemCode, Customer.ListNum, PostingDate.Date, PostingDate.Date, dtl.Quantity, dtl.Quantity));
 
-                            if (temppricelist != null)
+                            if (tempprice != null)
                             {
-                                dtl.Price = temppricelist.Price;
-                                dtl.AdjustedPrice = temppricelist.Price;
+                                dtl.Price = tempprice.Price;
+                                dtl.AdjustedPrice = tempprice.Price;
                             }
                             else
                             {
-                                dtl.Price = 0;
-                                dtl.AdjustedPrice = 0;
-                            }
-                        }
-                        
-                        update = true;
-                    }
+                                vwPrice temppricelist = Session.FindObject<vwPrice>(CriteriaOperator.Parse("ItemCode = ? and PriceList = ?",
+                                    dtl.ItemCode.ItemCode, Customer.ListNum));
 
-                    if (update == true && this.DocNum != null)
-                    {
-                        this.Session.CommitTransaction();
+                                if (temppricelist != null)
+                                {
+                                    dtl.Price = temppricelist.Price;
+                                    dtl.AdjustedPrice = temppricelist.Price;
+                                }
+                                else
+                                {
+                                    dtl.Price = 0;
+                                    dtl.AdjustedPrice = 0;
+                                }
+                            }
+
+                            update = true;
+                        }
+
+                        if (update == true && this.DocNum != null)
+                        {
+                            this.Session.CommitTransaction();
+                        }
+                    // Start ver 1.0.29
                     }
+                    // End ver 1.0.29
                 }
             }
         }
