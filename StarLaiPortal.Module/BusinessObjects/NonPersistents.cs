@@ -23,6 +23,7 @@ using System.Text;
 // 2024-06-01 - add Salesperson - ver 1.0.17
 // 2024-10-08 - add whse - ver 1.0.21
 // 2025-07-16 - add code to store itemcode only - ver 1.0.23
+// 2026-06-16 - remove postingdate field with string - ver 1.0.29
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -510,25 +511,27 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
 
+        // Start ver 1.0.29
+        //[XafDisplayName("Posting Date")]
+        //[Appearance("PostingDateStr", Enabled = false)]
+        //[Appearance("PostingDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
+        //[Index(6)]
+        //public string PostingDateStr
+        //{
+        //    get; set;
+        //}
+
+        //[XafDisplayName("Delivery Date")]
+        //[Appearance("DeliveryDateStr", Enabled = false)]
+        //[Appearance("DeliveryDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
+        //[Index(7)]
+        //public string DeliveryDateStr
+        //{
+        //    get; set;
+        //}
+        // End ver 1.0.29
+
         [XafDisplayName("Posting Date")]
-        [Appearance("PostingDateStr", Enabled = false)]
-        [Appearance("PostingDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
-        [Index(6)]
-        public string PostingDateStr
-        {
-            get; set;
-        }
-
-        [XafDisplayName("Delivery Date")]
-        [Appearance("DeliveryDateStr", Enabled = false)]
-        [Appearance("DeliveryDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
-        [Index(7)]
-        public string DeliveryDateStr
-        {
-            get; set;
-        }
-
-        [XafDisplayName("PostingDate")]
         [Appearance("PostingDate", Enabled = false)]
         [Appearance("PostingDate1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
         [Index(8)]
@@ -537,7 +540,7 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
 
-        [XafDisplayName("DeliveryDate")]
+        [XafDisplayName("Delivery Date")]
         [Appearance("DeliveryDate", Enabled = false)]
         [Appearance("DeliveryDate1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
         [Index(10)]
@@ -754,25 +757,27 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
 
+        // Start ver 1.0.29
+        //[XafDisplayName("Posting Date")]
+        //[Appearance("PostingDateStr", Enabled = false)]
+        //[Appearance("PostingDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
+        //[Index(4)]
+        //public string PostingDateStr
+        //{
+        //    get; set;
+        //}
+
+        //[XafDisplayName("Delivery Date")]
+        //[Appearance("DeliveryDateStr", Enabled = false)]
+        //[Appearance("DeliveryDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
+        //[Index(5)]
+        //public string DeliveryDateStr
+        //{
+        //    get; set;
+        //}
+        // End ver 1.0.29
+
         [XafDisplayName("Posting Date")]
-        [Appearance("PostingDateStr", Enabled = false)]
-        [Appearance("PostingDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
-        [Index(4)]
-        public string PostingDateStr
-        {
-            get; set;
-        }
-
-        [XafDisplayName("Delivery Date")]
-        [Appearance("DeliveryDateStr", Enabled = false)]
-        [Appearance("DeliveryDateStr1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
-        [Index(5)]
-        public string DeliveryDateStr
-        {
-            get; set;
-        }
-
-        [XafDisplayName("PostingDate")]
         [Appearance("PostingDate", Enabled = false)]
         [Appearance("PostingDate1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
         [Index(6)]
@@ -781,7 +786,7 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
 
-        [XafDisplayName("DeliveryDate")]
+        [XafDisplayName("Delivery Date")]
         [Appearance("DeliveryDate", Enabled = false)]
         [Appearance("DeliveryDate1", BackColor = "#FF7C80", FontColor = "Black", Criteria = "PartialPicked > 0")]
         [Index(7)]

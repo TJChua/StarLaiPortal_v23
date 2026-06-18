@@ -404,7 +404,7 @@
           <Item Id="SalesOrder_ListView" Index="0" />
           <Item Id="SalesOrderCollection_ListView" Index="1" />
           <Item Id="SalesOrderCollectionReport_ListView" Index="2" />
-          <Item Id="vwInquirySalesOrder_ListView" Index="3" QuickAccessItem="False" Visible="False" />
+          <Item Id="vwInquirySalesOrder_ListView" Index="3" QuickAccessItem="False" Visible="True" />
           <Item Id="SalesOrderInquiry_ListView" Index="4" />
           <Item Id="vwInquiryARDownpayment_ListView" Visible="False" Index="5" />
           <Item Id="ARDownpaymentInquiry_ListView" Index="6" />
@@ -428,9 +428,9 @@
         <Items>
           <Item Id="PickList_ListView" Index="0" Visible="False" />
           <Item Id="Pick List By Date" Caption="Pick List By Date" Index="1" ViewId="PickList_ListView_ByDate" IsNewNode="True" />
-          <Item Id="vwInquiryOpenPickList_ListView" Index="2" Visible="False" />
-          <Item Id="vwInquiryPickList_ListView" Index="3" Visible="False" />
-          <Item Id="vwInquiryPickListDetails_ListView" QuickAccessItem="False" Visible="False" Index="4" />
+          <Item Id="vwInquiryOpenPickList_ListView" Index="2" Visible="True" />
+          <Item Id="vwInquiryPickList_ListView" Index="3" Visible="True" />
+          <Item Id="vwInquiryPickListDetails_ListView" QuickAccessItem="False" Visible="True" Index="4" />
           <Item Id="OpenPickListInquiry_ListView" Index="5" Visible="True" />
           <Item Id="PickListInquiry_ListView" Index="6" Visible="True" />
           <Item Id="PickListDetailsInquiry_ListView" Visible="True" Index="7" />
@@ -2645,22 +2645,35 @@
     <DetailView Id="OpenPickListInquiry_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="13.414634146341463">
-            <LayoutGroup Id="OpenPickListInquiry" Caption="OpenPickListInquiry" Direction="Horizontal" RelativeSize="100">
-              <LayoutGroup Id="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1" ShowCaption="False" Caption="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1(4)" Index="0" RelativeSize="50.281690140845072" IsNewNode="True">
-                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
-                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="20.087336244541486" Direction="Horizontal">
+            <LayoutGroup Id="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1" ShowCaption="False" Caption="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1(4)" Index="0" RelativeSize="48.472222222222221" IsNewNode="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.043478260869563" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OpenPickListInquiry_col1" ShowCaption="False" Index="1" RelativeSize="51.527777777777779" IsNewNode="True">
+              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OpenPickListInquiry" Caption="OpenPickListInquiry" Direction="Horizontal" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1" ShowCaption="False" Caption="Autoaf712b03-b645-4bec-bf06-c8192fd0bdc1(4)" Index="0" RelativeSize="33.5243553008596" IsNewNode="True">
+                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.170212765957444" IsNewNode="True" />
+                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.829787234042556" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autof4c37342-b84e-4215-8e39-3f0eae16c7de" ShowCaption="False" Caption="Autof4c37342-b84e-4215-8e39-3f0eae16c7de(7)" Index="1" RelativeSize="49.718309859154928" IsNewNode="True">
-                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
-                <LayoutItem Id="Item1" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              <LayoutGroup Id="OpenPickListInquiry_col1" Index="1" RelativeSize="66.4756446991404" Caption="OpenPickListInquiry_col1">
+                <LayoutItem Id="DateTo" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="Status" RelativeSize="36.170212765957444" Index="0" />
+                <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="27.659574468085108" IsNewNode="True" />
+                <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="36.170212765957444" IsNewNode="True" />
+                <LayoutItem Id="DateFrom" RelativeSize="35.555555555555557" Removed="True" />
               </LayoutGroup>
-              <LayoutItem Id="Status" Index="1" RelativeSize="20.56338028169014" Removed="True" />
-              <LayoutItem Id="DateFrom" Removed="True" />
-              <LayoutItem Id="DateTo" Removed="True" />
+              <LayoutGroup Id="OpenPickListInquiry_col2" Index="2" RelativeSize="37.679083094555871" Caption="OpenPickListInquiry_col2" Removed="True">
+                <LayoutItem Id="PortalPL" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="PortalSO" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="86.58536585365853">
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="79.91266375545851">
             <LayoutItem Id="Results" RelativeSize="100" />
           </LayoutGroup>
         </LayoutGroup>
@@ -3027,22 +3040,35 @@
     <DetailView Id="PickListDetailsInquiry_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="14.675052410901468">
-            <LayoutGroup Id="PickListDetailsInquiry" RelativeSize="100" Direction="Horizontal">
-              <LayoutGroup Id="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
-                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.428571428571431" IsNewNode="True" />
-                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.571428571428569" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="20.087336244541486" Direction="Horizontal">
+            <LayoutGroup Id="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3" ShowCaption="False" Caption="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3(4)" Index="0" RelativeSize="48.75" IsNewNode="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.043478260869563" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PickListDetailsInquiry_col1" ShowCaption="False" Index="1" RelativeSize="51.25" IsNewNode="True">
+              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PickListDetailsInquiry" RelativeSize="100" Direction="Horizontal" Removed="True">
+              <LayoutGroup Id="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3" ShowCaption="False" Caption="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3(4)" Index="0" RelativeSize="48.710601719197705" IsNewNode="True">
+                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.170212765957444" IsNewNode="True" />
+                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.829787234042556" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autof88ca6ae-b7be-4a1c-a959-11c53758e976" ShowCaption="False" Caption="" Index="1" RelativeSize="50" IsNewNode="True">
-                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.428571428571431" IsNewNode="True" />
-                <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="1" RelativeSize="48.571428571428569" IsNewNode="True" />
+              <LayoutGroup Id="PickListDetailsInquiry_col1" Index="1" RelativeSize="51.289398280802295" Caption="PickListDetailsInquiry_col1">
+                <LayoutItem Id="DateTo" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="Status" RelativeSize="36.170212765957444" Index="0" />
+                <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="27.659574468085108" IsNewNode="True" />
+                <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="36.170212765957444" IsNewNode="True" />
+                <LayoutItem Id="DateFrom" RelativeSize="35.555555555555557" Removed="True" />
               </LayoutGroup>
-              <LayoutItem Id="DateFrom" Removed="True" />
-              <LayoutItem Id="DateTo" RelativeSize="27.083333333333332" Removed="True" />
-              <LayoutItem Id="Status" Removed="True" />
+              <LayoutGroup Id="PickListDetailsInquiry_col2" Index="3" RelativeSize="24.068767908309457" Caption="PickListDetailsInquiry_col2" Removed="True">
+                <LayoutItem Id="PortalPL" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="PortalSO" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="85.324947589098528">
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="79.91266375545851">
             <LayoutItem Id="Results" RelativeSize="100" />
           </LayoutGroup>
         </LayoutGroup>
@@ -3058,22 +3084,35 @@
     <DetailView Id="PickListInquiry_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="13.414634146341463">
-            <LayoutGroup Id="PickListInquiry" Caption="PickListInquiry" Direction="Horizontal" RelativeSize="100">
-              <LayoutGroup Id="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b" ShowCaption="False" Caption="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b(4)" Index="0" RelativeSize="50" IsNewNode="True">
-                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
-                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="20.087336244541486" Direction="Horizontal">
+            <LayoutGroup Id="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b" ShowCaption="False" Caption="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b(4)" Index="0" RelativeSize="48.611111111111114" IsNewNode="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.043478260869563" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PickListInquiry_col1" ShowCaption="False" Index="1" RelativeSize="51.388888888888886" IsNewNode="True">
+              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PickListInquiry" Caption="PickListInquiry" Direction="Horizontal" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b" ShowCaption="False" Caption="Autoe74db886-0a93-43f5-8d38-9f7c8ca7461b(4)" Index="0" RelativeSize="24.068767908309457" IsNewNode="True">
+                <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.170212765957444" IsNewNode="True" />
+                <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.829787234042556" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto2689612c-dded-4664-bc44-7bb59d6324e6" ShowCaption="False" Caption="Auto2689612c-dded-4664-bc44-7bb59d6324e6(7)" Index="1" RelativeSize="50" IsNewNode="True">
-                <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
-                <LayoutItem Id="Item1" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+              <LayoutGroup Id="PickListInquiry_col1" Index="1" RelativeSize="75.931232091690546" Caption="PickListInquiry_col1">
+                <LayoutItem Id="DateTo" Index="0" RelativeSize="50" Removed="True" />
+                <LayoutItem Id="Status" Index="0" RelativeSize="36.170212765957444" />
+                <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="27.659574468085108" IsNewNode="True" />
+                <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="36.170212765957444" IsNewNode="True" />
+                <LayoutItem Id="DateFrom" Removed="True" />
               </LayoutGroup>
-              <LayoutItem Id="Status" Index="1" RelativeSize="53.943661971830984" Removed="True" />
-              <LayoutItem Id="DateFrom" Removed="True" />
-              <LayoutItem Id="DateTo" Removed="True" />
+              <LayoutGroup Id="PickListInquiry_col2" Index="2" RelativeSize="47.134670487106014" Caption="PickListInquiry_col2" Removed="True">
+                <LayoutItem Id="PortalPL" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="PortalSO" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="86.58536585365853">
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="79.91266375545851">
             <LayoutItem Id="Results" RelativeSize="100" />
           </LayoutGroup>
         </LayoutGroup>
@@ -3088,12 +3127,10 @@
     <DetailView Id="PickListSO_DetailView" AllowEdit="False" />
     <ListView Id="PickListSO_ListView">
       <Columns>
-        <ColumnInfo Id="DeliveryDate" Index="-1" />
         <ColumnInfo Id="PartialPicked" Index="-1" />
-        <ColumnInfo Id="PostingDate" Width="81" Index="-1" />
-        <ColumnInfo Id="PostingDateStr" Width="89" />
-        <ColumnInfo Id="DeliveryDateStr" Width="92" />
-        <ColumnInfo Id="Priority" Index="4" />
+        <ColumnInfo Id="Priority" Index="2" />
+        <ColumnInfo Id="PostingDate" Width="81" Index="3" />
+        <ColumnInfo Id="DeliveryDate" Index="4" />
         <ColumnInfo Id="CustomerName" Index="5" SortIndex="-1" SortOrder="None" />
         <ColumnInfo Id="Transporter" Index="6" />
         <ColumnInfo Id="Salesperson" Index="7" />
@@ -3111,9 +3148,8 @@
     <DetailView Id="PickListSOGroup_DetailView" AllowEdit="False" />
     <ListView Id="PickListSOGroup_ListView">
       <Columns>
-        <ColumnInfo Id="DeliveryDate" Index="-1" />
-        <ColumnInfo Id="PostingDate" Width="112" Index="-1" />
-        <ColumnInfo Id="PostingDateStr" Width="0" />
+        <ColumnInfo Id="PostingDate" Width="112" Index="2" />
+        <ColumnInfo Id="DeliveryDate" Index="3" />
         <ColumnInfo Id="Priority" Index="4" />
         <ColumnInfo Id="CustomerName" SortIndex="-1" SortOrder="None" Index="5" />
         <ColumnInfo Id="Transporter" Index="6" />

@@ -586,6 +586,33 @@ namespace StarLaiPortal.Module.Controllers
                     this.InquirySearch.Active.SetItemValue("Enabled", true);
                 }
             }
+
+            if (typeof(OpenPickListInquiryResult).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(OpenPickListInquiryResult))
+                {
+                    this.ViewNewTab.Active.SetItemValue("Enabled", true);
+                    this.ViewNewTab.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+                }
+            }
+
+            if (typeof(PickListInquiryResult).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(PickListInquiryResult))
+                {
+                    this.ViewNewTab.Active.SetItemValue("Enabled", true);
+                    this.ViewNewTab.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+                }
+            }
+
+            if (typeof(PickListDetailsInquiryResult).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(PickListDetailsInquiryResult))
+                {
+                    this.ViewNewTab.Active.SetItemValue("Enabled", true);
+                    this.ViewNewTab.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+                }
+            }
             // End ver 1.0.29
         }
         protected override void OnViewControlsCreated()
@@ -1040,6 +1067,19 @@ namespace StarLaiPortal.Module.Controllers
                 PickListDetailsInquiry currObject = (PickListDetailsInquiry)e.CurrentObject;
                 currObject.Results.Clear();
 
+                string PortalSO = "";
+                string PortalPL = "";
+
+                if (!string.IsNullOrEmpty(currObject.PortalSO))
+                {
+                    PortalSO = currObject.PortalSO;
+                }
+
+                if (!string.IsNullOrEmpty(currObject.PortalPL))
+                {
+                    PortalPL = currObject.PortalPL;
+                }
+
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
@@ -1049,7 +1089,7 @@ namespace StarLaiPortal.Module.Controllers
                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
                     // End ver 1.0.24
                     // Start ver 1.0.29
-                    new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                    new OperandValue(PortalSO), new OperandValue(PortalPL), new OperandValue(""));
                     // End ver 1.0.29
 
                 if (sprocData.ResultSet.Count() > 0)
@@ -2275,12 +2315,25 @@ namespace StarLaiPortal.Module.Controllers
                 OpenPickListInquiry currObject = (OpenPickListInquiry)e.CurrentObject;
                 currObject.Results.Clear();
 
+                string PortalSO = "";
+                string PortalPL = "";
+
+                if (!string.IsNullOrEmpty(currObject.PortalSO))
+                {
+                    PortalSO = currObject.PortalSO;
+                }
+
+                if (!string.IsNullOrEmpty(currObject.PortalPL))
+                {
+                    PortalPL = currObject.PortalPL;
+                }
+
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("OpenPickListInquiry"),
                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
-                    new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                    new OperandValue(PortalSO), new OperandValue(PortalPL), new OperandValue(""));
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -2330,12 +2383,25 @@ namespace StarLaiPortal.Module.Controllers
                 PickListInquiry currObject = (PickListInquiry)e.CurrentObject;
                 currObject.Results.Clear();
 
+                string PortalSO = "";
+                string PortalPL = "";
+
+                if (!string.IsNullOrEmpty(currObject.PortalSO))
+                {
+                    PortalSO = currObject.PortalSO;
+                }
+
+                if (!string.IsNullOrEmpty(currObject.PortalPL))
+                {
+                    PortalPL = currObject.PortalPL;
+                }
+
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PickListInquiry"),
                     new OperandValue(""), new OperandValue(""), new OperandValue(""),
-                    new OperandValue(""), new OperandValue(""), new OperandValue(""));
+                    new OperandValue(PortalSO), new OperandValue(PortalPL), new OperandValue(""));
 
                 if (sprocData.ResultSet.Count() > 0)
                 {
@@ -3223,6 +3289,66 @@ namespace StarLaiPortal.Module.Controllers
 
                 IObjectSpace os = Application.CreateObjectSpace();
                 SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+
+                //openNewView(os, trx, ViewEditMode.View);
+                DetailView dv = Application.CreateDetailView(os, trx);
+                dv.ViewEditMode = ViewEditMode.View;
+                DevExpress.ExpressApp.View view = dv;
+                DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
+                DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
+                string url = webApplication.ViewUrlManager.GetUrl(shortcut);
+                string script = $"window.open('{url}', '_blank');";
+
+                // Execute script depending on the XAF UI Framework
+                DevExpress.ExpressApp.Web.WebWindow.CurrentRequestWindow.RegisterClientScript("openNewTab", script);
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(OpenPickListInquiryResult))
+            {
+                OpenPickListInquiryResult selectedObject = (OpenPickListInquiryResult)e.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                PickList trx = os.FindObject<PickList>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+
+                //openNewView(os, trx, ViewEditMode.View);
+                DetailView dv = Application.CreateDetailView(os, trx);
+                dv.ViewEditMode = ViewEditMode.View;
+                DevExpress.ExpressApp.View view = dv;
+                DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
+                DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
+                string url = webApplication.ViewUrlManager.GetUrl(shortcut);
+                string script = $"window.open('{url}', '_blank');";
+
+                // Execute script depending on the XAF UI Framework
+                DevExpress.ExpressApp.Web.WebWindow.CurrentRequestWindow.RegisterClientScript("openNewTab", script);
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(PickListInquiryResult))
+            {
+                PickListInquiryResult selectedObject = (PickListInquiryResult)e.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                PickList trx = os.FindObject<PickList>(new BinaryOperator("DocNum", selectedObject.PortalNo));
+
+                //openNewView(os, trx, ViewEditMode.View);
+                DetailView dv = Application.CreateDetailView(os, trx);
+                dv.ViewEditMode = ViewEditMode.View;
+                DevExpress.ExpressApp.View view = dv;
+                DevExpress.ExpressApp.Web.WebApplication webApplication = (WebApplication)Application;
+                DevExpress.ExpressApp.ViewShortcut shortcut = view.CreateShortcut();
+                string url = webApplication.ViewUrlManager.GetUrl(shortcut);
+                string script = $"window.open('{url}', '_blank');";
+
+                // Execute script depending on the XAF UI Framework
+                DevExpress.ExpressApp.Web.WebWindow.CurrentRequestWindow.RegisterClientScript("openNewTab", script);
+            }
+
+            if (View.ObjectTypeInfo.Type == typeof(PickListDetailsInquiryResult))
+            {
+                PickListDetailsInquiryResult selectedObject = (PickListDetailsInquiryResult)e.CurrentObject;
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                PickList trx = os.FindObject<PickList>(new BinaryOperator("DocNum", selectedObject.PortalNo));
 
                 //openNewView(os, trx, ViewEditMode.View);
                 DetailView dv = Application.CreateDetailView(os, trx);

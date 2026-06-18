@@ -555,8 +555,10 @@ namespace StarLaiPortal.Module.Controllers
 
                         dtl.Series = row.Values[0].ToString();
                         dtl.DocNum = row.Values[1].ToString();
-                        dtl.PostingDateStr = row.Values[2].ToString();
-                        dtl.DeliveryDateStr = row.Values[3].ToString();
+                        // Start ver 1.0.29
+                        //dtl.PostingDateStr = row.Values[2].ToString();
+                        //dtl.DeliveryDateStr = row.Values[3].ToString();
+                        // End ver 1.0.29
                         dtl.PostingDate = DateTime.Parse(row.Values[4].ToString());
                         dtl.DeliveryDate = DateTime.Parse(row.Values[5].ToString());
                         dtl.Priority = persistentObjectSpace.FindObject<PriorityType>(CriteriaOperator.Parse("Oid = ?", Int32.Parse(row.Values[6].ToString())));
@@ -1645,8 +1647,10 @@ namespace StarLaiPortal.Module.Controllers
                         dtl.Status = row.Values[10].ToString();
                         dtl.SAPDocNum = row.Values[11].ToString();
                         dtl.Warehouse = row.Values[12].ToString();
-                        dtl.PostingDateStr = row.Values[13].ToString();
-                        dtl.DeliveryDateStr = row.Values[14].ToString();
+                        // Start ver 1.0.29
+                        //dtl.PostingDateStr = row.Values[13].ToString();
+                        //dtl.DeliveryDateStr = row.Values[14].ToString();
+                        // End ver 1.0.29
                         dtl.PartialPicked = Int32.Parse(row.Values[15].ToString());
 
                         collectionSource.List.Add(dtl);

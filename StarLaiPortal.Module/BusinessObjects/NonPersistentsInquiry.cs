@@ -108,6 +108,9 @@ namespace StarLaiPortal.Module.BusinessObjects
         }
 
         [XafDisplayName("Expected Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
         [Appearance("DueDate", Enabled = false)]
         [Index(8)]
         public DateTime DueDate
@@ -537,6 +540,14 @@ namespace StarLaiPortal.Module.BusinessObjects
         //[XafDisplayName("ItemCode")]
         //[Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
         //public vwItemMasters ItemCode { get; set; }
+
+        [XafDisplayName("Portal SO")]
+        [Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalSO { get; set; }
+
+        [XafDisplayName("Portal Pick List")]
+        [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalPL { get; set; }
         // End ver 1.0.29
         public PickListDetailsInquiry()
         {
@@ -4894,6 +4905,14 @@ namespace StarLaiPortal.Module.BusinessObjects
         [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
         public InquiryViewStatus Status { get; set; }
 
+        [XafDisplayName("Portal SO")]
+        [Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalSO { get; set; }
+
+        [XafDisplayName("Portal Pick List")]
+        [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalPL { get; set; }
+
         public OpenPickListInquiry()
         {
             _Results = new BindingList<OpenPickListInquiryResult>();
@@ -5111,6 +5130,14 @@ namespace StarLaiPortal.Module.BusinessObjects
         //[LookupEditorMode(LookupEditorMode.AllItems)]
         [Index(2), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
         public InquiryViewStatus Status { get; set; }
+
+        [XafDisplayName("Portal SO")]
+        [Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalSO { get; set; }
+
+        [XafDisplayName("Portal Pick List")]
+        [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string PortalPL { get; set; }
 
         public PickListInquiry()
         {
