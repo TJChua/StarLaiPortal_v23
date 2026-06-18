@@ -548,6 +548,10 @@ namespace StarLaiPortal.Module.BusinessObjects
         [XafDisplayName("Portal Pick List")]
         [Index(4), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
         public string PortalPL { get; set; }
+
+        [XafDisplayName("Item Code")]
+        [Index(5), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(true)]
+        public string ItemCode { get; set; }
         // End ver 1.0.29
         public PickListDetailsInquiry()
         {

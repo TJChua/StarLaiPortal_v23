@@ -3041,14 +3041,15 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="20.087336244541486" Direction="Horizontal">
-            <LayoutGroup Id="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3" ShowCaption="False" Caption="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3(4)" Index="0" RelativeSize="48.75" IsNewNode="True">
+            <LayoutGroup Id="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3" ShowCaption="False" Caption="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3(4)" Index="0" RelativeSize="48.614958448753463" IsNewNode="True">
               <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
-              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="63.043478260869563" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PickListDetailsInquiry_col1" ShowCaption="False" Index="1" RelativeSize="51.25" IsNewNode="True">
-              <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
-              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
-              <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
+            <LayoutGroup Id="PickListDetailsInquiry_col1" ShowCaption="False" Index="1" RelativeSize="51.385041551246537" IsNewNode="True">
+              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="0" RelativeSize="36.956521739130437" IsNewNode="True" />
+              <LayoutItem Id="PortalPL" ViewItem="PortalPL" Index="1" RelativeSize="28.260869565217391" IsNewNode="True" />
+              <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="2" RelativeSize="34.782608695652172" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="PickListDetailsInquiry" RelativeSize="100" Direction="Horizontal" Removed="True">
               <LayoutGroup Id="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3" ShowCaption="False" Caption="Autof0ee1aaa-f185-431f-bb82-3e3cdfe6beb3(4)" Index="0" RelativeSize="48.710601719197705" IsNewNode="True">

@@ -1067,8 +1067,10 @@ namespace StarLaiPortal.Module.Controllers
                 PickListDetailsInquiry currObject = (PickListDetailsInquiry)e.CurrentObject;
                 currObject.Results.Clear();
 
+                // Start ver 1.0.29
                 string PortalSO = "";
                 string PortalPL = "";
+                string itemcode = "";
 
                 if (!string.IsNullOrEmpty(currObject.PortalSO))
                 {
@@ -1080,13 +1082,19 @@ namespace StarLaiPortal.Module.Controllers
                     PortalPL = currObject.PortalPL;
                 }
 
+                if (!string.IsNullOrEmpty(currObject.ItemCode))
+                {
+                    itemcode = currObject.ItemCode;
+                }
+                // End ver 1.0.29
+
                 XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
                 SelectedData sprocData = persistentObjectSpace.Session.ExecuteSproc("sp_GetInquiryView",
                     new OperandValue(currObject.DateFrom.Date),
                     new OperandValue(currObject.DateTo.AddDays(1).Date), new OperandValue(currObject.Status), new OperandValue("PickListDetailsInquiry"),
                     // Start ver 1.0.24
                     //new OperandValue(itemcode));
-                    new OperandValue(""), new OperandValue(""), new OperandValue(""),
+                    new OperandValue(itemcode), new OperandValue(""), new OperandValue(""),
                     // End ver 1.0.24
                     // Start ver 1.0.29
                     new OperandValue(PortalSO), new OperandValue(PortalPL), new OperandValue(""));
