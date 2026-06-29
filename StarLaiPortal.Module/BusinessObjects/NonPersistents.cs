@@ -24,6 +24,7 @@ using System.Text;
 // 2024-10-08 - add whse - ver 1.0.21
 // 2025-07-16 - add code to store itemcode only - ver 1.0.23
 // 2026-06-16 - remove postingdate field with string - ver 1.0.29
+// 2026-06-29 - add DO and INV docnum - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -89,6 +90,14 @@ namespace StarLaiPortal.Module.BusinessObjects
         [Appearance("Whse1", Enabled = false)]
         public string Whse { get; set; }
         // End ver 1.0.21
+
+        // Start ver 1.0.30
+        [XafDisplayName("Portal DO No.")]
+        [Index(8), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Appearance("PortalDONo", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Criteria = "IsErr")]
+        [Appearance("PortalDONo1", Enabled = false)]
+        public string PortalDONo { get; set; }
+        // End ver 1.0.30
 
         [Browsable(false)]
         public bool IsErr { get; set; }

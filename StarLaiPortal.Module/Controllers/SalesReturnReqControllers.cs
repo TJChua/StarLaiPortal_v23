@@ -31,6 +31,7 @@ using System.Text;
 // 2024-07-18 - add basedoc - ver 1.0.19
 // 2025-02-04 - not allow submit if posting period locked - ver 1.0.22
 // 2026-01-12 - add field validation - ver 1.0.26
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -58,6 +59,9 @@ namespace StarLaiPortal.Module.Controllers
             this.SRRPrintLabel.Active.SetItemValue("Enabled", false);
             this.SRRCopyToSR.Active.SetItemValue("Enabled", false);
             this.ApproveAppSRR_Pop.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.SubmitSRR_Action.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -69,7 +73,10 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
-                    this.SubmitSRR.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    //this.SubmitSRR.Active.SetItemValue("Enabled", true);
+                    this.SubmitSRR_Action.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                     this.CancelSRR.Active.SetItemValue("Enabled", true);
                     //this.PreviewSRR.Active.SetItemValue("Enabled", true);
                     //this.SRRPrintLabel.Active.SetItemValue("Enabled", true);
@@ -77,7 +84,10 @@ namespace StarLaiPortal.Module.Controllers
                 }
                 else
                 {
-                    this.SubmitSRR.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    //this.SubmitSRR.Active.SetItemValue("Enabled", false);
+                    this.SubmitSRR_Action.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                     this.CancelSRR.Active.SetItemValue("Enabled", false);
                     this.PreviewSRR.Active.SetItemValue("Enabled", false);
                     this.SRRPrintLabel.Active.SetItemValue("Enabled", false);
@@ -129,6 +139,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.SRRPrintLabel.Active.SetItemValue("Enabled", false);
                 this.SRRCopyToSR.Active.SetItemValue("Enabled", false);
                 this.ApproveAppSRR_Pop.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.SubmitSRR_Action.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
 
             if (View.Id == "SalesReturnRequests_SalesReturnRequestDetails_ListView")
@@ -1236,5 +1249,128 @@ namespace StarLaiPortal.Module.Controllers
 
             e.View = dv;
         }
+
+        // Start ver 1.0.30
+        private void SubmitSRR_Action_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            SalesReturnRequests selectedObject = (SalesReturnRequests)e.CurrentObject;
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+            if (selectedObject.IsValid3 == true)
+            {
+                showMsg("Error", "Unit Cost cannot zero.", InformationType.Error);
+                return;
+            }
+
+            // Start ver 1.0.26
+            if (!string.IsNullOrEmpty(selectedObject.EIVPostalZoneB))
+            {
+                if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+                {
+                    showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVPostalZoneS))
+            {
+                if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+                {
+                    showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVBuyerEmail))
+            {
+                System.ComponentModel.DataAnnotations.EmailAddressAttribute emailAddressValidator = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+                if (!emailAddressValidator.IsValid(selectedObject.EIVBuyerEmail))
+                {
+                    showMsg("Failed", "Invalid buyer email.", InformationType.Error);
+                    return;
+                }
+            }
+            // End ver 1.0.26
+
+            if (selectedObject.IsValid == true)
+            {
+                if (selectedObject.IsValid1 == false)
+                {
+                    if (selectedObject.IsValid2 == false)
+                    {
+                        selectedObject.Status = DocStatus.Submitted;
+                        SalesReturnRequestDocTrail ds = ObjectSpace.CreateObject<SalesReturnRequestDocTrail>();
+                        ds.DocStatus = DocStatus.Submitted;
+                        ds.DocRemarks = "";
+                        selectedObject.SalesReturnRequestDocTrail.Add(ds);
+
+                        ObjectSpace.CommitChanges();
+                        ObjectSpace.Refresh();
+
+                        #region Get approval
+                        List<string> ToEmails = new List<string>();
+                        string emailbody = "";
+                        string emailsubject = "";
+                        string emailaddress = "";
+                        Guid emailuser;
+                        DateTime emailtime = DateTime.Now;
+
+                        string getapproval = "EXEC sp_GetApproval '" + selectedObject.CreateUser.Oid + "', '" + selectedObject.Oid + "', 'SalesReturnRequest'";
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(getapproval, conn);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            if (reader.GetString(1) != "")
+                            {
+                                emailbody = "Dear Sir/Madam, " + System.Environment.NewLine + System.Environment.NewLine +
+                                       reader.GetString(3) + System.Environment.NewLine + GeneralSettings.appurl + reader.GetString(2) +
+                                       System.Environment.NewLine + System.Environment.NewLine;
+
+                                emailsubject = "Sales Return Request Approval";
+                                emailaddress = reader.GetString(1);
+                                emailuser = reader.GetGuid(0);
+
+                                ToEmails.Add(emailaddress);
+                            }
+
+                        }
+                        cmd.Dispose();
+                        conn.Close();
+
+                        if (ToEmails.Count > 0)
+                        {
+                            if (genCon.SendEmail(emailsubject, emailbody, ToEmails) == 1)
+                            {
+                            }
+                        }
+
+                        #endregion
+
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        SalesReturnRequests trx = os.FindObject<SalesReturnRequests>(new BinaryOperator("Oid", selectedObject.Oid));
+                        openNewView(os, trx, ViewEditMode.View);
+                        showMsg("Successful", "Submit Done.", InformationType.Success);
+                    }
+                    else
+                    {
+                        showMsg("Error", "Return qty cannot be zero.", InformationType.Error);
+                    }
+                }
+                else
+                {
+                    showMsg("Error", "Please fill in reason code.", InformationType.Error);
+                }
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

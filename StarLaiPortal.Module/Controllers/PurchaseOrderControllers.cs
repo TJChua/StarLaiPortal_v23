@@ -38,6 +38,7 @@ using System.Web;
 // 2024-01-30 - Add import update button - ver 1.0.14
 // 2024-10-08 - Add import update button - ver 1.0.21
 // 2025-12-05 - Add action submit button - ver 1.0.26
+// 2026-06-29 - Enhance printout file name - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -538,18 +539,31 @@ namespace StarLaiPortal.Module.Controllers
                 doc.SetParameterValue("dockey@", po.Oid);
                 doc.SetParameterValue("dbName@", conn.Database);
 
-                filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
-                    + "_" + po.Oid + "_" + user.UserName + "_PO_"
-                    + DateTime.Parse(po.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                // Start ver 1.0.30
+                //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                //    + "_" + po.Oid + "_" + user.UserName + "_PO_"
+                //    + DateTime.Parse(po.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + po.DocNum + "_" 
+                    + conn.Database 
+                    + "_" + user.UserName + "_" 
+                    + DateTime.Parse(po.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                // Start ver 1.0.30
 
                 doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
                 doc.Close();
                 doc.Dispose();
 
-                string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
-                    + "_" + po.Oid + "_" + user.UserName + "_PO_"
-                    + DateTime.Parse(po.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                // Start ver 1.0.30
+                //string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                //    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                //    + "_" + po.Oid + "_" + user.UserName + "_PO_"
+                //    + DateTime.Parse(po.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
+                    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + po.DocNum + "_"
+                    + conn.Database 
+                    + "_" + user.UserName + "_" 
+                    + DateTime.Parse(po.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                // End ver 1.0.30
                 var script = "window.open('" + url + "');";
 
                 WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);

@@ -39,6 +39,7 @@
             this.RejectAppPRR = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.PRRCopyToPReturn = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ApproveAppPRR_Pop = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitPRR_Action = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // PRRInquiryItem
             // 
@@ -145,6 +146,15 @@
             this.ApproveAppPRR_Pop.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.ApproveAppPRR_Pop_CustomizePopupWindowParams);
             this.ApproveAppPRR_Pop.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.ApproveAppPRR_Pop_Execute);
             // 
+            // SubmitPRR_Action
+            // 
+            this.SubmitPRR_Action.Caption = "Submit";
+            this.SubmitPRR_Action.Category = "ObjectsCreation";
+            this.SubmitPRR_Action.ConfirmationMessage = null;
+            this.SubmitPRR_Action.Id = "SubmitPRR_Action";
+            this.SubmitPRR_Action.ToolTip = null;
+            this.SubmitPRR_Action.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitPRR_Action_Execute);
+            // 
             // PurchaseReturnReqControllers
             // 
             this.Actions.Add(this.PRRInquiryItem);
@@ -157,6 +167,7 @@
             this.Actions.Add(this.RejectAppPRR);
             this.Actions.Add(this.PRRCopyToPReturn);
             this.Actions.Add(this.ApproveAppPRR_Pop);
+            this.Actions.Add(this.SubmitPRR_Action);
 
         }
 
@@ -172,5 +183,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction RejectAppPRR;
         private DevExpress.ExpressApp.Actions.SimpleAction PRRCopyToPReturn;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ApproveAppPRR_Pop;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitPRR_Action;
     }
 }

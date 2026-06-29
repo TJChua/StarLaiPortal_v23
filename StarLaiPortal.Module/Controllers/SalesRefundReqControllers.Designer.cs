@@ -38,6 +38,7 @@
             this.RejectAppSFR = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.SFRCopyToSF = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ApproveAppSFR_Pop = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitSFR_Action = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // SFRInquiryItem
             // 
@@ -131,6 +132,15 @@
             this.ApproveAppSFR_Pop.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.ApproveAppPRR_Pop_CustomizePopupWindowParams);
             this.ApproveAppSFR_Pop.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.ApproveAppPRR_Pop_Execute);
             // 
+            // SubmitSFR_Action
+            // 
+            this.SubmitSFR_Action.Caption = "Submit";
+            this.SubmitSFR_Action.Category = "ObjectsCreation";
+            this.SubmitSFR_Action.ConfirmationMessage = null;
+            this.SubmitSFR_Action.Id = "SubmitSFR_Action";
+            this.SubmitSFR_Action.ToolTip = null;
+            this.SubmitSFR_Action.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitSFR_Action_Execute);
+            // 
             // SalesRefundReqControllers
             // 
             this.Actions.Add(this.SFRInquiryItem);
@@ -142,6 +152,7 @@
             this.Actions.Add(this.RejectAppSFR);
             this.Actions.Add(this.SFRCopyToSF);
             this.Actions.Add(this.ApproveAppSFR_Pop);
+            this.Actions.Add(this.SubmitSFR_Action);
 
         }
 
@@ -156,5 +167,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction RejectAppSFR;
         private DevExpress.ExpressApp.Actions.SimpleAction SFRCopyToSF;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ApproveAppSFR_Pop;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitSFR_Action;
     }
 }

@@ -25,8 +25,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-// 2023-04-09 fix speed issue ver 1.0.8.1
-// 2023-09-25 add sales return ver 1.0.10
+// 2023-04-09 - fix speed issue ver 1.0.8.1
+// 2023-09-25 - add sales return ver 1.0.10
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -50,6 +51,9 @@ namespace StarLaiPortal.Module.Controllers
             // Start ver 1.0.10
             this.SOCCopyFromSR.Active.SetItemValue("Enabled", false);
             // End ver 1.0.10
+            // Start ver 1.0.30
+            this.SubmitSOC_Action.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -76,12 +80,18 @@ namespace StarLaiPortal.Module.Controllers
 
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
-                    this.SubmitSOC.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    //this.SubmitSOC.Active.SetItemValue("Enabled", true);
+                    this.SubmitSOC_Action.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                     this.CancelSOC.Active.SetItemValue("Enabled", true);
                 }
                 else
                 {
-                    this.SubmitSOC.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    //this.SubmitSOC.Active.SetItemValue("Enabled", false);
+                    this.SubmitSOC_Action.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                     this.CancelSOC.Active.SetItemValue("Enabled", false);
                 }
             }
@@ -105,6 +115,9 @@ namespace StarLaiPortal.Module.Controllers
                 // Start ver 1.0.10
                 this.SOCCopyFromSR.Active.SetItemValue("Enabled", false);
                 // End ver 1.0.10
+                // Start ver 1.0.30
+                this.SubmitSOC_Action.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
         }
         protected override void OnDeactivated()
@@ -448,5 +461,62 @@ namespace StarLaiPortal.Module.Controllers
             e.View = lv1;
         }
         // End ver 1.0.10
+
+        // Start ver 1.0.30
+        private void SubmitSOC_Action_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            SalesOrderCollection selectedObject = (SalesOrderCollection)e.CurrentObject;
+
+            // Start ver 1.0.10
+            foreach (SalesOrderCollectionReturn ssalesreturn in selectedObject.SalesOrderCollectionReturn)
+            {
+                if (selectedObject.SalesOrderCollectionDetails.Count() > 1)
+                {
+                    showMsg("Error", "Not allow multiple sales order while exist return.", InformationType.Error);
+                    return;
+                }
+
+                break;
+            }
+            // End ver 1.0.10
+
+            if (selectedObject.IsValid == true)
+            {
+                selectedObject.Status = DocStatus.Submitted;
+                SalesOrderCollectionDocStatus ds = ObjectSpace.CreateObject<SalesOrderCollectionDocStatus>();
+                ds.DocStatus = DocStatus.Submitted;
+                ds.DocRemarks = "";
+                selectedObject.SalesOrderCollectionDocStatus.Add(ds);
+
+                // Start ver 1.0.10
+                if (selectedObject.ReturnAmt > selectedObject.Total)
+                {
+                    selectedObject.Sap = true;
+                    selectedObject.Status = DocStatus.Post;
+                }
+                // End ver 1.0.10
+
+                ObjectSpace.CommitChanges();
+                ObjectSpace.Refresh();
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrderCollection trx = os.FindObject<SalesOrderCollection>(new BinaryOperator("Oid", selectedObject.Oid));
+                openNewView(os, trx, ViewEditMode.View);
+
+                // Start ver 1.0.10
+                if (trx.ReturnAmt > trx.Total)
+                {
+                    showMsg("Warning", "No downpayment created due to over return amount.", InformationType.Warning);
+                }
+                // End ver 1.0.10
+
+                showMsg("Successful", "Submit Done.", InformationType.Success);
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

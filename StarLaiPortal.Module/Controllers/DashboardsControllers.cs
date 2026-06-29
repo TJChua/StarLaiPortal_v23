@@ -1,4 +1,6 @@
-﻿using DevExpress.Data.Filtering;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.Editors;
@@ -7,6 +9,7 @@ using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.ExpressApp.SystemModule;
 using DevExpress.ExpressApp.Templates;
 using DevExpress.ExpressApp.Utils;
+using DevExpress.ExpressApp.Web;
 using DevExpress.ExpressApp.Web.Editors.ASPx;
 using DevExpress.ExpressApp.Web.Templates.ActionContainers;
 using DevExpress.ExpressApp.Web.Templates.ActionContainers.Menu;
@@ -33,11 +36,15 @@ using StarLaiPortal.Module.BusinessObjects.View;
 using StarLaiPortal.Module.BusinessObjects.Warehouse_Transfer;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 // 2023-09-08 - add dashboard sales/purchase/warehouse - ver 1.0.9 
+// 2026-06-29 - add preview button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -45,6 +52,9 @@ namespace StarLaiPortal.Module.Controllers
     public partial class DashboardsControllers : ViewController<ListView>
     {
         ASPxGridListEditor gridListEditor = null;
+        // Start ver 1.0.30
+        GeneralControllers genCon;
+        // End ver 1.0.30
         public DashboardsControllers()
         {
             InitializeComponent();
@@ -65,6 +75,9 @@ namespace StarLaiPortal.Module.Controllers
             this.ViewDocWhs.Active.SetItemValue("Enabled", false);
             this.ViewDashboardDocWhs.Active.SetItemValue("Enabled", false);
             // End ver 1.0.9
+            // Start ver 1.0.30
+            this.PreviewSalesDoc.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
 
             if (typeof(Dashboards).IsAssignableFrom(View.ObjectTypeInfo.Type))
             {
@@ -110,6 +123,11 @@ namespace StarLaiPortal.Module.Controllers
 
                     this.ViewDashboardDocSales.Active.SetItemValue("Enabled", true);
                     this.ViewDashboardDocSales.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+
+                    // Start ver 1.0.30
+                    //this.PreviewSalesDoc.Active.SetItemValue("Enabled", true);
+                    //this.PreviewSalesDoc.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+                    // End ver 1.0.30
                 }
             }
 
@@ -165,11 +183,15 @@ namespace StarLaiPortal.Module.Controllers
         {
             base.OnViewControlsCreated();
             // Access and customize the target View control.
-            gridListEditor = View.Editor as ASPxGridListEditor;
-            if (gridListEditor != null && gridListEditor.Grid != null)
-            {
-                gridListEditor.Grid.HtmlRowPrepared += Grid_HtmlRowPrepared;
-            }
+            //gridListEditor = View.Editor as ASPxGridListEditor;
+            //if (gridListEditor != null && gridListEditor.Grid != null)
+            //{
+            //    gridListEditor.Grid.HtmlRowPrepared += Grid_HtmlRowPrepared;
+            //}
+
+            // Start ver 1.0.30
+            genCon = Frame.GetController<GeneralControllers>();
+            // End ver 1.0.30
         }
 
         void Grid_HtmlRowPrepared(object sender, DevExpress.Web.ASPxGridViewTableRowEventArgs e)
@@ -946,6 +968,15 @@ namespace StarLaiPortal.Module.Controllers
                 WarehouseTransferReq trx = os.FindObject<WarehouseTransferReq>(new BinaryOperator("DocNum", selectedObject.DocNum));
                 openNewView(os, trx, ViewEditMode.View);
             }
+
+            // Start ver 1.0.30
+            if (selectedObject.TransactionType == DocTypeList.INV)
+            {
+                IObjectSpace os = Application.CreateObjectSpace();
+                DeliveryOrder trx = os.FindObject<DeliveryOrder>(new BinaryOperator("DocNum", selectedObject.DocNum));
+                openNewView(os, trx, ViewEditMode.View);
+            }
+            // End ver 1.0.30
         }
 
         private void ViewDocSales_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -2468,5 +2499,244 @@ namespace StarLaiPortal.Module.Controllers
             }
         }
         // End ver 1.0.9
+
+        // Start ver 1.0.30
+        private void PreviewSalesDoc_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            DashboardsSales selectedObject = (DashboardsSales)e.CurrentObject;
+
+            if (selectedObject.TransactionType == DocTypeList.SQ)
+            {
+                string strServer;
+                string strDatabase;
+                string strUserID;
+                string strPwd;
+                string filename;
+
+                SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                if (selectedObject.DocNum == "")
+                {
+                    showMsg("Fail", "SQ number not found.", InformationType.Error);
+                    return;
+                }
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesQuotation trx = os.FindObject<SalesQuotation>(new BinaryOperator("DocNum", selectedObject.DocNum));
+
+                try
+                {
+                    ReportDocument doc = new ReportDocument();
+                    strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Quotation.rpt"));
+                    strDatabase = conn.Database;
+                    strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                    strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                    doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                    doc.Refresh();
+
+                    doc.SetParameterValue("dockey@", trx.Oid);
+                    doc.SetParameterValue("dbName@", conn.Database);
+
+                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        + "_" + trx.Oid + "_" + user.UserName + "_SQ_"
+                        + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                    doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                    doc.Close();
+                    doc.Dispose();
+
+                    string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        + "_" + trx.Oid + "_" + user.UserName + "_SQ_"
+                        + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                    var script = "window.open('" + url + "');";
+
+                    WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                }
+                catch (Exception ex)
+                {
+                    showMsg("Fail", ex.Message, InformationType.Error);
+                }
+            }
+            else if (selectedObject.TransactionType == DocTypeList.SO)
+            {
+                string strServer;
+                string strDatabase;
+                string strUserID;
+                string strPwd;
+                string filename;
+
+                SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                if (selectedObject.DocNum == "")
+                {
+                    showMsg("Fail", "SO number not found.", InformationType.Error);
+                    return;
+                }
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesOrder trx = os.FindObject<SalesOrder>(new BinaryOperator("DocNum", selectedObject.DocNum));
+
+                try
+                {
+                    ReportDocument doc = new ReportDocument();
+                    strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\SalesOrder.rpt"));
+                    strDatabase = conn.Database;
+                    strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                    strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                    doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                    doc.Refresh();
+
+                    doc.SetParameterValue("dockey@", trx.Oid);
+                    doc.SetParameterValue("dbName@", conn.Database);
+
+                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        + "_" + trx.Oid + "_" + user.UserName + "_SO_"
+                        + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                    doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                    doc.Close();
+                    doc.Dispose();
+
+                    string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        + "_" + trx.Oid + "_" + user.UserName + "_SO_"
+                        + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                    var script = "window.open('" + url + "');";
+
+                    WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                }
+                catch (Exception ex)
+                {
+                    showMsg("Fail", ex.Message, InformationType.Error);
+                }
+            }
+            else if (selectedObject.TransactionType == DocTypeList.DO)
+            {
+                string strServer;
+                string strDatabase;
+                string strUserID;
+                string strPwd;
+                string filename;
+
+                SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                if (selectedObject.DocNum == "")
+                {
+                    showMsg("Fail", "DO number not found.", InformationType.Error);
+                    return;
+                }
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                DeliveryOrder trx = os.FindObject<DeliveryOrder>(new BinaryOperator("DocNum", selectedObject.DocNum));
+
+                try
+                {
+                    ReportDocument doc = new ReportDocument();
+                    strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\DeliveryOrder.rpt"));
+                    strDatabase = conn.Database;
+                    strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                    strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                    doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                    doc.Refresh();
+
+                    doc.SetParameterValue("dockey@", trx.Oid);
+                    doc.SetParameterValue("dbName@", conn.Database);
+
+                    filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        + "_" + trx.Oid + "_" + user.UserName + "_DO_"
+                        + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                    doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                    doc.Close();
+                    doc.Dispose();
+
+                    string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        + "_" + trx.Oid + "_" + user.UserName + "_DO_"
+                        + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                    var script = "window.open('" + url + "');";
+
+                    WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                }
+                catch (Exception ex)
+                {
+                    showMsg("Fail", ex.Message, InformationType.Error);
+                }
+            }
+            else if (selectedObject.TransactionType == DocTypeList.INV)
+            {
+                string strServer;
+                string strDatabase;
+                string strUserID;
+                string strPwd;
+                string filename;
+
+                SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                if (selectedObject.DocNum == "")
+                {
+                    showMsg("Fail", "Invoice number not found.", InformationType.Error);
+                    return;
+                }
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                DeliveryOrder trx = os.FindObject<DeliveryOrder>(new BinaryOperator("DocNum", selectedObject.DocNum));
+
+                if (trx.SAPDocNum != null)
+                {
+                    try
+                    {
+                        ReportDocument doc = new ReportDocument();
+                        strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                        strDatabase = conn.Database;
+                        strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                        strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                        doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                        doc.Refresh();
+
+                        doc.SetParameterValue("dockey@", trx.Oid);
+                        doc.SetParameterValue("dbName@", conn.Database);
+
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                            + "_" + trx.Oid + "_" + user.UserName + "_Inv_"
+                            + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                        doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                        doc.Close();
+                        doc.Dispose();
+
+                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                            + "_" + trx.Oid + "_" + user.UserName + "_Inv_"
+                            + DateTime.Parse(trx.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        var script = "window.open('" + url + "');";
+
+                        WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                    }
+                    catch (Exception ex)
+                    {
+                        showMsg("Fail", ex.Message, InformationType.Error);
+                    }
+                }
+                else
+                {
+                    showMsg("Fail", "Invoice not found.", InformationType.Error);
+                }
+            }
+            else
+            {
+                genCon.showMsg("Warning", "No printing.", InformationType.Warning);
+            }
+        }
+        // End ver 1.0.30
     }
 }

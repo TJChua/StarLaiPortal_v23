@@ -18,6 +18,7 @@ using System.Text;
 
 // 2023-08-16 Add reason code ver 1.0.8
 // 2023-09-25 change date format ver 1.0.10
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Credit_Notes_Cancellation
 {
@@ -33,8 +34,12 @@ namespace StarLaiPortal.Module.BusinessObjects.Credit_Notes_Cancellation
     [Appearance("HideEdit1", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitDPCancel", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitDPCancel", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.30
+    //[Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitDPCancel", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    //[Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitDPCancel", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitDPCancel_Action", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitDPCancel_Action", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.30
 
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelDPCancel", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideCancel1", AppearanceItemType.Action, "True", TargetItems = "CancelDPCancel", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]

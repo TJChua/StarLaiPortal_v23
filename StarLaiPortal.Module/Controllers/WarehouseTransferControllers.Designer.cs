@@ -32,6 +32,7 @@
             this.SubmitWT = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.CancelWT = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.PreviewWT = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.SubmitWT_Action = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // SubmitWT
             // 
@@ -66,11 +67,21 @@
             this.PreviewWT.ToolTip = null;
             this.PreviewWT.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PreviewWT_Execute);
             // 
+            // SubmitWT_Action
+            // 
+            this.SubmitWT_Action.Caption = "Submit";
+            this.SubmitWT_Action.Category = "ObjectsCreation";
+            this.SubmitWT_Action.ConfirmationMessage = null;
+            this.SubmitWT_Action.Id = "SubmitWT_Action";
+            this.SubmitWT_Action.ToolTip = null;
+            this.SubmitWT_Action.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitWT_Action_Execute);
+            // 
             // WarehouseTransferControllers
             // 
             this.Actions.Add(this.SubmitWT);
             this.Actions.Add(this.CancelWT);
             this.Actions.Add(this.PreviewWT);
+            this.Actions.Add(this.SubmitWT_Action);
 
         }
 
@@ -79,5 +90,6 @@
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction SubmitWT;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction CancelWT;
         private DevExpress.ExpressApp.Actions.SimpleAction PreviewWT;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitWT_Action;
     }
 }

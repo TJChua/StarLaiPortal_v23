@@ -38,6 +38,7 @@
             this.ViewDocPurchase = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ViewDashboardDocPurchase = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.ViewDocSales = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.PreviewSalesDoc = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // DashboardWarehouse
             // 
@@ -133,6 +134,15 @@
             this.ViewDocSales.ToolTip = null;
             this.ViewDocSales.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.ViewDocSales_Execute);
             // 
+            // PreviewSalesDoc
+            // 
+            this.PreviewSalesDoc.Caption = "Preview";
+            this.PreviewSalesDoc.Category = "ListView";
+            this.PreviewSalesDoc.ConfirmationMessage = null;
+            this.PreviewSalesDoc.Id = "PreviewSalesDoc";
+            this.PreviewSalesDoc.ToolTip = null;
+            this.PreviewSalesDoc.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PreviewSalesDoc_Execute);
+            // 
             // DashboardsControllers
             // 
             this.Actions.Add(this.DashboardWarehouse);
@@ -144,6 +154,7 @@
             this.Actions.Add(this.ViewDocPurchase);
             this.Actions.Add(this.ViewDashboardDocPurchase);
             this.Actions.Add(this.ViewDocSales);
+            this.Actions.Add(this.PreviewSalesDoc);
 
         }
 
@@ -158,5 +169,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction ViewDocPurchase;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ViewDashboardDocPurchase;
         private DevExpress.ExpressApp.Actions.SimpleAction ViewDocSales;
+        private DevExpress.ExpressApp.Actions.SimpleAction PreviewSalesDoc;
     }
 }

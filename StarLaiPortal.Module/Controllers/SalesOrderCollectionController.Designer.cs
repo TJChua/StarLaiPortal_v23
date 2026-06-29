@@ -34,6 +34,7 @@
             this.CancelSOC = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.PrintARDownpayment = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.SOCCopyFromSR = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitSOC_Action = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // SOCCopyFromSO
             // 
@@ -92,6 +93,15 @@
             this.SOCCopyFromSR.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.SOCCopyFromSR_CustomizePopupWindowParams);
             this.SOCCopyFromSR.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.SOCCopyFromSR_Execute);
             // 
+            // SubmitSOC_Action
+            // 
+            this.SubmitSOC_Action.Caption = "Submit";
+            this.SubmitSOC_Action.Category = "ObjectsCreation";
+            this.SubmitSOC_Action.ConfirmationMessage = null;
+            this.SubmitSOC_Action.Id = "SubmitSOC_Action";
+            this.SubmitSOC_Action.ToolTip = null;
+            this.SubmitSOC_Action.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitSOC_Action_Execute);
+            // 
             // SalesOrderCollectionController
             // 
             this.Actions.Add(this.SOCCopyFromSO);
@@ -99,6 +109,7 @@
             this.Actions.Add(this.CancelSOC);
             this.Actions.Add(this.PrintARDownpayment);
             this.Actions.Add(this.SOCCopyFromSR);
+            this.Actions.Add(this.SubmitSOC_Action);
 
         }
 
@@ -109,5 +120,6 @@
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction CancelSOC;
         private DevExpress.ExpressApp.Actions.SimpleAction PrintARDownpayment;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction SOCCopyFromSR;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitSOC_Action;
     }
 }

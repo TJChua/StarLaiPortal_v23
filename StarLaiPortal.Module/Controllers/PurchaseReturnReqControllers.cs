@@ -23,9 +23,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-// 2023-07-28 add GRPO Correction ver 0.1
+// 2023-07-28 - add GRPO Correction ver 0.1
 // 2023-08-16 - add stock 3 and stock 4 - ver 1.0.8
 // 2024-07-18 - add basedoc - ver 1.0.19
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -52,6 +53,9 @@ namespace StarLaiPortal.Module.Controllers
             this.RejectAppPRR.Active.SetItemValue("Enabled", false);
             this.PRRCopyToPReturn.Active.SetItemValue("Enabled", false);
             this.ApproveAppPRR_Pop.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.SubmitPRR_Action.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -63,14 +67,20 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
-                    this.SubmitPRR.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    //this.SubmitPRR.Active.SetItemValue("Enabled", true);
+                    this.SubmitPRR_Action.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                     this.CancelPRR.Active.SetItemValue("Enabled", true);
                     //this.PreviewPRR.Active.SetItemValue("Enabled", true);
                     this.PRRCopyToPReturn.Active.SetItemValue("Enabled", true);
                 }
                 else
                 {
-                    this.SubmitPRR.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    //this.SubmitPRR.Active.SetItemValue("Enabled", false);
+                    this.SubmitPRR_Action.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                     this.CancelPRR.Active.SetItemValue("Enabled", false);
                     this.PreviewPRR.Active.SetItemValue("Enabled", false);
                     this.PRRCopyToPReturn.Active.SetItemValue("Enabled", false);
@@ -117,6 +127,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.PreviewPRR.Active.SetItemValue("Enabled", false);
                 this.PRRCopyToPReturn.Active.SetItemValue("Enabled", false);
                 this.ApproveAppPRR_Pop.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.SubmitPRR_Action.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
 
             if (View.Id == "PurchaseReturnRequests_PurchaseReturnRequestDetails_ListView")
@@ -958,5 +971,102 @@ namespace StarLaiPortal.Module.Controllers
 
             e.View = dv;
         }
+
+        // Start ver 1.0.30
+        private void SubmitPRR_Action_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            PurchaseReturnRequests selectedObject = (PurchaseReturnRequests)e.CurrentObject;
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+            if (selectedObject.IsValid2 == true)
+            {
+                showMsg("Error", "Return quantity cannot zero.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.IsValid3 == true)
+            {
+                showMsg("Error", "Bin not enough stock.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.IsValid4 == true)
+            {
+                showMsg("Error", "Price not allow 0.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.IsValid == true)
+            {
+                if (selectedObject.IsValid1 == false)
+                {
+                    selectedObject.Status = DocStatus.Submitted;
+                    PurchaseReturnRequestDocTrail ds = ObjectSpace.CreateObject<PurchaseReturnRequestDocTrail>();
+                    ds.DocStatus = DocStatus.Submitted;
+                    ds.DocRemarks = "";
+                    selectedObject.PurchaseReturnRequestDocTrail.Add(ds);
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    #region Get approval
+                    List<string> ToEmails = new List<string>();
+                    string emailbody = "";
+                    string emailsubject = "";
+                    string emailaddress = "";
+                    Guid emailuser;
+                    DateTime emailtime = DateTime.Now;
+
+                    string getapproval = "EXEC sp_GetApproval '" + selectedObject.CreateUser.Oid + "', '" + selectedObject.Oid + "', 'PurchaseReturnRequest'";
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getapproval, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (reader.GetString(1) != "")
+                        {
+                            emailbody = "Dear Sir/Madam, " + System.Environment.NewLine + System.Environment.NewLine +
+                                   reader.GetString(3) + System.Environment.NewLine + GeneralSettings.appurl + reader.GetString(2) +
+                                   System.Environment.NewLine + System.Environment.NewLine;
+
+                            emailsubject = "Purchase Return Request Approval";
+                            emailaddress = reader.GetString(1);
+                            emailuser = reader.GetGuid(0);
+
+                            ToEmails.Add(emailaddress);
+                        }
+                    }
+                    cmd.Dispose();
+                    conn.Close();
+
+                    if (ToEmails.Count > 0)
+                    {
+                        if (genCon.SendEmail(emailsubject, emailbody, ToEmails) == 1)
+                        {
+                        }
+                    }
+
+                    #endregion
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    PurchaseReturnRequests trx = os.FindObject<PurchaseReturnRequests>(new BinaryOperator("Oid", selectedObject.Oid));
+                    openNewView(os, trx, ViewEditMode.View);
+                    showMsg("Successful", "Submit Done.", InformationType.Success);
+                }
+                else
+                {
+                    showMsg("Error", "Please fill in reason code.", InformationType.Error);
+                }
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

@@ -36,6 +36,7 @@
             this.SalesHistoryDTFrom = new DevExpress.ExpressApp.Actions.ParametrizedAction(this.components);
             this.SalesHistoryDTTo = new DevExpress.ExpressApp.Actions.ParametrizedAction(this.components);
             this.SalesHistoryDocFilter = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.SalesHistoryPrint = new DevExpress.ExpressApp.Actions.SingleChoiceAction(this.components);
             // 
             // DocumentDateFrom
             // 
@@ -110,6 +111,15 @@
             this.SalesHistoryDocFilter.ToolTip = null;
             this.SalesHistoryDocFilter.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SalesHistoryDocFilter_Execute);
             // 
+            // SalesHistoryPrint
+            // 
+            this.SalesHistoryPrint.Caption = "Preview";
+            this.SalesHistoryPrint.Category = "ObjectsCreation";
+            this.SalesHistoryPrint.ConfirmationMessage = null;
+            this.SalesHistoryPrint.Id = "SalesHistoryPrint";
+            this.SalesHistoryPrint.ToolTip = null;
+            this.SalesHistoryPrint.Execute += new DevExpress.ExpressApp.Actions.SingleChoiceActionExecuteEventHandler(this.SalesHistoryPrint_Execute);
+            // 
             // DocumentControllers
             // 
             this.Actions.Add(this.DocumentDateFrom);
@@ -119,6 +129,7 @@
             this.Actions.Add(this.SalesHistoryDTFrom);
             this.Actions.Add(this.SalesHistoryDTTo);
             this.Actions.Add(this.SalesHistoryDocFilter);
+            this.Actions.Add(this.SalesHistoryPrint);
 
         }
 
@@ -131,5 +142,6 @@
         private DevExpress.ExpressApp.Actions.ParametrizedAction SalesHistoryDTFrom;
         private DevExpress.ExpressApp.Actions.ParametrizedAction SalesHistoryDTTo;
         private DevExpress.ExpressApp.Actions.SimpleAction SalesHistoryDocFilter;
+        private DevExpress.ExpressApp.Actions.SingleChoiceAction SalesHistoryPrint;
     }
 }

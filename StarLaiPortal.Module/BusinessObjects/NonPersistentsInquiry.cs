@@ -22,6 +22,7 @@ using System.Text;
 // 2026-02-06 - add new field - ver 1.0.27
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 // 2026-05-28 - enhance picking inquiry to SP - ver 1.0.29
+// 2026-06-29 - add print count - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -3100,6 +3101,16 @@ namespace StarLaiPortal.Module.BusinessObjects
         {
             get; set;
         }
+
+        // Start ver 1.0.30
+        [XafDisplayName("Print Count")]
+        [Appearance("PrintCount", Enabled = false)]
+        [Index(63)]
+        public int PrintCount
+        {
+            get; set;
+        }
+        // End ver 1.0.30
     }
     #endregion
 

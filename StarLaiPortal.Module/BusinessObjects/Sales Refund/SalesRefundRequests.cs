@@ -19,6 +19,7 @@ using System.Text;
 // 2024-06-12 e-invoice - ver 1.0.18
 // 2025-01-23 new enhancement - ver 1.0.22
 // 2026-01-12 - field validation - ver 1.0.26
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Refund
 {
@@ -33,8 +34,12 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Refund
     [Appearance("HideEdit1", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitSFR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitSFR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.30
+    //[Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitSFR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    //[Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitSFR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitSFR_Action", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitSFR_Action", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.30
 
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelSFR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideCancel1", AppearanceItemType.Action, "True", TargetItems = "CancelSFR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]

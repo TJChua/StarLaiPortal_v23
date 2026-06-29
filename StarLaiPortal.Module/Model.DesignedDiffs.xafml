@@ -119,7 +119,7 @@
         <ActionLink ActionId="CreateSalesOrder" Index="3" />
         <ActionLink ActionId="CreateSalesOrderAction" Index="4" />
         <ActionLink ActionId="CancelSalesOrder" Index="5" />
-        <ActionLink ActionId="SubmitSOC" Index="6" />
+        <ActionLink ActionId="SubmitSOC_Action" Index="6" />
         <ActionLink ActionId="CancelSOC" Index="7" />
         <ActionLink ActionId="DashboardWarehouse" Index="8" />
         <ActionLink ActionId="DuplicateSQ" Index="9" />
@@ -149,14 +149,14 @@
         <ActionLink ActionId="CancelASN" Index="33" />
         <ActionLink ActionId="SubmitGRN" Index="34" />
         <ActionLink ActionId="SubmitPReturn" Index="35" />
-        <ActionLink ActionId="SubmitPRR" Index="36" />
+        <ActionLink ActionId="SubmitPRR_Action" Index="36" />
         <ActionLink ActionId="SubmitWTRAction" Index="37" />
         <ActionLink ActionId="CancelGRN" Index="38" />
         <ActionLink ActionId="SubmitSA" Index="39" />
         <ActionLink ActionId="SubmitSAR" Index="40" />
         <ActionLink ActionId="SubmitSR" Index="41" />
-        <ActionLink ActionId="SubmitSRR" Index="42" />
-        <ActionLink ActionId="SubmitWT" Index="43" />
+        <ActionLink ActionId="SubmitSRR_Action" Index="42" />
+        <ActionLink ActionId="SubmitWT_Action" Index="43" />
         <ActionLink ActionId="CancelPReturn" Index="44" />
         <ActionLink ActionId="CancelPRR" Index="45" />
         <ActionLink ActionId="CancelSA" Index="46" />
@@ -193,7 +193,6 @@
         <ActionLink ActionId="ApproveAppWTR_Pop" Index="77" />
         <ActionLink ActionId="ASNCopyToGRN" Index="78" />
         <ActionLink ActionId="CancelDO" Index="79" />
-        <ActionLink ActionId="CancelSFR" Index="80" />
         <ActionLink ActionId="ApproveAppSFR_Pop" Index="81" />
         <ActionLink ActionId="CancelSRefund" Index="82" />
         <ActionLink ActionId="DOCopyFromLoading" Index="83" />
@@ -203,12 +202,10 @@
         <ActionLink ActionId="PreviewInv" Index="87" />
         <ActionLink ActionId="PreviewBundleDO" Index="88" />
         <ActionLink ActionId="PreviewPONoCost" Index="89" />
-        <ActionLink ActionId="PreviewSFR" Index="90" />
         <ActionLink ActionId="PreviewSQ" Index="91" />
         <ActionLink ActionId="PreviewSRefund" Index="92" />
         <ActionLink ActionId="PrintARDownpayment" Index="93" />
         <ActionLink ActionId="ApproveAppARDPC_Pop" Index="94" />
-        <ActionLink ActionId="CancelDPCancel" Index="95" />
         <ActionLink ActionId="SubmitSCC" Index="96" />
         <ActionLink ActionId="SubmitSCS" Index="97" />
         <ActionLink ActionId="CancelSCC" Index="98" />
@@ -233,7 +230,42 @@
         <ActionLink ActionId="SOCCopyFromSR" Index="117" />
         <ActionLink ActionId="SRRPrintLabel" Index="118" />
         <ActionLink ActionId="SubmitDO" Index="119" />
+        <ActionLink ActionId="SubmitSFR_Action" Index="120" />
+        <ActionLink ActionId="CancelSFR" Index="121" />
+        <ActionLink ActionId="PreviewSFR" Index="122" />
+        <ActionLink ActionId="SubmitDPCancel_Action" Index="123" />
+        <ActionLink ActionId="CancelDPCancel" Index="124" />
+        <ActionLink ActionId="ASNContainer" Index="" />
+        <ActionLink ActionId="CancelContainer" Index="" />
+        <ActionLink ActionId="ChoicePreviewOption" Index="" />
+        <ActionLink ActionId="ChoicePrintASN" Index="" />
+        <ActionLink ActionId="ChoicePrintDelivery" Index="" />
+        <ActionLink ActionId="DocumentDateFrom" Index="" />
+        <ActionLink ActionId="DocumentDateTo" Index="" />
+        <ActionLink ActionId="DocumentFilter" Index="" />
+        <ActionLink ActionId="DocumentStatus" Index="" />
+        <ActionLink ActionId="ForceFlushGC" Index="" />
+        <ActionLink ActionId="ForceReleaseMemory" Index="" />
+        <ActionLink ActionId="InquirySearch" Index="" />
+        <ActionLink ActionId="PerformanceFunc" Index="" />
+        <ActionLink ActionId="PreviewInvInquiry" Index="" />
+        <ActionLink ActionId="PreviewSOInquiry" Index="" />
+        <ActionLink ActionId="PrintBundleInquiry" Index="" />
+        <ActionLink ActionId="PrintContainer" Index="" />
+        <ActionLink ActionId="PrintCreditMemoResult" Index="" />
+        <ActionLink ActionId="PrintCTInquiry" Index="" />
+        <ActionLink ActionId="PrintDOInquiry" Index="" />
+        <ActionLink ActionId="PrintEMDO" Index="" />
+        <ActionLink ActionId="PrintPReturn" Index="" />
+        <ActionLink ActionId="SalesHistoryPrint" Index="" />
+        <ActionLink ActionId="StockMovementSPSearch" Index="" />
+        <ActionLink ActionId="SubmitDPCancel" Index="" />
         <ActionLink ActionId="SubmitPO" Index="" />
+        <ActionLink ActionId="SubmitPRR" Index="" />
+        <ActionLink ActionId="SubmitSFR" Index="" />
+        <ActionLink ActionId="SubmitSOC" Index="" />
+        <ActionLink ActionId="SubmitSRR" Index="" />
+        <ActionLink ActionId="SubmitWT" Index="" />
         <ActionLink ActionId="SubmitWTR" Index="" />
       </ActionContainer>
       <ActionContainer Id="Unspecified">

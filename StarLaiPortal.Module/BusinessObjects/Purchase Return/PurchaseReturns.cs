@@ -15,8 +15,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-// 2023-07-28 add GRPO Correction ver 1.0.7
+// 2023-07-28 - add GRPO Correction ver 1.0.7
 // 2024-07-18 - add basedoc - ver 1.0.19
+// 2026-06-29 - add print count and print status - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
 {
@@ -439,6 +440,34 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
             }
         }
         // End ver 1.0.19
+
+        // Start ver 1.0.30
+        private int _PRPrintCount;
+        [XafDisplayName("Print Count")]
+        [Appearance("PRPrintCount", Enabled = false)]
+        [Index(43), VisibleInDetailView(false), VisibleInListView(true), VisibleInLookupListView(false)]
+        public int PRPrintCount
+        {
+            get { return _PRPrintCount; }
+            set
+            {
+                SetPropertyValue("PRPrintCount", ref _PRPrintCount, value);
+            }
+        }
+
+        private PrintStatus _PRPrintStatus;
+        [XafDisplayName("Print Status")]
+        [Appearance("PRPrintStatus", Enabled = false)]
+        [Index(44), VisibleInDetailView(false), VisibleInListView(true), VisibleInLookupListView(false)]
+        public PrintStatus PRPrintStatus
+        {
+            get { return _PRPrintStatus; }
+            set
+            {
+                SetPropertyValue("PRPrintStatus", ref _PRPrintStatus, value);
+            }
+        }
+        // End ver 1.0.30
 
         private string _Reference;
         [XafDisplayName("Reference")]

@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 
 // 2023-08-16 Add reason code ver 1.0.8
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -40,6 +41,9 @@ namespace StarLaiPortal.Module.Controllers
             this.SubmitDPCancel.Active.SetItemValue("Enabled", false);
             this.CancelDPCancel.Active.SetItemValue("Enabled", false);
             this.ApproveAppARDPC_Pop.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.SubmitDPCancel_Action.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -51,12 +55,18 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
-                    this.SubmitDPCancel.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    //this.SubmitDPCancel.Active.SetItemValue("Enabled", true);
+                    this.SubmitDPCancel_Action.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                     this.CancelDPCancel.Active.SetItemValue("Enabled", true);
                 }
                 else
                 {
-                    this.SubmitDPCancel.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    //this.SubmitDPCancel.Active.SetItemValue("Enabled", false);
+                    this.SubmitDPCancel_Action.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                     this.CancelDPCancel.Active.SetItemValue("Enabled", false);
                 }
 
@@ -90,6 +100,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.SubmitDPCancel.Active.SetItemValue("Enabled", false);
                 this.CancelDPCancel.Active.SetItemValue("Enabled", false);
                 this.ApproveAppARDPC_Pop.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.SubmitDPCancel_Action.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
         }
         protected override void OnDeactivated()
@@ -662,5 +675,88 @@ namespace StarLaiPortal.Module.Controllers
 
             e.View = dv;
         }
+
+        // Start ver 1.0.30
+        private void SubmitDPCancel_Action_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            ARDownpaymentCancel selectedObject = (ARDownpaymentCancel)e.CurrentObject;
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+            if (selectedObject.IsValid == true)
+            {
+                // Start ver 1.0.8
+                if (selectedObject.IsValid1 == false)
+                {
+                    // End ver 1.0.8
+                    selectedObject.Status = DocStatus.Submitted;
+                    ARDownpaymentCancellationDocTrail ds = ObjectSpace.CreateObject<ARDownpaymentCancellationDocTrail>();
+                    ds.DocStatus = DocStatus.Submitted;
+                    ds.DocRemarks = "";
+                    selectedObject.ARDownpaymentCancellationDocTrail.Add(ds);
+
+                    ObjectSpace.CommitChanges();
+                    ObjectSpace.Refresh();
+
+                    #region Get approval
+                    List<string> ToEmails = new List<string>();
+                    string emailbody = "";
+                    string emailsubject = "";
+                    string emailaddress = "";
+                    Guid emailuser;
+                    DateTime emailtime = DateTime.Now;
+
+                    string getapproval = "EXEC sp_GetApproval '" + selectedObject.CreateUser.Oid + "', '" + selectedObject.Oid + "', 'ARDownpaymentCancellation'";
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getapproval, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (reader.GetString(1) != "")
+                        {
+                            emailbody = "Dear Sir/Madam, " + System.Environment.NewLine + System.Environment.NewLine +
+                                   reader.GetString(3) + System.Environment.NewLine + GeneralSettings.appurl + reader.GetString(2) +
+                                   System.Environment.NewLine + System.Environment.NewLine;
+
+                            emailsubject = "AR Downpayment Cancellation Approval";
+                            emailaddress = reader.GetString(1);
+                            emailuser = reader.GetGuid(0);
+
+                            ToEmails.Add(emailaddress);
+                        }
+                    }
+                    cmd.Dispose();
+                    conn.Close();
+
+                    if (ToEmails.Count > 0)
+                    {
+                        if (genCon.SendEmail(emailsubject, emailbody, ToEmails) == 1)
+                        {
+                        }
+                    }
+
+                    #endregion
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    ARDownpaymentCancel trx = os.FindObject<ARDownpaymentCancel>(new BinaryOperator("Oid", selectedObject.Oid));
+                    openNewView(os, trx, ViewEditMode.View);
+                    showMsg("Successful", "Submit Done.", InformationType.Success);
+                    // Start ver 1.0.8
+                }
+                else
+                {
+                    showMsg("Error", "Please fill in reason code.", InformationType.Error);
+                }
+                // End ver 1.0.8
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

@@ -47,6 +47,7 @@ using System.Web;
 // 2025-06-25 - change item inquiry to dataview mode - ver 1.0.23
 // 2025-06-26 - Add check performance feature - ver 1.0.23
 // 2025-06-30 - Not allow search with no keyword - ver 1.0.23
+// 2026-06-29 - Sales History add preview option - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -409,6 +410,9 @@ namespace StarLaiPortal.Module.Controllers
                             // Start ver 1.0.21
                             item.Whse = row.Values[7].ToString();
                             // End ver 1.0.21
+                            // Start ver 1.0.30
+                            item.PortalDONo = row.Values[8].ToString();
+                            // End ver 1.0.30
                             saleslist.Sales.Add(item);
 
                             i++;

@@ -25,6 +25,7 @@ using System.Text;
 using System.Web;
 
 // 2023-09-25 - add stock balance checking - ver 1.0.10
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -44,6 +45,9 @@ namespace StarLaiPortal.Module.Controllers
             this.SubmitWT.Active.SetItemValue("Enabled", false);
             this.CancelWT.Active.SetItemValue("Enabled", false);
             this.PreviewWT.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.SubmitWT_Action.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -55,13 +59,19 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
-                    this.SubmitWT.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    //this.SubmitWT.Active.SetItemValue("Enabled", true);
+                    this.SubmitWT_Action.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                     this.CancelWT.Active.SetItemValue("Enabled", true);
                     this.PreviewWT.Active.SetItemValue("Enabled", true);
                 }
                 else
                 {
-                    this.SubmitWT.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    //this.SubmitWT.Active.SetItemValue("Enabled", false);
+                    this.SubmitWT_Action.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                     this.CancelWT.Active.SetItemValue("Enabled", false);
                     this.PreviewWT.Active.SetItemValue("Enabled", false);
                 }
@@ -71,6 +81,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.SubmitWT.Active.SetItemValue("Enabled", false);
                 this.CancelWT.Active.SetItemValue("Enabled", false);
                 this.PreviewWT.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.SubmitWT_Action.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
 
             if (View.Id == "WarehouseTransfers_WarehouseTransferDetails_ListView")
@@ -320,5 +333,89 @@ namespace StarLaiPortal.Module.Controllers
                 showMsg("Fail", ex.Message, InformationType.Error);
             }
         }
+
+        // Start ver 1.0.30
+        private void SubmitWT_Action_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            WarehouseTransfers selectedObject = (WarehouseTransfers)e.CurrentObject;
+
+            // Start ver 1.0.10
+            foreach (WarehouseTransferDetails dtl in selectedObject.WarehouseTransferDetails)
+            {
+                // Start ver 1.0.14
+                if (selectedObject.FromWarehouse.WarehouseCode != selectedObject.ToWarehouse.WarehouseCode)
+                {
+                    // End ver 1.0.14
+                    vwStockBalance available = ObjectSpace.FindObject<vwStockBalance>(CriteriaOperator.Parse("ItemCode = ? and WhsCode = ?",
+                   dtl.ItemCode, selectedObject.FromWarehouse.WarehouseCode));
+
+                    if (available != null)
+                    {
+                        if (available.InStock < (double)dtl.Quantity)
+                        {
+                            showMsg("Error", "Insufficient onhand quantity.", InformationType.Error);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        showMsg("Error", "Insufficient onhand quantity.", InformationType.Error);
+                        return;
+                    }
+                    // Start ver 1.0.14
+                }
+                // End ver 1.0.14
+            }
+            // End ver 1.0.10
+
+            if (selectedObject.IsValid2 == true)
+            {
+                showMsg("Error", "Bin not enough stock.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.IsValid3 == true)
+            {
+                showMsg("Error", "Cannot transfer within same bin.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.IsValid4 == true)
+            {
+                showMsg("Error", "Cannot transfer without bin.", InformationType.Error);
+                return;
+            }
+
+            if (selectedObject.IsValid == true)
+            {
+                selectedObject.Status = DocStatus.Submitted;
+                WarehouseTransfersDocTrail ds = ObjectSpace.CreateObject<WarehouseTransfersDocTrail>();
+                ds.DocStatus = DocStatus.Submitted;
+                ds.DocRemarks = "";
+                selectedObject.WarehouseTransfersDocTrail.Add(ds);
+
+                ObjectSpace.CommitChanges();
+                ObjectSpace.Refresh();
+
+                foreach (WarehouseTransferDetails dtl in selectedObject.WarehouseTransferDetails)
+                {
+                    if (dtl.BaseDoc != null)
+                    {
+                        genCon.CloseWarehouseTransferReq(dtl.BaseDoc, "Close", ObjectSpace);
+                        break;
+                    }
+                }
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                WarehouseTransfers trx = os.FindObject<WarehouseTransfers>(new BinaryOperator("Oid", selectedObject.Oid));
+                openNewView(os, trx, ViewEditMode.View);
+                showMsg("Successful", "Submit Done.", InformationType.Success);
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

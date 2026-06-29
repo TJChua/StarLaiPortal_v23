@@ -40,6 +40,7 @@
             this.RejectAppSRR = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.SRRCopyToSR = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.ApproveAppSRR_Pop = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitSRR_Action = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // SRRCopyFromInv
             // 
@@ -158,6 +159,15 @@
             this.ApproveAppSRR_Pop.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.ApproveAppSRR_Pop_CustomizePopupWindowParams);
             this.ApproveAppSRR_Pop.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.ApproveAppSRR_Pop_Execute);
             // 
+            // SubmitSRR_Action
+            // 
+            this.SubmitSRR_Action.Caption = "Submit";
+            this.SubmitSRR_Action.Category = "ObjectsCreation";
+            this.SubmitSRR_Action.ConfirmationMessage = null;
+            this.SubmitSRR_Action.Id = "SubmitSRR_Action";
+            this.SubmitSRR_Action.ToolTip = null;
+            this.SubmitSRR_Action.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitSRR_Action_Execute);
+            // 
             // SalesReturnReqControllers
             // 
             this.Actions.Add(this.SRRCopyFromInv);
@@ -171,6 +181,7 @@
             this.Actions.Add(this.RejectAppSRR);
             this.Actions.Add(this.SRRCopyToSR);
             this.Actions.Add(this.ApproveAppSRR_Pop);
+            this.Actions.Add(this.SubmitSRR_Action);
 
         }
 
@@ -187,5 +198,6 @@
         private DevExpress.ExpressApp.Actions.SimpleAction RejectAppSRR;
         private DevExpress.ExpressApp.Actions.SimpleAction SRRCopyToSR;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ApproveAppSRR_Pop;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitSRR_Action;
     }
 }

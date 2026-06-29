@@ -26,6 +26,7 @@ using System.Text;
 
 // 2023-08-16 - add stock 3 and stock 4 - ver 1.0.8
 // 2026-01-12 - add field validation - ver 1.0.26
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -51,6 +52,9 @@ namespace StarLaiPortal.Module.Controllers
             this.RejectAppSFR.Active.SetItemValue("Enabled", false);
             this.SFRCopyToSF.Active.SetItemValue("Enabled", false);
             this.ApproveAppSFR_Pop.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.SubmitSFR_Action.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -62,14 +66,20 @@ namespace StarLaiPortal.Module.Controllers
             {
                 if (((DetailView)View).ViewEditMode == ViewEditMode.View)
                 {
-                    this.SubmitSFR.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    ///this.SubmitSFR.Active.SetItemValue("Enabled", true);
+                    this.SubmitSFR_Action.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                     this.CancelSFR.Active.SetItemValue("Enabled", true);
                     //this.PreviewSAR.Active.SetItemValue("Enabled", true);
                     //this.SFRCopyToSF.Active.SetItemValue("Enabled", true);
                 }
                 else
                 {
-                    this.SubmitSFR.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    ///this.SubmitSFR.Active.SetItemValue("Enabled", false);
+                    this.SubmitSFR_Action.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                     this.CancelSFR.Active.SetItemValue("Enabled", false);
                     this.PreviewSFR.Active.SetItemValue("Enabled", false);
                     this.SFRCopyToSF.Active.SetItemValue("Enabled", false);
@@ -116,6 +126,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.RejectAppSFR.Active.SetItemValue("Enabled", false);
                 this.SFRCopyToSF.Active.SetItemValue("Enabled", false);
                 this.ApproveAppSFR_Pop.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.SubmitSFR_Action.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
         }
         protected override void OnDeactivated()
@@ -822,5 +835,123 @@ namespace StarLaiPortal.Module.Controllers
 
             e.View = dv;
         }
+
+        // Start ver 1.0.30
+        private void SubmitSFR_Action_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            SalesRefundRequests selectedObject = (SalesRefundRequests)e.CurrentObject;
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+            if (selectedObject.IsValid2 == true)
+            {
+                showMsg("Failed", "Salesperson already inactive.", InformationType.Error);
+                return;
+            }
+
+            // Start ver 1.0.26
+            if (!string.IsNullOrEmpty(selectedObject.EIVPostalZoneB))
+            {
+                if (selectedObject.EIVPostalZoneB.Where(x => !char.IsDigit(x)).Count() > 0)
+                {
+                    showMsg("Failed", "Buyer's Postcode not allow input string.", InformationType.Error);
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVPostalZoneS))
+            {
+                if (selectedObject.EIVPostalZoneS.Where(x => !char.IsDigit(x)).Count() > 0)
+                {
+                    showMsg("Failed", "Recipient's Postcode not allow input string.", InformationType.Error);
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(selectedObject.EIVBuyerEmail))
+            {
+                System.ComponentModel.DataAnnotations.EmailAddressAttribute emailAddressValidator = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+                if (!emailAddressValidator.IsValid(selectedObject.EIVBuyerEmail))
+                {
+                    showMsg("Failed", "Invalid buyer email.", InformationType.Error);
+                    return;
+                }
+            }
+            // End ver 1.0.26
+
+            if (selectedObject.IsValid == true)
+            {
+                selectedObject.Status = DocStatus.Submitted;
+                SalesRefundReqDocTrail ds = ObjectSpace.CreateObject<SalesRefundReqDocTrail>();
+                ds.DocStatus = DocStatus.Submitted;
+                ds.DocRemarks = "";
+                selectedObject.SalesRefundReqDocTrail.Add(ds);
+
+                ObjectSpace.CommitChanges();
+                ObjectSpace.Refresh();
+
+                #region Get approval
+                List<string> ToEmails = new List<string>();
+                string emailbody = "";
+                string emailsubject = "";
+                string emailaddress = "";
+                Guid emailuser;
+                DateTime emailtime = DateTime.Now;
+
+                string getapproval = "EXEC sp_GetApproval '" + selectedObject.CreateUser.Oid + "', '" + selectedObject.Oid + "', 'SalesRefundRequest'";
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(getapproval, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader.GetString(1) != "")
+                    {
+                        emailbody = "Dear Sir/Madam, " + System.Environment.NewLine + System.Environment.NewLine +
+                               reader.GetString(3) + System.Environment.NewLine + GeneralSettings.appurl + reader.GetString(2) +
+                               System.Environment.NewLine + System.Environment.NewLine;
+
+                        emailsubject = "Sales Refund Request Approval";
+                        emailaddress = reader.GetString(1);
+                        emailuser = reader.GetGuid(0);
+
+                        ToEmails.Add(emailaddress);
+                    }
+                }
+                cmd.Dispose();
+                conn.Close();
+
+                if (ToEmails.Count > 0)
+                {
+                    if (genCon.SendEmail(emailsubject, emailbody, ToEmails) == 1)
+                    {
+                    }
+                }
+
+                #endregion
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                SalesRefundRequests trx = os.FindObject<SalesRefundRequests>(new BinaryOperator("Oid", selectedObject.Oid));
+
+                if (trx.AppStatus == ApprovalStatusType.Not_Applicable && trx.Status == DocStatus.Submitted)
+                {
+                    trx.Status = DocStatus.PendPost;
+                    os.CommitChanges();
+                    os.Refresh();
+                }
+
+                IObjectSpace sos = Application.CreateObjectSpace();
+                SalesRefundRequests strx = sos.FindObject<SalesRefundRequests>(new BinaryOperator("Oid", selectedObject.Oid));
+                openNewView(sos, strx, ViewEditMode.View);
+                showMsg("Successful", "Submit Done.", InformationType.Success);
+            }
+            else
+            {
+                showMsg("Error", "No Content.", InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

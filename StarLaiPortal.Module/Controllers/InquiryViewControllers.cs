@@ -57,6 +57,7 @@ using StarLaiPortal.Module.BusinessObjects.Sales_Quotation;
 // 2026-02-06 - add new field - ver 1.0.26
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 // 2026-05-19 - Sales Order Inquiry add preview option - ver 1.0.29
+// 2026-06-29 - Purchase Return Inquiry add print count - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -1766,6 +1767,9 @@ namespace StarLaiPortal.Module.Controllers
                             result.ReturnReason = row.Values[22].ToString();
                             result.Reference = row.Values[23].ToString();
                             result.Transporter = row.Values[24].ToString();
+                            // Start ver 1.0.30
+                            result.PrintCount = int.Parse(row.Values[25].ToString());
+                            // End ver 1.0.30
 
                             currObject.Results.Add(result);
                         }

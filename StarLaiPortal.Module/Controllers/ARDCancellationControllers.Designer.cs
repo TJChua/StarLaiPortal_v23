@@ -33,6 +33,7 @@
             this.SubmitDPCancel = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.CancelDPCancel = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.ApproveAppARDPC_Pop = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
+            this.SubmitDPCancel_Action = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // CopyFromDownpayment
             // 
@@ -82,12 +83,22 @@
             this.ApproveAppARDPC_Pop.CustomizePopupWindowParams += new DevExpress.ExpressApp.Actions.CustomizePopupWindowParamsEventHandler(this.ApproveAppARDPC_Pop_CustomizePopupWindowParams);
             this.ApproveAppARDPC_Pop.Execute += new DevExpress.ExpressApp.Actions.PopupWindowShowActionExecuteEventHandler(this.ApproveAppARDPC_Pop_Execute);
             // 
+            // SubmitDPCancel_Action
+            // 
+            this.SubmitDPCancel_Action.Caption = "Submit";
+            this.SubmitDPCancel_Action.Category = "ObjectsCreation";
+            this.SubmitDPCancel_Action.ConfirmationMessage = null;
+            this.SubmitDPCancel_Action.Id = "SubmitDPCancel_Action";
+            this.SubmitDPCancel_Action.ToolTip = null;
+            this.SubmitDPCancel_Action.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.SubmitDPCancel_Action_Execute);
+            // 
             // ARDCancellationControllers
             // 
             this.Actions.Add(this.CopyFromDownpayment);
             this.Actions.Add(this.SubmitDPCancel);
             this.Actions.Add(this.CancelDPCancel);
             this.Actions.Add(this.ApproveAppARDPC_Pop);
+            this.Actions.Add(this.SubmitDPCancel_Action);
 
         }
 
@@ -97,5 +108,6 @@
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction SubmitDPCancel;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction CancelDPCancel;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction ApproveAppARDPC_Pop;
+        private DevExpress.ExpressApp.Actions.SimpleAction SubmitDPCancel_Action;
     }
 }

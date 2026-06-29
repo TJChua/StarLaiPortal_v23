@@ -29,9 +29,16 @@ using DevExpress.ExpressApp.Xpo;
 using StarLaiPortal.Module.BusinessObjects.Item_Inquiry;
 using System.Runtime.InteropServices;
 using DevExpress.Office.Utils;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using DevExpress.ExpressApp.Web;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Web;
 
 // 2024-07-26 - sales history add date filter - ver 1.0.19
 // 2025-07-16 - enhance saleshistory - ver 1.0.23
+// 2026-06-29 - Sales History add preview option - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -40,10 +47,25 @@ namespace StarLaiPortal.Module.Controllers
     {
         private DateTime Fromdate;
         private DateTime Todate;
+
+        // Start ver 1.0.30
+        GeneralControllers genCon;
+        // End ver 1.0.30
+
         public DocumentControllers()
         {
             InitializeComponent();
             // Target required Views (via the TargetXXX properties) and create their Actions.
+
+            // Start ver 1.0.30
+            ChoiceActionItem NA = new ChoiceActionItem("NA", "Preview Option", null);
+            ChoiceActionItem PreviewDO = new ChoiceActionItem("PreviewDO", "Preview DO", null);
+            ChoiceActionItem PreviewInvoice = new ChoiceActionItem("PreviewInvoice", "Preview Invoice", null);
+
+            SalesHistoryPrint.Items.Add(NA);
+            SalesHistoryPrint.Items.Add(PreviewDO);
+            SalesHistoryPrint.Items.Add(PreviewInvoice);
+            // End ver 1.0.30
         }
         protected override void OnActivated()
         {
@@ -58,6 +80,9 @@ namespace StarLaiPortal.Module.Controllers
             this.SalesHistoryDTTo.Active.SetItemValue("Enabled", false);
             this.SalesHistoryDocFilter.Active.SetItemValue("Enabled", false);
             // End ver 1.0.23
+            // Start ver 1.0.30
+            this.SalesHistoryPrint.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
 
             if (typeof(SalesOrder).IsAssignableFrom(View.ObjectTypeInfo.Type))
             {
@@ -330,11 +355,29 @@ namespace StarLaiPortal.Module.Controllers
                 }
             }
             // End ver 1.0.23
+
+            // Start ver 1.0.30
+            if (typeof(SalesHistory).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(SalesHistory))
+                {
+                    this.SalesHistoryPrint.Active.SetItemValue("Enabled", true);
+                    SalesHistoryPrint.PaintStyle = DevExpress.ExpressApp.Templates.ActionItemPaintStyle.Caption;
+                    SalesHistoryPrint.CustomizeControl += Previewaction_CustomizeControl;
+
+                    SalesHistoryPrint.SelectedIndex = 0;
+                }
+            }
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
             base.OnViewControlsCreated();
             // Access and customize the target View control.
+
+            // Start ver 1.0.30
+            genCon = Frame.GetController<GeneralControllers>();
+            // End ver 1.0.30
         }
         protected override void OnDeactivated()
         {
@@ -391,6 +434,33 @@ namespace StarLaiPortal.Module.Controllers
                 control.ComboBox.Width = 100;
             }
         }
+
+        // Start ver 1.0.30
+        void Previewaction_CustomizeControl(object sender, CustomizeControlEventArgs e)
+        {
+            SingleChoiceActionAsModeMenuActionItem actionItem = e.Control as SingleChoiceActionAsModeMenuActionItem;
+            if (actionItem != null && actionItem.Action.PaintStyle == DevExpress.ExpressApp.Templates.ActionItemPaintStyle.Caption)
+            {
+                DropDownSingleChoiceActionControlBase control = (DropDownSingleChoiceActionControlBase)actionItem.Control;
+                //control.Label.Text = actionItem.Action.Caption;
+                //control.Label.Style["padding-right"] = "5px";
+                control.ComboBox.Width = 150;
+            }
+        }
+
+        public void showMsg(string caption, string msg, InformationType msgtype)
+        {
+            MessageOptions options = new MessageOptions();
+            options.Duration = 3000;
+            //options.Message = string.Format("{0} task(s) have been successfully updated!", e.SelectedObjects.Count);
+            options.Message = string.Format("{0}", msg);
+            options.Type = msgtype;
+            options.Web.Position = InformationPosition.Right;
+            options.Win.Caption = caption;
+            options.Win.Type = WinMessageType.Flyout;
+            Application.ShowViewStrategy.ShowMessage(options);
+        }
+        // End ver 1.0.30
 
         private void DocumentDateFrom_Execute(object sender, ParametrizedActionExecuteEventArgs e)
         {
@@ -679,6 +749,9 @@ namespace StarLaiPortal.Module.Controllers
                             item.SAPInvoiceNo = row.Values[5].ToString();
                             item.Salesperson = row.Values[6].ToString();
                             item.Whse = row.Values[7].ToString();
+                            // Start ver 1.0.30
+                            item.PortalDONo = row.Values[8].ToString();
+                            // End ver 1.0.30
                             header.Sales.Add(item);
 
                             i++;
@@ -694,5 +767,144 @@ namespace StarLaiPortal.Module.Controllers
             }
         }
         // End ver 1.0.23
+
+        // Start ver 1.0.30
+        private void SalesHistoryPrint_Execute(object sender, SingleChoiceActionExecuteEventArgs e)
+        {
+            if (e.SelectedChoiceActionItem.Id == "PreviewDO")
+            {
+                if (e.SelectedObjects.Count == 1)
+                {
+                    string strServer;
+                    string strDatabase;
+                    string strUserID;
+                    string strPwd;
+                    string filename;
+
+                    SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                    SalesHistory result = (SalesHistory)View.CurrentObject;
+                    ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                    if (result.PortalDONo == "")
+                    {
+                        showMsg("Fail", "DO number not found.", InformationType.Error);
+                        return;
+                    }
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    DeliveryOrder delivery = os.FindObject<DeliveryOrder>(new BinaryOperator("DocNum", result.PortalDONo));
+
+                    if (delivery != null)
+                    {
+                        try
+                        {
+                            ReportDocument doc = new ReportDocument();
+                            strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                            doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\DeliveryOrder.rpt"));
+                            strDatabase = conn.Database;
+                            strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                            strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                            doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                            doc.Refresh();
+
+                            doc.SetParameterValue("dockey@", delivery.Oid);
+                            doc.SetParameterValue("dbName@", conn.Database);
+
+                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                                + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
+                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                            doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                            doc.Close();
+                            doc.Dispose();
+
+                            string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                                + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
+                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            var script = "window.open('" + url + "');";
+
+                            WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                        }
+                        catch (Exception ex)
+                        {
+                            showMsg("Fail", ex.Message, InformationType.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    showMsg("Fail", "Please select one DO only.", InformationType.Error);
+                }
+            }
+
+            if (e.SelectedChoiceActionItem.Id == "PreviewInvoice")
+            {
+                if (e.SelectedObjects.Count == 1)
+                {
+                    string strServer;
+                    string strDatabase;
+                    string strUserID;
+                    string strPwd;
+                    string filename;
+
+                    SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+                    SalesHistory result = (SalesHistory)View.CurrentObject;
+                    ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+                    if (result.PortalDONo == "")
+                    {
+                        showMsg("Fail", "Invoice number not found.", InformationType.Error);
+                        return;
+                    }
+
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    DeliveryOrder delivery = os.FindObject<DeliveryOrder>(new BinaryOperator("DocNum", result.PortalDONo));
+
+                    if (delivery != null)
+                    {
+                        try
+                        {
+                            ReportDocument doc = new ReportDocument();
+                            strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                            doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                            strDatabase = conn.Database;
+                            strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                            strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                            doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                            doc.Refresh();
+
+                            doc.SetParameterValue("dockey@", delivery.Oid);
+                            doc.SetParameterValue("dbName@", conn.Database);
+
+                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                                + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
+                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                            doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                            doc.Close();
+                            doc.Dispose();
+
+                            string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                                + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
+                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            var script = "window.open('" + url + "');";
+
+                            WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+                        }
+                        catch (Exception ex)
+                        {
+                            showMsg("Fail", ex.Message, InformationType.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    showMsg("Fail", "Please select one Invoice only.", InformationType.Error);
+                }
+            }
+        }
+        // End ver 1.0.30
     }
 }

@@ -18,6 +18,7 @@ using System.Text;
 // 2023-10-30 add creditnote payment method ver 1.0.12
 // 2024-01-04 add inquiry filter status ver 1.0.15
 // 2025-09-19 add new docstatus and container status ver 1.0.25
+// 2026-06-29 add new doctypelist ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -60,8 +61,11 @@ namespace StarLaiPortal.Module.BusinessObjects
         [XafDisplayName("Stock Count Confirm")] STC = 23,
         // End ver 1.0.11
         // Start ver 1.0.25
-        [XafDisplayName("Container Tracking")] CT = 24
+        [XafDisplayName("Container Tracking")] CT = 24,
         // End ver 1.0.25
+        // Start ver 1.0.30
+        [XafDisplayName("Invoice")] INV = 25,
+        // End ver 1.0.30
     }
 
     public enum DocStatus

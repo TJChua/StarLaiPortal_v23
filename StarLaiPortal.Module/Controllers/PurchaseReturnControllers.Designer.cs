@@ -32,6 +32,7 @@
             this.SubmitPReturn = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.CancelPReturn = new DevExpress.ExpressApp.Actions.PopupWindowShowAction(this.components);
             this.PreviewPReturn = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.PrintPReturn = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // SubmitPReturn
             // 
@@ -66,11 +67,21 @@
             this.PreviewPReturn.ToolTip = null;
             this.PreviewPReturn.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PreviewPReturn_Execute);
             // 
+            // PrintPReturn
+            // 
+            this.PrintPReturn.Caption = "Print";
+            this.PrintPReturn.Category = "ObjectsCreation";
+            this.PrintPReturn.ConfirmationMessage = null;
+            this.PrintPReturn.Id = "PrintPReturn";
+            this.PrintPReturn.ToolTip = null;
+            this.PrintPReturn.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PrintPReturn_Execute);
+            // 
             // PurchaseReturnControllers
             // 
             this.Actions.Add(this.SubmitPReturn);
             this.Actions.Add(this.CancelPReturn);
             this.Actions.Add(this.PreviewPReturn);
+            this.Actions.Add(this.PrintPReturn);
 
         }
 
@@ -79,5 +90,6 @@
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction SubmitPReturn;
         private DevExpress.ExpressApp.Actions.PopupWindowShowAction CancelPReturn;
         private DevExpress.ExpressApp.Actions.SimpleAction PreviewPReturn;
+        private DevExpress.ExpressApp.Actions.SimpleAction PrintPReturn;
     }
 }

@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 
 // 2023-09-12 add warehouse transfer req no ver 1.0.9
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Warehouse_Transfer
 {
@@ -25,7 +26,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Warehouse_Transfer
     [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitWT", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.30
+    //[Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitWT", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitWT_Action", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.30
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelWT", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
     public class WarehouseTransfers : XPObject

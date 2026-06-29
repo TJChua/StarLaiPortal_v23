@@ -18,10 +18,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-// 2023-08-16 update detail when change paymenttype ver 1.0.8
-// 2023-04-09 fix speed issue ver 1.0.8.1
-// 2023-09-25 change date format ver 1.0.10
-// 2023-09-25 add sales return ver 1.0.10
+// 2023-08-16 - update detail when change paymenttype ver 1.0.8
+// 2023-04-09 - fix speed issue ver 1.0.8.1
+// 2023-09-25 - change date format ver 1.0.10
+// 2023-09-25 - add sales return ver 1.0.10
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Order_Collection
 {
@@ -31,7 +32,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Order_Collection
     [DefaultProperty("DocNum")]
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitSOC", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.30
+    ////[Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitSOC", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitSOC_Action", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.30
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelSOC", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
     [Appearance("HideCopyFromSO", AppearanceItemType.Action, "True", TargetItems = "SOCCopyFromSO", Criteria = "PaymentType = null or Customer = null or ReferenceNum = null or " +

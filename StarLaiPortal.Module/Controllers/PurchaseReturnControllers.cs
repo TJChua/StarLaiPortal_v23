@@ -14,6 +14,7 @@ using DevExpress.ExpressApp.Web.Editors.ASPx;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
 using StarLaiPortal.Module.BusinessObjects;
+using StarLaiPortal.Module.BusinessObjects.Delivery_Order;
 using StarLaiPortal.Module.BusinessObjects.Purchase_Return;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
+
+// 2026-06-29 - add print count and print status - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -41,6 +44,9 @@ namespace StarLaiPortal.Module.Controllers
             this.SubmitPReturn.Active.SetItemValue("Enabled", false);
             this.CancelPReturn.Active.SetItemValue("Enabled", false);
             this.PreviewPReturn.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.PrintPReturn.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
         }
         protected override void OnViewControlsCreated()
         {
@@ -55,12 +61,18 @@ namespace StarLaiPortal.Module.Controllers
                     this.SubmitPReturn.Active.SetItemValue("Enabled", true);
                     this.CancelPReturn.Active.SetItemValue("Enabled", true);
                     this.PreviewPReturn.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    this.PrintPReturn.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                 }
                 else
                 {
                     this.SubmitPReturn.Active.SetItemValue("Enabled", false);
                     this.CancelPReturn.Active.SetItemValue("Enabled", false);
                     this.PreviewPReturn.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    this.PrintPReturn.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                 }
             }
             else
@@ -68,6 +80,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.SubmitPReturn.Active.SetItemValue("Enabled", false);
                 this.CancelPReturn.Active.SetItemValue("Enabled", false);
                 this.PreviewPReturn.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.PrintPReturn.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
 
             if (View.Id == "PurchaseReturns_PurchaseReturnDetails_ListView")
@@ -269,5 +284,64 @@ namespace StarLaiPortal.Module.Controllers
                 showMsg("Fail", ex.Message, InformationType.Error);
             }
         }
+
+        // Start ver 1.0.30
+        private void PrintPReturn_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            string strServer;
+            string strDatabase;
+            string strUserID;
+            string strPwd;
+            string filename;
+
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+            PurchaseReturns preturn = (PurchaseReturns)View.CurrentObject;
+            ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+            try
+            {
+                ReportDocument doc = new ReportDocument();
+                strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\GoodsReturn.rpt"));
+                strDatabase = conn.Database;
+                strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                doc.Refresh();
+
+                doc.SetParameterValue("dockey@", preturn.Oid);
+                doc.SetParameterValue("dbName@", conn.Database);
+
+                filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                    + "_" + preturn.Oid + "_" + user.UserName + "_PReturn_"
+                    + DateTime.Parse(preturn.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                doc.Close();
+                doc.Dispose();
+
+                string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                    + "_" + preturn.Oid + "_" + user.UserName + "_PReturn_"
+                    + DateTime.Parse(preturn.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                var script = "window.open('" + url + "');";
+
+                WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+
+                IObjectSpace os = Application.CreateObjectSpace();
+                PurchaseReturns trx = os.FindObject<PurchaseReturns>(new BinaryOperator("Oid", preturn.Oid));
+
+                trx.PRPrintCount = trx.PRPrintCount + 1;
+                trx.PRPrintStatus = PrintStatus.Printed;
+
+                os.CommitChanges();
+                os.Refresh();
+            }
+            catch (Exception ex)
+            {
+                showMsg("Fail", ex.Message, InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }

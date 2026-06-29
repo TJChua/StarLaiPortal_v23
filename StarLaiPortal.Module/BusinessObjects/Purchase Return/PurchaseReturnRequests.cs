@@ -15,8 +15,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-// 2023-07-28 add GRPO Correction ver 1.0.7
-// 2023-09-25 change date format ver 1.0.10
+// 2023-07-28 - add GRPO Correction ver 1.0.7
+// 2023-09-25 - change date format ver 1.0.10
+// 2026-06-29 - submit button change to action button - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
 {
@@ -32,8 +33,12 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
     [Appearance("HideEdit1", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitPRR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitPRR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // Start ver 1.0.30
+    //[Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitPRR", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    //[Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitPRR", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitPRR_Action", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideSubmit1", AppearanceItemType.Action, "True", TargetItems = "SubmitPRR_Action", Criteria = "(AppStatus in (2))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    // End ver 1.0.30
 
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelPRR", Criteria = "not (Status in (0, 1))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideCancel1", AppearanceItemType.Action, "True", TargetItems = "CancelPRR", Criteria = "CopyTo = 1", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
