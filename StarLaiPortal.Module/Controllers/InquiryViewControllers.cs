@@ -58,6 +58,7 @@ using StarLaiPortal.Module.BusinessObjects.Sales_Quotation;
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 // 2026-05-19 - Sales Order Inquiry add preview option - ver 1.0.29
 // 2026-06-29 - Purchase Return Inquiry add print count - ver 1.0.30
+// 2026-07-06 - add Consolidated E-Invoice field - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -1477,6 +1478,9 @@ namespace StarLaiPortal.Module.Controllers
                             // Start ver 1.0.19
                             result.EIVValidatedStatus = row.Values[27].ToString();
                             // End ver 1.0.19
+                            // Start ver 1.0.30
+                            result.EIVConsolidated = row.Values[28].ToString();
+                            // End ver 1.0.30
 
                             currObject.Results.Add(result);
                         }

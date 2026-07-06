@@ -7537,6 +7537,7 @@
     <ListView Id="vwShippingAddress_ListView" DataAccessMode="Client" />
     <DetailView Id="vwStockBalance_DetailView" AllowEdit="False" />
     <ListView Id="vwStockBalance_ListView" DataAccessMode="Client" />
+    <DetailView Id="vwTerritories_DetailView" AllowEdit="False" />
     <DetailView Id="vwTransporter_DetailView" AllowEdit="False" />
     <ListView Id="vwTransporter_ListView" DataAccessMode="Client" />
     <DetailView Id="vwVehicle_DetailView" AllowEdit="False" />

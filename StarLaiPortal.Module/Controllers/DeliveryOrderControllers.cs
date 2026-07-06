@@ -850,18 +850,31 @@ namespace StarLaiPortal.Module.Controllers
                         doc.SetParameterValue("dockey@", delivery.Oid);
                         doc.SetParameterValue("dbName@", conn.Database);
 
-                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
-                            + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
-                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        // Start ver 1.0.30
+                        //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        //    + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
+                        //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + delivery.DocNum + "_" 
+                            + conn.Database 
+                            + "_" + user.UserName + "_" 
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                        // End ver 1.0.30
 
                         doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
                         doc.Close();
                         doc.Dispose();
 
-                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
-                            + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
-                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        // Start ver 1.0.30
+                        //string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        //    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        //    + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
+                        //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + delivery.DocNum + "_" 
+                            + conn.Database 
+                            + "_" + user.UserName + "_" 
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                        // End ver 1.0.30
                         var script = "window.open('" + url + "');";
 
                         WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
@@ -913,18 +926,31 @@ namespace StarLaiPortal.Module.Controllers
                         doc.SetParameterValue("dockey@", delivery.Oid);
                         doc.SetParameterValue("dbName@", conn.Database);
 
-                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
-                            + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
-                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        // Start ver 1.0.30
+                        //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        //    + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
+                        //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + delivery.DocNum + "_" 
+                            + conn.Database 
+                            + "_" + user.UserName + "_" 
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                        // End ver 1.0.30
 
                         doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
                         doc.Close();
                         doc.Dispose();
 
+                        // Start ver 1.0.30
+                        //string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        //    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        //    + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
+                        //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
                         string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
-                            + "_" + delivery.Oid + "_" + user.UserName + "_DO_"
-                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + delivery.DocNum + "_" 
+                            + conn.Database
+                            + "_" + user.UserName + "_"
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                        // End ver 1.0.30
                         var script = "window.open('" + url + "');";
 
                         WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
@@ -979,18 +1005,31 @@ namespace StarLaiPortal.Module.Controllers
                             doc.SetParameterValue("dockey@", delivery.Oid);
                             doc.SetParameterValue("dbName@", conn.Database);
 
-                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
-                                + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
-                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            // Start ver 1.0.30
+                            //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                            //    + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
+                            //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + delivery.DocNum + "_" 
+                                + conn.Database 
+                                + "_" + user.UserName + "_" 
+                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                            // End ver 1.0.30
 
                             doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
                             doc.Close();
                             doc.Dispose();
 
-                            string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
-                                + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
-                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            // Start ver 1.0.30
+                            //string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                            //    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                            //    + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
+                            //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                            string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
+                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + delivery.DocNum + "_" 
+                                + conn.Database 
+                                + "_" + user.UserName + "_" 
+                                + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                            // End ver 1.0.30
                             var script = "window.open('" + url + "');";
 
                             WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
@@ -1179,18 +1218,31 @@ namespace StarLaiPortal.Module.Controllers
                         doc.SetParameterValue("dockey@", delivery.Oid);
                         doc.SetParameterValue("dbName@", conn.Database);
 
-                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
-                            + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
-                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        // Start ver 1.0.30
+                        //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                        //    + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
+                        //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + delivery.DocNum + "_" 
+                            + conn.Database 
+                            + "_" + user.UserName + "_" 
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                        // End ver 1.0.30
 
                         doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
                         doc.Close();
                         doc.Dispose();
 
-                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
-                            + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
-                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        // Start ver 1.0.30
+                        //string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        //    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                        //    + "_" + delivery.Oid + "_" + user.UserName + "_EMDO_"
+                        //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                        string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + delivery.DocNum + "_" 
+                            + conn.Database 
+                            + "_" + user.UserName + "_" 
+                            + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
+                        // End ver 1.0.30
                         var script = "window.open('" + url + "');";
 
                         WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);

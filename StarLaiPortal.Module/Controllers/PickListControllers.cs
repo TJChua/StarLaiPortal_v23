@@ -448,8 +448,8 @@ namespace StarLaiPortal.Module.Controllers
                             
                         if (socnt == 0)
                         {
-                            showMsg("Error", "SO already created pick list, please refresh data.", InformationType.Error);
-                            return;
+                            //showMsg("Error", "SO already created pick list, please refresh data.", InformationType.Error);
+                            //return;
                         }
                         // End ver 1.0.13
 

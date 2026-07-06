@@ -23,6 +23,7 @@ using System.Text;
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 // 2026-05-28 - enhance picking inquiry to SP - ver 1.0.29
 // 2026-06-29 - add print count - ver 1.0.30
+// 2026-07-06 - add Consolidated E-Invoice field - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -1969,6 +1970,16 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
         // End ver 1.0.19
+
+        // Start ver 1.0.30
+        [XafDisplayName("EIV-Consolidated E-Invoice")]
+        [Appearance("EIVConsolidated", Enabled = false)]
+        [Index(62)]
+        public string EIVConsolidated
+        {
+            get; set;
+        }
+        // End ver 1.0.30
     }
     #endregion
 
