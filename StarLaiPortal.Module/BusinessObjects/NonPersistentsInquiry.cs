@@ -45,7 +45,7 @@ namespace StarLaiPortal.Module.BusinessObjects
     [Appearance("HideExport", AppearanceItemType.Action, "True", TargetItems = "Export", Visibility = ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideRefresh", AppearanceItemType.Action, "True", TargetItems = "Refresh", Visibility = ViewItemVisibility.Hide, Context = "Any")]
 
-    [XafDisplayName("Sales Quoatation Inquiry (SP)")]
+    [XafDisplayName("Sales Quotation Inquiry (SP)")]
     public class SalesQuotationInquiry
     {
         [Key(AutoGenerate = true), Browsable(false)]
@@ -4770,6 +4770,9 @@ namespace StarLaiPortal.Module.BusinessObjects
         }
 
         [XafDisplayName("Expected Delivery Date")]
+        // Start ver 1.0.29
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.29
         [Appearance("DueDate", Enabled = false)]
         [Index(13)]
         public DateTime DueDate
