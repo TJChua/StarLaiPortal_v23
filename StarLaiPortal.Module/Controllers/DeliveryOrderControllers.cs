@@ -27,6 +27,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using StarLaiPortal.Module.BusinessObjects.Sales_Quotation;
+using System.Data;
 
 // 2023-07-28 - add print button and do not add count in preview ver 0.1
 // 2023-12-04 - add daily delivery summary ver 1.0.13
@@ -463,6 +464,9 @@ namespace StarLaiPortal.Module.Controllers
                 string strUserID;
                 string strPwd;
                 string filename;
+                // Start ver 1.0.30
+                string reportprefix = "";
+                // End ver 1.0.30
 
                 SqlConnection conn = new SqlConnection(genCon.getConnectionString());
                 DeliveryOrder delivery = (DeliveryOrder)View.CurrentObject;
@@ -470,6 +474,26 @@ namespace StarLaiPortal.Module.Controllers
 
                 if (delivery.SAPDocNum != null)
                 {
+                    // Start ver 1.0.30
+                    string query = "SELECT T1.BeginStr " +
+                        "FROM [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..OINV T0 " +
+                        "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..NNM1 T1 on T0.Series = T1.Series " +
+                        "WHERE T0.DocNum = '" + delivery.SAPDocNum + "'";
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        reportprefix = reader.GetString(0);
+                    }
+                    cmd.Dispose();
+                    conn.Close();
+                    // End ver 1.0.30
+
                     try
                     {
                         ReportDocument doc = new ReportDocument();
@@ -488,7 +512,7 @@ namespace StarLaiPortal.Module.Controllers
                         //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
                         //    + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
                         //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
-                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + delivery.DocNum + "_" 
+                        filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + reportprefix + delivery.SAPDocNum + "_" 
                             + conn.Database 
                             + "_" + user.UserName + "_" 
                             + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
@@ -504,7 +528,7 @@ namespace StarLaiPortal.Module.Controllers
                         //    + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
                         //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
                         string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
-                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + delivery.DocNum + "_" 
+                            ConfigurationManager.AppSettings.Get("PrintPath").ToString() + reportprefix + delivery.SAPDocNum + "_" 
                             + conn.Database 
                             + "_" + user.UserName + "_" 
                             + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
@@ -984,6 +1008,9 @@ namespace StarLaiPortal.Module.Controllers
                     string strUserID;
                     string strPwd;
                     string filename;
+                    // Start ver 1.0.30
+                    string reportprefix = "";
+                    // End ver 1.0.30
 
                     SqlConnection conn = new SqlConnection(genCon.getConnectionString());
                     DeliveryOrder delivery = (DeliveryOrder)View.CurrentObject;
@@ -991,6 +1018,26 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (delivery.SAPDocNum != null)
                     {
+                        // Start ver 1.0.30
+                        string query = "SELECT T1.BeginStr " +
+                            "FROM [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..OINV T0 " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..NNM1 T1 on T0.Series = T1.Series " +
+                            "WHERE T0.DocNum = '" + delivery.SAPDocNum + "'";
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            reportprefix = reader.GetString(0);
+                        }
+                        cmd.Dispose();
+                        conn.Close();
+                        // End ver 1.0.30
+
                         try
                         {
                             ReportDocument doc = new ReportDocument();
@@ -1009,7 +1056,7 @@ namespace StarLaiPortal.Module.Controllers
                             //filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
                             //    + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
                             //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
-                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + delivery.DocNum + "_" 
+                            filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + reportprefix + delivery.SAPDocNum + "_" 
                                 + conn.Database 
                                 + "_" + user.UserName + "_" 
                                 + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
@@ -1025,7 +1072,7 @@ namespace StarLaiPortal.Module.Controllers
                             //    + "_" + delivery.Oid + "_" + user.UserName + "_Inv_"
                             //    + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
                             string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
-                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + delivery.DocNum + "_" 
+                                ConfigurationManager.AppSettings.Get("PrintPath").ToString() + reportprefix + delivery.SAPDocNum + "_" 
                                 + conn.Database 
                                 + "_" + user.UserName + "_" 
                                 + DateTime.Parse(delivery.DocDate.ToString()).ToString("yyMMdd") + ".pdf";
