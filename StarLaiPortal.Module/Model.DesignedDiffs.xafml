@@ -4025,24 +4025,26 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="36.764705882352942" Direction="Horizontal">
-            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.633967789165446" IsNewNode="True">
-              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Currency" ViewItem="Currency" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="6" RelativeSize="17" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="45.1219512195122" Direction="Horizontal">
+            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.658935879945432" IsNewNode="True">
+              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Currency" ViewItem="Currency" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Series" ViewItem="Series" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.366032210834554" IsNewNode="True">
-              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="ETD" ViewItem="ETD" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="SAPDocNum" ViewItem="SAPDocNum" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Series" ViewItem="Series" Index="5" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="6" RelativeSize="17" IsNewNode="True" />
+            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.341064120054568" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="ETD" ViewItem="ETD" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="SAPDocNum" ViewItem="SAPDocNum" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="PRPrintCount" ViewItem="PRPrintCount" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="PRPrintStatus" ViewItem="PRPrintStatus" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="PurchaseReturns" RelativeSize="100" Removed="True">
               <LayoutGroup Id="PurchaseReturns_col1" RelativeSize="50">
@@ -4070,7 +4072,7 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="63.235294117647058">
+          <TabbedGroup Id="Tabs" RelativeSize="54.8780487804878">
             <LayoutGroup Id="PurchaseReturnDetails" RelativeSize="100">
               <LayoutItem Id="PurchaseReturnDetails" RelativeSize="100" />
             </LayoutGroup>
@@ -4099,6 +4101,8 @@
         <PropertyEditor Id="ETD" PropertyName="ETD" IsNewNode="True" />
         <PropertyEditor Id="GRPOCorrection" PropertyName="GRPOCorrection" IsNewNode="True" />
         <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="PRPrintCount" PropertyName="PRPrintCount" IsNewNode="True" />
+        <PropertyEditor Id="PRPrintStatus" PropertyName="PRPrintStatus" IsNewNode="True" />
         <PropertyEditor Id="PurchaseReturnDetails" PropertyName="PurchaseReturnDetails" View="PurchaseReturns_PurchaseReturnDetails_ListView" IsNewNode="True" />
         <PropertyEditor Id="PurchaseReturnDocTrail" PropertyName="PurchaseReturnDocTrail" View="PurchaseReturns_PurchaseReturnDocTrail_ListView" IsNewNode="True" />
         <PropertyEditor Id="ReasonCode" PropertyName="ReasonCode" IsNewNode="True" />
@@ -4119,27 +4123,29 @@
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="36.764705882352942" IsNewNode="True">
-            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.633967789165446" IsNewNode="True">
-              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Currency" ViewItem="Currency" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="6" RelativeSize="17" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="45.1219512195122" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.658935879945432" IsNewNode="True">
+              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Currency" ViewItem="Currency" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Series" ViewItem="Series" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.366032210834554" IsNewNode="True">
-              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="ETD" ViewItem="ETD" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="SAPDocNum" ViewItem="SAPDocNum" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Series" ViewItem="Series" Index="5" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="6" RelativeSize="17" IsNewNode="True" />
+            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.341064120054568" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="ETD" ViewItem="ETD" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="SAPDocNum" ViewItem="SAPDocNum" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="PRPrintCount" ViewItem="PRPrintCount" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="PRPrintStatus" ViewItem="PRPrintStatus" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="63.235294117647058" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="54.8780487804878" IsNewNode="True">
             <LayoutGroup Id="PurchaseReturnDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="PurchaseReturnDetails" ViewItem="PurchaseReturnDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>

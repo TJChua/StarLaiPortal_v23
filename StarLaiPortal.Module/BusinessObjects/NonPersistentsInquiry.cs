@@ -3121,6 +3121,14 @@ namespace StarLaiPortal.Module.BusinessObjects
         {
             get; set;
         }
+
+        [XafDisplayName("Print Status")]
+        [Appearance("PrintStatus", Enabled = false)]
+        [Index(64)]
+        public string PrintStatus
+        {
+            get; set;
+        }
         // End ver 1.0.30
     }
     #endregion

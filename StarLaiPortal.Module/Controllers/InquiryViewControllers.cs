@@ -1773,6 +1773,7 @@ namespace StarLaiPortal.Module.Controllers
                             result.Transporter = row.Values[24].ToString();
                             // Start ver 1.0.30
                             result.PrintCount = int.Parse(row.Values[25].ToString());
+                            result.PrintStatus = row.Values[26].ToString();
                             // End ver 1.0.30
 
                             currObject.Results.Add(result);
