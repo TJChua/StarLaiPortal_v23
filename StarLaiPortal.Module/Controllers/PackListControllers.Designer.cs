@@ -37,6 +37,7 @@
             this.PALBundleID = new DevExpress.ExpressApp.Actions.SingleChoiceAction(this.components);
             this.DeletePackList = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             this.PrintBundle = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
+            this.PrintIntercoBundle = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
             // PACopyFromPL
             // 
@@ -122,6 +123,15 @@
             this.PrintBundle.ToolTip = null;
             this.PrintBundle.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PrintBundle_Execute);
             // 
+            // PrintIntercoBundle
+            // 
+            this.PrintIntercoBundle.Caption = "Print Interco Bundle";
+            this.PrintIntercoBundle.Category = "ObjectsCreation";
+            this.PrintIntercoBundle.ConfirmationMessage = null;
+            this.PrintIntercoBundle.Id = "PrintIntercoBundle";
+            this.PrintIntercoBundle.ToolTip = null;
+            this.PrintIntercoBundle.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.PrintIntercoBundle_Execute);
+            // 
             // PackListControllers
             // 
             this.Actions.Add(this.PACopyFromPL);
@@ -132,6 +142,7 @@
             this.Actions.Add(this.PALBundleID);
             this.Actions.Add(this.DeletePackList);
             this.Actions.Add(this.PrintBundle);
+            this.Actions.Add(this.PrintIntercoBundle);
 
         }
 
@@ -145,5 +156,6 @@
         private DevExpress.ExpressApp.Actions.SingleChoiceAction PALBundleID;
         private DevExpress.ExpressApp.Actions.SimpleAction DeletePackList;
         private DevExpress.ExpressApp.Actions.SimpleAction PrintBundle;
+        private DevExpress.ExpressApp.Actions.SimpleAction PrintIntercoBundle;
     }
 }

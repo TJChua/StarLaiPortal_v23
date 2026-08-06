@@ -21,6 +21,7 @@ using System.Text;
 // 2024-05-16 - enhance speed - ver 1.0.15
 // 2024-06-12 - e-invoice - ver 1.0.18
 // 2024-10-09 - add PrintBy - ver 1.0.21
+// 2026-08-04 - add timestamp - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 {
@@ -219,6 +220,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime _PostingDate;
         [XafDisplayName("Posting Date")]
+        // Start ver 1.0.30
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.30
         [Index(13), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public DateTime PostingDate
         {

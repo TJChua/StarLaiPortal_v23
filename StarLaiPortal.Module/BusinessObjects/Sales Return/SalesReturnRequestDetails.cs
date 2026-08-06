@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 
 // 2024-06-12 - e-invoice - ver 1.0.18
+// 2026-08-04 - default return bin - ver 1.0.30
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
 {
@@ -238,7 +239,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
                 SetPropertyValue("Warehouse", ref _Warehouse, value);
                 if (!IsLoading && value != null)
                 {
-                    Bin = Session.FindObject<vwBin>(CriteriaOperator.Parse("AbsEntry = ?", Warehouse.DftBinAbs));
+                    // Start ver 1.0.30
+                    //Bin = Session.FindObject<vwBin>(CriteriaOperator.Parse("AbsEntry = ?", Warehouse.DftBinAbs));
+                    Bin = Session.FindObject<vwBin>(CriteriaOperator.Parse("BinCode = ? and Warehouse = ?", Warehouse.U_DfltReturnBin, Warehouse.WarehouseCode));
+                    // End ver 1.0.30
                 }
                 else if (!IsLoading && value == null)
                 {

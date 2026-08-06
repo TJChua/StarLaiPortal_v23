@@ -13,6 +13,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+// 2026-08-04 - add U_DfltReturnBin udf - ver 1.0.30
+
 namespace StarLaiPortal.Module.BusinessObjects.View
 {
     [DefaultClassOptions]
@@ -78,6 +80,16 @@ namespace StarLaiPortal.Module.BusinessObjects.View
             get; set;
         }
         // End ver 1.0.21
+
+        // Start ver 1.0.30
+        [XafDisplayName("DfltReturnBin")]
+        [Appearance("U_DfltReturnBin", Enabled = false)]
+        [Index(10)]
+        public string U_DfltReturnBin
+        {
+            get; set;
+        }
+        // End ver 1.0.30
 
         [XafDisplayName("Inactive")]
         [Appearance("Inactive", Enabled = false)]

@@ -904,6 +904,10 @@ namespace StarLaiPortal.Module.Controllers
                     showMsg("Fail", "Please select one Invoice only.", InformationType.Error);
                 }
             }
+
+            // Start ver 1.0.30
+            SalesHistoryPrint.SelectedIndex = 0;
+            // End ver 1.0.30
         }
         // End ver 1.0.30
     }

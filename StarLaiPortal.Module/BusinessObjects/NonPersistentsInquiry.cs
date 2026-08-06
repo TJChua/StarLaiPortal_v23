@@ -1788,7 +1788,10 @@ namespace StarLaiPortal.Module.BusinessObjects
             get; set;
         }
 
-        [XafDisplayName("Delivery Date")]
+        // Start ver 1.0.30
+        //[XafDisplayName("Delivery Date")]
+        [XafDisplayName("Payment Due")]
+        // End ver 1.0.30
         [Appearance("DueDate", Enabled = false)]
         [Index(13)]
         public DateTime DueDate

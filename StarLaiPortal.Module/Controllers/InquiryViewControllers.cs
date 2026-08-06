@@ -3435,6 +3435,10 @@ namespace StarLaiPortal.Module.Controllers
                     showMsg("Fail", "Please select one Invoice only.", InformationType.Error);
                 }
             }
+
+            // Start ver 1.0.30
+            ChoicePreviewOption.SelectedIndex = 0;
+            // End ver 1.0.30
         }
 
         private void ViewNewTab_Execute(object sender, SimpleActionExecuteEventArgs e)

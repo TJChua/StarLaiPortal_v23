@@ -29,8 +29,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-// 2023-04-09 fix speed issue ver 1.0.8.1
-// 2023-09-25 add warehouse field ver 1.0.10
+// 2023-04-09 - fix speed issue - ver 1.0.8.1
+// 2023-09-25 - add warehouse field - ver 1.0.10
+// 2026-08-04 - add print interco bundle - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -55,6 +56,9 @@ namespace StarLaiPortal.Module.Controllers
             this.PALBundleID.Active.SetItemValue("Enabled", false);
             this.DeletePackList.Active.SetItemValue("Enabled", false);
             this.PrintBundle.Active.SetItemValue("Enabled", false);
+            // Start ver 1.0.30
+            this.PrintIntercoBundle.Active.SetItemValue("Enabled", false);
+            // End ver 1.0.30
 
             if (typeof(vwPickList).IsAssignableFrom(View.ObjectTypeInfo.Type))
             {
@@ -105,6 +109,9 @@ namespace StarLaiPortal.Module.Controllers
                     this.CancelPA.Active.SetItemValue("Enabled", true);
                     //this.PrintBundlePA.Active.SetItemValue("Enabled", true);
                     this.PrintBundle.Active.SetItemValue("Enabled", true);
+                    // Start ver 1.0.30
+                    this.PrintIntercoBundle.Active.SetItemValue("Enabled", true);
+                    // End ver 1.0.30
                 }
                 else
                 {
@@ -112,6 +119,9 @@ namespace StarLaiPortal.Module.Controllers
                     this.CancelPA.Active.SetItemValue("Enabled", false);
                     this.PrintBundlePA.Active.SetItemValue("Enabled", false);
                     this.PrintBundle.Active.SetItemValue("Enabled", false);
+                    // Start ver 1.0.30
+                    this.PrintIntercoBundle.Active.SetItemValue("Enabled", false);
+                    // End ver 1.0.30
                 }
             }
             else
@@ -121,6 +131,9 @@ namespace StarLaiPortal.Module.Controllers
                 this.CancelPA.Active.SetItemValue("Enabled", false);
                 this.PrintBundlePA.Active.SetItemValue("Enabled", false);
                 this.PrintBundle.Active.SetItemValue("Enabled", false);
+                // Start ver 1.0.30
+                this.PrintIntercoBundle.Active.SetItemValue("Enabled", false);
+                // End ver 1.0.30
             }
         }
         protected override void OnDeactivated()
@@ -555,5 +568,55 @@ namespace StarLaiPortal.Module.Controllers
                 showMsg("Fail", ex.Message, InformationType.Error);
             }
         }
+
+        // Start ver 1.0.30
+        private void PrintIntercoBundle_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            string strServer;
+            string strDatabase;
+            string strUserID;
+            string strPwd;
+            string filename;
+
+            SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+            PackList pal = (PackList)View.CurrentObject;
+            ApplicationUser user = (ApplicationUser)SecuritySystem.CurrentUser;
+
+            try
+            {
+                ReportDocument doc = new ReportDocument();
+                strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
+                doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Bundle_Interco.rpt"));
+                strDatabase = conn.Database;
+                strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
+                strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
+                doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
+                doc.Refresh();
+
+                doc.SetParameterValue("dockey@", pal.Oid);
+                doc.SetParameterValue("dbName@", conn.Database);
+
+                filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
+                    + "_" + pal.Oid + "_" + user.UserName + "_IntercoBun_"
+                    + DateTime.Parse(pal.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+
+                doc.ExportToDisk(ExportFormatType.PortableDocFormat, filename);
+                doc.Close();
+                doc.Dispose();
+
+                string url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                    ConfigurationManager.AppSettings.Get("PrintPath").ToString() + conn.Database
+                    + "_" + pal.Oid + "_" + user.UserName + "_IntercoBun_"
+                    + DateTime.Parse(pal.DocDate.ToString()).ToString("yyyyMMdd") + ".pdf";
+                var script = "window.open('" + url + "');";
+
+                WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+            }
+            catch (Exception ex)
+            {
+                showMsg("Fail", ex.Message, InformationType.Error);
+            }
+        }
+        // End ver 1.0.30
     }
 }
