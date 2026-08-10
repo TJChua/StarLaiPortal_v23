@@ -13,12 +13,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-// 2023-07-28 add createdate ver 1.0.7
-// 2023-09-25 add Territory/Price List ver 1.0.10
-// 2024-04-01 add U_blockSales ver 1.0.15
-// 2024-06-12 e-invoice - ver 1.0.18
-// 2024-07-29 add DfltWhs - ver 1.0.19
-// 2025-11-03 add AutoInvoice - ver 1.0.24
+// 2023-07-28 - add createdate - ver 1.0.7
+// 2023-09-25 - add Territory/Price List - ver 1.0.10
+// 2024-04-01 - add U_blockSales - ver 1.0.15
+// 2024-06-12 - e-invoice - ver 1.0.18
+// 2024-07-29 - add DfltWhs - ver 1.0.19
+// 2025-11-03 - add AutoInvoice - ver 1.0.24
+// 2026-08-10 - add trade term - ver 1.0.31
 
 namespace StarLaiPortal.Module.BusinessObjects.View
 {
@@ -343,6 +344,16 @@ namespace StarLaiPortal.Module.BusinessObjects.View
             get; set;
         }
         // End ver 1.0.24
+
+        // Start ver 1.0.31
+        [XafDisplayName("U_TradeTerm")]
+        [Appearance("U_TradeTerm", Enabled = false)]
+        [Index(63), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        public string U_TradeTerm
+        {
+            get; set;
+        }
+        // End ver 1.0.31
 
         [Index(88), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(true)]
         public string BoFullName

@@ -24,6 +24,7 @@ using System.Text;
 
 // 2026-02-06 - change formula - ver 1.0.26
 // 2026-03-02 - enhance formula - ver 1.0.27
+// 2026-08-10 - add trade term and other enhancement - ver 1.0.31
 
 namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
 {
@@ -57,6 +58,11 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
             //DocDate = DateTime.Now;
             DocType = DocTypeList.CT;
             Status = DocStatus.New;
+
+            // Start ver 1.0.31
+            ESTDocProcessDays = Session.FindObject<ContainerDocProcessDays>(CriteriaOperator.Parse("Oid = ? and IsActive = 'True'", 1)) == null ? 0 : 
+                Session.FindObject<ContainerDocProcessDays>(CriteriaOperator.Parse("Oid = ? and IsActive = 'True'", 1)).ProcessingDays;
+            // End ver 1.0.31
         }
 
         private ApplicationUser _CreateUser;
@@ -168,10 +174,23 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 if (!IsLoading && value != null)
                 {
                     SupplierName = Supplier.BPName;
+                    // Start ver 1.0.31
+                    if (!string.IsNullOrEmpty(Supplier.U_TradeTerm))
+                    {
+                        PurTradeTerms = Session.FindObject<vwTRADETERM>(CriteriaOperator.Parse("Code = ?", Supplier.U_TradeTerm));
+                        AccTradeTerms = Session.FindObject<vwTRADETERM>(CriteriaOperator.Parse("Code = ?", Supplier.U_TradeTerm));
+                    }
+
+                    PurCreditorPaymentTerm = Session.FindObject<vwPaymentTerm>(CriteriaOperator.Parse("GroupNum = ?", Supplier.PaymentTerm));
+                    // End ver 1.0.31
                 }
                 else if (!IsLoading && value == null)
                 {
                     SupplierName = null;
+                    // Start ver 1.0.31
+                    PurTradeTerms = null;
+                    AccTradeTerms = null;
+                    // End ver 1.0.31
                 }
             }
         }
@@ -398,13 +417,19 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
             }
         }
 
-        private vwPAYTERM _PurCreditorPaymentTerm;
+        // Start ver 1.0.31
+        //private vwPAYTERM _PurCreditorPaymentTerm;
+        private vwPaymentTerm _PurCreditorPaymentTerm;
+        // End ver 1.0.31
         [NoForeignKey]
         [ImmediatePostData]
         [XafDisplayName("Creditor Payment Term")]
         [Index(43), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("PurCreditorPaymentTerm", Enabled = false, Criteria = "PurchaseDeptStatus = 1 or IsValidPurc = 0")]
-        public vwPAYTERM PurCreditorPaymentTerm
+        // Start ver 1.0.31
+        //public vwPAYTERM PurCreditorPaymentTerm
+        public vwPaymentTerm PurCreditorPaymentTerm
+        // End ver 1.0.31
         {
             get { return _PurCreditorPaymentTerm; }
             set
@@ -412,7 +437,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 SetPropertyValue("PurCreditorPaymentTerm", ref _PurCreditorPaymentTerm, value);
                 if (!IsLoading && value != null)
                 {
-                    AccCreditorPaymentTerm = Session.FindObject<vwPAYTERM>(CriteriaOperator.Parse("Code = ?", PurCreditorPaymentTerm.Code));
+                    // Start ver 1.0.31
+                    //AccCreditorPaymentTerm = Session.FindObject<vwPAYTERM>(CriteriaOperator.Parse("Code = ?", PurCreditorPaymentTerm.Code));
+                    AccCreditorPaymentTerm = Session.FindObject<vwPaymentTerm>(CriteriaOperator.Parse("GroupNum = ?", PurCreditorPaymentTerm.GroupNum));
+                    // End ver 1.0.31
                 }
                 else if (!IsLoading && value == null)
                 {
@@ -518,6 +546,17 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                         PendingDocDays = 1;
                         // End ver 1.0.27
                     }
+
+                    // Start ver 1.0.31
+                    if (SoftcopyBLRecFrmPur.Date.ToString("MM/dd/yyyy") != "01/01/0001" && DutySettDate.Date.ToString("MM/dd/yyyy") != "01/01/0001")
+                    {
+                        DocProcessDays = (DutySettDate.Date - SoftcopyBLRecFrmPur.Date).Days + 1;
+                    }
+                    else
+                    {
+                        DocProcessDays = 1;
+                    }
+                    // End ver 1.0.31
                 }
             }
         }
@@ -552,12 +591,18 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
             }
         }
 
-        private vwPAYTERM _AccCreditorPaymentTerm;
+        // Start ver 1.0.31
+        //private vwPAYTERM _AccCreditorPaymentTerm;
+        private vwPaymentTerm _AccCreditorPaymentTerm;
+        // End ver 1.0.31
         [NoForeignKey]
         [XafDisplayName("Creditor Payment Term")]
         [Index(63), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("AccCreditorPaymentTerm", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
-        public vwPAYTERM AccCreditorPaymentTerm
+        // Start ver 1.0.31
+        //public vwPAYTERM AccCreditorPaymentTerm
+        public vwPaymentTerm AccCreditorPaymentTerm
+        // End ver 1.0.31
         {
             get { return _AccCreditorPaymentTerm; }
             set
@@ -647,7 +692,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
 
         private int _AccDemmurrageFreeDays;
         [ImmediatePostData]
-        [XafDisplayName("Demmurrage Free Days")]
+        [XafDisplayName("Demurrage Free Days")]
         [Index(78), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("AccDemmurrageFreeDays", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public int AccDemmurrageFreeDays
@@ -736,12 +781,43 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
             }
         }
 
+        // Start ver 1.0.31
+        private int _ESTDocProcessDays;
+        [XafDisplayName("EST Doc. Processing Days")]
+        [Index(89), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Appearance("ESTDocProcessDays", Enabled = false)]
+        public int ESTDocProcessDays
+        {
+            get { return _ESTDocProcessDays; }
+            set
+            {
+                SetPropertyValue("ESTDocProcessDays", ref _ESTDocProcessDays, value);
+            }
+        }
+
+        private int _DocProcessDays;
+        [XafDisplayName("Doc. Processing Days")]
+        [Index(90), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Appearance("DocProcessDays", Enabled = false)]
+        public int DocProcessDays
+        {
+            get { return _DocProcessDays; }
+            set
+            {
+                SetPropertyValue("DocProcessDays", ref _DocProcessDays, value);
+            }
+        }
+        // End ver 1.0.31
+
         private DateTime _InvSettDate;
         // Start ver 1.0.27
         [ImmediatePostData]
         // End ver 1.0.27
         [XafDisplayName("Invoice Settlement Date")]
-        [Index(90), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        // Start ver 1.0.31
+        //[Index(90), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Index(91), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        // End ver 1.0.31
         [Appearance("InvSettDate", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime InvSettDate
         {
@@ -796,6 +872,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private DateTime _DutySettDate;
+        // Start ver 1.0.31
+        [ImmediatePostData]
+        // End ver 1.0.31
         [XafDisplayName("Duty Settlement Date")]
         [Index(98), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
@@ -807,11 +886,27 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
             set
             {
                 SetPropertyValue("DutySettDate", ref _DutySettDate, value);
+                // Start ver 1.0.31
+                if (!IsLoading)
+                {
+                    if (SoftcopyBLRecFrmPur.Date.ToString("MM/dd/yyyy") != "01/01/0001" && DutySettDate.Date.ToString("MM/dd/yyyy") != "01/01/0001")
+                    {
+                        DocProcessDays = (DutySettDate.Date - SoftcopyBLRecFrmPur.Date).Days + 1;
+                    }
+                    else
+                    {
+                        DocProcessDays = 1;
+                    }
+                }
+                // End ver 1.0.31
             }
         }
 
         private DateTime _ArrivePortDate;
-        [XafDisplayName("Arrive Port Date")]
+        // Start ver 1.0.31
+        //[XafDisplayName("Arrive Port Date")]
+        [XafDisplayName("Latest Port Arrive Date")]
+        // End ver 1.0.31
         [Index(100), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("ArrivePortDate", Enabled = false, Criteria = "AccDeptStatus = 1 or IsValidAcc = 0")]
         public DateTime ArrivePortDate
@@ -839,7 +934,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         // Warehouse Dept
         private DateTime _WhsStakeOnDateTime;
         [ImmediatePostData]
-        [XafDisplayName("Stake On Date Time")]
+        // Start ver 1.0.31
+        //[XafDisplayName("Stake On Date Time")]
+        [XafDisplayName("Stacked On Date Time")]
+        // End ver 1.0.31
         [Index(105), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [ModelDefault("EditMask", "dd/MM/yyyy hh:mm tt")]
@@ -971,7 +1069,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
 
         private int _WhsDemmurrageFreeDays;
         [ImmediatePostData]
-        [XafDisplayName("Demmurrage Free Days")]
+        [XafDisplayName("Demurrage Free Days")]
         [Index(110), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("WhsDemmurrageFreeDays", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
         public int WhsDemmurrageFreeDays
@@ -1077,6 +1175,21 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 }
             }
         }
+
+        // Start ver 1.0.31
+        private int _CombinedFreeDays;
+        [XafDisplayName("Combined (DM&DT) Free Days")]
+        [Index(114), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Appearance("CombinedFreeDays", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
+        public int CombinedFreeDays
+        {
+            get { return _CombinedFreeDays; }
+            set
+            {
+                SetPropertyValue("CombinedFreeDays", ref _CombinedFreeDays, value);
+            }
+        }
+        // End ver 1.0.31
 
         private DateTime _ReqPullOutDateTime;
         [ImmediatePostData]
@@ -1339,6 +1452,9 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         [XafDisplayName("Remarks")]
         [Index(130), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("WhsRemarks", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
+        // Start ver 1.0.31
+        [Size(250)]
+        // End ver 1.0.31
         public string WhsRemarks
         {
             get { return _WhsRemarks; }
@@ -1347,6 +1463,22 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                 SetPropertyValue("WhsRemarks", ref _WhsRemarks, value);
             }
         }
+
+        // Start ver 1.0.31
+        private string _WhsContainerDelayReason;
+        [XafDisplayName("Container Delay Reason")]
+        [Index(131), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        [Appearance("WhsContainerDelayReason", Enabled = false, Criteria = "WhsDeptStatus = 1 or IsValidWhs = 0")]
+        [Size(250)]
+        public string WhsContainerDelayReason
+        {
+            get { return _WhsContainerDelayReason; }
+            set
+            {
+                SetPropertyValue("WhsContainerDelayReason", ref _WhsContainerDelayReason, value);
+            }
+        }
+        // End ver 1.0.31
 
         private ContainerStatus _WhsDeptStatus;
         [ImmediatePostData]
@@ -1378,7 +1510,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private DateTime? _DemmurrageFreeDue;
-        [XafDisplayName("Demmurrage Free Due Date Time")]
+        [XafDisplayName("Demurrage Free Due Date Time")]
         [Index(143), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [ModelDefault("EditMask", "dd/MM/yyyy hh:mm tt")]
@@ -1485,7 +1617,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private int _DemmurrageFreeDelayDays;
-        [XafDisplayName("DEMMURRAGE Free Delay Days")]
+        [XafDisplayName("Demurrage Free Delay Days")]
         [Index(163), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("DemmurrageFreeDelayDays", Enabled = false)]
         public int DemmurrageFreeDelayDays
@@ -1498,7 +1630,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
         }
 
         private int _DemmurrageDETFreeDelayDays;
-        [XafDisplayName("Demmurrage (DET) Free Delay Days")]
+        [XafDisplayName("Demurrage (DET) Free Delay Days")]
         [Index(165), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Appearance("DemmurrageDETFreeDelayDays", Enabled = false)]
         public int DemmurrageDETFreeDelayDays

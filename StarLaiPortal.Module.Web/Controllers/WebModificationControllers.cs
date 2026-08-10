@@ -10,6 +10,7 @@ using DevExpress.ExpressApp.Utils;
 using DevExpress.ExpressApp.Web.SystemModule;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
+using DevExpress.Xpo;
 using DevExpress.XtraGrid.EditForm.Helpers;
 using StarLaiPortal.Module.BusinessObjects;
 using StarLaiPortal.Module.BusinessObjects.Advanced_Shipment_Notice;
@@ -42,19 +43,21 @@ using System.Linq;
 using System.Text;
 using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 
-// 2023-07-28 add AR Downpayment cancalletion ver 1.0.7
-// 2023-08-25 add picklistactual validation ver 1.0.9
-// 2023-04-09 fix speed issue ver 1.0.8.1
-// 2023-09-25 copy warehouse ver 1.0.10
-// 2023-10-11 fix multi tab issue ver 1.0.10
-// 2023-10-20 add stock count ver 1.0.12
-// 2023-12-04 add outstanding qty ver 1.0.13
-// 2024-01-17 block save if no series for PRR ver 1.0.13
-// 2024-01-29 SQ and PO update OIDKey ver 1.0.14
-// 2024-04-16 Pick list not allow to change after submitted ver 1.0.15
-// 2025-01-23 add item count ver 1.0.22
-// 2025-02-25 block add item if not in draft - ver 1.0.22
-// 2025-09-22 add container tracking - ver 1.0.25
+// 2023-07-28 - add AR Downpayment cancalletion ver 1.0.7
+// 2023-08-25 - add picklistactual validation ver 1.0.9
+// 2023-04-09 - fix speed issue ver 1.0.8.1
+// 2023-09-25 - copy warehouse ver 1.0.10
+// 2023-10-11 - fix multi tab issue ver 1.0.10
+// 2023-10-20 - add stock count ver 1.0.12
+// 2023-12-04 - add outstanding qty ver 1.0.13
+// 2024-01-17 - block save if no series for PRR ver 1.0.13
+// 2024-01-29 - SQ and PO update OIDKey ver 1.0.14
+// 2024-04-16 - Pick list not allow to change after submitted ver 1.0.15
+// 2025-01-23 - add item count ver 1.0.22
+// 2025-02-25 - block add item if not in draft - ver 1.0.22
+// 2025-09-22 - add container tracking - ver 1.0.25
+// 2026-08-10 - block save if duplicate contrainer no found - ver 1.0.31
+
 
 namespace StarLaiPortal.Module.Web.Controllers
 {
@@ -1064,6 +1067,25 @@ namespace StarLaiPortal.Module.Web.Controllers
             else if (View.ObjectTypeInfo.Type == typeof(ContainerTracking))
             {
                 ContainerTracking CurrObject = (ContainerTracking)args.CurrentObject;
+
+                // Start ver 1.0.31
+                ContainerTracking dupno = ObjectSpace.FindObject<ContainerTracking>(CriteriaOperator.Parse("ContainerNo = ?", CurrObject.ContainerNo));
+
+                if (dupno != null)
+                {
+                    if (dupno.Oid != CurrObject.Oid)
+                    {
+                        genCon.showMsg("Error", "Duplicate container no. found.", InformationType.Error);
+                        return;
+                    }
+                }
+
+                if (CurrObject.GRPOReturnBack.Date < CurrObject.ActualReturnBack.Date)
+                {
+                    genCon.showMsg("Error", "GRPO Completion Date not allow early than Actual Return Back to Port.", InformationType.Error);
+                    return;
+                }
+                // End ver 1.0.31
 
                 base.Save(args);
                 if (CurrObject.DocNum == null)

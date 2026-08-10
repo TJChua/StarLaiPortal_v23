@@ -285,6 +285,7 @@
     <Compile Include="BusinessObjects\Setup\Approvals.cs" />
     <Compile Include="BusinessObjects\Setup\ApprovalUsers.cs" />
     <Compile Include="BusinessObjects\Setup\BundleType.cs" />
+    <Compile Include="BusinessObjects\Setup\ContainerDocProcessDays.cs" />
     <Compile Include="BusinessObjects\Setup\DiscrepancyReason.cs" />
     <Compile Include="BusinessObjects\Setup\DocTypes.cs" />
     <Compile Include="BusinessObjects\Setup\ItemInquiryDefault.cs" />

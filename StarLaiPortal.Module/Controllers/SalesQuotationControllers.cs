@@ -51,6 +51,7 @@ using static System.Net.Mime.MediaTypeNames;
 // 2025-10-06 - Fix copy to recipient button - ver 1.0.25
 // 2025-12-08 - add require approve - ver 1.0.26
 // 2026-05-07 - enhance posting date and delivery date format - ver 1.0.28
+// 2026-08-10 - do not update when status not draft - ver 1.0.30
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -98,27 +99,34 @@ namespace StarLaiPortal.Module.Controllers
                     {
                         BusinessObjects.Sales_Quotation.SalesQuotation salesquotation = View.CurrentObject as BusinessObjects.Sales_Quotation.SalesQuotation;
 
-                        foreach (SalesQuotationDetails dtl in salesquotation.SalesQuotationDetails)
+                        // Start ver 1.0.30
+                        if (salesquotation.Status == DocStatus.Draft)
                         {
-                            // Start ver 1.0.22
-                            if (genCon != null)
+                        // End ver 1.0.30
+                            foreach (SalesQuotationDetails dtl in salesquotation.SalesQuotationDetails)
                             {
-                            // End ver 1.0.22
-                                dtl.Available = genCon.GenerateInstock(ObjectSpace, dtl.ItemCode.ItemCode, dtl.Location.WarehouseCode);
-                            // Start ver 1.0.22
+                                // Start ver 1.0.22
+                                if (genCon != null)
+                                {
+                                    // End ver 1.0.22
+                                    dtl.Available = genCon.GenerateInstock(ObjectSpace, dtl.ItemCode.ItemCode, dtl.Location.WarehouseCode);
+                                    // Start ver 1.0.22
+                                }
+                                // End ver 1.0.22
                             }
-                            // End ver 1.0.22
-                        }
 
-                        if (salesquotation.IsNew == false)
-                        {
-                            try
+                            if (salesquotation.IsNew == false)
                             {
-                                ObjectSpace.CommitChanges();
-                                ObjectSpace.Refresh();
+                                try
+                                {
+                                    ObjectSpace.CommitChanges();
+                                    ObjectSpace.Refresh();
+                                }
+                                catch { }
                             }
-                            catch { }
+                        // Start ver 1.0.30
                         }
+                        // End ver 1.0.30
                     }
                 }
             }
