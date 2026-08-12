@@ -1137,7 +1137,7 @@
                   <LayoutGroup Id="Auto3a6801d5-dcee-41ba-9ffc-b7f2b4656fd3" ShowCaption="False" Caption="Auto3a6801d5-dcee-41ba-9ffc-b7f2b4656fd3(6)" Index="0" RelativeSize="100" Direction="Vertical" IsNewNode="True">
                     <LayoutGroup Id="Autoba847f53-ec0b-4637-bf3f-8853fab8ad80" ShowCaption="False" Caption="Autoba847f53-ec0b-4637-bf3f-8853fab8ad80(7)" Index="0" RelativeSize="100" IsNewNode="True">
                       <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Container Tracking" Direction="Horizontal" IsNewNode="True">
-                        <LayoutGroup Id="Auto94e99795-6e01-41ed-b44b-621f2480559e" ShowCaption="False" Caption="Auto94e99795-6e01-41ed-b44b-621f2480559e(9)" Index="0" RelativeSize="49.857142857142854" IsNewNode="True">
+                        <LayoutGroup Id="Auto94e99795-6e01-41ed-b44b-621f2480559e" ShowCaption="False" Caption="Auto94e99795-6e01-41ed-b44b-621f2480559e(9)" Index="0" RelativeSize="49.644381223328594" IsNewNode="True">
                           <LayoutItem Id="ContainerNo" ViewItem="ContainerNo" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
                           <LayoutItem Id="Supplier" ViewItem="Supplier" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
                           <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
@@ -1145,7 +1145,7 @@
                           <LayoutItem Id="Forwarded" ViewItem="Forwarded" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
                           <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="30.303030303030305" IsNewNode="True" />
                         </LayoutGroup>
-                        <LayoutGroup Id="Auto2866b6e4-a749-498b-a174-51b97150d756" ShowCaption="False" Caption="Auto2866b6e4-a749-498b-a174-51b97150d756(16)" Index="1" RelativeSize="50.142857142857146" IsNewNode="True">
+                        <LayoutGroup Id="Auto2866b6e4-a749-498b-a174-51b97150d756" ShowCaption="False" Caption="Auto2866b6e4-a749-498b-a174-51b97150d756(16)" Index="1" RelativeSize="50.355618776671406" IsNewNode="True">
                           <LayoutItem Id="CreateDate" ViewItem="CreateDate" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
                           <LayoutItem Id="DocNum" ViewItem="DocNum" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
                           <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
@@ -1235,21 +1235,21 @@
             </LayoutGroup>
             <TabbedGroup Id="Item5" CaptionLocation="Top" Index="1" RelativeSize="76.504854368932044" IsNewNode="True">
               <LayoutGroup Id="Item1" ShowCaption="True" Caption="Purchase Dept." CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
-                <LayoutGroup Id="Auto1ff1fdc2-08df-4d39-b881-50393dd6d2f3" ShowCaption="False" Caption="Auto1ff1fdc2-08df-4d39-b881-50393dd6d2f3(20)" Index="0" RelativeSize="39.714285714285715" IsNewNode="True">
+                <LayoutGroup Id="Auto1ff1fdc2-08df-4d39-b881-50393dd6d2f3" ShowCaption="False" Caption="Auto1ff1fdc2-08df-4d39-b881-50393dd6d2f3(20)" Index="0" RelativeSize="39.5448079658606" IsNewNode="True">
                   <LayoutItem Id="PurBillOfLandingType" ViewItem="PurBillOfLandingType" CaptionLocation="Top" Index="0" RelativeSize="7.123655913978495" IsNewNode="True" />
                   <LayoutItem Id="PurCertificateOfOrigin" ViewItem="PurCertificateOfOrigin" CaptionLocation="Top" Index="1" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="SoftcopyBLRec" ViewItem="SoftcopyBLRec" CaptionLocation="Top" Index="2" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="SoftcopyPLRec" ViewItem="SoftcopyPLRec" CaptionLocation="Top" Index="3" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="SoftcopyInvoice" ViewItem="SoftcopyInvoice" CaptionLocation="Top" Index="4" RelativeSize="74.731182795698928" IsNewNode="True" />
                 </LayoutGroup>
-                <LayoutGroup Id="Auto2ac90500-4a1b-4442-ab38-2b6718424395" ShowCaption="False" Caption="Auto2ac90500-4a1b-4442-ab38-2b6718424395(26)" Index="1" RelativeSize="60.285714285714285" IsNewNode="True">
+                <LayoutGroup Id="Auto2ac90500-4a1b-4442-ab38-2b6718424395" ShowCaption="False" Caption="Auto2ac90500-4a1b-4442-ab38-2b6718424395(26)" Index="1" RelativeSize="60.4551920341394" IsNewNode="True">
                   <LayoutItem Id="PurchaseDeptStatus" ViewItem="PurchaseDeptStatus" CaptionLocation="Top" Index="0" RelativeSize="7.123655913978495" IsNewNode="True" />
                   <LayoutItem Id="PurCreditorPaymentTerm" ViewItem="PurCreditorPaymentTerm" CaptionLocation="Top" Index="1" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="PurTradeTerms" ViewItem="PurTradeTerms" CaptionLocation="Top" Index="2" RelativeSize="86.827956989247312" IsNewNode="True" />
                 </LayoutGroup>
               </LayoutGroup>
               <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="100" Caption="Account Dept." Direction="Horizontal" IsNewNode="True">
-                <LayoutGroup Id="Auto106929c5-9d6d-486e-aa6b-3067969be79a" ShowCaption="False" Caption="Auto106929c5-9d6d-486e-aa6b-3067969be79a(31)" Index="0" RelativeSize="39.714285714285715" IsNewNode="True">
+                <LayoutGroup Id="Auto106929c5-9d6d-486e-aa6b-3067969be79a" ShowCaption="False" Caption="Auto106929c5-9d6d-486e-aa6b-3067969be79a(31)" Index="0" RelativeSize="39.5448079658606" IsNewNode="True">
                   <LayoutItem Id="AccBillOfLandingType" ViewItem="AccBillOfLandingType" CaptionLocation="Top" Index="0" RelativeSize="7.123655913978495" IsNewNode="True" />
                   <LayoutItem Id="AccCertificateOfOrigin" ViewItem="AccCertificateOfOrigin" CaptionLocation="Top" Index="1" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="SoftcopyBLRecFrmPur" ViewItem="SoftcopyBLRecFrmPur" CaptionLocation="Top" Index="2" RelativeSize="6.0483870967741939" IsNewNode="True" />
@@ -1260,7 +1260,7 @@
                   <LayoutItem Id="ArrivePortDate" ViewItem="ArrivePortDate" CaptionLocation="Top" Index="7" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="RecvGatePassDate" ViewItem="RecvGatePassDate" CaptionLocation="Top" Index="8" RelativeSize="50.537634408602152" IsNewNode="True" />
                 </LayoutGroup>
-                <LayoutGroup Id="Autoa1dafb39-a879-4312-b895-0bf5dafcbe68" ShowCaption="False" Caption="Autoa1dafb39-a879-4312-b895-0bf5dafcbe68(43)" Index="1" RelativeSize="60.285714285714285" IsNewNode="True">
+                <LayoutGroup Id="Autoa1dafb39-a879-4312-b895-0bf5dafcbe68" ShowCaption="False" Caption="Autoa1dafb39-a879-4312-b895-0bf5dafcbe68(43)" Index="1" RelativeSize="60.4551920341394" IsNewNode="True">
                   <LayoutItem Id="AccDeptStatus" ViewItem="AccDeptStatus" CaptionLocation="Top" Index="0" RelativeSize="7.123655913978495" IsNewNode="True" />
                   <LayoutItem Id="AccCreditorPaymentTerm" ViewItem="AccCreditorPaymentTerm" CaptionLocation="Top" Index="1" RelativeSize="6.0483870967741939" IsNewNode="True" />
                   <LayoutItem Id="AccTradeTerms" ViewItem="AccTradeTerms" CaptionLocation="Top" Index="2" RelativeSize="6.0483870967741939" IsNewNode="True" />
@@ -1275,8 +1275,8 @@
                 </LayoutGroup>
               </LayoutGroup>
               <LayoutGroup Id="Item6" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="100" Caption="Warehouse Dept." Direction="Vertical" IsNewNode="True">
-                <LayoutGroup Id="Autoe74bf0b4-c237-4a88-8f7c-dd5c7480c5dd" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="74.462365591397855" IsNewNode="True">
-                  <LayoutGroup Id="Auto4d9b297e-c3a6-49fc-a9ca-0ffffb0afa50" ShowCaption="False" Caption="Auto4d9b297e-c3a6-49fc-a9ca-0ffffb0afa50(56)" Index="0" RelativeSize="47.142857142857146" IsNewNode="True">
+                <LayoutGroup Id="Autoe74bf0b4-c237-4a88-8f7c-dd5c7480c5dd" ShowCaption="False" Caption="Autoe74bf0b4-c237-4a88-8f7c-dd5c7480c5dd(60)" Direction="Horizontal" Index="0" RelativeSize="74.462365591397855" IsNewNode="True">
+                  <LayoutGroup Id="Auto4d9b297e-c3a6-49fc-a9ca-0ffffb0afa50" ShowCaption="False" Caption="Auto4d9b297e-c3a6-49fc-a9ca-0ffffb0afa50(56)" Index="0" RelativeSize="46.941678520625892" IsNewNode="True">
                     <LayoutItem Id="WhsStakeOnDateTime" ViewItem="WhsStakeOnDateTime" CaptionLocation="Top" Index="0" RelativeSize="9.5667870036101075" IsNewNode="True" />
                     <LayoutItem Id="WhsStorageFreeDays" ViewItem="WhsStorageFreeDays" CaptionLocation="Top" Index="1" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="WhsDemmurrageFreeDays" ViewItem="WhsDemmurrageFreeDays" CaptionLocation="Top" Index="2" RelativeSize="8.12274368231047" IsNewNode="True" />
@@ -1289,15 +1289,15 @@
                     <LayoutItem Id="ActualReturnBack" ViewItem="ActualReturnBack" CaptionLocation="Top" Index="9" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="GRPOReturnBack" ViewItem="GRPOReturnBack" CaptionLocation="Top" Index="10" RelativeSize="17.328519855595669" IsNewNode="True" />
                   </LayoutGroup>
-                  <LayoutGroup Id="Auto9fb74abe-2d7d-4701-b08f-1a7af8e86781" ShowCaption="False" Caption="Auto9fb74abe-2d7d-4701-b08f-1a7af8e86781(67)" Index="1" RelativeSize="52.857142857142854" IsNewNode="True">
+                  <LayoutGroup Id="Auto9fb74abe-2d7d-4701-b08f-1a7af8e86781" ShowCaption="False" Caption="Auto9fb74abe-2d7d-4701-b08f-1a7af8e86781(67)" Index="1" RelativeSize="53.058321479374108" IsNewNode="True">
                     <LayoutItem Id="WhsDeptStatus" ViewItem="WhsDeptStatus" CaptionLocation="Top" Index="0" RelativeSize="9.5667870036101075" IsNewNode="True" />
                     <LayoutItem Id="StorageFreeDue" ViewItem="StorageFreeDue" CaptionLocation="Top" Index="1" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="DemmurrageFreeDue" ViewItem="DemmurrageFreeDue" CaptionLocation="Top" Index="2" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="WhsDetentionFreeDueDate" ViewItem="WhsDetentionFreeDueDate" CaptionLocation="Top" Index="3" RelativeSize="8.12274368231047" IsNewNode="True" />
-                    <LayoutItem Id="DetentionFreeDelay" ViewItem="DetentionFreeDelay" CaptionLocation="Top" Index="4" RelativeSize="8.12274368231047" IsNewNode="True" />
-                    <LayoutItem Id="StorageFreeDelayDays" ViewItem="StorageFreeDelayDays" CaptionLocation="Top" Index="5" RelativeSize="8.12274368231047" IsNewNode="True" />
+                    <LayoutItem Id="StorageHours" ViewItem="StorageHours" Index="4" RelativeSize="8.12274368231047" CaptionLocation="Top" IsNewNode="True" />
+                    <LayoutItem Id="StorageFreeDelayHours" ViewItem="StorageFreeDelayHours" Index="5" RelativeSize="8.12274368231047" CaptionLocation="Top" IsNewNode="True" />
                     <LayoutItem Id="DemmurrageFreeDelayDays" ViewItem="DemmurrageFreeDelayDays" CaptionLocation="Top" Index="6" RelativeSize="8.12274368231047" IsNewNode="True" />
-                    <LayoutItem Id="DemmurrageDETFreeDelayDays" ViewItem="DemmurrageDETFreeDelayDays" CaptionLocation="Top" Index="7" RelativeSize="8.12274368231047" IsNewNode="True" />
+                    <LayoutItem Id="DetentionFreeDelay" ViewItem="DetentionFreeDelay" CaptionLocation="Top" Index="7" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="ForwardedFrmPort" ViewItem="ForwardedFrmPort" CaptionLocation="Top" Index="8" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="WhsUnload" ViewItem="WhsUnload" CaptionLocation="Top" Index="9" RelativeSize="8.12274368231047" IsNewNode="True" />
                     <LayoutItem Id="ForwardedToPort" ViewItem="ForwardedToPort" CaptionLocation="Top" Index="10" RelativeSize="8.12274368231047" IsNewNode="True" />
