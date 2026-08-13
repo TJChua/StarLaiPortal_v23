@@ -52,6 +52,7 @@ using static System.Net.Mime.MediaTypeNames;
 // 2025-12-08 - add require approve - ver 1.0.26
 // 2026-05-07 - enhance posting date and delivery date format - ver 1.0.28
 // 2026-08-10 - do not update when status not draft - ver 1.0.30
+// 2026-08-10 - add trade term and other enhancement - ver 1.0.31
 
 namespace StarLaiPortal.Module.Controllers
 {

@@ -40,6 +40,7 @@ using System.Web;
 // 2024-04-04 - Update available qty - ver 1.0.15
 // 2024-06-11 - fixed disable edit and delete button - ver 1.0.17
 // 2025-12-05 - add submit WTR action button - ver 1.0.26
+// 2026-08-10 - add trade term and other enhancement - ver 1.0.31
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -80,27 +81,34 @@ namespace StarLaiPortal.Module.Controllers
                 {
                     BusinessObjects.Warehouse_Transfer.WarehouseTransferReq warehousereq = View.CurrentObject as BusinessObjects.Warehouse_Transfer.WarehouseTransferReq;
 
-                    foreach (WarehouseTransferReqDetails dtl in warehousereq.WarehouseTransferReqDetails)
+                    // Start ver 1.0.31
+                    if (warehousereq.Status == DocStatus.Draft)
                     {
-                        if (dtl.FromWarehouse != null)
+                    // End ver 1.0.31
+                        foreach (WarehouseTransferReqDetails dtl in warehousereq.WarehouseTransferReqDetails)
                         {
-                            dtl.Available = genCon.GenerateInstock(ObjectSpace, dtl.ItemCode.ItemCode, dtl.FromWarehouse.WarehouseCode);
+                            if (dtl.FromWarehouse != null)
+                            {
+                                dtl.Available = genCon.GenerateInstock(ObjectSpace, dtl.ItemCode.ItemCode, dtl.FromWarehouse.WarehouseCode);
+                            }
+                            else
+                            {
+                                dtl.Available = 0;
+                            }
                         }
-                        else
-                        {
-                            dtl.Available = 0;
-                        }
-                    }
 
-                    if (warehousereq.IsNew == false)
-                    {
-                        try
+                        if (warehousereq.IsNew == false)
                         {
-                            ObjectSpace.CommitChanges();
-                            ObjectSpace.Refresh();
+                            try
+                            {
+                                ObjectSpace.CommitChanges();
+                                ObjectSpace.Refresh();
+                            }
+                            catch { }
                         }
-                        catch { }
+                    // Start ver 1.0.31
                     }
+                    // End ver 1.0.31
                 }
             }
             // End ver 1.0.17

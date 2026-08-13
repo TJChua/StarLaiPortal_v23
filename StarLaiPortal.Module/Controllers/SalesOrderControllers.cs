@@ -29,11 +29,12 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-// 2023-08-22 add cancel and close button ver 1.0.9
-// 2024-04-04 Update available qty ver 1.0.15
-// 2024-06-01 Hide cancel button ver 1.0.17
-// 2025-05-25 avoid error when open new tab 1.0.29
-// 2026-06-29 Enhance printout file name - ver 1.0.30
+// 2023-08-22 - add cancel and close button ver 1.0.9
+// 2024-04-04 - Update available qty ver 1.0.15
+// 2024-06-01 - Hide cancel button ver 1.0.17
+// 2025-05-25 - avoid error when open new tab 1.0.29
+// 2026-06-29 - Enhance printout file name - ver 1.0.30
+// 2026-08-10 - add trade term and other enhancement - ver 1.0.31
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -65,28 +66,35 @@ namespace StarLaiPortal.Module.Controllers
                     {
                         BusinessObjects.Sales_Order.SalesOrder salesorder = View.CurrentObject as BusinessObjects.Sales_Order.SalesOrder;
 
-                        foreach (SalesOrderDetails dtl in salesorder.SalesOrderDetails)
+                        // Start ver 1.0.31
+                        if (salesorder.Status == DocStatus.Open)
                         {
-                            // Start ver 1.0.29
-                            if (genCon != null)
+                        // End ver 1.0.31
+                            foreach (SalesOrderDetails dtl in salesorder.SalesOrderDetails)
                             {
-                            // End ver 1.0.29
-                                dtl.Available = genCon.GenerateInstock(ObjectSpace, dtl.ItemCode.ItemCode, dtl.Location.WarehouseCode);
-                            // Start ver 1.0.29
+                                // Start ver 1.0.29
+                                if (genCon != null)
+                                {
+                                    // End ver 1.0.29
+                                    dtl.Available = genCon.GenerateInstock(ObjectSpace, dtl.ItemCode.ItemCode, dtl.Location.WarehouseCode);
+                                    // Start ver 1.0.29
+                                }
+                                // End ver 1.0.29
                             }
-                            // End ver 1.0.29
-                        }
 
-                        if (salesorder.IsNew == false)
-                        {
-                            try 
+                            if (salesorder.IsNew == false)
                             {
-                                ObjectSpace.CommitChanges();
-                                ObjectSpace.Refresh();
-                            }
-                            catch { }
+                                try
+                                {
+                                    ObjectSpace.CommitChanges();
+                                    ObjectSpace.Refresh();
+                                }
+                                catch { }
 
+                            }
+                        // Start ver 1.0.31
                         }
+                        // End ver 1.0.31
                     }
                 }
             }
