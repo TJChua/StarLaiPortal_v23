@@ -1515,6 +1515,9 @@ namespace StarLaiPortal.Module.BusinessObjects
 
         [XafDisplayName("Create Date Time")]
         [Appearance("CreateDT", Enabled = false)]
+        // Start ver 1.0.31
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        // End ver 1.0.31
         [Index(8)]
         public DateTime CreateDT
         {

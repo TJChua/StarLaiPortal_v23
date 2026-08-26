@@ -1293,6 +1293,17 @@ namespace StarLaiPortal.Module.Controllers
                         var script = "window.open('" + url + "');";
 
                         WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+
+                        // Start ver 1.0.31
+                        IObjectSpace os = Application.CreateObjectSpace();
+                        DeliveryOrder trx = os.FindObject<DeliveryOrder>(new BinaryOperator("Oid", delivery.Oid));
+
+                        trx.DOPrintCount = trx.DOPrintCount + 1;
+                        trx.DOPrintDate = DateTime.Now;
+
+                        os.CommitChanges();
+                        os.Refresh();
+                        // End ver 1.0.31
                     }
                     catch (Exception ex)
                     {
@@ -1365,6 +1376,17 @@ namespace StarLaiPortal.Module.Controllers
                     var script = "window.open('" + url + "');";
 
                     WebWindow.CurrentRequestWindow.RegisterStartupScript("DownloadFile", script);
+
+                    // Start ver 1.0.31
+                    IObjectSpace os = Application.CreateObjectSpace();
+                    DeliveryOrder trx = os.FindObject<DeliveryOrder>(new BinaryOperator("Oid", delivery.Oid));
+
+                    trx.DOPrintCount = trx.DOPrintCount + 1;
+                    trx.DOPrintDate = DateTime.Now;
+
+                    os.CommitChanges();
+                    os.Refresh();
+                    // End ver 1.0.31
                 }
                 catch (Exception ex)
                 {

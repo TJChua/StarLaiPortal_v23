@@ -256,7 +256,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         [NoForeignKey]
         [RuleRequiredField(DefaultContexts.Save)]
         [XafDisplayName("Bin")]
-        [DataSourceCriteria("Warehouse = '@this.FromWarehouse.WarehouseCode'")]
+        [DataSourceCriteria("Warehouse = '@this.Warehouse.WarehouseCode'")]
         [LookupEditorMode(LookupEditorMode.AllItems)]
         [Index(14), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(true)]
         public vwBin Bin
