@@ -3052,6 +3052,9 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (result.PortalNo == "")
                     {
+                        // Start ver 1.0.31
+                        ChoicePreviewOption.SelectedIndex = 0;
+                        // End ver 1.0.31
                         showMsg("Fail", "SO number not found.", InformationType.Error);
                         return;
                     }
@@ -3132,6 +3135,9 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (result.PortalSQNo == "")
                     {
+                        // Start ver 1.0.31
+                        ChoicePreviewOption.SelectedIndex = 0;
+                        // End ver 1.0.31
                         showMsg("Fail", "SQ number not found.", InformationType.Error);
                         return;
                     }
@@ -3199,6 +3205,9 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (result.PickListNo == "")
                     {
+                        // Start ver 1.0.31
+                        ChoicePreviewOption.SelectedIndex = 0;
+                        // End ver 1.0.31
                         showMsg("Fail", "Pick List number not found.", InformationType.Error);
                         return;
                     }
@@ -3266,6 +3275,9 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (result.PortalDONo == "")
                     {
+                        // Start ver 1.0.31
+                        ChoicePreviewOption.SelectedIndex = 0;
+                        // End ver 1.0.31
                         showMsg("Fail", "DO number not found.", InformationType.Error);
                         return;
                     }
@@ -3349,6 +3361,9 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (result.PortalDONo == "")
                     {
+                        // Start ver 1.0.31
+                        ChoicePreviewOption.SelectedIndex = 0;
+                        // End ver 1.0.31
                         showMsg("Fail", "Invoice number not found.", InformationType.Error);
                         return;
                     }

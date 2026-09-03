@@ -32,12 +32,13 @@ using System.Text;
 using System.Web;
 
 // 2023-07-20 - do not close asn if partial - ver 1.0.6 (UAT)
-// 2023-04-09 fix speed issue ver 1.0.8.1
-// 2023-09-25 add copyto qty ver 1.0.10
-// 2023-12-04 add outstanding qty ver 1.0.13
-// 2025-07-21 enhance speed ver 1.0.23
-// 2025-08-18 not allow submit if PO line closed ver 1.0.24
-// 2025-10-29 add PO line Num ver 1.0.24
+// 2023-04-09 - fix speed issue - ver 1.0.8.1
+// 2023-09-25 - add copyto qty - ver 1.0.10
+// 2023-12-04 - add outstanding qty - ver 1.0.13
+// 2025-07-21 - enhance speed - ver 1.0.23
+// 2025-08-18 - not allow submit if PO line closed - ver 1.0.24
+// 2025-10-29 - add PO line Num - ver 1.0.24
+// 2026-09-02 - handle partial outstanding - ver 1.0.31
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -814,7 +815,10 @@ namespace StarLaiPortal.Module.Controllers
                                         asndetail.CopyToQty = asndetail.CopyToQty - (asndetail.CopyToQty - dtl.Received);
                                         asndetail.CopyTotalQty = asndetail.CopyTotalQty + dtl.Received;
                                         // Start ver 1.0.13
-                                        asndetail.OutstandingQty = asndetail.UnloadQty - dtl.Received;
+                                        // Start ver 1.0.31
+                                        //asndetail.OutstandingQty = asndetail.UnloadQty - dtl.Received;
+                                        asndetail.OutstandingQty = asndetail.UnloadQty - asndetail.CopyTotalQty;
+                                        // End ver 1.0.31
                                         // End ver 1.0.13
                                     }
 
