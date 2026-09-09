@@ -55,12 +55,13 @@ using StarLaiPortal.Module.BusinessObjects.Reports;
 using StarLaiPortal.Module.BusinessObjects.Print_Module;
 using StarLaiPortal.Module.BusinessObjects.Stock_Count_Inquiry;
 
-// 2023-07-28 add AR Downpayment cancalletion ver 1.0.7
-// 2023-09-11 add dashboard sales/purchase/warehouse ver 1.0.9
-// 2023-09-19 add disable detail view ver 1.0.9
-// 2023-10-20 add stock count ver 1.0.11
-// 2025-09-11 Hide Export by role ver 1.0.25
-// 2026-03-02 Hide Export by different role group by module ver 1.0.27
+// 2023-07-28 - add AR Downpayment cancalletion ver 1.0.7
+// 2023-09-11 - add dashboard sales/purchase/warehouse ver 1.0.9
+// 2023-09-19 - add disable detail view ver 1.0.9
+// 2023-10-20 - add stock count ver 1.0.11
+// 2025-09-11 - Hide Export by role ver 1.0.25
+// 2026-03-02 - Hide Export by different role group by module ver 1.0.27
+// 2026-09-07 - Export add new module ver 1.0.32
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -321,7 +322,11 @@ namespace StarLaiPortal.Module.Controllers
                     View.ObjectTypeInfo.Type == typeof(SalesOrderCollectionDetails) || View.ObjectTypeInfo.Type == typeof(SalesOrderCollectionReturn) || 
                     View.ObjectTypeInfo.Type == typeof(SalesOrderCollectionDocStatus) || View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrder) || 
                     View.ObjectTypeInfo.Type == typeof(vwInquiryARDownpayment) || View.ObjectTypeInfo.Type == typeof(ARDownpaymentInquiryResult) ||
-                    View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrderDetails))
+                    View.ObjectTypeInfo.Type == typeof(vwInquirySalesOrderDetails)
+                    // Start ver 1.0.32
+                    || View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryResult) || View.ObjectTypeInfo.Type == typeof(SalesOrderInquiryDetailResult)
+                    // End ver 1.0.32
+                    )
                 {
                     PermissionPolicyRole exportrole = ObjectSpace.FindObject<PermissionPolicyRole>(CriteriaOperator.Parse("IsCurrentUserInRole('ExportSO')"));
                     if (exportrole == null)
@@ -362,7 +367,11 @@ namespace StarLaiPortal.Module.Controllers
                     View.ObjectTypeInfo.Type == typeof(PickListDetailsActual) || View.ObjectTypeInfo.Type == typeof(PickListDocTrail) || 
                     View.ObjectTypeInfo.Type == typeof(PickListAttachment) || View.ObjectTypeInfo.Type == typeof(vwInquiryOpenPickList) || 
                     View.ObjectTypeInfo.Type == typeof(vwInquiryPickList) || View.ObjectTypeInfo.Type == typeof(vwInquiryPickListDetails) || 
-                    View.ObjectTypeInfo.Type == typeof(PickListDetailsInquiryResult))
+                    View.ObjectTypeInfo.Type == typeof(PickListDetailsInquiryResult)
+                    // Start ver 1.0.32
+                    || View.ObjectTypeInfo.Type == typeof(PickListInquiryResult) || View.ObjectTypeInfo.Type == typeof(OpenPickListInquiryResult)
+                    // End ver 1.0.32
+                    )
                 {
                     PermissionPolicyRole exportrole = ObjectSpace.FindObject<PermissionPolicyRole>(CriteriaOperator.Parse("IsCurrentUserInRole('ExportPickList')"));
                     if (exportrole == null)
@@ -376,7 +385,11 @@ namespace StarLaiPortal.Module.Controllers
                 if (View.ObjectTypeInfo.Type == typeof(PackList) || View.ObjectTypeInfo.Type == typeof(PackListDetails) ||
                    View.ObjectTypeInfo.Type == typeof(PackListDocTrail) || View.ObjectTypeInfo.Type == typeof(vwInquiryBundleID) ||
                    View.ObjectTypeInfo.Type == typeof(BundleIDInquiryResult) || View.ObjectTypeInfo.Type == typeof(vwInquiryPackList) ||
-                   View.ObjectTypeInfo.Type == typeof(PackListInquiryResult))
+                   View.ObjectTypeInfo.Type == typeof(PackListInquiryResult)
+                   // Start ver 1.0.32
+                   || View.ObjectTypeInfo.Type == typeof(BundleIDInquiryResult)
+                   // End ver 1.0.32
+                   )
                 {
                     PermissionPolicyRole exportrole = ObjectSpace.FindObject<PermissionPolicyRole>(CriteriaOperator.Parse("IsCurrentUserInRole('ExportPackList')"));
                     if (exportrole == null)

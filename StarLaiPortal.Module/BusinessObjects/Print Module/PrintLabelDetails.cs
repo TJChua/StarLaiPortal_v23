@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 
 // 2023-09-25 add printing uom ver 1.0.10
+// 2026-09-09 - Add Importby and Made in - ver 1.0.32
 
 namespace StarLaiPortal.Module.BusinessObjects.Print_Module
 {
@@ -199,6 +200,34 @@ namespace StarLaiPortal.Module.BusinessObjects.Print_Module
                 SetPropertyValue("LineOID", ref _LineOID, value);
             }
         }
+
+        // Start ver 1.0.32
+        private vwCountry _MadeIn;
+        [NoForeignKey]
+        [XafDisplayName("Made In")]
+        [Index(23), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        public vwCountry MadeIn
+        {
+            get { return _MadeIn; }
+            set
+            {
+                SetPropertyValue("MadeIn", ref _MadeIn, value);
+            }
+        }
+
+        private vwImporter _ImportBy;
+        [NoForeignKey]
+        [XafDisplayName("Import By")]
+        [Index(25), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        public vwImporter ImportBy
+        {
+            get { return _ImportBy; }
+            set
+            {
+                SetPropertyValue("ImportBy", ref _ImportBy, value);
+            }
+        }
+        // End ver 1.0.32
 
         private PrintLabel _PrintLabel;
         [Association("PrintLabel-PrintLabelDetails")]

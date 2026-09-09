@@ -15,9 +15,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-// 2023-04-09 fix speed issue ver 1.0.8.1
-// 2023-09-25 add copyto qty ver 1.0.10
-// 2025-08-18 Add ASN Container Printing ver 1.0.24
+// 2023-04-09 - fix speed issue - ver 1.0.8.1
+// 2023-09-25 - add copyto qty - ver 1.0.10
+// 2025-08-18 - Add ASN Container Printing - ver 1.0.24
+// 2026-09-09 - Add Importby and Made in - ver 1.0.32
 
 namespace StarLaiPortal.Module.BusinessObjects.Advanced_Shipment_Notice
 {
@@ -386,6 +387,34 @@ namespace StarLaiPortal.Module.BusinessObjects.Advanced_Shipment_Notice
                 SetPropertyValue("BatchNumber", ref _BatchNumber, value);
             }
         }
+
+        // Start ver 1.0.32
+        private vwCountry _MadeIn;
+        [NoForeignKey]
+        [XafDisplayName("Made In")]
+        [Index(55), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        public vwCountry MadeIn
+        {
+            get { return _MadeIn; }
+            set
+            {
+                SetPropertyValue("MadeIn", ref _MadeIn, value);
+            }
+        }
+
+        private vwImporter _ImportBy;
+        [NoForeignKey]
+        [XafDisplayName("Import By")]
+        [Index(58), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        public vwImporter ImportBy
+        {
+            get { return _ImportBy; }
+            set
+            {
+                SetPropertyValue("ImportBy", ref _ImportBy, value);
+            }
+        }
+        // End ver 1.0.32
 
         private bool _CopyTo;
         [XafDisplayName("CopyTo")]

@@ -46,6 +46,7 @@ using System.Web.UI.WebControls;
 // 2026-05-15 - add Sales Order Inquiry - ver 1.0.29
 // 2026-05-28 - enhance picking inquiry to SP - ver 1.0.29
 // 2026-08-10 - add new container setup - ver 1.0.31
+// 2026-09-07 - add sales order detail inquiry SP - ver 1.0.32
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -718,6 +719,21 @@ namespace StarLaiPortal.Module.Controllers
                 }
             }
             // End ver 1.0.31
+
+            // Start ver 1.0.32
+            if (e.ActionArguments.SelectedChoiceActionItem.Id == "SalesOrderDetailInquiry_ListView")
+            {
+                XPObjectSpace persistentObjectSpace = (XPObjectSpace)Application.CreateObjectSpace();
+                var nonPersistentOS = Application.CreateObjectSpace(typeof(SalesOrderDetailInquiry));
+                SalesOrderDetailInquiry list = nonPersistentOS.CreateObject<SalesOrderDetailInquiry>();
+
+                DetailView detailView = Application.CreateDetailView(nonPersistentOS, list);
+                detailView.ViewEditMode = DevExpress.ExpressApp.Editors.ViewEditMode.Edit;
+
+                e.ActionArguments.ShowViewParameters.CreatedView = detailView;
+                e.Handled = true;
+            }
+            // End ver 1.0.32
 
             // Start ver 1.0.15
             if (DateTime.Now.Minute.ToString("00").Substring(1, 1) == "0" ||

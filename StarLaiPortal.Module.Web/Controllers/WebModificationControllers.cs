@@ -57,6 +57,7 @@ using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 // 2025-02-25 - block add item if not in draft - ver 1.0.22
 // 2025-09-22 - add container tracking - ver 1.0.25
 // 2026-08-10 - block save if duplicate contrainer no found - ver 1.0.31
+// 2026-09-09 - not allow edit after submit - ver 1.0.32
 
 
 namespace StarLaiPortal.Module.Web.Controllers
@@ -562,6 +563,20 @@ namespace StarLaiPortal.Module.Web.Controllers
             {
                 GRN CurrObject = (GRN)args.CurrentObject;
                 SqlConnection conn = new SqlConnection(genCon.getConnectionString());
+
+                // Start ver 1.0.32
+                IObjectSpace grn = Application.CreateObjectSpace();
+                GRN grntrx = grn.FindObject<GRN>(new BinaryOperator("Oid", CurrObject.Oid));
+
+                if (grntrx != null)
+                {
+                    if (grntrx.Status != DocStatus.Draft)
+                    {
+                        genCon.showMsg("Error", "The object you are trying to save was changed by other user, please close the tab and reopen again.", InformationType.Error);
+                        return;
+                    }
+                }
+                // End ver 1.0.32
 
                 // Start ver 1.0.8.1
                 string duppo = null;

@@ -438,9 +438,10 @@
           <Item Id="SalesOrderCollectionReport_ListView" Index="2" />
           <Item Id="vwInquirySalesOrder_ListView" Index="3" QuickAccessItem="False" Visible="True" />
           <Item Id="SalesOrderInquiry_ListView" Index="4" />
-          <Item Id="vwInquiryARDownpayment_ListView" Visible="False" Index="5" />
-          <Item Id="ARDownpaymentInquiry_ListView" Index="6" />
-          <Item Id="vwInquirySalesOrderDetails_ListView" Visible="False" />
+          <Item Id="vwInquirySalesOrderDetails_ListView" Visible="False" Index="5" />
+          <Item Id="SalesOrderDetailInquiry_ListView" Index="6" />
+          <Item Id="vwInquiryARDownpayment_ListView" Visible="False" Index="7" />
+          <Item Id="ARDownpaymentInquiry_ListView" Index="8" />
         </Items>
       </Item>
       <Item Id="Manual Credit Note Request" Index="8" Visible="True">
@@ -846,30 +847,34 @@
     <DetailView Id="ASN_DetailView">
       <Items>
         <ActionContainerViewItem Id="Import ASN" ActionContainer="ListView" Caption="Import ASN" Orientation="Vertical" IsNewNode="True" />
+        <PropertyEditor Id="ImportBy" LookupEditorMode="AllItems" />
+        <PropertyEditor Id="MadeIn" LookupEditorMode="AllItems" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="36.101083032490976" Direction="Horizontal">
-            <LayoutGroup Id="ASN_col1" ShowCaption="False" Index="0" RelativeSize="40.201729106628243" IsNewNode="True">
-              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="RefNo" ViewItem="RefNo" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Vehicle" ViewItem="Vehicle" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Container" ViewItem="Container" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="BatchNumber" ViewItem="BatchNumber" Index="6" RelativeSize="17" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="45.1219512195122" Direction="Horizontal">
+            <LayoutGroup Id="ASN_col1" ShowCaption="False" Index="0" RelativeSize="40.159574468085104" IsNewNode="True">
+              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="RefNo" ViewItem="RefNo" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Vehicle" ViewItem="Vehicle" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Container" ViewItem="Container" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="BatchNumber" ViewItem="BatchNumber" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="ImportBy" ViewItem="ImportBy" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="ASN_col2" ShowCaption="False" Index="1" RelativeSize="59.798270893371757" Direction="Horizontal" Caption="ASN_col2" IsNewNode="True">
-              <LayoutGroup Id="Autoc59d1a75-f507-46e7-86e7-2d447368ba47" ShowCaption="False" Caption="Autoc59d1a75-f507-46e7-86e7-2d447368ba47(12)" Index="0" RelativeSize="69.1566265060241" IsNewNode="True">
-                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="18" IsNewNode="True" />
-                <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13" IsNewNode="True" />
-                <LayoutItem Id="PrintStatus" ViewItem="PrintStatus" Index="2" RelativeSize="13" IsNewNode="True" />
-                <LayoutItem Id="DocDate" ViewItem="DocDate" Index="3" RelativeSize="13" IsNewNode="True" />
-                <LayoutItem Id="RefDate" ViewItem="RefDate" Index="4" RelativeSize="13" IsNewNode="True" />
-                <LayoutItem Id="ETA" ViewItem="ETA" Index="5" RelativeSize="13" IsNewNode="True" />
-                <LayoutItem Id="ESR" ViewItem="ESR" Index="6" RelativeSize="17" IsNewNode="True" />
+            <LayoutGroup Id="ASN_col2" ShowCaption="False" Index="1" RelativeSize="59.840425531914896" Direction="Horizontal" Caption="ASN_col2" IsNewNode="True">
+              <LayoutGroup Id="Autoc59d1a75-f507-46e7-86e7-2d447368ba47" ShowCaption="False" Caption="Autoc59d1a75-f507-46e7-86e7-2d447368ba47(12)" Index="0" RelativeSize="75.777777777777771" IsNewNode="True">
+                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+                <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+                <LayoutItem Id="PrintStatus" ViewItem="PrintStatus" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+                <LayoutItem Id="DocDate" ViewItem="DocDate" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+                <LayoutItem Id="RefDate" ViewItem="RefDate" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+                <LayoutItem Id="ETA" ViewItem="ETA" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+                <LayoutItem Id="ESR" ViewItem="ESR" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+                <LayoutItem Id="MadeIn" ViewItem="MadeIn" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="Import ASN" ViewItem="Import ASN" Index="1" RelativeSize="30.843373493975903" IsNewNode="True" />
+              <LayoutItem Id="Import ASN" ViewItem="Import ASN" Index="1" RelativeSize="24.222222222222221" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="ASN" RelativeSize="100" Removed="True">
               <LayoutGroup Id="ASN_col1" RelativeSize="50">
@@ -894,7 +899,7 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="63.898916967509024">
+          <TabbedGroup Id="Tabs" RelativeSize="54.8780487804878">
             <LayoutGroup Id="ASNDetails" RelativeSize="100">
               <LayoutItem Id="ASNDetails" RelativeSize="100" />
             </LayoutGroup>
@@ -913,6 +918,7 @@
         <PropertyEditor Id="ASNDetails" PropertyName="ASNDetails" View="ASN_ASNDetails_ListView" IsNewNode="True" />
         <PropertyEditor Id="ASNDocTrail" PropertyName="ASNDocTrail" View="ASN_ASNDocTrail_ListView" IsNewNode="True" />
         <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="ASN_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="BatchNumber" PropertyName="BatchNumber" IsNewNode="True" />
         <PropertyEditor Id="Container" PropertyName="Container" IsNewNode="True" />
         <PropertyEditor Id="CreateDate" PropertyName="CreateDate" IsNewNode="True" />
         <PropertyEditor Id="CreateUser" PropertyName="CreateUser" IsNewNode="True" />
@@ -921,7 +927,10 @@
         <PropertyEditor Id="DocType" PropertyName="DocType" IsNewNode="True" />
         <PropertyEditor Id="ESR" PropertyName="ESR" IsNewNode="True" />
         <PropertyEditor Id="ETA" PropertyName="ETA" IsNewNode="True" />
+        <PropertyEditor Id="ImportBy" PropertyName="ImportBy" IsNewNode="True" />
+        <PropertyEditor Id="MadeIn" PropertyName="MadeIn" IsNewNode="True" />
         <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="PONo" PropertyName="PONo" IsNewNode="True" />
         <PropertyEditor Id="PrintStatus" PropertyName="PrintStatus" IsNewNode="True" />
         <PropertyEditor Id="RefDate" PropertyName="RefDate" IsNewNode="True" />
         <PropertyEditor Id="RefNo" PropertyName="RefNo" IsNewNode="True" />
@@ -936,26 +945,29 @@
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="36.968576709796672" IsNewNode="True">
-            <LayoutGroup Id="ASN_col1" ShowCaption="False" Index="0" RelativeSize="49.941245593419509" IsNewNode="True">
-              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="RefNo" ViewItem="RefNo" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Vehicle" ViewItem="Vehicle" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Container" ViewItem="Container" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="30" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="45.1219512195122" IsNewNode="True">
+            <LayoutGroup Id="ASN_col1" ShowCaption="False" Index="0" RelativeSize="49.867021276595743" IsNewNode="True">
+              <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="RefNo" ViewItem="RefNo" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Vehicle" ViewItem="Vehicle" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Container" ViewItem="Container" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="BatchNumber" ViewItem="BatchNumber" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="ImportBy" ViewItem="ImportBy" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="ASN_col2" ShowCaption="False" Index="1" RelativeSize="50.058754406580491" IsNewNode="True">
-              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="18" IsNewNode="True" />
-              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="PrintStatus" ViewItem="PrintStatus" Index="2" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="3" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="RefDate" ViewItem="RefDate" Index="4" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="ETA" ViewItem="ETA" Index="5" RelativeSize="13" IsNewNode="True" />
-              <LayoutItem Id="ESR" ViewItem="ESR" Index="6" RelativeSize="17" IsNewNode="True" />
+            <LayoutGroup Id="ASN_col2" ShowCaption="False" Index="1" RelativeSize="50.132978723404257" IsNewNode="True">
+              <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="PrintStatus" ViewItem="PrintStatus" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="DocDate" ViewItem="DocDate" Index="3" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="RefDate" ViewItem="RefDate" Index="4" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="ETA" ViewItem="ETA" Index="5" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="ESR" ViewItem="ESR" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
+              <LayoutItem Id="MadeIn" ViewItem="MadeIn" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="63.031423290203328" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="54.8780487804878" IsNewNode="True">
             <LayoutGroup Id="ASNDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="ASNDetails" ViewItem="ASNDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
@@ -4641,6 +4653,47 @@
     <ListView Id="SalesOrderCollection_SalesOrderCollectionReturn_ListView" AllowEdit="True" />
     <DetailView Id="SalesOrderCollectionDetails_DetailView" AllowEdit="True" />
     <DetailView Id="SalesOrderCollectionDocStatus_DetailView" AllowEdit="False" />
+    <DetailView Id="SalesOrderDetailInquiry_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="25.76419213973799" Direction="Horizontal">
+            <LayoutGroup Id="SalesOrderDetailInquiry_col1" ShowCaption="False" Index="0" RelativeSize="47.866666666666667" IsNewNode="True">
+              <LayoutItem Id="DateFrom" ViewItem="DateFrom" Index="0" RelativeSize="28.8135593220339" IsNewNode="True" />
+              <LayoutItem Id="DateTo" ViewItem="DateTo" Index="1" RelativeSize="22.033898305084747" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="49.152542372881356" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesOrderDetailInquiry_col2" ShowCaption="False" Index="1" RelativeSize="52.133333333333333" IsNewNode="True">
+              <LayoutItem Id="PortalSO" ViewItem="PortalSO" Index="0" RelativeSize="28.8135593220339" IsNewNode="True" />
+              <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="22.033898305084747" IsNewNode="True" />
+              <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="2" RelativeSize="22.033898305084747" IsNewNode="True" />
+              <LayoutItem Id="LegacyItemCode" ViewItem="LegacyItemCode" Index="3" RelativeSize="27.118644067796609" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesOrderDetailInquiry" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="SalesOrderDetailInquiry_col1" RelativeSize="49.931034482758619">
+                <LayoutItem Id="Customer" Removed="True" />
+                <LayoutItem Id="DateFrom" RelativeSize="28.333333333333332" />
+                <LayoutItem Id="DateTo" RelativeSize="21.666666666666668" />
+                <LayoutItem Id="Status" RelativeSize="50" />
+              </LayoutGroup>
+              <LayoutGroup Id="SalesOrderDetailInquiry_col2" RelativeSize="50.068965517241381">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="21.666666666666668" IsNewNode="True" />
+                <LayoutItem Id="ItemCode" Index="2" RelativeSize="21.666666666666668" />
+                <LayoutItem Id="LegacyItemCode" Index="3" RelativeSize="28.333333333333332" />
+                <LayoutItem Id="PortalSO" RelativeSize="28.333333333333332" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Results_Group" Direction="Vertical" RelativeSize="74.235807860262014">
+            <LayoutItem Id="Results" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesOrderDetailInquiry_Results_ListView">
+      <Columns>
+        <ColumnInfo Id="CardName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
     <DetailView Id="SalesOrderDocStatus_DetailView" AllowEdit="False" />
     <DetailView Id="SalesOrderInquiry_DetailView">
       <Layout>
@@ -4670,6 +4723,7 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <DetailView Id="SalesOrderInquiryDetailResult_DetailView" AllowEdit="False" />
     <DetailView Id="SalesOrderInquiryResult_DetailView" AllowEdit="False" />
     <ListView Id="SalesQuotation_AuditTrail_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
       <Columns>
@@ -7368,6 +7422,7 @@
     <ListView Id="vwDriver_ListView" DataAccessMode="Client" />
     <DetailView Id="vwExchangeRate_DetailView" AllowEdit="False" />
     <ListView Id="vwExchangeRate_ListView" DataAccessMode="Client" />
+    <DetailView Id="vwImporter_DetailView" AllowEdit="False" />
     <DetailView Id="vwInquiryARDownpayment_DetailView" AllowEdit="False" />
     <ListView Id="vwInquiryARDownpayment_ListView" DataAccessMode="Client" />
     <DetailView Id="vwInquiryASN_DetailView" AllowEdit="False" />

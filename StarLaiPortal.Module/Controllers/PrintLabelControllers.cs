@@ -30,7 +30,8 @@ using System.Text;
 using System.Web;
 
 // 2023-07-20 - enhance print label docnumber to selection - ver 1.0.6 (UAT)
-// 2023-09-25 add printing uom ver 1.0.10
+// 2023-09-25 - add printing uom - ver 1.0.10
+// 2026-09-09 - Add Importby and Made in - ver 1.0.32
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -192,6 +193,10 @@ namespace StarLaiPortal.Module.Controllers
                                         newitem.Remarks = trx.BatchNumber;
                                         newitem.PrintCount = dtl.LabelPrintCount;
                                         newitem.LineOID = dtl.Oid;
+                                        // Start ver 1.0.32
+                                        newitem.ImportBy = newitem.Session.GetObjectByKey<vwImporter>(trx.ImportBy.ImporterCode);
+                                        newitem.MadeIn = newitem.Session.GetObjectByKey<vwCountry>(trx.MadeIn.Code);
+                                        // End ver 1.0.32
 
                                         selectedObject.PrintLabelDetails.Add(newitem);
                                     }

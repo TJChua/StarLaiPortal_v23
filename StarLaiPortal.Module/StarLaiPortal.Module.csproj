@@ -349,6 +349,7 @@
     <Compile Include="BusinessObjects\View\vwEIVRegType.cs" />
     <Compile Include="BusinessObjects\View\vwEIVType.cs" />
     <Compile Include="BusinessObjects\View\vwExchangeRate.cs" />
+    <Compile Include="BusinessObjects\View\vwImporter.cs" />
     <Compile Include="BusinessObjects\View\vwInvoice.cs" />
     <Compile Include="BusinessObjects\View\vwItemMasters.cs" />
     <Compile Include="BusinessObjects\View\vwLastPurchasePrice.cs" />
