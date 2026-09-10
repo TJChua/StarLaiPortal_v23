@@ -3852,7 +3852,7 @@ namespace StarLaiPortal.Module.Controllers
                             return;
                         }
 
-                        string[] trx = result.PortalDONo.Replace(" ", "").Split(',');
+                        string[] trx = result.PickListNo.Replace(" ", "").Split(',');
 
                         foreach (string dtl in trx)
                         {

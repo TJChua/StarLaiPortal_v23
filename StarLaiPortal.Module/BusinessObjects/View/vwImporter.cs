@@ -18,8 +18,8 @@ namespace StarLaiPortal.Module.BusinessObjects.View
 {
     [DefaultClassOptions]
     [NavigationItem("SAP")]
-    [XafDisplayName("Driver")]
-    [DefaultProperty("DriverName")]
+    [XafDisplayName("Importer")]
+    [DefaultProperty("ImporterName")]
     [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
