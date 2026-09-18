@@ -492,11 +492,12 @@
         <Items>
           <Item Id="DeliveryOrder_ListView" Index="0" Visible="False" />
           <Item Id="Delivery Order By Date" Caption="Delivery Order By Date" Index="1" ViewId="DeliveryOrder_ListView_ByDate" IsNewNode="True" />
-          <Item Id="vwInquiryDelivery_ListView" Index="2" Visible="False" />
-          <Item Id="DeliveryInquiry_ListView" Index="3" />
-          <Item Id="vwInquiryInvoice_ListView" Index="4" Visible="False" />
-          <Item Id="InvoiceInquiry_ListView" Index="5" />
-          <Item Id="DailyDeliveryOrders_ListView" Index="6" />
+          <Item Id="EMContainer_ListView" Index="2" />
+          <Item Id="vwInquiryDelivery_ListView" Index="3" Visible="False" />
+          <Item Id="DeliveryInquiry_ListView" Index="4" />
+          <Item Id="vwInquiryInvoice_ListView" Index="5" Visible="False" />
+          <Item Id="InvoiceInquiry_ListView" Index="6" />
+          <Item Id="DailyDeliveryOrders_ListView" Index="7" />
         </Items>
       </Item>
       <Item Id="Purchase Order" Index="14" Visible="True">
@@ -1826,6 +1827,110 @@
       </Columns>
     </ListView>
     <ListView Id="DocTypes_ListView" DataAccessMode="Client" />
+    <DetailView Id="EMContainer_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="62.195121951219512" Caption="SimpleEditors">
+            <LayoutGroup Id="Auto709ede45-37ff-44b1-be02-e1a76d5594ee" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="89.542483660130713" IsNewNode="True">
+              <LayoutGroup Id="EMContainer_col1" ShowCaption="False" Index="0" RelativeSize="49.867724867724867" IsNewNode="True">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="ContainerNo" ViewItem="ContainerNo" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="DestinationPort" ViewItem="DestinationPort" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="JobNo" ViewItem="JobNo" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EstimateArrivalDate" ViewItem="EstimateArrivalDate" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="SealingDate" ViewItem="SealingDate" Index="6" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="CIPLDrafted" ViewItem="CIPLDrafted" Index="7" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="PullOutDate" ViewItem="PullOutDate" Index="8" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="PortOfLoadingEta" ViewItem="PortOfLoadingEta" Index="9" RelativeSize="11.678832116788321" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="EMContainer_col2" ShowCaption="False" Index="1" RelativeSize="50.132275132275133" IsNewNode="True">
+                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="InvoiceDate" ViewItem="InvoiceDate" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="VesselNumber" ViewItem="VesselNumber" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="ActualArrivalDate" ViewItem="ActualArrivalDate" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="CustomDocSubmitted" ViewItem="CustomDocSubmitted" Index="6" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="ActualTimeDeparture" ViewItem="ActualTimeDeparture" Index="7" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="ActualTimeArrival" ViewItem="ActualTimeArrival" Index="8" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="FinalDestinationETA" ViewItem="FinalDestinationETA" Index="9" RelativeSize="11.678832116788321" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="Remarks" ViewItem="Remarks" Index="1" RelativeSize="10.457516339869281" IsNewNode="True" />
+            <LayoutGroup Id="EMContainer" RelativeSize="90.7514450867052" Removed="True">
+              <LayoutGroup Id="EMContainer_col1" RelativeSize="49.863760217983653">
+                <LayoutItem Id="Customer" Index="0" RelativeSize="12.318840579710145" />
+                <LayoutItem Id="CustomerName" Index="1" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="ContainerNo" Index="2" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="DocDate" Index="2" RelativeSize="7.3446327683615822" Removed="True" />
+                <LayoutItem Id="DestinationPort" Index="3" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="InvoiceDate" Index="3" RelativeSize="7.9268292682926829" Removed="True" />
+                <LayoutItem Id="JobNo" Index="4" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="Status" Index="4" RelativeSize="8.6092715231788084" Removed="True" />
+                <LayoutItem Id="EstimateArrivalDate" Index="5" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="VesselNumber" Index="5" RelativeSize="7.3446327683615822" Removed="True" />
+                <LayoutItem Id="SealingDate" ViewItem="SealingDate" Index="6" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="CIPLDrafted" ViewItem="CIPLDrafted" Index="7" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="PullOutDate" ViewItem="PullOutDate" Index="8" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="PortOfLoadingEta" ViewItem="PortOfLoadingEta" Index="9" RelativeSize="12.318840579710145" IsNewNode="True" />
+                <LayoutItem Id="DocNum" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="EMContainer_col2" RelativeSize="50.136239782016347">
+                <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="12.318840579710145" IsNewNode="True" />
+                <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="InvoiceDate" ViewItem="InvoiceDate" Index="3" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="VesselNumber" ViewItem="VesselNumber" Index="4" RelativeSize="9.420289855072463" IsNewNode="True" />
+                <LayoutItem Id="ActualArrivalDate" Index="5" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="SealingDate" Index="5" RelativeSize="6.8421052631578947" Removed="True" />
+                <LayoutItem Id="CIPLDrafted" Index="6" RelativeSize="6.8421052631578947" Removed="True" />
+                <LayoutItem Id="CustomDocSubmitted" Index="6" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="ActualTimeDeparture" Index="7" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="PortOfLoadingEta" Index="7" RelativeSize="7.9268292682926829" Removed="True" />
+                <LayoutItem Id="PullOutDate" Index="7" RelativeSize="7.3446327683615822" Removed="True" />
+                <LayoutItem Id="ActualTimeArrival" Index="8" RelativeSize="9.420289855072463" />
+                <LayoutItem Id="FinalDestinationETA" ViewItem="FinalDestinationETA" Index="9" RelativeSize="12.318840579710145" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="Remarks" Index="9" RelativeSize="19.867549668874172" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="37.804878048780488">
+            <LayoutGroup Id="EMContainerDO" RelativeSize="100">
+              <LayoutItem Id="EMContainerDO" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="EMContainerDODetails" RelativeSize="100">
+              <LayoutItem Id="EMContainerDODetails" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="EMContainerDocTrail" RelativeSize="100">
+              <LayoutItem Id="EMContainerDocTrail" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="EMContainer_EMContainerDODetails_ListView">
+      <Columns>
+        <ColumnInfo Id="BaseDoc" Index="0" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="BaseDate" Index="1" />
+        <ColumnInfo Id="DOLine" Index="2" SortIndex="1" SortOrder="Ascending" />
+        <ColumnInfo Id="ItemCode" Index="3" />
+        <ColumnInfo Id="LegacyItemCode" Index="4" />
+        <ColumnInfo Id="ItemDesc" Index="5" />
+        <ColumnInfo Id="CatalogNo" Index="6" />
+        <ColumnInfo Id="Warehouse" Index="7" />
+        <ColumnInfo Id="Bin" Index="8" />
+        <ColumnInfo Id="Quantity" Index="9" />
+        <ColumnInfo Id="Loaded" Index="10" />
+        <ColumnInfo Id="Variance" Index="11" />
+        <ColumnInfo Id="Price" Index="12" />
+        <ColumnInfo Id="Total" Index="13" />
+      </Columns>
+    </ListView>
+    <DetailView Id="EMContainerDocTrail_DetailView" AllowEdit="False" />
     <DetailView Id="GlobalItemInquiry_DetailView">
       <Items>
         <ActionContainerViewItem Id="GlobalButton" ActionContainer="ListView" Caption="GlobalButton" Orientation="Vertical" IsNewNode="True" />

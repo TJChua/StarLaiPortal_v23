@@ -194,8 +194,14 @@ namespace StarLaiPortal.Module.Controllers
                                         newitem.PrintCount = dtl.LabelPrintCount;
                                         newitem.LineOID = dtl.Oid;
                                         // Start ver 1.0.32
-                                        newitem.ImportBy = newitem.Session.GetObjectByKey<vwImporter>(trx.ImportBy.ImporterCode);
-                                        newitem.MadeIn = newitem.Session.GetObjectByKey<vwCountry>(trx.MadeIn.Code);
+                                        if (trx.ImportBy != null)
+                                        {
+                                            newitem.ImportBy = newitem.Session.GetObjectByKey<vwImporter>(trx.ImportBy.ImporterCode);
+                                        }
+                                        if (trx.MadeIn != null)
+                                        {
+                                            newitem.MadeIn = newitem.Session.GetObjectByKey<vwCountry>(trx.MadeIn.Code);
+                                        }
                                         // End ver 1.0.32
 
                                         selectedObject.PrintLabelDetails.Add(newitem);
@@ -215,6 +221,16 @@ namespace StarLaiPortal.Module.Controllers
                                         newitem.Remarks = trx.BatchNumber;
                                         newitem.PrintCount = dtl.LabelPrintCount;
                                         newitem.LineOID = dtl.Oid;
+                                        // Start ver 1.0.32
+                                        if (trx.ImportBy != null)
+                                        {
+                                            newitem.ImportBy = newitem.Session.GetObjectByKey<vwImporter>(trx.ImportBy.ImporterCode);
+                                        }
+                                        if (trx.MadeIn != null)
+                                        {
+                                            newitem.MadeIn = newitem.Session.GetObjectByKey<vwCountry>(trx.MadeIn.Code);
+                                        }
+                                        // End ver 1.0.32
 
                                         selectedObject.PrintLabelDetails.Add(newitem);
                                     }

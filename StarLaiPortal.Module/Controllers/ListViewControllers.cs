@@ -55,13 +55,14 @@ using StarLaiPortal.Module.BusinessObjects.Reports;
 using StarLaiPortal.Module.BusinessObjects.Print_Module;
 using StarLaiPortal.Module.BusinessObjects.Stock_Count_Inquiry;
 
-// 2023-07-28 - add AR Downpayment cancalletion ver 1.0.7
-// 2023-09-11 - add dashboard sales/purchase/warehouse ver 1.0.9
-// 2023-09-19 - add disable detail view ver 1.0.9
-// 2023-10-20 - add stock count ver 1.0.11
-// 2025-09-11 - Hide Export by role ver 1.0.25
-// 2026-03-02 - Hide Export by different role group by module ver 1.0.27
-// 2026-09-07 - Export add new module ver 1.0.32
+// 2023-07-28 - add AR Downpayment cancalletion - ver 1.0.7
+// 2023-09-11 - add dashboard sales/purchase/warehouse - ver 1.0.9
+// 2023-09-19 - add disable detail view - ver 1.0.9
+// 2023-10-20 - add stock count - ver 1.0.11
+// 2025-09-11 - Hide Export by role - ver 1.0.25
+// 2026-03-02 - Hide Export by different role group by module - ver 1.0.27
+// 2026-09-07 - Export add new module - ver 1.0.32
+// 2026-09-18 - Add EM Container module - ver 1.0.33
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -180,6 +181,9 @@ namespace StarLaiPortal.Module.Controllers
                  // Start ver 1.0.25
                  View.ObjectTypeInfo.Type == typeof(ContainerTracking)
                  // End ver 1.0.25
+                 // Start ver 1.0.33
+                 || View.ObjectTypeInfo.Type == typeof(EMContainer) || View.ObjectTypeInfo.Type == typeof(EMContainerDO)
+                 // End ver 1.0.33
                  )
             {
                 listViewController = Frame.GetController<ListViewController>();

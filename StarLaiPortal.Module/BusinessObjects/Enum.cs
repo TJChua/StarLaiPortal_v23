@@ -12,13 +12,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-// 2023-07-28 add AR Downpayment Cancellation ver 1.0.7
-// 2023-10-05 add payment method for sales return ver 1.0.10
-// 2023-10-18 add Stock Count ver 1.0.11
-// 2023-10-30 add creditnote payment method ver 1.0.12
-// 2024-01-04 add inquiry filter status ver 1.0.15
-// 2025-09-19 add new docstatus and container status ver 1.0.25
-// 2026-06-29 add new doctypelist ver 1.0.30
+// 2023-07-28 - add AR Downpayment Cancellation - ver 1.0.7
+// 2023-10-05 - add payment method for sales return - ver 1.0.10
+// 2023-10-18 - add Stock Count - ver 1.0.11
+// 2023-10-30 - add creditnote payment method - ver 1.0.12
+// 2024-01-04 - add inquiry filter status - ver 1.0.15
+// 2025-09-19 - add new docstatus and container status - ver 1.0.25
+// 2026-06-29 - add new doctypelist - ver 1.0.30
+// 2026-09-18 - add new doctypelist - ver 1.0.32
 
 namespace StarLaiPortal.Module.BusinessObjects
 {
@@ -66,6 +67,9 @@ namespace StarLaiPortal.Module.BusinessObjects
         // Start ver 1.0.30
         [XafDisplayName("Invoice")] INV = 25,
         // End ver 1.0.30
+        // Start ver 1.0.30
+        [XafDisplayName("EM Container")] EMC = 26,
+        // End ver 1.0.30 
     }
 
     public enum DocStatus

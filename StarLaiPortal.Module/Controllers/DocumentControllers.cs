@@ -39,6 +39,7 @@ using System.Web;
 // 2024-07-26 - sales history add date filter - ver 1.0.19
 // 2025-07-16 - enhance saleshistory - ver 1.0.23
 // 2026-06-29 - Sales History add preview option - ver 1.0.30
+// 2026-09-18 - Add EM Container module - ver 1.0.33
 
 namespace StarLaiPortal.Module.Controllers
 {
@@ -369,6 +370,48 @@ namespace StarLaiPortal.Module.Controllers
                 }
             }
             // End ver 1.0.30
+
+            // Start ver 1.0.33
+            if (typeof(EMContainer).IsAssignableFrom(View.ObjectTypeInfo.Type))
+            {
+                if (View.ObjectTypeInfo.Type == typeof(EMContainer))
+                {
+                    if (View.Id == "EMContainer_ListView")
+                    {
+                        DocumentStatus.Items.Clear();
+
+                        DocumentStatus.Items.Add(new ChoiceActionItem("All", "All", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("Open", "Open", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("Draft", "Draft", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("Submitted", "Submitted", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("Cancelled", "Cancelled", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("Closed", "Closed", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("Post", "Posted", null));
+                        DocumentStatus.Items.Add(new ChoiceActionItem("PendPost", "Pending Post", null));
+
+                        DocumentStatus.SelectedIndex = 0;
+
+                        this.DocumentStatus.Active.SetItemValue("Enabled", true);
+                        DocumentStatus.PaintStyle = DevExpress.ExpressApp.Templates.ActionItemPaintStyle.Caption;
+                        DocumentStatus.CustomizeControl += action_CustomizeControl;
+
+                        this.DocumentDateFrom.Active.SetItemValue("Enabled", true);
+                        this.DocumentDateFrom.Value = DateTime.Today.AddDays(-14);
+                        DocumentDateFrom.PaintStyle = DevExpress.ExpressApp.Templates.ActionItemPaintStyle.Caption;
+                        this.DocumentDateFrom.CustomizeControl += DateActionFrom_CustomizeControl;
+                        this.DocumentDateFrom.Execute += DocumentDateFrom_Execute;
+
+                        this.DocumentDateTo.Active.SetItemValue("Enabled", true);
+                        this.DocumentDateTo.Value = DateTime.Today;
+                        DocumentDateTo.PaintStyle = DevExpress.ExpressApp.Templates.ActionItemPaintStyle.Caption;
+                        this.DocumentDateTo.CustomizeControl += DateActionTo_CustomizeControl;
+                        this.DocumentDateTo.Execute += DocumentDateTo_Execute;
+
+                        this.DocumentFilter.Active.SetItemValue("Enabled", true);
+                    }
+                }
+            }
+            // End ver 1.0.33
         }
         protected override void OnViewControlsCreated()
         {
@@ -713,6 +756,25 @@ namespace StarLaiPortal.Module.Controllers
             //}
             //// End ver 1.0.19
             // End ver 1.0.23
+
+            // Start ver 1.0.33
+            if (View.ObjectTypeInfo.Type == typeof(EMContainer))
+            {
+                if (View.Id == "EMContainer_ListView")
+                {
+                    if (DocumentStatus.SelectedItem.Id != "All")
+                    {
+                        ((ListView)View).CollectionSource.Criteria["Filter1"] = CriteriaOperator.Parse("[Status] = ? " +
+                            "and DocDate >= ? and DocDate <= ?", DocumentStatus.SelectedItem.Id, Fromdate, Todate.AddDays(1));
+                    }
+                    else
+                    {
+                        ((ListView)View).CollectionSource.Criteria["Filter1"] = CriteriaOperator.Parse("DocDate >= ? and DocDate <= ?",
+                           Fromdate, Todate.AddDays(1));
+                    }
+                }
+            }
+            // End ver 1.0.33
         }
 
         // Start ver 1.0.23

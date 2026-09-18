@@ -156,6 +156,15 @@
     <Compile Include="BusinessObjects\Delivery Order\DeliveryOrder.cs" />
     <Compile Include="BusinessObjects\Delivery Order\DeliveryOrderDetails.cs" />
     <Compile Include="BusinessObjects\Delivery Order\DeliveryOrderDocTrail.cs" />
+    <Compile Include="BusinessObjects\Delivery Order\EMContainer.cs" />
+    <Compile Include="BusinessObjects\Delivery Order\EMContainerDO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessObjects\Delivery Order\EMContainerDocTrail.cs" />
+    <Compile Include="BusinessObjects\Delivery Order\EMContainerDODetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessObjects\Delivery Order\EMContainerExtDO.cs" />
     <Compile Include="BusinessObjects\Enum.cs" />
     <Compile Include="BusinessObjects\GeneralSettings.cs" />
     <Compile Include="BusinessObjects\GRN\GRN.cs" />
@@ -438,6 +447,12 @@
     <Compile Include="Controllers\DocumentControllers.Designer.cs">
       <DependentUpon>DocumentControllers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\EMContainerControllers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\EMContainerControllers.Designer.cs">
+      <DependentUpon>EMContainerControllers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\FilterControllers.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -667,6 +682,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\DocumentControllers.resx">
       <DependentUpon>DocumentControllers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\EMContainerControllers.resx">
+      <DependentUpon>EMContainerControllers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\GeneralControllers.resx">
       <DependentUpon>GeneralControllers.cs</DependentUpon>

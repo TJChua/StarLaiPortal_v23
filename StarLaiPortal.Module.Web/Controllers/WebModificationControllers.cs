@@ -58,6 +58,8 @@ using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 // 2025-09-22 - add container tracking - ver 1.0.25
 // 2026-08-10 - block save if duplicate contrainer no found - ver 1.0.31
 // 2026-09-09 - not allow edit after submit - ver 1.0.32
+// 2026-09-18 - allow grpo completion blank - ver 1.0.32
+// 2026-09-18 - Add EM Container module - ver 1.0.33
 
 
 namespace StarLaiPortal.Module.Web.Controllers
@@ -1095,11 +1097,18 @@ namespace StarLaiPortal.Module.Web.Controllers
                     }
                 }
 
-                if (CurrObject.GRPOReturnBack.Date < CurrObject.ActualReturnBack.Date)
+                // Start ver 1.0.32
+                if (CurrObject.GRPOReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001" && CurrObject.ActualReturnBack.Date.ToString("MM/dd/yyyy") != "01/01/0001")
                 {
-                    genCon.showMsg("Error", "GRPO Completion Date not allow early than Actual Return Back to Port.", InformationType.Error);
-                    return;
+                // End ver 1.0.32
+                    if (CurrObject.GRPOReturnBack.Date < CurrObject.ActualReturnBack.Date)
+                    {
+                        genCon.showMsg("Error", "GRPO Completion Date not allow early than Actual Return Back to Port.", InformationType.Error);
+                        return;
+                    }
+                // Start ver 1.0.32
                 }
+                // End ver 1.0.32
                 // End ver 1.0.31
 
                 base.Save(args);
@@ -1136,6 +1145,81 @@ namespace StarLaiPortal.Module.Web.Controllers
                 View.CreateControls();
             }
             // End ver 1.0.25
+            // Start ver 1.0.33
+            else if (View.ObjectTypeInfo.Type == typeof(EMContainer))
+            {
+                EMContainer CurrObject = (EMContainer)args.CurrentObject;
+
+                base.Save(args);
+                if (CurrObject.DocNum == null)
+                {
+                    string docprefix = genCon.GetDocPrefix();
+                    CurrObject.DocNum = genCon.GenerateDocNum(DocTypeList.EMC, ObjectSpace, TransferType.NA, 0, docprefix);
+                }
+
+                base.Save(args);
+                ((DetailView)View).ViewEditMode = ViewEditMode.View;
+                View.BreakLinksToControls();
+                View.CreateControls();
+            }
+            else if (View.ObjectTypeInfo.Type == typeof(EMContainerDO))
+            {
+                EMContainerDO CurrObject = (EMContainerDO)args.CurrentObject;
+                DetailView masterview = Application.MainWindow.View as DetailView;
+                EMContainer master = (EMContainer)masterview.CurrentObject;
+
+                DeliveryOrder trx = ObjectSpace.FindObject<DeliveryOrder>(CriteriaOperator.Parse("DocNum = ?",
+                      CurrObject.DONumber));
+
+                if (trx == null)
+                {
+                    throw new InvalidOperationException("DO not found.");
+                }
+
+                if (trx != null)
+                {
+                    if (trx.Customer.BPCode != master.Customer.BPCode)
+                    {
+                        throw new InvalidOperationException("DO customer not same with EM container document customer.");
+                    }
+                }
+
+                if (master.EMContainerDO.Where(x => x.DONumber == CurrObject.DONumber).Count() > 0)
+                {
+                    throw new InvalidOperationException("DO number exist in current document.");
+                }
+
+                base.Save(args);
+
+                //if (trx != null)
+                //{
+                //    foreach (DeliveryOrderDetails dtl in trx.DeliveryOrderDetails)
+                //    {
+                //        EMContainerDODetails newDOline = ObjectSpace.CreateObject<EMContainerDODetails>();
+
+                //        newDOline.ItemCode = newDOline.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode.ItemCode);
+                //        newDOline.Warehouse = newDOline.Session.GetObjectByKey<vwWarehouse>(dtl.Bin.Warehouse);
+                //        newDOline.Bin = newDOline.Session.GetObjectByKey<vwBin>(dtl.Bin.BinCode);
+                //        newDOline.Quantity = dtl.Quantity;
+                //        newDOline.Price = dtl.Price;
+
+                //        if (dtl.EIVClassification != null)
+                //        {
+                //            newDOline.EIVClassification = newDOline.Session.FindObject<vwEIVClass>
+                //                (CriteriaOperator.Parse("Code = ?", dtl.EIVClassification.Code));
+                //        }
+                //        newDOline.BaseDoc = trx.DocNum.ToString();
+                //        newDOline.BaseId = dtl.Oid.ToString();
+                //        newDOline.SODocNum = dtl.SODocNum;
+                //        newDOline.SOBaseID = dtl.SOBaseID;
+                //        newDOline.PickListDocNum = dtl.PickListDocNum;
+                //        newDOline.PackListLine = dtl.PackListLine;
+
+                //        master.EMContainerDODetails.Add(newDOline);
+                //    }
+                //}
+            }
+            // End ver 1.0.33
             else
             {
                 base.Save(args);
