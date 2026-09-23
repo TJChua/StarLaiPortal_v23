@@ -1190,34 +1190,6 @@ namespace StarLaiPortal.Module.Web.Controllers
                 }
 
                 base.Save(args);
-
-                //if (trx != null)
-                //{
-                //    foreach (DeliveryOrderDetails dtl in trx.DeliveryOrderDetails)
-                //    {
-                //        EMContainerDODetails newDOline = ObjectSpace.CreateObject<EMContainerDODetails>();
-
-                //        newDOline.ItemCode = newDOline.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode.ItemCode);
-                //        newDOline.Warehouse = newDOline.Session.GetObjectByKey<vwWarehouse>(dtl.Bin.Warehouse);
-                //        newDOline.Bin = newDOline.Session.GetObjectByKey<vwBin>(dtl.Bin.BinCode);
-                //        newDOline.Quantity = dtl.Quantity;
-                //        newDOline.Price = dtl.Price;
-
-                //        if (dtl.EIVClassification != null)
-                //        {
-                //            newDOline.EIVClassification = newDOline.Session.FindObject<vwEIVClass>
-                //                (CriteriaOperator.Parse("Code = ?", dtl.EIVClassification.Code));
-                //        }
-                //        newDOline.BaseDoc = trx.DocNum.ToString();
-                //        newDOline.BaseId = dtl.Oid.ToString();
-                //        newDOline.SODocNum = dtl.SODocNum;
-                //        newDOline.SOBaseID = dtl.SOBaseID;
-                //        newDOline.PickListDocNum = dtl.PickListDocNum;
-                //        newDOline.PackListLine = dtl.PackListLine;
-
-                //        master.EMContainerDODetails.Add(newDOline);
-                //    }
-                //}
             }
             // End ver 1.0.33
             else

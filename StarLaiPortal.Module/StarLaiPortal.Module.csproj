@@ -357,6 +357,8 @@
     <Compile Include="BusinessObjects\View\vwEIVFreqSync.cs" />
     <Compile Include="BusinessObjects\View\vwEIVRegType.cs" />
     <Compile Include="BusinessObjects\View\vwEIVType.cs" />
+    <Compile Include="BusinessObjects\View\vwEMDO.cs" />
+    <Compile Include="BusinessObjects\View\vwEMDODetails.cs" />
     <Compile Include="BusinessObjects\View\vwExchangeRate.cs" />
     <Compile Include="BusinessObjects\View\vwImporter.cs" />
     <Compile Include="BusinessObjects\View\vwInvoice.cs" />

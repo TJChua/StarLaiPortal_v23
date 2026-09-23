@@ -92,17 +92,17 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
             }
         }
 
-        private vwBusniessPartner _Vendor;
-        [XafDisplayName("Vendor")]
+        private vwBusniessPartner _Supplier;
+        [XafDisplayName("Supplier")]
         [NoForeignKey]
         [DataSourceCriteria("ValidFor = 'Y' and CardType = 'S'")]
         [Index(1), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
-        public vwBusniessPartner Vendor
+        public vwBusniessPartner Supplier
         {
-            get { return _Vendor; }
+            get { return _Supplier; }
             set
             {
-                SetPropertyValue("Vendor", ref _Vendor, value);
+                SetPropertyValue("Supplier", ref _Supplier, value);
             }
         }
 

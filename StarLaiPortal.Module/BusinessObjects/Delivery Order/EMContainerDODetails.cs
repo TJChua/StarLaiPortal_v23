@@ -18,7 +18,7 @@ using System.Text;
 namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 {
     [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    //[Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("LinkDoc", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("UnlinkDoc", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [XafDisplayName("EM Container DO Details")]
@@ -228,7 +228,12 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
                 SetPropertyValue("Loaded", ref _Loaded, value);
                 if (!IsLoading && value != 0)
                 {
+                    if (Loaded > Quantity)
+                    {
+                        Loaded = Quantity;
+                    }
                     Total = Loaded * Price;
+                    Variance = Loaded - Quantity;
                 }
             }
         }
@@ -405,7 +410,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         private vwEIVClass _EIVClassification;
         [NoForeignKey]
         [XafDisplayName("Classification")]
-        [RuleRequiredField(DefaultContexts.Save)]
+        //[RuleRequiredField(DefaultContexts.Save)]
         [Appearance("EIVClassification", Enabled = false)]
         [Index(53), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public vwEIVClass EIVClassification

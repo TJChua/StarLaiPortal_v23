@@ -21,6 +21,7 @@ using DevExpress.Xpo;
 // 2024-01-30 - add SQ and PO update - ver 1.0.14
 // 2025-02-25 - block add item if not in draft - ver 1.0.22
 // 2026-03-06 - no allow decimal place in decimal variable - ver 1.0.27
+// 2026-09-18 - Add EM Container module - ver 1.0.33
 
 namespace Admiral.ImportData
 {
@@ -117,6 +118,12 @@ namespace Admiral.ImportData
                     {
                         query = "SELECT 1 FROM [" + conn.Database + "]..GRN where [Status] <> 0 AND DocNum = '" + option.DocNum + "'";
                     }
+                    // Start ver 1.0.33
+                    else if (option.Type == "EMContainerDO" || option.Type == "EMContainerExtDO")
+                    {
+                        query = "SELECT 1 FROM [" + conn.Database + "]..EMContainer where [Status] <> 0 AND DocNum = '" + option.DocNum + "'";
+                    }
+                    // End ver 1.0.33
 
                     if (conn.State == ConnectionState.Open)
                     {
@@ -206,6 +213,11 @@ namespace Admiral.ImportData
 
         private bool StartImport(Worksheet ws, IModelClass bo, IObjectSpace os)
         {
+            // Start ver 1.0.33
+            SqlConnection conn = new SqlConnection(option.ConnectionString);
+            string query = "";
+            // End ver 1.0.33
+
             if (ws.Cells[0,0].DisplayText != option.DocNum)
             {
                 showMsg("Error", "Import Fail, excel document number not match with current record.", InformationType.Error);
@@ -469,6 +481,24 @@ namespace Admiral.ImportData
                                     ws.Cells[r, c].SetValue(option.DocNum);
                                 }
                             }
+
+                            // Start ver 1.0.33
+                            if (option.Type == "EMContainerDO")
+                            {
+                                if (ws.Cells[3, c].DisplayText == "EMContainer")
+                                {
+                                    ws.Cells[r, c].SetValue(option.DocNum);
+                                }
+                            }
+
+                            if (option.Type == "EMContainerExtDO")
+                            {
+                                if (ws.Cells[3, c].DisplayText == "EMContainer")
+                                {
+                                    ws.Cells[r, c].SetValue(option.DocNum);
+                                }
+                            }
+                            // End ver 1.0.33
                             // End ver 1.0.12
 
                             var field = fields[c];
@@ -674,6 +704,60 @@ namespace Admiral.ImportData
                                 else if (memberType == typeof(string))
                                 {
                                     var v = cell.Value.ToObject();
+
+                                    // Start ver 1.0.33
+                                    if (field.Name == "DONumber")
+                                    {
+                                        // Block import duplicate DO 
+                                        string DONumber = "";
+                                        query = "SELECT T1.DONumber FROM EMContainer T0 " +
+                                            "INNER JOIN EMContainerDO T1 on T0.OID = T1.EMContainer " +
+                                            "WHERE T0.DocNum = '" + option.DocNum + "' AND T1.DONumber = '" + v.ToString() + "' AND T1.GCRecord is null";
+                                        if (conn.State == ConnectionState.Open)
+                                        {
+                                            conn.Close();
+                                        }
+                                        conn.Open();
+                                        SqlCommand cmdduplicate = new SqlCommand(query, conn);
+                                        SqlDataReader readerduplicate = cmdduplicate.ExecuteReader();
+                                        while (readerduplicate.Read())
+                                        {
+                                            DONumber = readerduplicate.GetString(0);
+                                        }
+                                        cmdduplicate.Dispose();
+                                        conn.Close();
+
+                                        if (DONumber != "")
+                                        {
+                                            result.AddErrorMessage(string.Format("DO number exist in current document."), cell);
+                                        }
+
+                                        // Block invalid DO 
+                                        DONumber = "";
+                                        query = "SELECT T0.PortalNum, T0.CardCode, T1.Customer FROM vwEMDO T0 " +
+                                            "INNER JOIN EMContainer T1 on T1.DocNum = '" + option.DocNum + "' " +
+                                            "WHERE T0.CardCode = T1.Customer AND T0.PortalNum = '" + v.ToString() + "'";
+                                        if (conn.State == ConnectionState.Open)
+                                        {
+                                            conn.Close();
+                                        }
+                                        conn.Open();
+                                        SqlCommand cmdinvalid = new SqlCommand(query, conn);
+                                        SqlDataReader readerinvalid = cmdinvalid.ExecuteReader();
+                                        while (readerinvalid.Read())
+                                        {
+                                            DONumber = readerinvalid.GetString(0);
+                                        }
+                                        cmdinvalid.Dispose();
+                                        conn.Close();
+
+                                        if (DONumber == "")
+                                        {
+                                            result.AddErrorMessage(string.Format("Invalid DO number."), cell);
+                                        }
+                                    }
+                                    // End ver 1.0.33
+
                                     if (v != null)
                                         value = v.ToString();
                                 }
@@ -916,6 +1000,26 @@ namespace Admiral.ImportData
                         book.Worksheets.Remove(book.Worksheets[0]);
                     }
                     // End ver 1.0.14
+
+                    // Start ver 1.0.33
+                    if (item.Name == "EMContainerDO" && option.Type == "EMContainerDO")
+                    {
+                        var cls = option.MainTypeInfo.Application.BOModel.GetClass(item.MemberInfo.ListElementTypeInfo.Type);
+                        var b = book.Worksheets.Add("EM Container DO");
+                        CreateSheet(b, cls, "EMContainerDO", option.DocNum);
+
+                        book.Worksheets.Remove(book.Worksheets[0]);
+                    }
+
+                    if (item.Name == "EMContainerExtDO" && option.Type == "EMContainerExtDO")
+                    {
+                        var cls = option.MainTypeInfo.Application.BOModel.GetClass(item.MemberInfo.ListElementTypeInfo.Type);
+                        var b = book.Worksheets.Add("EM Container External DO");
+                        CreateSheet(b, cls, "EMContainerExtDO", option.DocNum);
+
+                        book.Worksheets.Remove(book.Worksheets[0]);
+                    }
+                    // End ver 1.0.33
                 }
             }
 
@@ -1175,6 +1279,52 @@ namespace Admiral.ImportData
                     }
                 }
                 // End ver 1.0.14
+
+                // Start ver 1.0.33
+                if (module == "EMContainerDO")
+                {
+                    if (item.Name == "DONumber" || item.Name == "EMContainer")
+                    {
+                        var c = cells[3, i];
+                        c.Value = item.Caption;
+                        c.FillColor = Color.FromArgb(255, 153, 0);
+                        c.Font.Color = Color.White;
+                        var isRequiredField = IsRequiredField(item);
+
+                        var range = book.Range.FromLTRB(i, 2, i, 20000);
+
+                        //DataValidation dv = null;
+
+                        if (isRequiredField)
+                        {
+                            c.Font.Bold = true;
+                        }
+                        i++;
+                    }
+                }
+
+                if (module == "EMContainerExtDO")
+                {
+                    if (item.Name == "Supplier" || item.Name == "DocNum" || item.Name == "EMContainer")
+                    {
+                        var c = cells[3, i];
+                        c.Value = item.Caption;
+                        c.FillColor = Color.FromArgb(255, 153, 0);
+                        c.Font.Color = Color.White;
+                        var isRequiredField = IsRequiredField(item);
+
+                        var range = book.Range.FromLTRB(i, 2, i, 20000);
+
+                        //DataValidation dv = null;
+
+                        if (isRequiredField)
+                        {
+                            c.Font.Bold = true;
+                        }
+                        i++;
+                    }
+                }
+                // End ver 1.0.33
             }
             #endregion
         }

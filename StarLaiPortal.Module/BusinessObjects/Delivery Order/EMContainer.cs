@@ -23,11 +23,16 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
     [XafDisplayName("EM Container")]
     [NavigationItem("Delivery Order")]
     [DefaultProperty("DocNum")]
+
+    [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "not (Status in (0, 3, 6))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideSubmit", AppearanceItemType.Action, "True", TargetItems = "SubmitEMC", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideCancel", AppearanceItemType.Action, "True", TargetItems = "CancelEMC", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideFullTextSearch", AppearanceItemType.Action, "True", TargetItems = "FullTextSearch", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
 
+    [Appearance("HideImportDO", AppearanceItemType.Action, "True", TargetItems = "ImportEMDO", Criteria = "not (Status in (0)) or Customer = null", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideImportEXTDO", AppearanceItemType.Action, "True", TargetItems = "ImportExternalDO", Criteria = "not (Status in (0)) or Customer = null", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideCopyFromDO", AppearanceItemType.Action, "True", TargetItems = "CopyFromDO", Criteria = "not (Status in (0))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     public class EMContainer : XPObject
     { 
         public EMContainer(Session session)
@@ -397,6 +402,31 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
             }
         }
 
+        private bool _SapINV;
+        [XafDisplayName("SapINV")]
+        [Index(98), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        public bool SapINV
+        {
+            get { return _SapINV; }
+            set
+            {
+                SetPropertyValue("SapINV", ref _SapINV, value);
+            }
+        }
+
+        private string _SAPINVDocNum;
+        [XafDisplayName("SAP AR Inv Num")]
+        [Appearance("SAPINVDocNum", Enabled = false)]
+        [Index(99), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
+        public string SAPINVDocNum
+        {
+            get { return _SAPINVDocNum; }
+            set
+            {
+                SetPropertyValue("SAPINVDocNum", ref _SAPINVDocNum, value);
+            }
+        }
+
         [Browsable(false)]
         public bool IsNew
         {
@@ -420,6 +450,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         [Association("EMContainer-EMContainerDO")]
         [XafDisplayName("DO")]
+        [Appearance("EMContainerDO", Enabled = false, Criteria = "not (Status in (0))")]
         public XPCollection<EMContainerDO> EMContainerDO
         {
             get { return GetCollection<EMContainerDO>("EMContainerDO"); }
@@ -427,6 +458,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         [Association("EMContainer-EMContainerDODetails")]
         [XafDisplayName("DO Details")]
+        [Appearance("EMContainerDODetails", Enabled = false, Criteria = "not (Status in (0))")]
         public XPCollection<EMContainerDODetails> EMContainerDODetails
         {
             get { return GetCollection<EMContainerDODetails>("EMContainerDODetails"); }
@@ -434,6 +466,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         [Association("EMContainer-EMContainerExtDO")]
         [XafDisplayName("External DO")]
+        [Appearance("EMContainerExtDO", Enabled = false, Criteria = "not (Status in (0))")]
         public XPCollection<EMContainerExtDO> EMContainerExtDO
         {
             get { return GetCollection<EMContainerExtDO>("EMContainerExtDO"); }

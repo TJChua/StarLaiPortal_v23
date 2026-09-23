@@ -67,6 +67,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 // 2025-10-30 Auto create INT Quotation from B2B portal - ver 1.0.26
 // 2026-03-18 Update loading missing doc num - ver 1.0.27
 // 2026-05-07 enhance posting date and delivery date format - ver 1.0.28
+// 2026-09-18 - Add EM Container module - ver 1.0.33
 
 namespace PortalIntegration
 {

@@ -18,9 +18,9 @@ using System.Text;
 
 namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 {
-    //[Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideNew", AppearanceItemType.Action, "True", TargetItems = "New", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
-    //[Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
+    [Appearance("HideDelete", AppearanceItemType.Action, "True", TargetItems = "Delete", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
     [Appearance("LinkDoc", AppearanceItemType = "Action", TargetItems = "Link", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [Appearance("UnlinkDoc", AppearanceItemType = "Action", TargetItems = "Unlink", Context = "ListView", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide)]
     [XafDisplayName("EM Container DO")]
@@ -128,6 +128,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime? _PostingDate;
         [XafDisplayName("Posting Date")]
+        [Appearance("PostingDate", Enabled = false)]
         [Index(3), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public DateTime? PostingDate
         {
@@ -138,13 +139,6 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
             }
         }
 
-        [Browsable(false)]
-        public bool IsNew
-        {
-            get
-            { return Session.IsNewObject(this); }
-        }
-
         private EMContainer _EMContainer;
         [Association("EMContainer-EMContainerDO")]
         [Index(99), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
@@ -153,6 +147,13 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         {
             get { return _EMContainer; }
             set { SetPropertyValue("EMContainer", ref _EMContainer, value); }
+        }
+
+        [Browsable(false)]
+        public bool IsNew
+        {
+            get
+            { return Session.IsNewObject(this); }
         }
 
         protected override void OnSaving()
