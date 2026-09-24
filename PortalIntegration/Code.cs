@@ -1811,6 +1811,83 @@ namespace PortalIntegration
                 }
                 // End ver 1.0.12
 
+                // Start ver 1.0.33
+                temp = ConfigurationManager.AppSettings["EMINV"].ToString().ToUpper();
+                if (temp == "Y" || temp == "YES" || temp == "TRUE" || temp == "1")
+                {
+                    WriteLog("[INFO]", "--EM Invoice Posting Start--");
+
+                    #region EM Invoice
+                    IList<EMContainer> invlist = ListObjectSpace.GetObjects<EMContainer>
+                        (CriteriaOperator.Parse("SapINV = ? and Status = ?", 0, 6));
+
+                    foreach (EMContainer dtlinv in invlist)
+                    {
+                        try
+                        {
+                            IObjectSpace invos = ObjectSpaceProvider.CreateObjectSpace();
+                            EMContainer invobj = invos.GetObjectByKey<EMContainer>(dtlinv.Oid);
+
+                            if (invobj.SapINV == false)
+                            {
+                                #region Post Invoice
+                                if (!sap.oCom.InTransaction) sap.oCom.StartTransaction();
+
+                                int tempinv = 0;
+
+                                tempinv = PostEMInvtoSAP(invobj, ObjectSpaceProvider, sap);
+                                if (tempinv == 1)
+                                {
+                                    if (sap.oCom.InTransaction)
+                                        sap.oCom.EndTransaction(SAPbobsCOM.BoWfTransOpt.wf_Commit);
+
+                                    invobj.SapINV = true;
+                                    invobj.Status = DocStatus.Closed;
+
+                                    EMContainerDocTrail ds = invos.CreateObject<EMContainerDocTrail>();
+                                    ds.CreateUser = invos.GetObjectByKey<ApplicationUser>(Guid.Parse("100348B5-290E-47DF-9355-557C7E2C56D3"));
+                                    ds.CreateDate = DateTime.Now;
+                                    ds.DocStatus = DocStatus.Post;
+                                    ds.DocRemarks = "Posted SAP";
+                                    invobj.EMContainerDocTrail.Add(ds);
+
+                                    invos.CommitChanges();
+
+                                    GC.Collect();
+                                }
+                                else if (tempinv <= 0)
+                                {
+                                    if (sap.oCom.InTransaction)
+                                        sap.oCom.EndTransaction(SAPbobsCOM.BoWfTransOpt.wf_RollBack);
+
+                                    GC.Collect();
+                                }
+                                #endregion
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            IObjectSpace osupdate = ObjectSpaceProvider.CreateObjectSpace();
+                            EMContainer obj = osupdate.GetObjectByKey<EMContainer>(dtlinv.Oid);
+
+                            EMContainerDocTrail ds = osupdate.CreateObject<EMContainerDocTrail>();
+                            ds.CreateUser = osupdate.GetObjectByKey<ApplicationUser>(Guid.Parse("100348B5-290E-47DF-9355-557C7E2C56D3"));
+                            ds.CreateDate = DateTime.Now;
+                            ds.DocStatus = DocStatus.PendPost;
+                            ds.DocRemarks = "SAP Error:" + ex.Message;
+                            obj.EMContainerDocTrail.Add(ds);
+
+                            osupdate.CommitChanges();
+
+                            WriteLog("[Error]", "Message: EM Invoice Post Failed - OID : " + dtlinv.Oid + " (" + ex.Message + ")");
+                        }
+                    }
+                    #endregion
+
+                    WriteLog("[INFO]", "--EM Invoice Posting End--");
+                }
+                // End ver 1.0.33
+
                 #region Update SAP DocNum
                 SqlCommand TransactionNotification = new SqlCommand("", conn);
                 TransactionNotification.CommandTimeout = 600;
@@ -7863,5 +7940,341 @@ namespace PortalIntegration
             }
         }
         // End ver 1.0.12
+
+        // Start ver 1.0.33
+        public int PostEMInvtoSAP(EMContainer oTargetDoc, IObjectSpaceProvider ObjectSpaceProvider, SAPCompany sap)
+        {
+            // return 0 = post nothing
+            // return -1 = posting error
+            // return 1 = posting successful
+            try
+            {
+                if (!oTargetDoc.SapINV)
+                {
+                    IObjectSpace bos = ObjectSpaceProvider.CreateObjectSpace();
+                    // Start ver 1.0.10
+                    string sodocnum = null;
+                    // End ver 1.0.10
+                    Guid g;
+                    // Create and display the value of two GUIDs.
+                    g = Guid.NewGuid();
+
+                    SAPbobsCOM.Documents oDoc = null;
+
+                    oDoc = (SAPbobsCOM.Documents)sap.oCom.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oInvoices);
+
+                    oDoc.CardCode = oTargetDoc.Customer.BPCode;
+                    oDoc.CardName = oTargetDoc.CustomerName;
+                    oDoc.DocDate = DateTime.Now;
+                    oDoc.Comments = oTargetDoc.Remarks;
+                    oDoc.UserFields.Fields.Item("U_PortalDocNum").Value = oTargetDoc.DocNum;
+                    // Start ver 1.0.18
+                    vwBillingAddress BillingAddress = bos.FindObject<vwBillingAddress>(CriteriaOperator.Parse("AddressKey = ? and CardCode = ?"
+                        , oTargetDoc.Customer.BillToDef, oTargetDoc.Customer.BPCode));
+                    vwShippingAddress ShippingAddress = bos.FindObject<vwShippingAddress>(CriteriaOperator.Parse("AddressKey = ? and CardCode = ?"
+                        , oTargetDoc.Customer.ShipToDef, oTargetDoc.Customer.BPCode));
+
+                    if (BillingAddress != null)
+                    {
+                        oDoc.PayToCode = BillingAddress.AddressKey;
+                    }
+                    if (ShippingAddress != null)
+                    {
+                        oDoc.ShipToCode = ShippingAddress.AddressKey;
+                    }
+                    // End ver 1.0.18
+
+                    // Start ver 1.0.33
+                    DeliveryOrder DOtrx = null;
+                    foreach (EMContainerDO dtldo in oTargetDoc.EMContainerDO)
+                    {
+                        DOtrx = bos.FindObject<DeliveryOrder>(CriteriaOperator.Parse("DocNum = ?", 
+                            oTargetDoc.Customer.BillToDef, oTargetDoc.Customer.BPCode));
+
+                        if (DOtrx != null)
+                        {
+                            break;
+                        }
+                    }
+                    // End ver 1.0.33
+
+                    // Start ver 1.0.33
+                    if (DOtrx != null)
+                    {
+                        // End ver 1.0.33
+                        // Start ver 1.0.18
+                        // Buyer
+                        if (DOtrx.EIVConsolidate != null)
+                        {
+                            if (DOtrx.EIVConsolidate.Code == "Y")
+                            {
+                                oDoc.UserFields.Fields.Item("U_EIV_Consolidate").Value = "N";
+                            }
+                            else
+                            {
+                                oDoc.UserFields.Fields.Item("U_EIV_Consolidate").Value = "Y";
+                            }
+                        }
+                        if (DOtrx.EIVType != null)
+                        {
+                            oDoc.UserFields.Fields.Item("U_EIV_InvoiceType").Value = DOtrx.EIVType.Code;
+                        }
+                        if (DOtrx.EIVFreqSync != null)
+                        {
+                            oDoc.UserFields.Fields.Item("U_EIV_FreqSync").Value = DOtrx.EIVFreqSync.Code;
+                        }
+                        oDoc.UserFields.Fields.Item("U_EIV_BuyerName").Value = oTargetDoc.CustomerName == null ? "" : DOtrx.CustomerName;
+                        oDoc.UserFields.Fields.Item("U_EIV_BuyerTin").Value = DOtrx.EIVBuyerTIN == null ? "" : DOtrx.EIVBuyerTIN;
+                        oDoc.UserFields.Fields.Item("U_EIV_BuyerRegNum").Value = DOtrx.EIVBuyerRegNum == null ? "" : DOtrx.EIVBuyerRegNum;
+                        if (DOtrx.EIVBuyerRegTyp != null)
+                        {
+                            oDoc.UserFields.Fields.Item("U_EIV_BuyerRegTyp").Value = DOtrx.EIVBuyerRegTyp.Code;
+                        }
+                        oDoc.UserFields.Fields.Item("U_EIV_BuyerSSTRegNum").Value = DOtrx.EIVBuyerSSTRegNum == null ? "" : DOtrx.EIVBuyerSSTRegNum;
+                        oDoc.UserFields.Fields.Item("U_EIV_BuyerEmail").Value = DOtrx.EIVBuyerEmail == null ? "" : DOtrx.EIVBuyerEmail;
+                        oDoc.UserFields.Fields.Item("U_EIV_BuyerContact").Value = DOtrx.EIVBuyerContact == null ? "" : DOtrx.EIVBuyerContact;
+
+                        oDoc.AddressExtension.BillToStreet = DOtrx.EIVAddressLine1B == null ? "" : DOtrx.EIVAddressLine1B;
+                        oDoc.AddressExtension.BillToBlock = DOtrx.EIVAddressLine2B == null ? "" : DOtrx.EIVAddressLine2B;
+                        oDoc.AddressExtension.BillToCity = DOtrx.EIVAddressLine3B == null ? "" : DOtrx.EIVAddressLine3B;
+                        oDoc.AddressExtension.BillToCounty = DOtrx.EIVCityNameB == null ? "" : DOtrx.EIVCityNameB;
+                        oDoc.AddressExtension.BillToZipCode = DOtrx.EIVPostalZoneB == null ? "" : DOtrx.EIVPostalZoneB;
+
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_AddressLine1B").Value = DOtrx.EIVAddressLine1B == null ? "" : DOtrx.EIVAddressLine1B;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_AddressLine2B").Value = DOtrx.EIVAddressLine2B == null ? "" : DOtrx.EIVAddressLine2B;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_AddressLine3B").Value = DOtrx.EIVAddressLine3B == null ? "" : DOtrx.EIVAddressLine3B;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_PostalZoneB").Value = DOtrx.EIVPostalZoneB == null ? "" : DOtrx.EIVPostalZoneB;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_CityNameB").Value = DOtrx.EIVCityNameB == null ? "" : DOtrx.EIVCityNameB;
+                        if (DOtrx.EIVStateB != null)
+                        {
+                            oDoc.AddressExtension.BillToState = DOtrx.EIVStateB.Code;
+                        }
+                        if (DOtrx.EIVCountryB != null)
+                        {
+                            oDoc.AddressExtension.BillToCountry = DOtrx.EIVCountryB.Code;
+                        }
+
+                        // Recipient
+                        oDoc.UserFields.Fields.Item("U_EIV_ShippingName").Value = DOtrx.EIVShippingName == null ? "" : DOtrx.EIVShippingName;
+                        oDoc.UserFields.Fields.Item("U_EIV_ShippingTin").Value = DOtrx.EIVShippingTin == null ? "" : DOtrx.EIVShippingTin;
+                        oDoc.UserFields.Fields.Item("U_EIV_ShippingRegNum").Value = DOtrx.EIVShippingRegNum == null ? "" : DOtrx.EIVShippingRegNum;
+                        if (DOtrx.EIVShippingRegTyp != null)
+                        {
+                            oDoc.UserFields.Fields.Item("U_EIV_ShippingRegTyp").Value = DOtrx.EIVShippingRegTyp.Code;
+                        }
+
+                        oDoc.AddressExtension.ShipToStreet = DOtrx.EIVAddressLine1S == null ? "" : DOtrx.EIVAddressLine1S;
+                        oDoc.AddressExtension.ShipToBlock = DOtrx.EIVAddressLine2S == null ? "" : DOtrx.EIVAddressLine2S;
+                        oDoc.AddressExtension.ShipToCity = DOtrx.EIVAddressLine3S == null ? "" : DOtrx.EIVAddressLine3S;
+                        oDoc.AddressExtension.ShipToCounty = DOtrx.EIVCityNameS == null ? "" : DOtrx.EIVCityNameS;
+                        oDoc.AddressExtension.ShipToZipCode = DOtrx.EIVPostalZoneS == null ? "" : DOtrx.EIVPostalZoneS;
+
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_AddressLine1S").Value = DOtrx.EIVAddressLine1S == null ? "" : DOtrx.EIVAddressLine1S;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_AddressLine2S").Value = DOtrx.EIVAddressLine2S == null ? "" : DOtrx.EIVAddressLine2S;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_AddressLine3S").Value = DOtrx.EIVAddressLine3S == null ? "" : DOtrx.EIVAddressLine3S;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_PostalZoneS").Value = DOtrx.EIVPostalZoneS == null ? "" : DOtrx.EIVPostalZoneS;
+                        oDoc.AddressExtension.UserFields.Fields.Item("U_EIV_CityNameS").Value = DOtrx.EIVCityNameS == null ? "" : DOtrx.EIVCityNameS;
+                        if (DOtrx.EIVStateS != null)
+                        {
+                            oDoc.AddressExtension.ShipToState = DOtrx.EIVStateS.Code;
+                        }
+                        if (DOtrx.EIVCountryS != null)
+                        {
+                            oDoc.AddressExtension.ShipToCountry = DOtrx.EIVCountryS.Code;
+                        }
+                        // End ver 1.0.18
+                        // Start ver 1.0.33
+                    }
+                    // End ver 1.0.33
+
+                    int cnt = 0;
+                    foreach (EMContainerDODetails dtl in oTargetDoc.EMContainerDODetails)
+                    {
+                        cnt++;
+                        if (cnt == 1)
+                        {
+                        }
+                        else
+                        {
+                            oDoc.Lines.Add();
+                            oDoc.Lines.SetCurrentLine(oDoc.Lines.Count - 1);
+                        }
+
+                        oDoc.Lines.ItemCode = dtl.ItemCode.ItemCode;
+                        oDoc.Lines.ItemDescription = dtl.ItemDesc;
+                        oDoc.Lines.Quantity = (double)dtl.Quantity;
+                        oDoc.Lines.UnitPrice = (double)dtl.Price;
+                        if (dtl.Warehouse != null)
+                        {
+                            oDoc.Lines.WarehouseCode = dtl.Warehouse.WarehouseCode;
+                        }
+                        oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.Oid.ToString();
+                        // Start ver 1.0.18
+                        if (dtl.EIVClassification != null)
+                        {
+                            oDoc.Lines.UserFields.Fields.Item("U_EIV_Classification").Value = dtl.EIVClassification.Code;
+                        }
+                        // End ver 1.0.18
+
+                        if (dtl.Bin != null)
+                        {
+                            oDoc.Lines.BinAllocations.BinAbsEntry = dtl.Bin.AbsEntry;
+                            oDoc.Lines.BinAllocations.Quantity = (double)dtl.Quantity;
+                        }
+
+                        string getdoDocentry = "SELECT T1.DocEntry, T1.LineNum, T1.U_PortalLineOid " +
+                         "From [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..ODLN T0 " +
+                         "INNER join [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..DLN1 T1 on T0.DocEntry = T1.DocEntry " +
+                         "WHERE U_PortalDocNum = '" + dtl.BaseDoc + "'";
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                        conn.Open();
+                        SqlCommand cmd1 = new SqlCommand(getdoDocentry, conn);
+                        SqlDataReader reader1 = cmd1.ExecuteReader();
+                        while (reader1.Read())
+                        {
+                            if (reader1.GetString(2) == dtl.Oid.ToString())
+                            {
+                                oDoc.Lines.BaseType = 15;
+                                oDoc.Lines.BaseEntry = reader1.GetInt32(0);
+                                oDoc.Lines.BaseLine = reader1.GetInt32(1);
+                            }
+                        }
+                        conn.Close();
+
+                        IObjectSpace os = ObjectSpaceProvider.CreateObjectSpace();
+                        SalesOrder so = os.FindObject<SalesOrder>(CriteriaOperator.Parse("DocNum = ?", dtl.SODocNum));
+
+                        // Start ver 1.0.10
+                        sodocnum = so.DocNum;
+                        // End ver 1.0.10
+
+                        if (so.Series.SeriesName == "Cash")
+                        {
+                            IObjectSpace fos = ObjectSpaceProvider.CreateObjectSpace();
+                            vwSeries series = fos.FindObject<vwSeries>(CriteriaOperator.Parse("SeriesName = ? and ObjectCode = ?",
+                                "Cash", "13"));
+
+                            if (series != null)
+                            {
+                                oDoc.Series = int.Parse(series.Series);
+                            }
+                        }
+                        else
+                        {
+                            IObjectSpace fos = ObjectSpaceProvider.CreateObjectSpace();
+                            vwSeries series = fos.FindObject<vwSeries>(CriteriaOperator.Parse("SeriesName = ? and ObjectCode = ?",
+                                "Term", "13"));
+
+                            if (series != null)
+                            {
+                                oDoc.Series = int.Parse(series.Series);
+                            }
+                        }
+                    }
+
+                    // Start ver 1.0.10
+                    //string getdpDocentry = "SELECT T0.DocEntry, T0.DocTotal FROM [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..ODPI T0 " +
+                    //      "LEFT JOIN DeliveryOrderDetails T1 on T0.U_SoDocNumber = T1.SODocNum COLLATE DATABASE_DEFAULT " +
+                    //      "WHERE T1.DeliveryOrder = " + oTargetDoc.Oid + " " +
+                    //      "GROUP BY T0.DocEntry, T0.DocTotal";
+                    string getdpDocentry = "SELECT T0.DocEntry, T0.DocTotal, T0.DocTotal - T1.Total as Balance, T1.Total " +
+                        "From [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..ODPI T0 " +
+                        "INNER JOIN " +
+                        "( " +
+                        "SELECT D1.SODocNum ,SUM(D1.Total) as Total FROM EMContainer D0 " +
+                        "INNER JOIN EMContainerDODetails D1 on D0.OID = D1.EMContainer " +
+                        "WHERE D0.SapINV = 1 AND D1.GCRecord is null AND D0.GCRecord is null " +
+                        "AND D0.DocNum = '" + oTargetDoc.DocNum + "' " +
+                        "GROUP BY D1.SODocNum " +
+                        ") T1 on T1.SODocNum = T0.U_SoDocNumber COLLATE DATABASE_DEFAULT ";
+                    // End ver 1.0.10
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getdpDocentry, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        // Start ver 1.0.10
+                        if (reader.GetDecimal(2) > 0)
+                        {
+                            double drawamt = (double)reader.GetDecimal(2) - (double)oTargetDoc.EMContainerDODetails.Sum(s => s.Total);
+                            // End ver 1.0.10
+                            SAPbobsCOM.DownPaymentsToDraw dpm = oDoc.DownPaymentsToDraw;
+                            dpm.DocEntry = reader.GetInt32(0);
+                            // Start ver 1.0.10
+                            //dpm.AmountToDraw = (double)oTargetDoc.DeliveryOrderDetails.Sum(s => s.Total);
+                            //dpm.AmountToDraw = (double)reader.GetDecimal(1);
+                            if (drawamt <= 0)
+                            {
+                                dpm.AmountToDraw = (double)reader.GetDecimal(2);
+                            }
+                            else
+                            {
+                                //dpm.AmountToDraw = (double)oTargetDoc.EMContainerDODetails.Sum(s => s.Total);
+                                dpm.AmountToDraw = (double)reader.GetDecimal(3);
+                            }
+                            // End ver 1.0.10
+                            dpm.Add();
+                            // Start ver 1.0.10
+                        }
+                        // End ver 1.0.10
+                    }
+                    conn.Close();
+
+                    int rc = oDoc.Add();
+                    if (rc != 0)
+                    {
+                        string temp = sap.oCom.GetLastErrorDescription();
+                        if (sap.oCom.InTransaction)
+                        {
+                            sap.oCom.EndTransaction(BoWfTransOpt.wf_RollBack);
+                        }
+
+                        IObjectSpace osupdate = ObjectSpaceProvider.CreateObjectSpace();
+                        EMContainer obj = osupdate.GetObjectByKey<EMContainer>(oTargetDoc.Oid);
+
+                        EMContainerDocTrail ds = osupdate.CreateObject<EMContainerDocTrail>();
+                        ds.CreateUser = osupdate.GetObjectByKey<ApplicationUser>(Guid.Parse("100348B5-290E-47DF-9355-557C7E2C56D3"));
+                        ds.CreateDate = DateTime.Now;
+                        ds.DocStatus = DocStatus.PendPost;
+                        ds.DocRemarks = "SAP Error:" + temp;
+                        obj.EMContainerDocTrail.Add(ds);
+
+                        osupdate.CommitChanges();
+
+                        WriteLog("[Error]", "Message: EM Invoice Posting :" + oTargetDoc + "-" + temp);
+
+                        return -1;
+                    }
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                IObjectSpace osupdate = ObjectSpaceProvider.CreateObjectSpace();
+                EMContainer obj = osupdate.GetObjectByKey<EMContainer>(oTargetDoc.Oid);
+
+                EMContainerDocTrail ds = osupdate.CreateObject<EMContainerDocTrail>();
+                ds.CreateUser = osupdate.GetObjectByKey<ApplicationUser>(Guid.Parse("100348B5-290E-47DF-9355-557C7E2C56D3"));
+                ds.CreateDate = DateTime.Now;
+                ds.DocStatus = DocStatus.PendPost;
+                ds.DocRemarks = "SAP Error:" + ex.Message;
+                obj.EMContainerDocTrail.Add(ds);
+
+                osupdate.CommitChanges();
+
+                WriteLog("[Error]", "Message: EM Invoice Posting :" + oTargetDoc + "-" + ex.Message);
+
+                return -1;
+            }
+        }
+        // End ver 1.0.33
     }
 }

@@ -755,6 +755,30 @@ namespace Admiral.ImportData
                                         {
                                             result.AddErrorMessage(string.Format("Invalid DO number."), cell);
                                         }
+
+                                        // Block Non EM customer 
+                                        DONumber = "";
+                                        query = "SELECT T0.DocNum, T0.Customer FROM DeliveryOrder T0 " +
+                                            "INNER JOIN vwBusniessPartner T1 on T0.Customer = T1.BPCode " +
+                                            "WHERE T0.DocNum = '" + v.ToString() + "' AND T1.IntercoType = 'EM'";
+                                        if (conn.State == ConnectionState.Open)
+                                        {
+                                            conn.Close();
+                                        }
+                                        conn.Open();
+                                        SqlCommand cmdinvalidcus = new SqlCommand(query, conn);
+                                        SqlDataReader readerinvalidcus = cmdinvalidcus.ExecuteReader();
+                                        while (readerinvalidcus.Read())
+                                        {
+                                            DONumber = readerinvalidcus.GetString(0);
+                                        }
+                                        cmdinvalid.Dispose();
+                                        conn.Close();
+
+                                        if (DONumber == "")
+                                        {
+                                            result.AddErrorMessage(string.Format("This DO not belong to EM customer."), cell);
+                                        }
                                     }
                                     // End ver 1.0.33
 

@@ -20,6 +20,7 @@ using System.Text;
 // 2024-07-29 - add DfltWhs - ver 1.0.19
 // 2025-11-03 - add AutoInvoice - ver 1.0.24
 // 2026-08-10 - add trade term - ver 1.0.31
+// 2026-09-24 - add IntercoType - ver 1.0.33
 
 namespace StarLaiPortal.Module.BusinessObjects.View
 {
@@ -354,6 +355,16 @@ namespace StarLaiPortal.Module.BusinessObjects.View
             get; set;
         }
         // End ver 1.0.31
+
+        // Start ver 1.0.33
+        [XafDisplayName("IntercoType")]
+        [Appearance("IntercoType", Enabled = false)]
+        [Index(65), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
+        public string IntercoType
+        {
+            get; set;
+        }
+        // End ver 1.0.33
 
         [Index(88), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(true)]
         public string BoFullName

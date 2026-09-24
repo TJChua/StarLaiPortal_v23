@@ -141,7 +141,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         [NoForeignKey]
         [ImmediatePostData]
         [LookupEditorMode(LookupEditorMode.AllItems)]
-        [DataSourceCriteria("ValidFor = 'Y' and CardType = 'C'")]
+        [DataSourceCriteria("ValidFor = 'Y' and CardType = 'C' and IntercoType = 'EM'")]
         [Appearance("Customer", Enabled = false, Criteria = "not IsNew")]
         [RuleRequiredField(DefaultContexts.Save)]
         [Index(5), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]

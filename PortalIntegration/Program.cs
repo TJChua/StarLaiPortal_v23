@@ -32,9 +32,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// 2023-07-28 add Downpayment cancellation ver 1.0.7
-// 2023-11-02 Add stock count ver 1.0.12
-// 2024-06-12 e-invoice - ver 1.0.18
+// 2023-07-28 - add Downpayment cancellation ver 1.0.7
+// 2023-11-02 - Add stock count ver 1.0.12
+// 2024-06-12 - e-invoice - ver 1.0.18
+// 2026-09-18 - Add EM Container module - ver 1.0.33
 
 namespace PortalIntegration
 {
@@ -219,6 +220,14 @@ namespace PortalIntegration
             XafTypesInfo.Instance.RegisterEntity(typeof(StockCountConfirmDetails));
             XafTypesInfo.Instance.RegisterEntity(typeof(StockCountConfirmDocTrail));
             // End ver 1.0.12
+
+            // Start ver 1.0.33
+            XafTypesInfo.Instance.RegisterEntity(typeof(EMContainer));
+            XafTypesInfo.Instance.RegisterEntity(typeof(EMContainerDO));
+            XafTypesInfo.Instance.RegisterEntity(typeof(EMContainerDocTrail));
+            XafTypesInfo.Instance.RegisterEntity(typeof(EMContainerDODetails));
+            XafTypesInfo.Instance.RegisterEntity(typeof(EMContainerExtDO));
+            // End ver 1.0.33
 
             //Setup
             XafTypesInfo.Instance.RegisterEntity(typeof(Approvals));
