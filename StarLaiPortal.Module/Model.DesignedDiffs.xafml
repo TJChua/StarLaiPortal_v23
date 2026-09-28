@@ -492,7 +492,7 @@
         <Items>
           <Item Id="DeliveryOrder_ListView" Index="0" Visible="False" />
           <Item Id="Delivery Order By Date" Caption="Delivery Order By Date" Index="1" ViewId="DeliveryOrder_ListView_ByDate" IsNewNode="True" />
-          <Item Id="EMContainer_ListView" Index="2" />
+          <Item Id="EMContainer_ListView" Index="2" Visible="True" />
           <Item Id="vwInquiryDelivery_ListView" Index="3" Visible="False" />
           <Item Id="DeliveryInquiry_ListView" Index="4" />
           <Item Id="vwInquiryInvoice_ListView" Index="5" Visible="False" />

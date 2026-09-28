@@ -1435,7 +1435,7 @@ namespace StarLaiPortal.Module.Controllers
                             result.PortalNo = row.Values[1].ToString();
                             result.SAPNo = row.Values[2].ToString();
                             // Start ver 1.0.32
-                            if (row.Values[3].ToString() != "")
+                            if (row.Values[3].ToString() != "01/01/1900 12:00:00 AM")
                             {
                                 result.CreateDT = DateTime.Parse(row.Values[3].ToString());
                             }

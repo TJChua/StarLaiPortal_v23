@@ -157,6 +157,7 @@ namespace StarLaiPortal.Module.Controllers
             if (selectedObject.IsValid == true)
             {
                 selectedObject.Status = DocStatus.Open;
+                selectedObject.InvoiceDate = DateTime.Now;
 
                 EMContainerDocTrail ds = ObjectSpace.CreateObject<EMContainerDocTrail>();
                 ds.DocStatus = DocStatus.Open;
@@ -230,6 +231,12 @@ namespace StarLaiPortal.Module.Controllers
                         (CriteriaOperator.Parse("PortalNum = ?", dtl.DONumber));
 
                     int count = 1;
+
+                    if (selectedObject.EMContainerDODetails.Where(x => x.BaseDoc == dtl.DONumber).Count() > 0)
+                    {
+                        count = selectedObject.EMContainerDODetails.Where(x => x.BaseDoc == dtl.DONumber).Max(pp => pp.DOLine);
+                    }
+
                     foreach (vwEMDODetails item in itemlist)
                     {
                         EMContainerDODetails newdetails = os.CreateObject<EMContainerDODetails>();
@@ -390,6 +397,12 @@ namespace StarLaiPortal.Module.Controllers
                         }
 
                         int count = 1;
+
+                        if (container.EMContainerDODetails.Where(x => x.BaseDoc == dtl.PortalNum).Count() > 0)
+                        {
+                            count = container.EMContainerDODetails.Where(x => x.BaseDoc == dtl.PortalNum).Max(pp => pp.DOLine);
+                        }
+
                         foreach (vwEMDODetails item in itemlist)
                         {
                             EMContainerDODetails newdetails = ObjectSpace.CreateObject<EMContainerDODetails>();

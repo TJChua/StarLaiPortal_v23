@@ -232,6 +232,12 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
                     {
                         Loaded = Quantity;
                     }
+
+                    if (Loaded <= 0)
+                    {
+                        Loaded = 1;
+                    }
+
                     Total = Loaded * Price;
                     Variance = Loaded - Quantity;
                 }

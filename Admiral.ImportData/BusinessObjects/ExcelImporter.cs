@@ -729,7 +729,7 @@ namespace Admiral.ImportData
 
                                         if (DONumber != "")
                                         {
-                                            result.AddErrorMessage(string.Format("DO number exist in current document."), cell);
+                                            result.AddErrorMessage(string.Format("The DO number already exists in the current document."), cell);
                                         }
 
                                         // Block invalid DO 
@@ -753,7 +753,7 @@ namespace Admiral.ImportData
 
                                         if (DONumber == "")
                                         {
-                                            result.AddErrorMessage(string.Format("Invalid DO number."), cell);
+                                            result.AddErrorMessage(string.Format("The DO number does not belong to this customer."), cell);
                                         }
 
                                         // Block Non EM customer 
@@ -777,7 +777,7 @@ namespace Admiral.ImportData
 
                                         if (DONumber == "")
                                         {
-                                            result.AddErrorMessage(string.Format("This DO not belong to EM customer."), cell);
+                                            result.AddErrorMessage(string.Format("This DO does not belong to the EM customer."), cell);
                                         }
                                     }
                                     // End ver 1.0.33

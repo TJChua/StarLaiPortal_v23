@@ -7965,7 +7965,7 @@ namespace PortalIntegration
 
                     oDoc.CardCode = oTargetDoc.Customer.BPCode;
                     oDoc.CardName = oTargetDoc.CustomerName;
-                    oDoc.DocDate = DateTime.Now;
+                    oDoc.DocDate = oTargetDoc.InvoiceDate;
                     oDoc.Comments = oTargetDoc.Remarks;
                     oDoc.UserFields.Fields.Item("U_PortalDocNum").Value = oTargetDoc.DocNum;
                     // Start ver 1.0.18
