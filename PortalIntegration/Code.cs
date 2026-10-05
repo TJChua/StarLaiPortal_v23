@@ -1266,7 +1266,10 @@ namespace PortalIntegration
                                 //if (doobj.Customer.GroupName != "Trade AR InterCo" 
                                 //    && doobj.Customer.GroupName != "Non Trade AR InterCo" 
                                 //    && doobj.Customer.GroupName != "AR InterCo Loan")
-                                if (doobj.Customer.AutoInvoice == "Y")
+                                // Start ver 1.0.33
+                                //if (doobj.Customer.AutoInvoice == "Y")
+                                if (doobj.Customer.AutoInvoice == "Y" && doobj.Customer.IntercoType != "EM")
+                                // End ver 1.0.33
                                 {
                                 // End ver 1.0.24
                                     #region Post INV
@@ -7965,7 +7968,7 @@ namespace PortalIntegration
 
                     oDoc.CardCode = oTargetDoc.Customer.BPCode;
                     oDoc.CardName = oTargetDoc.CustomerName;
-                    oDoc.DocDate = oTargetDoc.InvoiceDate;
+                    oDoc.DocDate = DateTime.Now;
                     oDoc.Comments = oTargetDoc.Remarks;
                     oDoc.UserFields.Fields.Item("U_PortalDocNum").Value = oTargetDoc.DocNum;
                     // Start ver 1.0.18
@@ -8090,87 +8093,90 @@ namespace PortalIntegration
                     int cnt = 0;
                     foreach (EMContainerDODetails dtl in oTargetDoc.EMContainerDODetails)
                     {
-                        cnt++;
-                        if (cnt == 1)
+                        if (dtl.Loaded > 0)
                         {
-                        }
-                        else
-                        {
-                            oDoc.Lines.Add();
-                            oDoc.Lines.SetCurrentLine(oDoc.Lines.Count - 1);
-                        }
+                            cnt++;
+                            if (cnt == 1)
+                            {
+                            }
+                            else
+                            {
+                                oDoc.Lines.Add();
+                                oDoc.Lines.SetCurrentLine(oDoc.Lines.Count - 1);
+                            }
 
-                        oDoc.Lines.ItemCode = dtl.ItemCode.ItemCode;
-                        oDoc.Lines.ItemDescription = dtl.ItemDesc;
-                        oDoc.Lines.Quantity = (double)dtl.Quantity;
-                        oDoc.Lines.UnitPrice = (double)dtl.Price;
-                        if (dtl.Warehouse != null)
-                        {
-                            oDoc.Lines.WarehouseCode = dtl.Warehouse.WarehouseCode;
-                        }
-                        oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.Oid.ToString();
-                        // Start ver 1.0.18
-                        if (dtl.EIVClassification != null)
-                        {
-                            oDoc.Lines.UserFields.Fields.Item("U_EIV_Classification").Value = dtl.EIVClassification.Code;
-                        }
-                        // End ver 1.0.18
+                            oDoc.Lines.ItemCode = dtl.ItemCode.ItemCode;
+                            oDoc.Lines.ItemDescription = dtl.ItemDesc;
+                            oDoc.Lines.Quantity = (double)dtl.Loaded;
+                            oDoc.Lines.UnitPrice = (double)dtl.Price;
+                            if (dtl.Warehouse != null)
+                            {
+                                oDoc.Lines.WarehouseCode = dtl.Warehouse.WarehouseCode;
+                            }
+                            oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.Oid.ToString();
+                            // Start ver 1.0.18
+                            if (dtl.EIVClassification != null)
+                            {
+                                oDoc.Lines.UserFields.Fields.Item("U_EIV_Classification").Value = dtl.EIVClassification.Code;
+                            }
+                            // End ver 1.0.18
 
-                        if (dtl.Bin != null)
-                        {
-                            oDoc.Lines.BinAllocations.BinAbsEntry = dtl.Bin.AbsEntry;
-                            oDoc.Lines.BinAllocations.Quantity = (double)dtl.Quantity;
-                        }
+                            if (dtl.Bin != null)
+                            {
+                                oDoc.Lines.BinAllocations.BinAbsEntry = dtl.Bin.AbsEntry;
+                                oDoc.Lines.BinAllocations.Quantity = (double)dtl.Loaded;
+                            }
 
-                        string getdoDocentry = "SELECT T1.DocEntry, T1.LineNum, T1.U_PortalLineOid " +
-                         "From [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..ODLN T0 " +
-                         "INNER join [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..DLN1 T1 on T0.DocEntry = T1.DocEntry " +
-                         "WHERE U_PortalDocNum = '" + dtl.BaseDoc + "'";
-                        if (conn.State == ConnectionState.Open)
-                        {
+                            string getdoDocentry = "SELECT T1.DocEntry, T1.LineNum, T1.U_PortalLineOid " +
+                             "From [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..ODLN T0 " +
+                             "INNER join [" + ConfigurationManager.AppSettings["CompanyDB"].ToString() + "]..DLN1 T1 on T0.DocEntry = T1.DocEntry " +
+                             "WHERE U_PortalDocNum = '" + dtl.BaseDoc + "'";
+                            if (conn.State == ConnectionState.Open)
+                            {
+                                conn.Close();
+                            }
+                            conn.Open();
+                            SqlCommand cmd1 = new SqlCommand(getdoDocentry, conn);
+                            SqlDataReader reader1 = cmd1.ExecuteReader();
+                            while (reader1.Read())
+                            {
+                                if (reader1.GetString(2) == dtl.BaseId.ToString())
+                                {
+                                    oDoc.Lines.BaseType = 15;
+                                    oDoc.Lines.BaseEntry = reader1.GetInt32(0);
+                                    oDoc.Lines.BaseLine = reader1.GetInt32(1);
+                                }
+                            }
                             conn.Close();
-                        }
-                        conn.Open();
-                        SqlCommand cmd1 = new SqlCommand(getdoDocentry, conn);
-                        SqlDataReader reader1 = cmd1.ExecuteReader();
-                        while (reader1.Read())
-                        {
-                            if (reader1.GetString(2) == dtl.Oid.ToString())
+
+                            IObjectSpace os = ObjectSpaceProvider.CreateObjectSpace();
+                            SalesOrder so = os.FindObject<SalesOrder>(CriteriaOperator.Parse("DocNum = ?", dtl.SODocNum));
+
+                            // Start ver 1.0.10
+                            sodocnum = so.DocNum;
+                            // End ver 1.0.10
+
+                            if (so.Series.SeriesName == "Cash")
                             {
-                                oDoc.Lines.BaseType = 15;
-                                oDoc.Lines.BaseEntry = reader1.GetInt32(0);
-                                oDoc.Lines.BaseLine = reader1.GetInt32(1);
+                                IObjectSpace fos = ObjectSpaceProvider.CreateObjectSpace();
+                                vwSeries series = fos.FindObject<vwSeries>(CriteriaOperator.Parse("SeriesName = ? and ObjectCode = ?",
+                                    "Cash", "13"));
+
+                                if (series != null)
+                                {
+                                    oDoc.Series = int.Parse(series.Series);
+                                }
                             }
-                        }
-                        conn.Close();
-
-                        IObjectSpace os = ObjectSpaceProvider.CreateObjectSpace();
-                        SalesOrder so = os.FindObject<SalesOrder>(CriteriaOperator.Parse("DocNum = ?", dtl.SODocNum));
-
-                        // Start ver 1.0.10
-                        sodocnum = so.DocNum;
-                        // End ver 1.0.10
-
-                        if (so.Series.SeriesName == "Cash")
-                        {
-                            IObjectSpace fos = ObjectSpaceProvider.CreateObjectSpace();
-                            vwSeries series = fos.FindObject<vwSeries>(CriteriaOperator.Parse("SeriesName = ? and ObjectCode = ?",
-                                "Cash", "13"));
-
-                            if (series != null)
+                            else
                             {
-                                oDoc.Series = int.Parse(series.Series);
-                            }
-                        }
-                        else
-                        {
-                            IObjectSpace fos = ObjectSpaceProvider.CreateObjectSpace();
-                            vwSeries series = fos.FindObject<vwSeries>(CriteriaOperator.Parse("SeriesName = ? and ObjectCode = ?",
-                                "Term", "13"));
+                                IObjectSpace fos = ObjectSpaceProvider.CreateObjectSpace();
+                                vwSeries series = fos.FindObject<vwSeries>(CriteriaOperator.Parse("SeriesName = ? and ObjectCode = ?",
+                                    "Term", "13"));
 
-                            if (series != null)
-                            {
-                                oDoc.Series = int.Parse(series.Series);
+                                if (series != null)
+                                {
+                                    oDoc.Series = int.Parse(series.Series);
+                                }
                             }
                         }
                     }

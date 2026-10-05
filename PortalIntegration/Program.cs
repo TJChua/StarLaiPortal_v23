@@ -45,7 +45,7 @@ namespace PortalIntegration
         [STAThread]
         static void Main()
         {
-            const string appName = "Portal Integration";
+            const string appName = "Operation Portal Integration";
             bool createdNew;
 
             mutex = new System.Threading.Mutex(true, appName, out createdNew);

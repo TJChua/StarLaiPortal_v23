@@ -441,7 +441,10 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
             {
                 foreach (EMContainerDODetails dtl in this.EMContainerDODetails)
                 {
-                    return true;
+                    if (dtl.Loaded > 0)
+                    {
+                        return true;
+                    }
                 }
 
                 return false;
