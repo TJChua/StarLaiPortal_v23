@@ -563,7 +563,7 @@ namespace StarLaiPortal.Module.Controllers
                         doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
                         doc.Refresh();
 
-                        doc.SetParameterValue("dockey@", emcontainer.Oid);
+                        doc.SetParameterValue("dockey@", emcontainer.SAPINVDocNum);
                         doc.SetParameterValue("dbName@", conn.Database);
 
                         // Start ver 1.0.30

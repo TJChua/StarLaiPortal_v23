@@ -226,14 +226,14 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
             set
             {
                 SetPropertyValue("Loaded", ref _Loaded, value);
-                if (!IsLoading && value != 0)
+                if (!IsLoading)
                 {
                     if (Loaded > Quantity)
                     {
                         Loaded = Quantity;
                     }
 
-                    if (Loaded <= 0)
+                    if (Loaded < 0)
                     {
                         Loaded = 1;
                     }
