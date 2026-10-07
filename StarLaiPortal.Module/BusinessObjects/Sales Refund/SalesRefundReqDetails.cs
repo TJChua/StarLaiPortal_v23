@@ -200,7 +200,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Refund
 
         private vwReasonCode _ReasonCode;
         [NoForeignKey]
-        [ImmediatePostData]
+        //[ImmediatePostData]
         [DataSourceCriteria("Type = 'SalesReturn'")]
         [RuleRequiredField(DefaultContexts.Save)]
         [XafDisplayName("Reason Code")]

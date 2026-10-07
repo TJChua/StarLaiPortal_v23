@@ -7,6 +7,7 @@ using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
+using StarLaiPortal.Module.BusinessObjects.Credit_Notes_Cancellation;
 using StarLaiPortal.Module.BusinessObjects.Setup;
 using StarLaiPortal.Module.BusinessObjects.View;
 using System;
@@ -18,6 +19,7 @@ using System.Text;
 // 2023-07-28 - add GRPO Correction ver 1.0.7
 // 2023-09-25 - change date format ver 1.0.10
 // 2026-06-29 - submit button change to action button - ver 1.0.30
+// 2026-10-06 - add total amount and total quantity - ver 1.0.34
 
 namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
 {
@@ -456,6 +458,38 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
         }
         // End ver 1.0.7
 
+        // Start ver 1.0.34
+        private decimal _TotalQty;
+        [XafDisplayName("Total Qty")]
+        [Appearance("TotalQty", Enabled = false)]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:N0}")]
+        [Index(38), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        public decimal TotalQty
+        {
+            get { return _TotalQty; }
+            set
+            {
+                SetPropertyValue("TotalQty", ref _TotalQty, value);
+            }
+        }
+
+        private decimal _Total;
+        [XafDisplayName("Total Amt")]
+        [Appearance("Total", Enabled = false)]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:n2}")]
+        [Index(40), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
+        public decimal Total
+        {
+            get { return _Total; }
+            set
+            {
+                SetPropertyValue("Total", ref _Total, value);
+            }
+        }
+        // End ver 1.0.34
+
         private string _AppUser;
         [XafDisplayName("AppUser")]
         [Index(78), VisibleInDetailView(false), VisibleInListView(false), VisibleInLookupListView(false)]
@@ -597,7 +631,20 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
         [XafDisplayName("Content")]
         public XPCollection<PurchaseReturnRequestDetails> PurchaseReturnRequestDetails
         {
-            get { return GetCollection<PurchaseReturnRequestDetails>("PurchaseReturnRequestDetails"); }
+            get
+            {
+                // Start ver 1.0.34
+                //get { return GetCollection<PurchaseReturnRequestDetails>("PurchaseReturnRequestDetails"); }
+
+                var collection = GetCollection<PurchaseReturnRequestDetails>(
+                    nameof(PurchaseReturnRequestDetails));
+
+                collection.CollectionChanged -= Details_CollectionChanged;
+                collection.CollectionChanged += Details_CollectionChanged;
+
+                return collection;
+                // End ver 1.0.34
+            }
         }
 
         [Association("PurchaseReturnRequests-PurchaseReturnRequestDocTrail")]
@@ -674,5 +721,18 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
                 }
             }
         }
+
+        // Start ver 1.0.34
+        private void Details_CollectionChanged(object sender, XPCollectionChangedEventArgs e)
+        {
+            RecalculateTotals();
+        }
+
+        public void RecalculateTotals()
+        {
+            Total = PurchaseReturnRequestDetails.Sum(x => x.Total);
+            TotalQty = PurchaseReturnRequestDetails.Sum(x => x.Quantity);
+        }
+        // End ver 1.0.34
     }
 }

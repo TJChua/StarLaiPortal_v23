@@ -18,6 +18,7 @@ using System.Text;
 // 2023-07-28 - add GRPO Correction ver 1.0.7
 // 2024-07-18 - add basedoc - ver 1.0.19
 // 2026-06-29 - add print count and print status - ver 1.0.30
+// 2026-10-06 - add total amount and total quantity - ver 1.0.34
 
 namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
 {
@@ -469,6 +470,38 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
         }
         // End ver 1.0.30
 
+        // Start ver 1.0.34
+        private decimal _TotalQty;
+        [XafDisplayName("Total Qty")]
+        [Appearance("TotalQty", Enabled = false)]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:N0}")]
+        [Index(48), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        public decimal TotalQty
+        {
+            get { return _TotalQty; }
+            set
+            {
+                SetPropertyValue("TotalQty", ref _TotalQty, value);
+            }
+        }
+
+        private decimal _Total;
+        [XafDisplayName("Total Amt")]
+        [Appearance("Total", Enabled = false)]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:n2}")]
+        [Index(50), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
+        public decimal Total
+        {
+            get { return _Total; }
+            set
+            {
+                SetPropertyValue("Total", ref _Total, value);
+            }
+        }
+        // End ver 1.0.34
+
         private string _Reference;
         [XafDisplayName("Reference")]
         [Index(79), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
@@ -547,7 +580,20 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
         [XafDisplayName("Content")]
         public XPCollection<PurchaseReturnDetails> PurchaseReturnDetails
         {
-            get { return GetCollection<PurchaseReturnDetails>("PurchaseReturnDetails"); }
+            get
+            {
+                // Start ver 1.0.34
+                //get { return GetCollection<PurchaseReturnDetails>("PurchaseReturnDetails"); }
+
+                var collection = GetCollection<PurchaseReturnDetails>(
+                    nameof(PurchaseReturnDetails));
+
+                collection.CollectionChanged -= Details_CollectionChanged;
+                collection.CollectionChanged += Details_CollectionChanged;
+
+                return collection;
+                // End ver 1.0.34
+            }
         }
 
         [Association("PurchaseReturns-PurchaseReturnDocTrail")]
@@ -610,5 +656,18 @@ namespace StarLaiPortal.Module.BusinessObjects.Purchase_Return
                 }
             }
         }
+
+        // Start ver 1.0.34
+        private void Details_CollectionChanged(object sender, XPCollectionChangedEventArgs e)
+        {
+            RecalculateTotals();
+        }
+
+        public void RecalculateTotals()
+        {
+            Total = PurchaseReturnDetails.Sum(x => x.Total);
+            TotalQty = PurchaseReturnDetails.Sum(x => x.Quantity);
+        }
+        // End ver 1.0.34
     }
 }

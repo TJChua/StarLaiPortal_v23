@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="ItemInquiry_DetailView_Report">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SecurityControl_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="SecurityControl">
+              <LayoutItem Id="PasswordExpiredPeriod" Index="1" RelativeSize="5.8558558558558556" Removed="True" />
+              <LayoutItem Id="FailedLoginCount" Index="2" RelativeSize="76.126126126126124" Removed="True" />
+              <LayoutItem Id="AccessRestrictedFrom" Removed="True" />
+              <LayoutItem Id="AccessRestrictedTo" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemInquiry_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

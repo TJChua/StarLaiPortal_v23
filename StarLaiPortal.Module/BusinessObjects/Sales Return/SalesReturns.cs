@@ -7,6 +7,7 @@ using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
+using StarLaiPortal.Module.BusinessObjects.Credit_Notes_Cancellation;
 using StarLaiPortal.Module.BusinessObjects.Setup;
 using StarLaiPortal.Module.BusinessObjects.View;
 using System;
@@ -18,6 +19,7 @@ using System.Text;
 // 2023-10-05 add payment method for sales return ver 1.0.10
 // 2024-06-12 - e-invoice - ver 1.0.18
 // 2024-07-18 - add basedoc - ver 1.0.19
+// 2026-10-06 - add total amount and total quantity - ver 1.0.34
 
 namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
 {
@@ -426,6 +428,38 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
             }
         }
         // End ver 1.0.19
+
+        // Start ver 1.0.34
+        private decimal _TotalQty;
+        [XafDisplayName("Total Qty")]
+        [Appearance("TotalQty", Enabled = false)]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:N0}")]
+        [Index(38), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        public decimal TotalQty
+        {
+            get { return _TotalQty; }
+            set
+            {
+                SetPropertyValue("TotalQty", ref _TotalQty, value);
+            }
+        }
+
+        private decimal _Total;
+        [XafDisplayName("Total Amt")]
+        [Appearance("Total", Enabled = false)]
+        [DbType("numeric(18,6)")]
+        [ModelDefault("DisplayFormat", "{0:n2}")]
+        [Index(40), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
+        public decimal Total
+        {
+            get { return _Total; }
+            set
+            {
+                SetPropertyValue("Total", ref _Total, value);
+            }
+        }
+        // End ver 1.0.34
 
         // Start ver 1.0.18
         private vwYesNo _EIVConsolidate;
@@ -898,10 +932,23 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         [XafDisplayName("Content")]
         public XPCollection<SalesReturnDetails> SalesReturnDetails
         {
-            get { return GetCollection<SalesReturnDetails>("SalesReturnDetails"); }
+            get
+            {
+                // Start ver 1.0.34
+                //get { return GetCollection<SalesReturnRequestDetails>("SalesReturnDetails"); }
+
+                var collection = GetCollection<SalesReturnDetails>(
+                    nameof(SalesReturnDetails));
+
+                collection.CollectionChanged -= Details_CollectionChanged;
+                collection.CollectionChanged += Details_CollectionChanged;
+
+                return collection;
+                // End ver 1.0.34
+            }
         }
 
-        [Association("SalesReturns-SalesReturnDocTrail")]
+    [Association("SalesReturns-SalesReturnDocTrail")]
         [XafDisplayName("Status History")]
         public XPCollection<SalesReturnDocTrail> SalesReturnDocTrail
         {
@@ -961,5 +1008,18 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
                 }
             }
         }
+
+        // Start ver 1.0.34
+        private void Details_CollectionChanged(object sender, XPCollectionChangedEventArgs e)
+        {
+            RecalculateTotals();
+        }
+
+        public void RecalculateTotals()
+        {
+            Total = SalesReturnDetails.Sum(x => x.Total);
+            TotalQty = SalesReturnDetails.Sum(x => x.Quantity);
+        }
+        // End ver 1.0.34
     }
 }
