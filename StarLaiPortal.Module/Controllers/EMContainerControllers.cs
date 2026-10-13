@@ -14,6 +14,7 @@ using DevExpress.ExpressApp.Web;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
+using DevExpress.Web.Internal.XmlProcessor;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraReports.Serialization;
 using StarLaiPortal.Module.BusinessObjects;
@@ -525,6 +526,7 @@ namespace StarLaiPortal.Module.Controllers
                 // Start ver 1.0.30
                 string reportprefix = "";
                 // End ver 1.0.30
+                string cdocentry = "";
 
                 SqlConnection conn = new SqlConnection(genCon.getConnectionString());
                 EMContainer emcontainer = (EMContainer)View.CurrentObject;
@@ -552,6 +554,28 @@ namespace StarLaiPortal.Module.Controllers
                     conn.Close();
                     // End ver 1.0.30
 
+                    query = "SELECT BaseId FROM EMContainerDODetails WHERE EMContainer = " + emcontainer.Oid + " GROUP BY BaseId";
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmddo = new SqlCommand(query, conn);
+                    SqlDataReader readerdo = cmddo.ExecuteReader();
+                    while (readerdo.Read())
+                    {
+                        if (cdocentry == "")
+                        {
+                            cdocentry = readerdo.GetString(0);
+                        }
+                        else
+                        {
+                            cdocentry = cdocentry + "," + readerdo.GetString(0);
+                        }
+                    }
+                    cmddo.Dispose();
+                    conn.Close();
+
                     try
                     {
                         ReportDocument doc = new ReportDocument();
@@ -563,7 +587,7 @@ namespace StarLaiPortal.Module.Controllers
                         doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
                         doc.Refresh();
 
-                        doc.SetParameterValue("dockey@", emcontainer.SAPINVDocNum);
+                        doc.SetParameterValue("dockey@", cdocentry);
                         doc.SetParameterValue("dbName@", conn.Database);
 
                         // Start ver 1.0.30

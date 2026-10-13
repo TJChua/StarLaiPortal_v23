@@ -8113,7 +8113,7 @@ namespace PortalIntegration
                             {
                                 oDoc.Lines.WarehouseCode = dtl.Warehouse.WarehouseCode;
                             }
-                            oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.Oid.ToString();
+                            oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.BaseId;
                             // Start ver 1.0.18
                             if (dtl.EIVClassification != null)
                             {
