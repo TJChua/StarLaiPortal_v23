@@ -239,7 +239,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private string _JobNo;
-        [XafDisplayName("Job No")]
+        [XafDisplayName("Our Ref")]
         [Index(23), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         [Size(30)]
         public string JobNo

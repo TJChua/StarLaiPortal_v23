@@ -526,7 +526,6 @@ namespace StarLaiPortal.Module.Controllers
                 // Start ver 1.0.30
                 string reportprefix = "";
                 // End ver 1.0.30
-                string cdocentry = "";
 
                 SqlConnection conn = new SqlConnection(genCon.getConnectionString());
                 EMContainer emcontainer = (EMContainer)View.CurrentObject;
@@ -554,40 +553,18 @@ namespace StarLaiPortal.Module.Controllers
                     conn.Close();
                     // End ver 1.0.30
 
-                    query = "SELECT BaseId FROM EMContainerDODetails WHERE EMContainer = " + emcontainer.Oid + " GROUP BY BaseId";
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                    conn.Open();
-                    SqlCommand cmddo = new SqlCommand(query, conn);
-                    SqlDataReader readerdo = cmddo.ExecuteReader();
-                    while (readerdo.Read())
-                    {
-                        if (cdocentry == "")
-                        {
-                            cdocentry = readerdo.GetString(0);
-                        }
-                        else
-                        {
-                            cdocentry = cdocentry + "," + readerdo.GetString(0);
-                        }
-                    }
-                    cmddo.Dispose();
-                    conn.Close();
-
                     try
                     {
                         ReportDocument doc = new ReportDocument();
                         strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
-                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice_EM.rpt"));
                         strDatabase = conn.Database;
                         strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
                         strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
                         doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
                         doc.Refresh();
 
-                        doc.SetParameterValue("dockey@", cdocentry);
+                        doc.SetParameterValue("dockey@", emcontainer.Oid);
                         doc.SetParameterValue("dbName@", conn.Database);
 
                         // Start ver 1.0.30

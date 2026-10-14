@@ -957,7 +957,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                         // Start ver 1.0.27
                         //StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays - 1);
                         //DemmurrageFreeDue = WhsStakeOnDateTime.AddDays(WhsDemmurrageFreeDays - 1);
-                        StorageFreeDue = WhsStakeOnDateTime.Date.AddDays(WhsStorageFreeDays - 1);
+                        StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays - 1);
                         // Start ver 1.0.31
                         if (CombinedFreeDays != 0)
                         {
@@ -1083,7 +1083,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Container_Tracking
                     // End ver 1.0.27
                     // Start ver 1.0.27
                         //StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays - 1);
-                        StorageFreeDue = WhsStakeOnDateTime.Date.AddDays(WhsStorageFreeDays - 1);
+                        StorageFreeDue = WhsStakeOnDateTime.AddDays(WhsStorageFreeDays - 1);
                     // End ver 1.0.27
                     // Start ver 1.0.27
                     }
