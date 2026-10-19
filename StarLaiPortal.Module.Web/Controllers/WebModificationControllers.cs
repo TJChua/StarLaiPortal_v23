@@ -1191,6 +1191,19 @@ namespace StarLaiPortal.Module.Web.Controllers
 
                 base.Save(args);
             }
+            else if (View.ObjectTypeInfo.Type == typeof(EMContainerExtDO))
+            {
+                EMContainerExtDO CurrObject = (EMContainerExtDO)args.CurrentObject;
+                DetailView masterview = Application.MainWindow.View as DetailView;
+                EMContainer master = (EMContainer)masterview.CurrentObject;
+
+                if (master.EMContainerExtDO.Where(x => x.DocNum == CurrObject.DocNum && x.Supplier == CurrObject.Supplier).Count() > 0)
+                {
+                    throw new InvalidOperationException("DO/Invoice No. with same supplier exist in current document.");
+                }
+
+                base.Save(args);
+            }
             // End ver 1.0.33
             else
             {

@@ -604,9 +604,8 @@ namespace Admiral.ImportData
                                                 {
                                                     result.AddErrorMessage(
                                                         string.Format(
-                                                            "??????“{0}”????????“{1}”??????“{3}”???????????????????!????:{2}",
-                                                            field.MemberInfo.MemberType.FullName, condition,
-                                                            "???" + list.Count + "???", conditionValue), cell);
+                                                            "'{2}' not available in {0} listing.",
+                                                            ws.Cells[3, c].DisplayText, condition, conditionValue), cell);
                                                 }
                                                 else
                                                 {
@@ -708,8 +707,31 @@ namespace Admiral.ImportData
                                     // Start ver 1.0.33
                                     if (field.Name == "DONumber")
                                     {
-                                        // Block import duplicate DO 
+                                        // Block not exist DO 
                                         string DONumber = "";
+                                        query = "SELECT T0.PortalNum, T0.CardCode FROM vwEMDO T0 " +
+                                            "WHERE T0.PortalNum = '" + v.ToString() + "'";
+                                        if (conn.State == ConnectionState.Open)
+                                        {
+                                            conn.Close();
+                                        }
+                                        conn.Open();
+                                        SqlCommand cmdexist = new SqlCommand(query, conn);
+                                        SqlDataReader readerexist= cmdexist.ExecuteReader();
+                                        while (readerexist.Read())
+                                        {
+                                            DONumber = readerexist.GetString(0);
+                                        }
+                                        cmdexist.Dispose();
+                                        conn.Close();
+
+                                        if (DONumber == "")
+                                        {
+                                            result.AddErrorMessage(string.Format("The DO number not exist/created invoice."), cell);
+                                        }
+
+                                        // Block import duplicate DO 
+                                        DONumber = "";
                                         query = "SELECT T1.DONumber FROM EMContainer T0 " +
                                             "INNER JOIN EMContainerDO T1 on T0.OID = T1.EMContainer " +
                                             "WHERE T0.DocNum = '" + option.DocNum + "' AND T1.DONumber = '" + v.ToString() + "' AND T1.GCRecord is null";
@@ -735,8 +757,8 @@ namespace Admiral.ImportData
                                         // Block invalid DO 
                                         DONumber = "";
                                         query = "SELECT T0.PortalNum, T0.CardCode, T1.Customer FROM vwEMDO T0 " +
-                                            "INNER JOIN EMContainer T1 on T1.DocNum = '" + option.DocNum + "' " +
-                                            "WHERE T0.CardCode = T1.Customer AND T0.PortalNum = '" + v.ToString() + "'";
+                                            "INNER JOIN EMContainer T1 on T1.DocNum = '" + option.DocNum + "' COLLATE DATABASE_DEFAULT " +
+                                            "WHERE T0.CardCode <> T1.Customer AND T0.PortalNum = '" + v.ToString() + "'";
                                         if (conn.State == ConnectionState.Open)
                                         {
                                             conn.Close();
@@ -751,7 +773,7 @@ namespace Admiral.ImportData
                                         cmdinvalid.Dispose();
                                         conn.Close();
 
-                                        if (DONumber == "")
+                                        if (DONumber != "")
                                         {
                                             result.AddErrorMessage(string.Format("The DO number does not belong to this customer."), cell);
                                         }
@@ -759,8 +781,8 @@ namespace Admiral.ImportData
                                         // Block Non EM customer 
                                         DONumber = "";
                                         query = "SELECT T0.DocNum, T0.Customer FROM DeliveryOrder T0 " +
-                                            "INNER JOIN vwBusniessPartner T1 on T0.Customer = T1.BPCode " +
-                                            "WHERE T0.DocNum = '" + v.ToString() + "' AND T1.IntercoType = 'EM'";
+                                            "INNER JOIN vwBusniessPartner T1 on T0.Customer = T1.BPCode COLLATE DATABASE_DEFAULT " +
+                                            "WHERE T0.DocNum = '" + v.ToString() + "' AND T1.IntercoType <> 'EM'";
                                         if (conn.State == ConnectionState.Open)
                                         {
                                             conn.Close();
@@ -775,9 +797,37 @@ namespace Admiral.ImportData
                                         cmdinvalid.Dispose();
                                         conn.Close();
 
-                                        if (DONumber == "")
+                                        if (DONumber != "")
                                         {
                                             result.AddErrorMessage(string.Format("This DO does not belong to the EM customer."), cell);
+                                        }
+                                    }
+
+                                    if (field.Name == "DocNum" && option.Type == "EMContainerExtDO")
+                                    {
+                                        // Block import duplicate DO/Invoice No 
+                                        string InvoiceNo = "";
+                                        query = "SELECT T1.DocNum FROM EMContainer T0 " +
+                                            "INNER JOIN EMContainerExtDO T1 on T0.OID = T1.EMContainer " +
+                                            "WHERE T0.DocNum = '" + option.DocNum + "' AND T1.DocNum = '" + v.ToString() + "' " +
+                                            "AND T1.Supplier = '" + ws.Cells[r, 1].Value.ToString() + "' AND T1.GCRecord is null";
+                                        if (conn.State == ConnectionState.Open)
+                                        {
+                                            conn.Close();
+                                        }
+                                        conn.Open();
+                                        SqlCommand cmdduplicate = new SqlCommand(query, conn);
+                                        SqlDataReader readerduplicate = cmdduplicate.ExecuteReader();
+                                        while (readerduplicate.Read())
+                                        {
+                                            InvoiceNo = readerduplicate.GetString(0);
+                                        }
+                                        cmdduplicate.Dispose();
+                                        conn.Close();
+
+                                        if (InvoiceNo != "")
+                                        {
+                                            result.AddErrorMessage(string.Format("The DO/Invoice No. already exists in the current document."), cell);
                                         }
                                     }
                                     // End ver 1.0.33

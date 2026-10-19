@@ -68,6 +68,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 // 2026-03-18 Update loading missing doc num - ver 1.0.27
 // 2026-05-07 enhance posting date and delivery date format - ver 1.0.28
 // 2026-09-18 - Add EM Container module - ver 1.0.33
+// 2026-10-15 - Auto create picklist after downpayment posted - ver 1.0.35
 
 namespace PortalIntegration
 {
@@ -1016,6 +1017,104 @@ namespace PortalIntegration
 
                     WriteLog("[INFO]", "--AR Downpayment Posting End--");
                 }
+
+                // Start ver 1.0.35
+                temp = ConfigurationManager.AppSettings["AutoPickingAfterDP"].ToString().ToUpper();
+                if (temp == "Y" || temp == "YES" || temp == "TRUE" || temp == "1")
+                {
+                    WriteLog("[INFO]", "--Automation Picking After DP Start--");
+
+                    #region Automation Picking After AR Downpayment
+                    string getAutoSo = "EXEC sp_GetAutoPickList 'AutoAfterDP'";
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    conn.Open();
+                    SqlCommand cmdauto = new SqlCommand(getAutoSo, conn);
+                    SqlDataReader readerauto = cmdauto.ExecuteReader();
+                    while (readerauto.Read())
+                    {
+                        IObjectSpace getSOos = ObjectSpaceProvider.CreateObjectSpace();
+                        SalesOrder getobj = getSOos.FindObject<SalesOrder>(new BinaryOperator("Oid", readerauto.GetInt32(0)));
+
+                        if (getobj != null)
+                        {
+                            #region Add Picking
+                            IObjectSpace autoplos = ObjectSpaceProvider.CreateObjectSpace();
+                            PickList newpl = autoplos.CreateObject<PickList>();
+
+                            GeneralControllers genCon = new GeneralControllers();
+                            string docprefix = GetDocPrefix();
+                            newpl.DocNum = genCon.GenerateDocNum(DocTypeList.PL, autoplos, TransferType.NA, 0, docprefix);
+
+                            if (getobj.Transporter != null)
+                            {
+                                newpl.Transporter = newpl.Session.GetObjectByKey<vwTransporter>(getobj.Transporter.TransporterID);
+                            }
+
+                            newpl.CustomerGroup = getobj.Customer.GroupName;
+                            newpl.Customer = getobj.Customer.BPCode;
+                            newpl.CustomerName = getobj.CustomerName;
+                            // Start ver 1.0.28
+                            newpl.DeliveryDate = getobj.DeliveryDate;
+                            // End ver 1.0.28
+                            newpl.SONumber = getobj.DocNum;
+                            newpl.SODeliveryDate = getobj.DeliveryDate.Date.ToString("dd/MM/yyyy");
+                            if (getobj.Priority != null)
+                            {
+                                newpl.Priority = newpl.Session.GetObjectByKey<PriorityType>(getobj.Priority.Oid);
+                            }
+
+                            foreach (SalesOrderDetails dtl in getobj.SalesOrderDetails)
+                            {
+                                PickListDetails newpldetails = autoplos.CreateObject<PickListDetails>();
+
+                                newpldetails.ItemCode = newpldetails.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode.ItemCode);
+                                newpldetails.ItemDesc = dtl.ItemDesc;
+                                newpldetails.CatalogNo = dtl.CatalogNo;
+                                if (dtl.Location != null)
+                                {
+                                    newpldetails.Warehouse = newpldetails.Session.GetObjectByKey<vwWarehouse>(dtl.Location.WarehouseCode);
+                                    newpl.Warehouse = newpl.Session.GetObjectByKey<vwWarehouse>(dtl.Location.WarehouseCode);
+                                }
+                                newpldetails.PlanQty = dtl.Quantity;
+                                newpldetails.Customer = newpldetails.Session.GetObjectByKey<vwBusniessPartner>(getobj.Customer.BPCode);
+                                newpldetails.SOBaseDoc = getobj.DocNum;
+                                newpldetails.SOBaseId = dtl.Oid.ToString();
+                                newpldetails.SOCreateDate = DateTime.Parse(getobj.CreateDate.ToString());
+                                newpldetails.SOExpectedDate = getobj.PostingDate;
+                                newpldetails.SORemarks = getobj.Remarks;
+                                if (getobj.ContactPerson != null)
+                                {
+                                    newpldetails.SOSalesperson = getobj.ContactPerson.SlpName;
+                                }
+                                if (getobj.Transporter != null)
+                                {
+                                    newpldetails.SOTransporter = getobj.Transporter.TransporterName;
+                                }
+                                newpldetails.SODeliveryDate = getobj.DeliveryDate;
+                                if (getobj.Priority != null)
+                                {
+                                    newpldetails.Priority = newpldetails.Session.GetObjectByKey<PriorityType>(getobj.Priority.Oid);
+                                }
+
+                                newpl.PickListDetails.Add(newpldetails);
+                            }
+
+                            autoplos.CommitChanges();
+
+                            #endregion
+                        }
+                    }
+                    cmdauto.Dispose();
+                    conn.Close();
+
+                    #endregion
+
+                    WriteLog("[INFO]", "--Automation Picking After DP End--");
+                }
+                // End ver 1.0.35
 
                 temp = ConfigurationManager.AppSettings["PickListPost"].ToString().ToUpper();
                 if (temp == "Y" || temp == "YES" || temp == "TRUE" || temp == "1")
@@ -2452,7 +2551,7 @@ namespace PortalIntegration
                             "INNER JOIN (" +
                             "SELECT D1.SalesQuotation FROM [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation D0 " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails D1 on D0.OID = D1.SalesQuotation " +
-                            "WHERE D1.Loc1Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
+                            "WHERE D1.Loc1Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 AND ISNULL(D1.GeneratedLoc1, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
@@ -2676,7 +2775,7 @@ namespace PortalIntegration
                             "INNER JOIN (" +
                             "SELECT D1.SalesQuotation FROM [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation D0 " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails D1 on D0.OID = D1.SalesQuotation " +
-                            "WHERE D1.Loc2Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
+                            "WHERE D1.Loc2Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 AND ISNULL(D1.GeneratedLoc2, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
@@ -2900,7 +2999,7 @@ namespace PortalIntegration
                             "INNER JOIN (" +
                             "SELECT D1.SalesQuotation FROM [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation D0 " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails D1 on D0.OID = D1.SalesQuotation " +
-                            "WHERE D1.Loc3Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
+                            "WHERE D1.Loc3Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 AND ISNULL(D1.GeneratedLoc3, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
@@ -3124,7 +3223,7 @@ namespace PortalIntegration
                             "INNER JOIN (" +
                             "SELECT D1.SalesQuotation FROM [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation D0 " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails D1 on D0.OID = D1.SalesQuotation " +
-                            "WHERE D1.Loc4Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
+                            "WHERE D1.Loc4Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 AND ISNULL(D1.GeneratedLoc4, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
@@ -3348,7 +3447,7 @@ namespace PortalIntegration
                             "INNER JOIN (" +
                             "SELECT D1.SalesQuotation FROM [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotation D0 " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..SalesQuotationDetails D1 on D0.OID = D1.SalesQuotation " +
-                            "WHERE D1.Loc5Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 " +
+                            "WHERE D1.Loc5Quantity > 0 AND D1.GCRecord is null AND ISNULL(D0.GeneratedINT, 0) = 0 AND ISNULL(D1.GeneratedLoc5, 0) = 0 " +
                             "GROUP BY D1.SalesQuotation " +
                             ") T1 on T0.OID = T1.SalesQuotation " +
                             "INNER JOIN [" + ConfigurationManager.AppSettings["B2BPortalDB"].ToString() + "]..vwInquiryCustomer T2 on T2.PriKey = T0.Customer " +
@@ -8113,7 +8212,7 @@ namespace PortalIntegration
                             {
                                 oDoc.Lines.WarehouseCode = dtl.Warehouse.WarehouseCode;
                             }
-                            oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.BaseId;
+                            oDoc.Lines.UserFields.Fields.Item("U_PortalLineOid").Value = dtl.Oid.ToString();
                             // Start ver 1.0.18
                             if (dtl.EIVClassification != null)
                             {
