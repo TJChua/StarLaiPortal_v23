@@ -35,6 +35,7 @@ using DevExpress.ExpressApp.Web;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web;
+using System.Data;
 
 // 2024-07-26 - sales history add date filter - ver 1.0.19
 // 2025-07-16 - enhance saleshistory - ver 1.0.23
@@ -909,6 +910,7 @@ namespace StarLaiPortal.Module.Controllers
                     string strUserID;
                     string strPwd;
                     string filename;
+                    string SAPInvNo = "";
 
                     SqlConnection conn = new SqlConnection(genCon.getConnectionString());
                     SalesHistory result = (SalesHistory)View.CurrentObject;
@@ -917,6 +919,9 @@ namespace StarLaiPortal.Module.Controllers
                     if (result.PortalDONo == "")
                     {
                         showMsg("Fail", "Invoice number not found.", InformationType.Error);
+                        // Start ver 1.0.30
+                        SalesHistoryPrint.SelectedIndex = 0;
+                        // End ver 1.0.30
                         return;
                     }
 
@@ -925,6 +930,41 @@ namespace StarLaiPortal.Module.Controllers
 
                     if (delivery != null)
                     {
+                        string query = "SELECT T0.DocNum FROM [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..OINV T0 " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..INV1 T1 ON T0.DocEntry = T1.DocEntry " +
+                            "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..ODLN T2 ON T1.BaseType = T2.ObjType AND T1.BaseEntry = T2.DocEntry " +
+                            "WHERE T2.U_PortalDocNum = '" + delivery.DocNum + "' AND T1.ItemCode = '" + result.ItemCode + "'" +
+                            "GROUP BY T0.DocNum";
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            if (SAPInvNo != "")
+                            {
+                                SAPInvNo = SAPInvNo + ", " + reader.GetInt32(0).ToString();
+                            }
+                            else
+                            {
+                                SAPInvNo = reader.GetInt32(0).ToString();
+                            }
+                        }
+                        cmd.Dispose();
+                        conn.Close();
+
+                        if (SAPInvNo == "")
+                        {
+                            showMsg("Fail", "Invoice number not found.", InformationType.Error);
+                            // Start ver 1.0.30
+                            SalesHistoryPrint.SelectedIndex = 0;
+                            // End ver 1.0.30
+                            return;
+                        }
+
                         try
                         {
                             ReportDocument doc = new ReportDocument();
@@ -936,7 +976,7 @@ namespace StarLaiPortal.Module.Controllers
                             doc.DataSourceConnections[0].SetConnection(strServer, strDatabase, strUserID, strPwd);
                             doc.Refresh();
 
-                            doc.SetParameterValue("dockey@", delivery.Oid);
+                            doc.SetParameterValue("dockey@", SAPInvNo);
                             doc.SetParameterValue("dbName@", conn.Database);
 
                             filename = ConfigurationManager.AppSettings.Get("ReportPath").ToString() + conn.Database
@@ -958,12 +998,18 @@ namespace StarLaiPortal.Module.Controllers
                         catch (Exception ex)
                         {
                             showMsg("Fail", ex.Message, InformationType.Error);
+                            // Start ver 1.0.30
+                            SalesHistoryPrint.SelectedIndex = 0;
+                            // End ver 1.0.30
                         }
                     }
                 }
                 else
                 {
                     showMsg("Fail", "Please select one Invoice only.", InformationType.Error);
+                    // Start ver 1.0.30
+                    SalesHistoryPrint.SelectedIndex = 0;
+                    // End ver 1.0.30
                 }
             }
 

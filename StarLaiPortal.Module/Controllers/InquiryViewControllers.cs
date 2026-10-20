@@ -2856,11 +2856,12 @@ namespace StarLaiPortal.Module.Controllers
             
                 if (delivery.SAPDocNum != null)
                 {
+                    string[] sapdocnum = delivery.SAPDocNum.Split(',');
                     // Start ver 1.0.30
                     string query = "SELECT T1.BeginStr " +
                         "FROM [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..OINV T0 " +
                         "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..NNM1 T1 on T0.Series = T1.Series " +
-                        "WHERE T0.DocNum = '" + delivery.SAPDocNum + "'";
+                         "WHERE T0.DocNum = '" + sapdocnum[0] + "'";
                     if (conn.State == ConnectionState.Open)
                     {
                         conn.Close();
@@ -2880,7 +2881,7 @@ namespace StarLaiPortal.Module.Controllers
                     {
                         ReportDocument doc = new ReportDocument();
                         strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
-                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice_DO.rpt"));
                         strDatabase = conn.Database;
                         strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
                         strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
@@ -3591,10 +3592,11 @@ namespace StarLaiPortal.Module.Controllers
                             // Start ver 1.0.30
                             if (delivery.SAPDocNum != null)
                             {
+                                string[] sapdocnum = delivery.SAPDocNum.Split(',');
                                 string query = "SELECT T1.BeginStr " +
                                     "FROM [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..OINV T0 " +
                                     "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..NNM1 T1 on T0.Series = T1.Series " +
-                                    "WHERE T0.DocNum = '" + delivery.SAPDocNum + "'";
+                                    "WHERE T0.DocNum = '" + sapdocnum[0] + "'";
                                 if (conn.State == ConnectionState.Open)
                                 {
                                     conn.Close();
@@ -3615,7 +3617,7 @@ namespace StarLaiPortal.Module.Controllers
                             {
                                 ReportDocument doc = new ReportDocument();
                                 strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
-                                doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                                doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice_DO.rpt"));
                                 strDatabase = conn.Database;
                                 strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
                                 strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
@@ -4030,10 +4032,11 @@ namespace StarLaiPortal.Module.Controllers
                                 // Start ver 1.0.30
                                 if (delivery.SAPDocNum != null)
                                 {
+                                    string[] sapdocnum = delivery.SAPDocNum.Split(',');
                                     string query = "SELECT T1.BeginStr " +
                                         "FROM [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..OINV T0 " +
                                         "INNER JOIN [" + ConfigurationManager.AppSettings["SAPDB"].ToString() + "]..NNM1 T1 on T0.Series = T1.Series " +
-                                        "WHERE T0.DocNum = '" + delivery.SAPDocNum + "'";
+                                        "WHERE T0.DocNum = '" + sapdocnum[0] + "'";
                                     if (conn.State == ConnectionState.Open)
                                     {
                                         conn.Close();
@@ -4054,7 +4057,7 @@ namespace StarLaiPortal.Module.Controllers
                                 {
                                     ReportDocument doc = new ReportDocument();
                                     strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
-                                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                                    doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice_DO.rpt"));
                                     strDatabase = conn.Database;
                                     strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
                                     strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();

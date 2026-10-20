@@ -412,6 +412,7 @@ namespace StarLaiPortal.Module.Controllers
                             // End ver 1.0.21
                             // Start ver 1.0.30
                             item.PortalDONo = row.Values[8].ToString();
+                            item.ItemCode = OrderStatusCode;
                             // End ver 1.0.30
                             saleslist.Sales.Add(item);
 

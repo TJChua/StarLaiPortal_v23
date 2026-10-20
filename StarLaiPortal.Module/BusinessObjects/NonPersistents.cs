@@ -97,6 +97,12 @@ namespace StarLaiPortal.Module.BusinessObjects
         [Appearance("PortalDONo", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Criteria = "IsErr")]
         [Appearance("PortalDONo1", Enabled = false)]
         public string PortalDONo { get; set; }
+
+        [XafDisplayName("Item Code")]
+        [Index(9), VisibleInListView(false), VisibleInDetailView(false), VisibleInLookupListView(false)]
+        [Appearance("ItemCode", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Criteria = "IsErr")]
+        [Appearance("ItemCode1", Enabled = false)]
+        public string ItemCode { get; set; }
         // End ver 1.0.30
 
         [Browsable(false)]

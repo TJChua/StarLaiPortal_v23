@@ -2696,7 +2696,7 @@ namespace StarLaiPortal.Module.Controllers
                     {
                         ReportDocument doc = new ReportDocument();
                         strServer = ConfigurationManager.AppSettings.Get("SQLserver").ToString();
-                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice.rpt"));
+                        doc.Load(HttpContext.Current.Server.MapPath("~\\Reports\\Invoice_DO.rpt"));
                         strDatabase = conn.Database;
                         strUserID = ConfigurationManager.AppSettings.Get("SQLID").ToString();
                         strPwd = ConfigurationManager.AppSettings.Get("SQLPass").ToString();
