@@ -1150,6 +1150,17 @@ namespace StarLaiPortal.Module.Web.Controllers
             {
                 EMContainer CurrObject = (EMContainer)args.CurrentObject;
 
+                EMContainer dupno = ObjectSpace.FindObject<EMContainer>(CriteriaOperator.Parse("ContainerNo = ?", CurrObject.ContainerNo));
+
+                if (dupno != null)
+                {
+                    if (dupno.Oid != CurrObject.Oid)
+                    {
+                        genCon.showMsg("Error", "Duplicate container no. found.", InformationType.Error);
+                        return;
+                    }
+                }
+
                 base.Save(args);
                 if (CurrObject.DocNum == null)
                 {

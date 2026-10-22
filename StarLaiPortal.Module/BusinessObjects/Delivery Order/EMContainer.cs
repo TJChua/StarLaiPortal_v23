@@ -177,6 +177,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime _DocDate;
         [XafDisplayName("Date")]
+        [Appearance("DocDate", Enabled = false)]
         [Index(10), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public DateTime DocDate
         {
