@@ -21,7 +21,7 @@ using System.Text;
 namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 {
     [XafDisplayName("EM Container")]
-    [NavigationItem("Delivery Order")]
+    [NavigationItem("East Malaysia Container")]
     [DefaultProperty("DocNum")]
 
     [Appearance("HideEdit", AppearanceItemType.Action, "True", TargetItems = "SwitchToEditMode; Edit", Criteria = "not (Status in (0, 3, 6))", Visibility = DevExpress.ExpressApp.Editors.ViewItemVisibility.Hide, Context = "Any")]
@@ -474,6 +474,14 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         public XPCollection<EMContainerExtDO> EMContainerExtDO
         {
             get { return GetCollection<EMContainerExtDO>("EMContainerExtDO"); }
+        }
+
+        [Association("EMContainer-EMContainerAttachment")]
+        [XafDisplayName("Attachment")]
+        [Appearance("EMContainerAttachment", Enabled = false, Criteria = "not (Status in (0))")]
+        public XPCollection<EMContainerAttachment> EMContainerAttachment
+        {
+            get { return GetCollection<EMContainerAttachment>("EMContainerAttachment"); }
         }
 
         [Association("EMContainer-EMContainerDocTrail")]
