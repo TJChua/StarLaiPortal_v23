@@ -648,7 +648,7 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" Direction="Horizontal" RelativeSize="34.552845528455286">
-            <LayoutGroup Id="ARDownpaymentCancel_col1" ShowCaption="False" Index="0" RelativeSize="49.810844892812106" IsNewNode="True">
+            <LayoutGroup Id="ARDownpaymentCancel_col1" ShowCaption="False" Index="0" RelativeSize="49.69097651421508" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -656,7 +656,7 @@
               <LayoutItem Id="PostingDate" ViewItem="PostingDate" Index="4" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="ContactPerson" ViewItem="ContactPerson" Index="5" RelativeSize="18.823529411764707" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="ARDownpaymentCancel_col2" ShowCaption="False" Index="1" RelativeSize="50.189155107187894" IsNewNode="True">
+            <LayoutGroup Id="ARDownpaymentCancel_col2" ShowCaption="False" Index="1" RelativeSize="50.30902348578492" IsNewNode="True">
               <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="SAPDocNum" ViewItem="SAPDocNum" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -665,7 +665,7 @@
             </LayoutGroup>
             <LayoutGroup Id="ARDownpaymentCancel" Removed="True" />
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="58.536585365853661">
+          <TabbedGroup Id="Tabs" RelativeSize="65.447154471544721">
             <LayoutGroup Id="ARDownpaymentCancelDetails" RelativeSize="100">
               <LayoutItem Id="ARDownpaymentCancelDetails" RelativeSize="100" />
             </LayoutGroup>
@@ -682,11 +682,6 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto9235df8e-8022-4c2d-9db1-678eda27a488" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="47.667087011349309" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="25.851197982345525" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="26.481715006305169" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -715,15 +710,13 @@
         <PropertyEditor Id="Sap" PropertyName="Sap" IsNewNode="True" />
         <PropertyEditor Id="SAPDocNum" PropertyName="SAPDocNum" IsNewNode="True" />
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="34.552845528455286" IsNewNode="True">
-            <LayoutGroup Id="ARDownpaymentCancel_col1" ShowCaption="False" Index="0" RelativeSize="49.811320754716981" IsNewNode="True">
+            <LayoutGroup Id="ARDownpaymentCancel_col1" ShowCaption="False" Index="0" RelativeSize="49.69097651421508" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -731,7 +724,7 @@
               <LayoutItem Id="PostingDate" ViewItem="PostingDate" Index="4" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="ContactPerson" ViewItem="ContactPerson" Index="5" RelativeSize="18.823529411764707" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="ARDownpaymentCancel_col2" ShowCaption="False" Index="1" RelativeSize="50.188679245283019" IsNewNode="True">
+            <LayoutGroup Id="ARDownpaymentCancel_col2" ShowCaption="False" Index="1" RelativeSize="50.30902348578492" IsNewNode="True">
               <LayoutItem Id="Status" ViewItem="Status" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="SAPDocNum" ViewItem="SAPDocNum" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -739,7 +732,7 @@
               <LayoutItem Id="Remarks" ViewItem="Remarks" Index="4" RelativeSize="34.117647058823529" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="58.536585365853661" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="65.447154471544721" IsNewNode="True">
             <LayoutGroup Id="ARDownpaymentCancelDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="ARDownpaymentCancelDetails" ViewItem="ARDownpaymentCancelDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
@@ -756,18 +749,11 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto986d51ff-bb1c-41c8-94f6-c844926914e0" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="47.79874213836478" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="25.786163522012579" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="26.415094339622641" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
     <ListView Id="ARDownpaymentCancel_ListView" DataAccessMode="Client">
       <Columns>
-        <ColumnInfo Id="TotalQty" Index="8" />
-        <ColumnInfo Id="Total" Index="9" />
         <ColumnInfo Id="SAPDocNum" Index="10" />
         <ColumnInfo Id="Reference" Index="11" />
         <ColumnInfo Id="CancelDate" Index="12" />
@@ -792,8 +778,6 @@
         <ColumnInfo Id="ContactPerson" PropertyName="ContactPerson" Index="5" IsNewNode="True" />
         <ColumnInfo Id="Status" PropertyName="Status" Index="6" IsNewNode="True" />
         <ColumnInfo Id="AppStatus" PropertyName="AppStatus" Index="7" IsNewNode="True" />
-        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="8" IsNewNode="True" />
-        <ColumnInfo Id="Total" PropertyName="Total" Index="9" IsNewNode="True" />
         <ColumnInfo Id="SAPDocNum" PropertyName="SAPDocNum" Index="10" IsNewNode="True" />
         <ColumnInfo Id="Reference" PropertyName="Reference" Index="11" IsNewNode="True" />
         <ColumnInfo Id="CancelDate" PropertyName="CancelDate" Index="12" IsNewNode="True" />
@@ -1857,38 +1841,91 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="68.810916179337227" Caption="SimpleEditors">
-            <LayoutGroup Id="Auto709ede45-37ff-44b1-be02-e1a76d5594ee" ShowCaption="False" Caption="Auto709ede45-37ff-44b1-be02-e1a76d5594ee(3)" Direction="Horizontal" Index="0" RelativeSize="84.985835694050991" IsNewNode="True">
-              <LayoutGroup Id="EMContainer_col1" ShowCaption="False" Index="0" RelativeSize="41.090425531914896" IsNewNode="True">
-                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="11.333333333333334" IsNewNode="True" />
-                <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="ContainerNo" ViewItem="ContainerNo" Index="2" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="DestinationPort" ViewItem="DestinationPort" Index="3" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="JobNo" ViewItem="JobNo" Index="4" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="EstimateArrivalDate" ViewItem="EstimateArrivalDate" Index="5" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="SealingDate" ViewItem="SealingDate" Index="6" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="CIPLDrafted" ViewItem="CIPLDrafted" Index="7" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="PullOutDate" ViewItem="PullOutDate" Index="8" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                <LayoutItem Id="PortOfLoadingEta" ViewItem="PortOfLoadingEta" Index="9" RelativeSize="19.333333333333332" IsNewNode="True" />
-              </LayoutGroup>
-              <LayoutGroup Id="EMContainer_col2" ShowCaption="False" Index="1" RelativeSize="58.909574468085104" Direction="Horizontal" Caption="EMContainer_col2" IsNewNode="True">
-                <LayoutGroup Id="Autof5e77142-9b82-4d02-af08-165b78d24782" ShowCaption="False" Caption="Autof5e77142-9b82-4d02-af08-165b78d24782(16)" Index="0" RelativeSize="75.395033860045146" IsNewNode="True">
-                  <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="11.333333333333334" IsNewNode="True" />
-                  <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="InvoiceDate" ViewItem="InvoiceDate" Index="3" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="VesselNumber" ViewItem="VesselNumber" Index="4" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="ActualArrivalDate" ViewItem="ActualArrivalDate" Index="5" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="CustomDocSubmitted" ViewItem="CustomDocSubmitted" Index="6" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="ActualTimeDeparture" ViewItem="ActualTimeDeparture" Index="7" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="ActualTimeArrival" ViewItem="ActualTimeArrival" Index="8" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="FinalDestinationETA" ViewItem="FinalDestinationETA" Index="9" RelativeSize="8.6666666666666661" IsNewNode="True" />
-                  <LayoutItem Id="SAPINVDocNum" ViewItem="SAPINVDocNum" Index="10" RelativeSize="10.666666666666666" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="79.968454258675081" Caption="SimpleEditors">
+            <LayoutGroup Id="Auto709ede45-37ff-44b1-be02-e1a76d5594ee" ShowCaption="False" Caption="Auto709ede45-37ff-44b1-be02-e1a76d5594ee(3)" Direction="Horizontal" Index="0" RelativeSize="88.954635108481256" IsNewNode="True">
+              <LayoutGroup Id="EMContainer_col1" ShowCaption="False" Index="0" RelativeSize="86.219974715549938" Caption="EMContainer_col1" IsNewNode="True">
+                <LayoutGroup Id="Autoca89ec82-ccd3-42f3-a255-6c1c62c6236a" ShowCaption="False" Caption="Autoca89ec82-ccd3-42f3-a255-6c1c62c6236a(5)" Direction="Horizontal" Index="0" RelativeSize="8.2039911308203983" IsNewNode="True">
+                  <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="50.293255131964813" IsNewNode="True" />
+                  <LayoutItem Id="DocNum" ViewItem="DocNum" Index="1" RelativeSize="49.706744868035187" IsNewNode="True" />
                 </LayoutGroup>
-                <LayoutItem Id="ImportEMDO" ViewItem="ImportEMDO" Index="1" RelativeSize="24.604966139954854" IsNewNode="True" />
+                <LayoutGroup Id="Autof279a69d-6e88-45f6-8b3d-02bf08711781" ShowCaption="False" Caption="Autof279a69d-6e88-45f6-8b3d-02bf08711781(8)" Index="1" RelativeSize="91.7960088691796" IsNewNode="True">
+                  <LayoutGroup Id="Auto569bc4e4-b211-4553-8a1c-4d6d8e329464" ShowCaption="False" Caption="Auto569bc4e4-b211-4553-8a1c-4d6d8e329464(9)" Direction="Horizontal" Index="0" RelativeSize="8.454106280193237" IsNewNode="True">
+                    <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="0" RelativeSize="50.293255131964813" IsNewNode="True" />
+                    <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="49.706744868035187" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Autoee95747f-9553-41fd-8051-bbdc27969768" ShowCaption="False" Caption="Autoee95747f-9553-41fd-8051-bbdc27969768(12)" Index="1" RelativeSize="91.54589371980677" IsNewNode="True">
+                    <LayoutGroup Id="Autoec4bf094-85dc-43ec-b353-fac12ea20fc1" ShowCaption="False" Caption="Autoec4bf094-85dc-43ec-b353-fac12ea20fc1(13)" Direction="Horizontal" Index="0" RelativeSize="9.2348284960422156" IsNewNode="True">
+                      <LayoutItem Id="Forwarder" ViewItem="Forwarder" Index="0" RelativeSize="50.293255131964813" IsNewNode="True" />
+                      <LayoutItem Id="DocDate" ViewItem="DocDate" Index="1" RelativeSize="49.706744868035187" IsNewNode="True" />
+                    </LayoutGroup>
+                    <LayoutGroup Id="Auto5b054858-2b1b-4f0a-8b1a-4ce3c50e5578" ShowCaption="False" Caption="Auto5b054858-2b1b-4f0a-8b1a-4ce3c50e5578(16)" Index="1" RelativeSize="90.765171503957788" IsNewNode="True">
+                      <LayoutGroup Id="Auto20371d2a-1bde-45fd-8c31-361d42d176b0" ShowCaption="False" Caption="Auto20371d2a-1bde-45fd-8c31-361d42d176b0(17)" Direction="Horizontal" Index="0" RelativeSize="10.174418604651162" IsNewNode="True">
+                        <LayoutItem Id="ContainerNo" ViewItem="ContainerNo" Index="0" RelativeSize="50.439882697947212" IsNewNode="True" />
+                        <LayoutItem Id="Item1" Index="1" RelativeSize="49.560117302052788" IsNewNode="True" />
+                      </LayoutGroup>
+                      <LayoutGroup Id="Auto1fdc6ae7-8bd7-4d9d-8b11-71db3745f886" ShowCaption="False" Caption="Auto1fdc6ae7-8bd7-4d9d-8b11-71db3745f886(20)" Index="1" RelativeSize="89.825581395348834" IsNewNode="True">
+                        <LayoutGroup Id="Autocef5085a-cb56-4933-9536-5278f216fec0" ShowCaption="False" Caption="Autocef5085a-cb56-4933-9536-5278f216fec0(21)" Direction="Horizontal" Index="0" RelativeSize="11.326860841423947" IsNewNode="True">
+                          <LayoutItem Id="JobNo" ViewItem="JobNo" Index="0" RelativeSize="50.586510263929618" IsNewNode="True" />
+                          <LayoutItem Id="VesselNumber" ViewItem="VesselNumber" Index="1" RelativeSize="49.413489736070382" IsNewNode="True" />
+                        </LayoutGroup>
+                        <LayoutGroup Id="Auto0633ab6e-c16d-4e00-8ea9-2a6c8854303f" ShowCaption="False" Caption="Auto0633ab6e-c16d-4e00-8ea9-2a6c8854303f(24)" Index="1" RelativeSize="88.673139158576049" IsNewNode="True">
+                          <LayoutGroup Id="Auto09254da3-593d-4a11-aa2a-d02a2bca6a3f" ShowCaption="False" Caption="Auto09254da3-593d-4a11-aa2a-d02a2bca6a3f(25)" Direction="Horizontal" Index="0" RelativeSize="12.773722627737227" IsNewNode="True">
+                            <LayoutItem Id="PortOfLoading" ViewItem="PortOfLoading" Index="0" RelativeSize="50.586510263929618" IsNewNode="True" />
+                            <LayoutItem Id="PortOfLoadingEta" ViewItem="PortOfLoadingEta" Index="1" RelativeSize="49.413489736070382" IsNewNode="True" />
+                          </LayoutGroup>
+                          <LayoutGroup Id="Auto4f76a180-3ffe-4f68-80bb-c3275cf9e570" ShowCaption="False" Caption="Auto4f76a180-3ffe-4f68-80bb-c3275cf9e570(28)" Index="1" RelativeSize="87.226277372262771" IsNewNode="True">
+                            <LayoutGroup Id="Auto336302c8-26b9-4a32-b6a1-6c699aa9dc40" ShowCaption="False" Caption="Auto336302c8-26b9-4a32-b6a1-6c699aa9dc40(29)" Direction="Horizontal" Index="0" RelativeSize="14.644351464435147" IsNewNode="True">
+                              <LayoutItem Id="DestinationPort" ViewItem="DestinationPort" Index="0" RelativeSize="50.733137829912025" IsNewNode="True" />
+                              <LayoutItem Id="Item3" Index="1" RelativeSize="49.266862170087975" IsNewNode="True" />
+                            </LayoutGroup>
+                            <LayoutGroup Id="Auto3a946ae2-0c79-4649-a62a-0c3ece86eac2" ShowCaption="False" Caption="Auto3a946ae2-0c79-4649-a62a-0c3ece86eac2(32)" Index="1" RelativeSize="85.355648535564853" IsNewNode="True">
+                              <LayoutGroup Id="Auto71ea8562-3caf-4805-a94c-fd0a614eb64a" ShowCaption="False" Caption="Auto71ea8562-3caf-4805-a94c-fd0a614eb64a(33)" Direction="Horizontal" Index="0" RelativeSize="17.156862745098039" IsNewNode="True">
+                                <LayoutItem Id="EstimateArrivalDate" ViewItem="EstimateArrivalDate" Index="0" RelativeSize="50.879765395894431" IsNewNode="True" />
+                                <LayoutItem Id="ActualArrivalDate" ViewItem="ActualArrivalDate" Index="1" RelativeSize="49.120234604105569" IsNewNode="True" />
+                              </LayoutGroup>
+                              <LayoutGroup Id="Auto64b1619a-991c-482f-9815-c33176aa1a6f" ShowCaption="False" Caption="Auto64b1619a-991c-482f-9815-c33176aa1a6f(36)" Index="1" RelativeSize="82.843137254901961" IsNewNode="True">
+                                <LayoutGroup Id="Auto89fe96d5-aa53-4e6c-ad0f-7ee25e15088c" ShowCaption="False" Caption="Auto89fe96d5-aa53-4e6c-ad0f-7ee25e15088c(37)" Direction="Horizontal" Index="0" RelativeSize="20.710059171597631" IsNewNode="True">
+                                  <LayoutItem Id="SealingDate" ViewItem="SealingDate" Index="0" RelativeSize="50.879765395894431" IsNewNode="True" />
+                                  <LayoutItem Id="CIPLDrafted" ViewItem="CIPLDrafted" Index="1" RelativeSize="49.120234604105569" IsNewNode="True" />
+                                </LayoutGroup>
+                                <LayoutGroup Id="Autoe1c67519-fe3d-4b52-98ad-bf81037a1bda" ShowCaption="False" Caption="Autoe1c67519-fe3d-4b52-98ad-bf81037a1bda(40)" Index="1" RelativeSize="79.289940828402365" IsNewNode="True">
+                                  <LayoutGroup Id="Autoad4f5412-66cf-4853-9938-31dced797d39" ShowCaption="False" Caption="Autoad4f5412-66cf-4853-9938-31dced797d39(41)" Direction="Horizontal" Index="0" RelativeSize="26.119402985074625" IsNewNode="True">
+                                    <LayoutItem Id="PullOutDate" ViewItem="PullOutDate" Index="0" RelativeSize="50.879765395894431" IsNewNode="True" />
+                                    <LayoutItem Id="SAPINVDocNum" ViewItem="SAPINVDocNum" Index="1" RelativeSize="49.120234604105569" IsNewNode="True" />
+                                  </LayoutGroup>
+                                  <LayoutGroup Id="Auto74a00dbb-d518-44d4-8743-ebc33d74be6a" ShowCaption="False" Caption="Auto74a00dbb-d518-44d4-8743-ebc33d74be6a(44)" Index="1" RelativeSize="73.880597014925371" IsNewNode="True">
+                                    <LayoutGroup Id="Autoce765322-0e7c-408f-aa90-a67dd6e30104" ShowCaption="False" Caption="Autoce765322-0e7c-408f-aa90-a67dd6e30104(45)" Direction="Horizontal" Index="0" RelativeSize="35.353535353535356" IsNewNode="True">
+                                      <LayoutItem Id="InvoiceDate" ViewItem="InvoiceDate" Index="0" RelativeSize="51.02639296187683" IsNewNode="True" />
+                                      <LayoutItem Id="CustomDocSubmitted" ViewItem="CustomDocSubmitted" Index="1" RelativeSize="48.97360703812317" IsNewNode="True" />
+                                    </LayoutGroup>
+                                    <LayoutGroup Id="Auto9e150ecb-8614-46ca-be41-1b9ea4b1b76a" ShowCaption="False" Caption="Auto9e150ecb-8614-46ca-be41-1b9ea4b1b76a(48)" Direction="Vertical" Index="1" RelativeSize="64.646464646464651" IsNewNode="True">
+                                      <LayoutGroup Id="Autoc6b60495-ccd6-4a58-b9ce-287d2f75cb2b" ShowCaption="False" Caption="Autoc6b60495-ccd6-4a58-b9ce-287d2f75cb2b(49)" Index="0" RelativeSize="100" IsNewNode="True">
+                                        <LayoutGroup Id="Autod823d8fe-38c8-4d4d-ad04-d1c4bc8b56f8" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="50" IsNewNode="True">
+                                          <LayoutItem Id="ActualTimeDeparture" ViewItem="ActualTimeDeparture" Index="0" RelativeSize="51.173020527859236" IsNewNode="True" />
+                                          <LayoutItem Id="Item2" Index="1" RelativeSize="48.826979472140764" IsNewNode="True" />
+                                        </LayoutGroup>
+                                        <LayoutGroup Id="Auto93834d0f-a94e-4e25-8ba3-133b1e7498b6" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="50" IsNewNode="True">
+                                          <LayoutItem Id="FinalDestinationETA" ViewItem="FinalDestinationETA" Index="0" RelativeSize="51.173020527859236" IsNewNode="True" />
+                                          <LayoutItem Id="ActualTimeArrival" ViewItem="ActualTimeArrival" Index="1" RelativeSize="48.826979472140764" IsNewNode="True" />
+                                        </LayoutGroup>
+                                      </LayoutGroup>
+                                    </LayoutGroup>
+                                  </LayoutGroup>
+                                </LayoutGroup>
+                              </LayoutGroup>
+                            </LayoutGroup>
+                          </LayoutGroup>
+                        </LayoutGroup>
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="EMContainer_col2" ShowCaption="False" Index="1" RelativeSize="13.780025284450064" Direction="Vertical" Caption="EMContainer_col2" IsNewNode="True">
+                <LayoutItem Id="ImportEMDO" ViewItem="ImportEMDO" Index="0" RelativeSize="100" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutItem Id="Remarks" ViewItem="Remarks" Index="1" RelativeSize="15.014164305949009" IsNewNode="True" />
+            <LayoutItem Id="Remarks" ViewItem="Remarks" Index="1" RelativeSize="11.045364891518737" IsNewNode="True" />
             <LayoutGroup Id="EMContainer" RelativeSize="90.7514450867052" Removed="True">
               <LayoutGroup Id="EMContainer_col1" RelativeSize="49.863760217983653">
                 <LayoutItem Id="Customer" Index="0" RelativeSize="12.318840579710145" />
@@ -1926,10 +1963,7 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="SizeableEditors" RelativeSize="6.4327485380116958">
-            <LayoutItem Id="Remarks" RelativeSize="100" />
-          </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="24.756335282651072">
+          <TabbedGroup Id="Tabs" RelativeSize="20.031545741324923" Index="1">
             <LayoutGroup Id="EMContainerDO" RelativeSize="100">
               <LayoutItem Id="EMContainerDO" RelativeSize="100" />
             </LayoutGroup>
@@ -1939,6 +1973,9 @@
             <LayoutGroup Id="EMContainerExtDO" RelativeSize="100">
               <LayoutItem Id="EMContainerExtDO" RelativeSize="100" />
             </LayoutGroup>
+            <LayoutGroup Id="EMContainerAttachment" RelativeSize="100">
+              <LayoutItem Id="EMContainerAttachment" RelativeSize="100" />
+            </LayoutGroup>
             <LayoutGroup Id="EMContainerDocTrail" RelativeSize="100">
               <LayoutItem Id="EMContainerDocTrail" RelativeSize="100" />
             </LayoutGroup>
@@ -1946,6 +1983,9 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="1.8292682926829269" Caption="Remarks" Removed="True">
+            <LayoutItem Id="Remarks" RelativeSize="100" Removed="True" />
+          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -3966,7 +4006,7 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" Direction="Horizontal" RelativeSize="39.837398373983739">
-            <LayoutGroup Id="PurchaseReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="42.91091593475533" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="42.768850432632881" IsNewNode="True">
               <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -3975,8 +4015,8 @@
               <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Remarks" ViewItem="Remarks" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="57.08908406524467" Direction="Horizontal" Caption="PurchaseReturnRequests_col2" IsNewNode="True">
-              <LayoutGroup Id="Auto59a75480-b36f-4410-9e56-a74bb638b5ac" ShowCaption="False" Caption="Auto59a75480-b36f-4410-9e56-a74bb638b5ac(10)" Index="0" RelativeSize="74.065934065934073" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="57.231149567367119" Direction="Horizontal" Caption="PurchaseReturnRequests_col2" IsNewNode="True">
+              <LayoutGroup Id="Auto59a75480-b36f-4410-9e56-a74bb638b5ac" ShowCaption="False" Caption="Auto59a75480-b36f-4410-9e56-a74bb638b5ac(10)" Index="0" RelativeSize="74.514038876889842" IsNewNode="True">
                 <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -3985,11 +4025,11 @@
                 <LayoutItem Id="Series" ViewItem="Series" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="PRR Inquiry Item" ViewItem="PRR Inquiry Item" Index="1" RelativeSize="25.934065934065934" IsNewNode="True" />
+              <LayoutItem Id="PRR Inquiry Item" ViewItem="PRR Inquiry Item" Index="1" RelativeSize="25.485961123110151" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="PurchaseReturnRequests" Removed="True" />
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="53.2520325203252">
+          <TabbedGroup Id="Tabs" RelativeSize="60.162601626016261">
             <LayoutGroup Id="PurchaseReturnRequestDetails" RelativeSize="100" Caption="Content">
               <LayoutItem Id="PurchaseReturnRequestDetails" RelativeSize="100" />
             </LayoutGroup>
@@ -4006,11 +4046,6 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto8112baf4-13a7-4e0f-b2b9-cdccd20a7dd4" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="57.967377666248431" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="20.702634880803011" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="21.329987452948558" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -4047,8 +4082,6 @@
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
         <PropertyEditor Id="Supplier" PropertyName="Supplier" IsNewNode="True" />
         <PropertyEditor Id="SupplierName" PropertyName="SupplierName" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="Transporter" PropertyName="Transporter" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
@@ -4056,7 +4089,7 @@
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.837398373983739" IsNewNode="True">
-            <LayoutGroup Id="PurchaseReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="42.91091593475533" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="42.768850432632881" IsNewNode="True">
               <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -4065,8 +4098,8 @@
               <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Remarks" ViewItem="Remarks" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="57.08908406524467" Direction="Horizontal" IsNewNode="True">
-              <LayoutGroup Id="Auto59a75480-b36f-4410-9e56-a74bb638b5ac" ShowCaption="False" Caption="Auto59a75480-b36f-4410-9e56-a74bb638b5ac(10)" Index="0" RelativeSize="74.065934065934073" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="57.231149567367119" Direction="Horizontal" IsNewNode="True">
+              <LayoutGroup Id="Auto59a75480-b36f-4410-9e56-a74bb638b5ac" ShowCaption="False" Caption="Auto59a75480-b36f-4410-9e56-a74bb638b5ac(10)" Index="0" RelativeSize="74.514038876889842" IsNewNode="True">
                 <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -4075,10 +4108,10 @@
                 <LayoutItem Id="Series" ViewItem="Series" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="PRR Inquiry Item" ViewItem="PRR Inquiry Item" Index="1" RelativeSize="25.934065934065934" IsNewNode="True" />
+              <LayoutItem Id="PRR Inquiry Item" ViewItem="PRR Inquiry Item" Index="1" RelativeSize="25.485961123110151" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="53.2520325203252" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="60.162601626016261" IsNewNode="True">
             <LayoutGroup Id="PurchaseReturnRequestDetails" Index="0" ShowCaption="True" RelativeSize="100" Caption="Content" IsNewNode="True">
               <LayoutItem Id="PurchaseReturnRequestDetails" ViewItem="PurchaseReturnRequestDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
@@ -4095,11 +4128,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Autoca556f1c-8fb5-47e2-be75-1e2fda659843" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="57.967377666248431" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="20.702634880803011" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="21.329987452948558" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -4136,8 +4164,6 @@
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
         <PropertyEditor Id="Supplier" PropertyName="Supplier" IsNewNode="True" />
         <PropertyEditor Id="SupplierName" PropertyName="SupplierName" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="Transporter" PropertyName="Transporter" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
@@ -4145,7 +4171,7 @@
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.837398373983739" IsNewNode="True">
-            <LayoutGroup Id="PurchaseReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="42.91091593475533" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="42.768850432632881" IsNewNode="True">
               <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -4154,8 +4180,8 @@
               <LayoutItem Id="Reference" ViewItem="Reference" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Remarks" ViewItem="Remarks" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="57.08908406524467" Direction="Horizontal" IsNewNode="True">
-              <LayoutGroup Id="Auto59a75480-b36f-4410-9e56-a74bb638b5ac" ShowCaption="False" Caption="Auto59a75480-b36f-4410-9e56-a74bb638b5ac(10)" Index="0" RelativeSize="74.065934065934073" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="57.231149567367119" Direction="Horizontal" IsNewNode="True">
+              <LayoutGroup Id="Auto59a75480-b36f-4410-9e56-a74bb638b5ac" ShowCaption="False" Caption="Auto59a75480-b36f-4410-9e56-a74bb638b5ac(10)" Index="0" RelativeSize="74.514038876889842" IsNewNode="True">
                 <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -4164,10 +4190,10 @@
                 <LayoutItem Id="Series" ViewItem="Series" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="GRPOCorrection" ViewItem="GRPOCorrection" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="PRR Inquiry Item" ViewItem="PRR Inquiry Item" Index="1" RelativeSize="25.934065934065934" IsNewNode="True" />
+              <LayoutItem Id="PRR Inquiry Item" ViewItem="PRR Inquiry Item" Index="1" RelativeSize="25.485961123110151" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="53.2520325203252" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="60.162601626016261" IsNewNode="True">
             <LayoutGroup Id="PurchaseReturnRequestDetails" Index="0" ShowCaption="True" RelativeSize="100" Caption="Content" IsNewNode="True">
               <LayoutItem Id="PurchaseReturnRequestDetails" ViewItem="PurchaseReturnRequestDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
@@ -4184,11 +4210,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto93e512db-4c3c-4601-bd63-e4d504aa8fc5" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="57.967377666248431" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="20.702634880803011" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="21.329987452948558" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -4202,7 +4223,6 @@
         <ColumnInfo Id="AppStatus" Index="7" />
         <ColumnInfo Id="CurrencyRate" Index="8" />
         <ColumnInfo Id="Reference" Index="9" />
-        <ColumnInfo Id="TotalQty" SortIndex="0" SortOrder="Ascending" />
       </Columns>
     </ListView>
     <ListView Id="PurchaseReturnRequests_ListView_Approval" ClassName="StarLaiPortal.Module.BusinessObjects.Purchase_Return.PurchaseReturnRequests" Caption="Purchase Return Request Approval" DataAccessMode="Client" DetailViewID="PurchaseReturnRequests_DetailView_Approval" MasterDetailView="PurchaseReturnRequests_DetailView" IsNewNode="True">
@@ -4235,8 +4255,6 @@
         <ColumnInfo Id="CurrencyRate" PropertyName="CurrencyRate" Index="8" IsNewNode="True" />
         <ColumnInfo Id="Reference" PropertyName="Reference" Index="9" IsNewNode="True" />
         <ColumnInfo Id="GRPOCorrection" PropertyName="GRPOCorrection" Index="10" IsNewNode="True" />
-        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="11" IsNewNode="True" />
-        <ColumnInfo Id="Total" PropertyName="Total" Index="12" IsNewNode="True" />
       </Columns>
     </ListView>
     <ListView Id="PurchaseReturnRequests_PurchaseReturnRequestDetails_ListView" AllowEdit="True" />
@@ -4257,7 +4275,7 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="45.1219512195122" Direction="Horizontal">
-            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.560853199498119" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.443757725587147" IsNewNode="True">
               <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
               <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
               <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
@@ -4267,7 +4285,7 @@
               <LayoutItem Id="Series" ViewItem="Series" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
               <LayoutItem Id="Remarks" ViewItem="Remarks" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.439146800501881" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.556242274412853" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
               <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
               <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
@@ -4303,7 +4321,7 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="47.967479674796749">
+          <TabbedGroup Id="Tabs" RelativeSize="54.8780487804878">
             <LayoutGroup Id="PurchaseReturnDetails" RelativeSize="100">
               <LayoutItem Id="PurchaseReturnDetails" RelativeSize="100" />
             </LayoutGroup>
@@ -4314,11 +4332,6 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto6a301a93-b9d2-4a01-8752-1c9395443a59" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="55.207026348808029" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="22.082810539523212" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="22.710163111668759" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -4353,8 +4366,6 @@
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
         <PropertyEditor Id="Supplier" PropertyName="Supplier" IsNewNode="True" />
         <PropertyEditor Id="SupplierName" PropertyName="SupplierName" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="Transporter" PropertyName="Transporter" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
@@ -4362,7 +4373,7 @@
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="45.1219512195122" IsNewNode="True">
-            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.560853199498119" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.443757725587147" IsNewNode="True">
               <LayoutItem Id="Supplier" ViewItem="Supplier" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
               <LayoutItem Id="SupplierName" ViewItem="SupplierName" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
               <LayoutItem Id="Requestor" ViewItem="Requestor" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
@@ -4372,7 +4383,7 @@
               <LayoutItem Id="Series" ViewItem="Series" Index="6" RelativeSize="11.711711711711711" IsNewNode="True" />
               <LayoutItem Id="Remarks" ViewItem="Remarks" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.439146800501881" IsNewNode="True">
+            <LayoutGroup Id="PurchaseReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.556242274412853" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="15.315315315315315" IsNewNode="True" />
               <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="11.711711711711711" IsNewNode="True" />
               <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="11.711711711711711" IsNewNode="True" />
@@ -4383,7 +4394,7 @@
               <LayoutItem Id="PRPrintStatus" ViewItem="PRPrintStatus" Index="7" RelativeSize="14.414414414414415" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="47.967479674796749" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="54.8780487804878" IsNewNode="True">
             <LayoutGroup Id="PurchaseReturnDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="PurchaseReturnDetails" ViewItem="PurchaseReturnDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
@@ -4394,11 +4405,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto86dfc8a6-a5af-4d85-a12a-cadb74e27f28" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.9105691056910565" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="55.207026348808029" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="22.082810539523212" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="22.710163111668759" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -4411,8 +4417,6 @@
         <ColumnInfo Id="SAPDocNum" Index="8" />
         <ColumnInfo Id="CurrencyRate" Index="9" />
         <ColumnInfo Id="Reference" Index="10" />
-        <ColumnInfo Id="TotalQty" Index="12" />
-        <ColumnInfo Id="Total" Index="13" />
         <ColumnInfo Id="BaseDoc" Index="14" />
         <ColumnInfo Id="PRPrintCount" Index="15" />
         <ColumnInfo Id="PRPrintStatus" Index="16" />
@@ -5559,15 +5563,15 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="34.552845528455286" Direction="Horizontal">
-            <LayoutGroup Id="SalesRefundRequests_col1" ShowCaption="False" Index="0" RelativeSize="44.981412639405207" IsNewNode="True">
+            <LayoutGroup Id="SalesRefundRequests_col1" ShowCaption="False" Index="0" RelativeSize="44.9938195302843" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="ContactPerson" ViewItem="ContactPerson" Index="3" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="4" RelativeSize="34.117647058823529" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesRefundRequests_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="55.018587360594793" Caption="SalesRefundRequests_col2" IsNewNode="True">
-              <LayoutGroup Id="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f" ShowCaption="False" Caption="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f(10)" Index="0" RelativeSize="73.423423423423429" IsNewNode="True">
+            <LayoutGroup Id="SalesRefundRequests_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="55.0061804697157" Caption="SalesRefundRequests_col2" IsNewNode="True">
+              <LayoutGroup Id="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f" ShowCaption="False" Caption="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f(10)" Index="0" RelativeSize="73.483146067415731" IsNewNode="True">
                 <LayoutItem Id="DocDate" ViewItem="DocDate" Index="0" RelativeSize="20" IsNewNode="True" />
                 <LayoutItem Id="PostingDate" ViewItem="PostingDate" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -5575,7 +5579,7 @@
                 <LayoutItem Id="Remarks" ViewItem="Remarks" Index="4" RelativeSize="15.294117647058824" IsNewNode="True" />
                 <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="5" RelativeSize="18.823529411764707" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="SFR Inquiry Item" ViewItem="SFR Inquiry Item" Index="1" RelativeSize="26.576576576576578" IsNewNode="True" />
+              <LayoutItem Id="SFR Inquiry Item" ViewItem="SFR Inquiry Item" Index="1" RelativeSize="26.516853932584269" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="SalesRefundRequests" RelativeSize="100" Removed="True">
               <LayoutGroup Id="SalesRefundRequests_col1" RelativeSize="50">
@@ -5600,45 +5604,45 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="48.3739837398374">
+          <TabbedGroup Id="Tabs" RelativeSize="65.447154471544721">
             <LayoutGroup Id="SalesRefundReqDetails" RelativeSize="100">
               <LayoutItem Id="SalesRefundReqDetails" RelativeSize="100" />
             </LayoutGroup>
             <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto89f6787c-a399-4e4d-b26f-9883068bec22" ShowCaption="False" Caption="Auto89f6787c-a399-4e4d-b26f-9883068bec22(21)" Index="0" RelativeSize="49.808917197452232" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto89f6787c-a399-4e4d-b26f-9883068bec22" ShowCaption="False" Caption="Auto89f6787c-a399-4e4d-b26f-9883068bec22(21)" Index="0" RelativeSize="49.809402795425669" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto8997c333-6f41-458a-9fa7-cd281a6c566f" ShowCaption="False" Caption="Auto8997c333-6f41-458a-9fa7-cd281a6c566f(32)" Index="1" RelativeSize="50.191082802547768" IsNewNode="True">
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto8997c333-6f41-458a-9fa7-cd281a6c566f" ShowCaption="False" Caption="Auto8997c333-6f41-458a-9fa7-cd281a6c566f(32)" Index="1" RelativeSize="50.190597204574331" IsNewNode="True">
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto7dedc906-6c92-412d-9451-83b70686d8cf" ShowCaption="False" Caption="Auto7dedc906-6c92-412d-9451-83b70686d8cf(41)" Index="0" RelativeSize="49.808917197452232" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="56.565656565656568" IsNewNode="True" />
+              <LayoutGroup Id="Auto7dedc906-6c92-412d-9451-83b70686d8cf" ShowCaption="False" Caption="Auto7dedc906-6c92-412d-9451-83b70686d8cf(41)" Index="0" RelativeSize="49.809402795425669" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="68.613138686131393" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb" ShowCaption="False" Caption="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb(46)" Index="1" RelativeSize="50.191082802547768" IsNewNode="True">
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb" ShowCaption="False" Caption="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb(46)" Index="1" RelativeSize="50.190597204574331" IsNewNode="True">
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesRefundReqDocTrail" RelativeSize="100" Index="3">
@@ -5654,11 +5658,6 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Autoea537896-c8b1-48c7-88c5-b48f3cd41d0f" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="17.073170731707318" IsNewNode="True">
-            <LayoutItem Id="Item3" Index="0" RelativeSize="40.644361833952914" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="29.368029739776951" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="29.987608426270135" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -5716,23 +5715,21 @@
         <PropertyEditor Id="SAPDocNum" PropertyName="SAPDocNum" IsNewNode="True" />
         <ActionContainerViewItem Id="SFR Inquiry Item" ActionContainer="ListView" Caption="SFR Inquiry Item" Orientation="Vertical" IsNewNode="True" />
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="34.552845528455286" IsNewNode="True">
-            <LayoutGroup Id="SalesRefundRequests_col1" ShowCaption="False" Index="0" RelativeSize="44.879898862199745" IsNewNode="True">
+            <LayoutGroup Id="SalesRefundRequests_col1" ShowCaption="False" Index="0" RelativeSize="44.746600741656366" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="ContactPerson" ViewItem="ContactPerson" Index="3" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="4" RelativeSize="34.117647058823529" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesRefundRequests_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="55.120101137800255" IsNewNode="True">
-              <LayoutGroup Id="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f" ShowCaption="False" Caption="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f(10)" Index="0" RelativeSize="72.935779816513758" IsNewNode="True">
+            <LayoutGroup Id="SalesRefundRequests_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="55.253399258343634" IsNewNode="True">
+              <LayoutGroup Id="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f" ShowCaption="False" Caption="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f(10)" Index="0" RelativeSize="73.601789709172266" IsNewNode="True">
                 <LayoutItem Id="DocDate" ViewItem="DocDate" Index="0" RelativeSize="20" IsNewNode="True" />
                 <LayoutItem Id="PostingDate" ViewItem="PostingDate" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -5740,48 +5737,48 @@
                 <LayoutItem Id="Remarks" ViewItem="Remarks" Index="4" RelativeSize="15.294117647058824" IsNewNode="True" />
                 <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="5" RelativeSize="18.823529411764707" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="SFR Inquiry Item" ViewItem="SFR Inquiry Item" Index="1" RelativeSize="27.064220183486238" IsNewNode="True" />
+              <LayoutItem Id="SFR Inquiry Item" ViewItem="SFR Inquiry Item" Index="1" RelativeSize="26.398210290827741" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="48.3739837398374" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="65.447154471544721" IsNewNode="True">
             <LayoutGroup Id="SalesRefundReqDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="SalesRefundReqDetails" ViewItem="SalesRefundReqDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto89f6787c-a399-4e4d-b26f-9883068bec22" ShowCaption="False" Caption="Auto89f6787c-a399-4e4d-b26f-9883068bec22(21)" Index="0" RelativeSize="49.804941482444733" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto89f6787c-a399-4e4d-b26f-9883068bec22" ShowCaption="False" Caption="Auto89f6787c-a399-4e4d-b26f-9883068bec22(21)" Index="0" RelativeSize="49.809402795425669" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto8997c333-6f41-458a-9fa7-cd281a6c566f" ShowCaption="False" Caption="Auto8997c333-6f41-458a-9fa7-cd281a6c566f(32)" Index="1" RelativeSize="50.195058517555267" IsNewNode="True">
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto8997c333-6f41-458a-9fa7-cd281a6c566f" ShowCaption="False" Caption="Auto8997c333-6f41-458a-9fa7-cd281a6c566f(32)" Index="1" RelativeSize="50.190597204574331" IsNewNode="True">
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto7dedc906-6c92-412d-9451-83b70686d8cf" ShowCaption="False" Caption="Auto7dedc906-6c92-412d-9451-83b70686d8cf(41)" Index="0" RelativeSize="49.804941482444733" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="56.565656565656568" IsNewNode="True" />
+              <LayoutGroup Id="Auto7dedc906-6c92-412d-9451-83b70686d8cf" ShowCaption="False" Caption="Auto7dedc906-6c92-412d-9451-83b70686d8cf(41)" Index="0" RelativeSize="49.809402795425669" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="68.613138686131393" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb" ShowCaption="False" Caption="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb(46)" Index="1" RelativeSize="50.195058517555267" IsNewNode="True">
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb" ShowCaption="False" Caption="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb(46)" Index="1" RelativeSize="50.190597204574331" IsNewNode="True">
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesRefundReqDocTrail" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
@@ -5797,11 +5794,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto76d9dd78-9958-4103-b563-db8a3870e588" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="17.073170731707318" IsNewNode="True">
-            <LayoutItem Id="Item3" Index="0" RelativeSize="39.443742098609356" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="29.962073324905184" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="30.594184576485461" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -5859,23 +5851,21 @@
         <PropertyEditor Id="SAPDocNum" PropertyName="SAPDocNum" IsNewNode="True" />
         <ActionContainerViewItem Id="SFR Inquiry Item" ActionContainer="ListView" Caption="SFR Inquiry Item" Orientation="Vertical" IsNewNode="True" />
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="34.552845528455286" IsNewNode="True">
-            <LayoutGroup Id="SalesRefundRequests_col1" ShowCaption="False" Index="0" RelativeSize="44.879898862199745" IsNewNode="True">
+            <LayoutGroup Id="SalesRefundRequests_col1" ShowCaption="False" Index="0" RelativeSize="44.746600741656366" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="20" IsNewNode="True" />
               <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="ContactPerson" ViewItem="ContactPerson" Index="3" RelativeSize="15.294117647058824" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="4" RelativeSize="34.117647058823529" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesRefundRequests_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="55.120101137800255" IsNewNode="True">
-              <LayoutGroup Id="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f" ShowCaption="False" Caption="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f(10)" Index="0" RelativeSize="72.935779816513758" IsNewNode="True">
+            <LayoutGroup Id="SalesRefundRequests_col2" ShowCaption="False" Direction="Horizontal" Index="1" RelativeSize="55.253399258343634" IsNewNode="True">
+              <LayoutGroup Id="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f" ShowCaption="False" Caption="Auto2ce6cee2-cbfe-49bf-8b80-cad0a73e0b8f(10)" Index="0" RelativeSize="73.601789709172266" IsNewNode="True">
                 <LayoutItem Id="DocDate" ViewItem="DocDate" Index="0" RelativeSize="20" IsNewNode="True" />
                 <LayoutItem Id="PostingDate" ViewItem="PostingDate" Index="1" RelativeSize="15.294117647058824" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="15.294117647058824" IsNewNode="True" />
@@ -5883,48 +5873,48 @@
                 <LayoutItem Id="Remarks" ViewItem="Remarks" Index="4" RelativeSize="15.294117647058824" IsNewNode="True" />
                 <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="5" RelativeSize="18.823529411764707" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="SFR Inquiry Item" ViewItem="SFR Inquiry Item" Index="1" RelativeSize="27.064220183486238" IsNewNode="True" />
+              <LayoutItem Id="SFR Inquiry Item" ViewItem="SFR Inquiry Item" Index="1" RelativeSize="26.398210290827741" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="48.3739837398374" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="65.447154471544721" IsNewNode="True">
             <LayoutGroup Id="SalesRefundReqDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="SalesRefundReqDetails" ViewItem="SalesRefundReqDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto89f6787c-a399-4e4d-b26f-9883068bec22" ShowCaption="False" Caption="Auto89f6787c-a399-4e4d-b26f-9883068bec22(21)" Index="0" RelativeSize="49.804941482444733" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto89f6787c-a399-4e4d-b26f-9883068bec22" ShowCaption="False" Caption="Auto89f6787c-a399-4e4d-b26f-9883068bec22(21)" Index="0" RelativeSize="49.809402795425669" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto8997c333-6f41-458a-9fa7-cd281a6c566f" ShowCaption="False" Caption="Auto8997c333-6f41-458a-9fa7-cd281a6c566f(32)" Index="1" RelativeSize="50.195058517555267" IsNewNode="True">
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto8997c333-6f41-458a-9fa7-cd281a6c566f" ShowCaption="False" Caption="Auto8997c333-6f41-458a-9fa7-cd281a6c566f(32)" Index="1" RelativeSize="50.190597204574331" IsNewNode="True">
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto7dedc906-6c92-412d-9451-83b70686d8cf" ShowCaption="False" Caption="Auto7dedc906-6c92-412d-9451-83b70686d8cf(41)" Index="0" RelativeSize="49.804941482444733" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="56.565656565656568" IsNewNode="True" />
+              <LayoutGroup Id="Auto7dedc906-6c92-412d-9451-83b70686d8cf" ShowCaption="False" Caption="Auto7dedc906-6c92-412d-9451-83b70686d8cf(41)" Index="0" RelativeSize="49.809402795425669" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="68.613138686131393" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb" ShowCaption="False" Caption="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb(46)" Index="1" RelativeSize="50.195058517555267" IsNewNode="True">
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="0" RelativeSize="17.171717171717173" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="1" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="2" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="3" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="4" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="5" RelativeSize="13.131313131313131" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="6" RelativeSize="17.171717171717173" IsNewNode="True" />
+              <LayoutGroup Id="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb" ShowCaption="False" Caption="Auto5fd2f63f-4b09-4a4a-a6c8-e537ea0a64fb(46)" Index="1" RelativeSize="50.190597204574331" IsNewNode="True">
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="0" RelativeSize="12.408759124087592" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="1" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="2" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="3" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="4" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="5" RelativeSize="9.4890510948905114" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="6" RelativeSize="40.145985401459853" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesRefundReqDocTrail" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
@@ -5940,11 +5930,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Autod8bdb6c1-7545-45a3-b94c-5d9079bd9803" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="17.073170731707318" IsNewNode="True">
-            <LayoutItem Id="Item3" Index="0" RelativeSize="39.443742098609356" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="29.962073324905184" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="30.594184576485461" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -5967,8 +5952,6 @@
         <ColumnInfo Id="PostingDate" PropertyName="PostingDate" Index="4" IsNewNode="True" />
         <ColumnInfo Id="Status" PropertyName="Status" Index="5" IsNewNode="True" />
         <ColumnInfo Id="AppStatus" PropertyName="AppStatus" Index="6" IsNewNode="True" />
-        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="7" IsNewNode="True" />
-        <ColumnInfo Id="Total" PropertyName="Total" Index="8" IsNewNode="True" />
         <ColumnInfo Id="Reference" PropertyName="Reference" Index="9" IsNewNode="True" />
       </Columns>
     </ListView>
@@ -6207,8 +6190,8 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="39.676113360323889" Direction="Horizontal">
-            <LayoutGroup Id="SalesReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="41.827541827541829" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="39.837398373983739" Direction="Horizontal">
+            <LayoutGroup Id="SalesReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="41.779975278121135" IsNewNode="True">
               <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Salesperson" ViewItem="Salesperson" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6217,8 +6200,8 @@
               <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="58.172458172458171" Direction="Horizontal" Caption="SalesReturnRequests_col2" IsNewNode="True">
-              <LayoutGroup Id="Auto68161cc5-b83e-48bd-9400-10ceeea9c221" ShowCaption="False" Caption="Auto68161cc5-b83e-48bd-9400-10ceeea9c221(10)" Index="0" RelativeSize="73.672566371681413" IsNewNode="True">
+            <LayoutGroup Id="SalesReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="58.220024721878865" Direction="Horizontal" Caption="SalesReturnRequests_col2" IsNewNode="True">
+              <LayoutGroup Id="Auto68161cc5-b83e-48bd-9400-10ceeea9c221" ShowCaption="False" Caption="Auto68161cc5-b83e-48bd-9400-10ceeea9c221(10)" Index="0" RelativeSize="74.734607218683649" IsNewNode="True">
                 <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6227,7 +6210,7 @@
                 <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="SRR Inquiry Item" ViewItem="SRR Inquiry Item" Index="1" RelativeSize="26.327433628318584" IsNewNode="True" />
+              <LayoutItem Id="SRR Inquiry Item" ViewItem="SRR Inquiry Item" Index="1" RelativeSize="25.265392781316347" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="SalesReturnRequests" RelativeSize="100" Removed="True">
               <LayoutGroup Id="SalesReturnRequests_col1" RelativeSize="50">
@@ -6251,47 +6234,47 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="53.441295546558706">
+          <TabbedGroup Id="Tabs" RelativeSize="60.162601626016261">
             <LayoutGroup Id="SalesReturnRequestDetails" RelativeSize="100">
               <LayoutItem Id="SalesReturnRequestDetails" RelativeSize="100" />
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Autod16168ff-303b-4a84-b317-262e2a7e31ff" ShowCaption="False" Caption="Autod16168ff-303b-4a84-b317-262e2a7e31ff(24)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="26.785714285714285" IsNewNode="True" />
+              <LayoutGroup Id="Autod16168ff-303b-4a84-b317-262e2a7e31ff" ShowCaption="False" Caption="Autod16168ff-303b-4a84-b317-262e2a7e31ff(24)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="33.87096774193548" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd" ShowCaption="False" Caption="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd(35)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd" ShowCaption="False" Caption="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd(35)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Autodc3a9f44-aa1b-412c-8184-b75168741fae" ShowCaption="False" Caption="Autodc3a9f44-aa1b-412c-8184-b75168741fae(45)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="61.607142857142854" IsNewNode="True" />
+              <LayoutGroup Id="Autodc3a9f44-aa1b-412c-8184-b75168741fae" ShowCaption="False" Caption="Autodc3a9f44-aa1b-412c-8184-b75168741fae(45)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="65.3225806451613" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0" ShowCaption="False" Caption="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0(50)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0" ShowCaption="False" Caption="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0(50)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesReturnRequestDocTrail" RelativeSize="100" Index="3">
@@ -6310,11 +6293,6 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Autob0e30f88-ad6a-4f03-9486-3db5cb055630" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.8825910931174086" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="38.352638352638351" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="30.501930501930502" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="31.145431145431147" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -6378,16 +6356,14 @@
         <PropertyEditor Id="ShippingAddressfield" PropertyName="ShippingAddressfield" MaxLength="500" RowCount="4" IsNewNode="True" />
         <ActionContainerViewItem Id="SRR Inquiry Item" ActionContainer="ListView" Caption="SRR Inquiry Item" Orientation="Vertical" IsNewNode="True" />
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="Transporter" PropertyName="Transporter" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.676113360323889" IsNewNode="True">
-            <LayoutGroup Id="SalesReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="41.827541827541829" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.837398373983739" IsNewNode="True">
+            <LayoutGroup Id="SalesReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="41.779975278121135" IsNewNode="True">
               <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Salesperson" ViewItem="Salesperson" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6396,8 +6372,8 @@
               <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="58.172458172458171" Direction="Horizontal" IsNewNode="True">
-              <LayoutGroup Id="Auto68161cc5-b83e-48bd-9400-10ceeea9c221" ShowCaption="False" Caption="Auto68161cc5-b83e-48bd-9400-10ceeea9c221(10)" Index="0" RelativeSize="73.672566371681413" IsNewNode="True">
+            <LayoutGroup Id="SalesReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="58.220024721878865" Direction="Horizontal" IsNewNode="True">
+              <LayoutGroup Id="Auto68161cc5-b83e-48bd-9400-10ceeea9c221" ShowCaption="False" Caption="Auto68161cc5-b83e-48bd-9400-10ceeea9c221(10)" Index="0" RelativeSize="74.734607218683649" IsNewNode="True">
                 <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6406,50 +6382,50 @@
                 <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="SRR Inquiry Item" ViewItem="SRR Inquiry Item" Index="1" RelativeSize="26.327433628318584" IsNewNode="True" />
+              <LayoutItem Id="SRR Inquiry Item" ViewItem="SRR Inquiry Item" Index="1" RelativeSize="25.265392781316347" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="53.441295546558706" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="60.162601626016261" IsNewNode="True">
             <LayoutGroup Id="SalesReturnRequestDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="SalesReturnRequestDetails" ViewItem="SalesReturnRequestDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Autod16168ff-303b-4a84-b317-262e2a7e31ff" ShowCaption="False" Caption="Autod16168ff-303b-4a84-b317-262e2a7e31ff(24)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="26.785714285714285" IsNewNode="True" />
+              <LayoutGroup Id="Autod16168ff-303b-4a84-b317-262e2a7e31ff" ShowCaption="False" Caption="Autod16168ff-303b-4a84-b317-262e2a7e31ff(24)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="33.87096774193548" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd" ShowCaption="False" Caption="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd(35)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd" ShowCaption="False" Caption="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd(35)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Autodc3a9f44-aa1b-412c-8184-b75168741fae" ShowCaption="False" Caption="Autodc3a9f44-aa1b-412c-8184-b75168741fae(45)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="61.607142857142854" IsNewNode="True" />
+              <LayoutGroup Id="Autodc3a9f44-aa1b-412c-8184-b75168741fae" ShowCaption="False" Caption="Autodc3a9f44-aa1b-412c-8184-b75168741fae(45)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="65.3225806451613" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0" ShowCaption="False" Caption="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0(50)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0" ShowCaption="False" Caption="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0(50)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesReturnRequestDocTrail" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
@@ -6465,11 +6441,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Autoe37a1817-3933-4de4-8d98-79da397d9a80" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.8825910931174086" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="38.352638352638351" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="30.501930501930502" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="31.145431145431147" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -6533,16 +6504,14 @@
         <PropertyEditor Id="ShippingAddressfield" PropertyName="ShippingAddressfield" MaxLength="500" RowCount="4" IsNewNode="True" />
         <ActionContainerViewItem Id="SRR Inquiry Item" ActionContainer="ListView" Caption="SRR Inquiry Item" Orientation="Vertical" IsNewNode="True" />
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="Transporter" PropertyName="Transporter" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.676113360323889" IsNewNode="True">
-            <LayoutGroup Id="SalesReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="41.827541827541829" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.837398373983739" IsNewNode="True">
+            <LayoutGroup Id="SalesReturnRequests_col1" ShowCaption="False" Index="0" RelativeSize="41.779975278121135" IsNewNode="True">
               <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Salesperson" ViewItem="Salesperson" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6551,8 +6520,8 @@
               <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="58.172458172458171" Direction="Horizontal" IsNewNode="True">
-              <LayoutGroup Id="Auto68161cc5-b83e-48bd-9400-10ceeea9c221" ShowCaption="False" Caption="Auto68161cc5-b83e-48bd-9400-10ceeea9c221(10)" Index="0" RelativeSize="73.672566371681413" IsNewNode="True">
+            <LayoutGroup Id="SalesReturnRequests_col2" ShowCaption="False" Index="1" RelativeSize="58.220024721878865" Direction="Horizontal" IsNewNode="True">
+              <LayoutGroup Id="Auto68161cc5-b83e-48bd-9400-10ceeea9c221" ShowCaption="False" Caption="Auto68161cc5-b83e-48bd-9400-10ceeea9c221(10)" Index="0" RelativeSize="74.734607218683649" IsNewNode="True">
                 <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
                 <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="AppStatus" ViewItem="AppStatus" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6561,50 +6530,50 @@
                 <LayoutItem Id="Remarks" ViewItem="Remarks" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
                 <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="SRR Inquiry Item" ViewItem="SRR Inquiry Item" Index="1" RelativeSize="26.327433628318584" IsNewNode="True" />
+              <LayoutItem Id="SRR Inquiry Item" ViewItem="SRR Inquiry Item" Index="1" RelativeSize="25.265392781316347" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="53.441295546558706" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="60.162601626016261" IsNewNode="True">
             <LayoutGroup Id="SalesReturnRequestDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="SalesReturnRequestDetails" ViewItem="SalesReturnRequestDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Autod16168ff-303b-4a84-b317-262e2a7e31ff" ShowCaption="False" Caption="Autod16168ff-303b-4a84-b317-262e2a7e31ff(24)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="26.785714285714285" IsNewNode="True" />
+              <LayoutGroup Id="Autod16168ff-303b-4a84-b317-262e2a7e31ff" ShowCaption="False" Caption="Autod16168ff-303b-4a84-b317-262e2a7e31ff(24)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="33.87096774193548" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd" ShowCaption="False" Caption="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd(35)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd" ShowCaption="False" Caption="Auto1ca9992c-cdb7-455b-9570-9e915a832ebd(35)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Autodc3a9f44-aa1b-412c-8184-b75168741fae" ShowCaption="False" Caption="Autodc3a9f44-aa1b-412c-8184-b75168741fae(45)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="61.607142857142854" IsNewNode="True" />
+              <LayoutGroup Id="Autodc3a9f44-aa1b-412c-8184-b75168741fae" ShowCaption="False" Caption="Autodc3a9f44-aa1b-412c-8184-b75168741fae(45)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="65.3225806451613" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0" ShowCaption="False" Caption="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0(50)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0" ShowCaption="False" Caption="Auto6a2892aa-c29f-4dc1-b3a2-c2c9572e1fd0(50)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesReturnRequestDocTrail" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
@@ -6620,11 +6589,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Autof316589f-40f7-4a38-ae98-61f0d55800a9" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.8825910931174086" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="38.352638352638351" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="30.501930501930502" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="31.145431145431147" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -6636,8 +6600,6 @@
         <ColumnInfo Id="Status" Index="6" />
         <ColumnInfo Id="AppStatus" Index="7" />
         <ColumnInfo Id="CurrencyRate" Index="8" />
-        <ColumnInfo Id="TotalQty" Index="9" />
-        <ColumnInfo Id="Total" Index="10" />
         <ColumnInfo Id="Reference" Index="11" />
         <ColumnInfo Id="PaymentMethod" Index="12" />
       </Columns>
@@ -6669,8 +6631,6 @@
         <ColumnInfo Id="Status" PropertyName="Status" Index="6" IsNewNode="True" />
         <ColumnInfo Id="AppStatus" PropertyName="AppStatus" Index="7" IsNewNode="True" />
         <ColumnInfo Id="CurrencyRate" PropertyName="CurrencyRate" Index="8" IsNewNode="True" />
-        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="9" IsNewNode="True" />
-        <ColumnInfo Id="Total" PropertyName="Total" Index="10" IsNewNode="True" />
         <ColumnInfo Id="Reference" PropertyName="Reference" Index="11" IsNewNode="True" />
         <ColumnInfo Id="PaymentMethod" PropertyName="PaymentMethod" Index="12" IsNewNode="True" />
       </Columns>
@@ -6693,8 +6653,8 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="39.676113360323889" Direction="Horizontal">
-            <LayoutGroup Id="SalesReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.420849420849422" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="39.837398373983739" Direction="Horizontal">
+            <LayoutGroup Id="SalesReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.320148331273174" IsNewNode="True">
               <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Salesperson" ViewItem="Salesperson" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6703,7 +6663,7 @@
               <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.579150579150578" IsNewNode="True">
+            <LayoutGroup Id="SalesReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.679851668726826" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6738,47 +6698,47 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="53.441295546558706">
+          <TabbedGroup Id="Tabs" RelativeSize="60.162601626016261">
             <LayoutGroup Id="SalesReturnDetails" RelativeSize="100">
               <LayoutItem Id="SalesReturnDetails" RelativeSize="100" />
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto77656373-e3b0-40b4-b2de-409902286ab7" ShowCaption="False" Caption="Auto77656373-e3b0-40b4-b2de-409902286ab7(22)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="26.785714285714285" IsNewNode="True" />
+              <LayoutGroup Id="Auto77656373-e3b0-40b4-b2de-409902286ab7" ShowCaption="False" Caption="Auto77656373-e3b0-40b4-b2de-409902286ab7(22)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="33.87096774193548" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682" ShowCaption="False" Caption="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682(33)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682" ShowCaption="False" Caption="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682(33)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df" ShowCaption="False" Caption="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df(43)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="61.607142857142854" IsNewNode="True" />
+              <LayoutGroup Id="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df" ShowCaption="False" Caption="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df(43)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="65.3225806451613" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929" ShowCaption="False" Caption="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929(48)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929" ShowCaption="False" Caption="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929(48)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesReturnDocTrail" RelativeSize="100" Index="3">
@@ -6788,11 +6748,6 @@
               <LayoutItem Id="AuditTrail" RelativeSize="100" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto177f4c03-c008-458d-ad73-bc2f737d255b" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.8825910931174086" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="38.352638352638351" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="30.501930501930502" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="31.145431145431147" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -6852,16 +6807,14 @@
         <PropertyEditor Id="ShippingAddress" PropertyName="ShippingAddress" IsNewNode="True" />
         <PropertyEditor Id="ShippingAddressfield" PropertyName="ShippingAddressfield" MaxLength="500" RowCount="4" IsNewNode="True" />
         <PropertyEditor Id="Status" PropertyName="Status" IsNewNode="True" />
-        <PropertyEditor Id="Total" PropertyName="Total" IsNewNode="True" />
-        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" IsNewNode="True" />
         <PropertyEditor Id="Transporter" PropertyName="Transporter" IsNewNode="True" />
         <PropertyEditor Id="UpdateDate" PropertyName="UpdateDate" IsNewNode="True" />
         <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.676113360323889" IsNewNode="True">
-            <LayoutGroup Id="SalesReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.420849420849422" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="39.837398373983739" IsNewNode="True">
+            <LayoutGroup Id="SalesReturns_col1" ShowCaption="False" Index="0" RelativeSize="49.320148331273174" IsNewNode="True">
               <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Salesperson" ViewItem="Salesperson" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6870,7 +6823,7 @@
               <LayoutItem Id="CurrencyRate" ViewItem="CurrencyRate" Index="5" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="Reference" ViewItem="Reference" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="SalesReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.579150579150578" IsNewNode="True">
+            <LayoutGroup Id="SalesReturns_col2" ShowCaption="False" Index="1" RelativeSize="50.679851668726826" IsNewNode="True">
               <LayoutItem Id="DocNum" ViewItem="DocNum" Index="0" RelativeSize="17.346938775510203" IsNewNode="True" />
               <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="13.26530612244898" IsNewNode="True" />
               <LayoutItem Id="DocDate" ViewItem="DocDate" Index="2" RelativeSize="13.26530612244898" IsNewNode="True" />
@@ -6880,47 +6833,47 @@
               <LayoutItem Id="EIVConsolidate" ViewItem="EIVConsolidate" Index="6" RelativeSize="16.3265306122449" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" Index="1" RelativeSize="53.441295546558706" IsNewNode="True">
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="60.162601626016261" IsNewNode="True">
             <LayoutGroup Id="SalesReturnDetails" Index="0" ShowCaption="True" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="SalesReturnDetails" ViewItem="SalesReturnDetails" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
             <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" Caption="E-Invoice Buyer" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto77656373-e3b0-40b4-b2de-409902286ab7" ShowCaption="False" Caption="Auto77656373-e3b0-40b4-b2de-409902286ab7(22)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="26.785714285714285" IsNewNode="True" />
+              <LayoutGroup Id="Auto77656373-e3b0-40b4-b2de-409902286ab7" ShowCaption="False" Caption="Auto77656373-e3b0-40b4-b2de-409902286ab7(22)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVBuyerName" ViewItem="EIVBuyerName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerTIN" ViewItem="EIVBuyerTIN" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegNum" ViewItem="EIVBuyerRegNum" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerRegTyp" ViewItem="EIVBuyerRegTyp" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerSSTRegNum" ViewItem="EIVBuyerSSTRegNum" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerEmail" ViewItem="EIVBuyerEmail" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVBuyerContact" ViewItem="EIVBuyerContact" Index="6" RelativeSize="33.87096774193548" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682" ShowCaption="False" Caption="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682(33)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682" ShowCaption="False" Caption="Autoa9a5eee8-0c93-4901-bcb7-8bc13ce93682(33)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="BillingAddress" ViewItem="BillingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1B" ViewItem="EIVAddressLine1B" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2B" ViewItem="EIVAddressLine2B" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3B" ViewItem="EIVAddressLine3B" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneB" ViewItem="EIVPostalZoneB" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameB" ViewItem="EIVCityNameB" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateB" ViewItem="EIVStateB" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryB" ViewItem="EIVCountryB" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="2" Caption="E-Invoice Recipient" RelativeSize="100" IsNewNode="True">
-              <LayoutGroup Id="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df" ShowCaption="False" Caption="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df(43)" Index="0" RelativeSize="49.933774834437088" IsNewNode="True">
-                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="61.607142857142854" IsNewNode="True" />
+              <LayoutGroup Id="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df" ShowCaption="False" Caption="Auto8c238a59-a393-4b82-bb3d-efc7c572d5df(43)" Index="0" RelativeSize="49.936467598475225" IsNewNode="True">
+                <LayoutItem Id="EIVShippingName" ViewItem="EIVShippingName" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingTin" ViewItem="EIVShippingTin" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegTyp" ViewItem="EIVShippingRegTyp" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVShippingRegNum" ViewItem="EIVShippingRegNum" Index="3" RelativeSize="65.3225806451613" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929" ShowCaption="False" Caption="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929(48)" Index="1" RelativeSize="50.066225165562912" IsNewNode="True">
-                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="15.178571428571429" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="11.607142857142858" IsNewNode="True" />
-                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="15.178571428571429" IsNewNode="True" />
+              <LayoutGroup Id="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929" ShowCaption="False" Caption="Autofb9da5d3-ffa3-4a62-bec8-757fa74f5929(48)" Index="1" RelativeSize="50.063532401524775" IsNewNode="True">
+                <LayoutItem Id="ShippingAddress" ViewItem="ShippingAddress" Index="0" RelativeSize="13.709677419354838" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine1S" ViewItem="EIVAddressLine1S" Index="1" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine2S" ViewItem="EIVAddressLine2S" Index="2" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVAddressLine3S" ViewItem="EIVAddressLine3S" Index="3" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVPostalZoneS" ViewItem="EIVPostalZoneS" Index="4" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCityNameS" ViewItem="EIVCityNameS" Index="5" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVStateS" ViewItem="EIVStateS" Index="6" RelativeSize="10.483870967741936" IsNewNode="True" />
+                <LayoutItem Id="EIVCountryS" ViewItem="EIVCountryS" Index="7" RelativeSize="23.387096774193548" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="SalesReturnDocTrail" Index="3" ShowCaption="True" RelativeSize="100" IsNewNode="True">
@@ -6930,11 +6883,6 @@
               <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
             </LayoutGroup>
           </TabbedGroup>
-          <LayoutGroup Id="Auto00b97683-6d94-4362-835d-11782b0737c2" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="6.8825910931174086" IsNewNode="True">
-            <LayoutItem Id="Item1" Index="0" RelativeSize="38.352638352638351" IsNewNode="True" />
-            <LayoutItem Id="TotalQty" ViewItem="TotalQty" Index="1" RelativeSize="30.501930501930502" IsNewNode="True" />
-            <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="31.145431145431147" IsNewNode="True" />
-          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
@@ -6946,8 +6894,6 @@
         <ColumnInfo Id="Status" Index="6" />
         <ColumnInfo Id="SAPDocNum" Index="7" />
         <ColumnInfo Id="CurrencyRate" Index="8" />
-        <ColumnInfo Id="TotalQty" Index="9" />
-        <ColumnInfo Id="Total" Index="10" />
         <ColumnInfo Id="Reference" Index="11" />
         <ColumnInfo Id="PaymentMethod" Index="12" />
         <ColumnInfo Id="BaseDoc" Index="13" />

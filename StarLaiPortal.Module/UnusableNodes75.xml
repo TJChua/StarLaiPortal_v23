@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SalesReturns_DetailView_Dashboard">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <ListView Id="SalesReturnRequests_ListView_Approval">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Total" PropertyName="Total" Index="10" />
+        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="9" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesReturnRequests_DetailView_Dashboard">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SalesReturnRequests_DetailView_Approval">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <ListView Id="SalesRefundRequests_ListView_Approval">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Total" PropertyName="Total" Index="8" />
+        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="7" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesRefundRequests_DetailView_Dashboard">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SalesRefundRequests_DetailView_Approval">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <DetailView Id="PurchaseReturns_DetailView_Dashboard">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <ListView Id="PurchaseReturnRequests_ListView_Approval">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Total" PropertyName="Total" Index="12" />
+        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="11" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseReturnRequests_DetailView_Dashboard">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <DetailView Id="PurchaseReturnRequests_DetailView_Approval">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <DetailView Id="ItemInquiry_DetailView_Report">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ARDownpaymentCancel_ListView_Approval">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Total" PropertyName="Total" Index="9" />
+        <ColumnInfo Id="TotalQty" PropertyName="TotalQty" Index="8" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ARDownpaymentCancel_DetailView_Approval">
+      <Items Id="Items">
+        <PropertyEditor Id="TotalQty" PropertyName="TotalQty" />
+        <PropertyEditor Id="Total" PropertyName="Total" />
+      </Items>
+    </DetailView>
+    <DetailView Id="ARDownpaymentCancel_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto9235df8e-8022-4c2d-9db1-678eda27a488">
+            <LayoutItem Id="Total" ViewItem="Total" />
+            <LayoutItem Id="TotalQty" ViewItem="TotalQty" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ARDownpaymentCancel_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalQty" Index="8" />
+        <ColumnInfo Id="Total" Index="9" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ItemInquiry_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autobbf64865-516a-4878-aac6-eee1a0c2219b">
+            <LayoutItem Id="ViewSales" ViewItem="ViewSales" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PurchaseReturnRequests_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto8112baf4-13a7-4e0f-b2b9-cdccd20a7dd4">
+            <LayoutItem Id="Total" ViewItem="Total" />
+            <LayoutItem Id="TotalQty" ViewItem="TotalQty" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseReturnRequests_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalQty" SortIndex="0" SortOrder="Ascending" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseReturns_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto6a301a93-b9d2-4a01-8752-1c9395443a59">
+            <LayoutItem Id="Total" ViewItem="Total" />
+            <LayoutItem Id="TotalQty" ViewItem="TotalQty" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseReturns_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalQty" Index="12" />
+        <ColumnInfo Id="Total" Index="13" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesRefundRequests_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autoea537896-c8b1-48c7-88c5-b48f3cd41d0f">
+            <LayoutItem Id="Total" ViewItem="Total" />
+            <LayoutItem Id="TotalQty" ViewItem="TotalQty" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesReturnRequests_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Autob0e30f88-ad6a-4f03-9486-3db5cb055630">
+            <LayoutItem Id="Total" ViewItem="Total" />
+            <LayoutItem Id="TotalQty" ViewItem="TotalQty" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesReturnRequests_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalQty" Index="9" />
+        <ColumnInfo Id="Total" Index="10" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesReturns_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Auto177f4c03-c008-458d-ad73-bc2f737d255b">
+            <LayoutItem Id="Total" ViewItem="Total" />
+            <LayoutItem Id="TotalQty" ViewItem="TotalQty" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesReturns_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="TotalQty" Index="9" />
+        <ColumnInfo Id="Total" Index="10" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

@@ -189,7 +189,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _InvoiceDate;
-        [XafDisplayName("Invoice  Date")]
+        [XafDisplayName("Invoice/Packing List Date")]
         [Index(13), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
         public DateTime InvoiceDate
         {
@@ -227,7 +227,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private string _DestinationPort;
-        [XafDisplayName("Destination Port")]
+        [XafDisplayName("Final Destination Port")]
         [Index(20), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Size(30)]
         public string DestinationPort
@@ -253,7 +253,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private string _VesselNumber;
-        [XafDisplayName("Vessel Number")]
+        [XafDisplayName("Vessel & Voyage")]
         [Index(25), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         [Size(30)]
         public string VesselNumber
@@ -266,7 +266,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _EstimateArrivalDate;
-        [XafDisplayName("Estimate Arrival Date")]
+        [XafDisplayName("Empty Container Estimate Arrival Date")]
         [Index(28), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime EstimateArrivalDate
         {
@@ -278,7 +278,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _ActualArrivalDate;
-        [XafDisplayName("Actual Arrival Date")]
+        [XafDisplayName("Empty Container Actual Arrival Date/Time")]
         [Index(30), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime ActualArrivalDate
         {
@@ -302,7 +302,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _CIPLDrafted;
-        [XafDisplayName("CIPL Drafted")]
+        [XafDisplayName("CIPL Drafted Date")]
         [Index(35), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime CIPLDrafted
         {
@@ -314,7 +314,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _CustomDocSubmitted;
-        [XafDisplayName("Custom Doc Submitted")]
+        [XafDisplayName("Custom Doc Submitted Date")]
         [Index(38), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime CustomDocSubmitted
         {
@@ -326,7 +326,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _PullOutDate;
-        [XafDisplayName("Pull Out Date")]
+        [XafDisplayName("Pull Out Date/Time")]
         [Index(40), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PullOutDate
         {
@@ -338,7 +338,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _PortOfLoadingEta;
-        [XafDisplayName("Port Of Loading Eta")]
+        [XafDisplayName("Port Of Loading Eta Date")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [Index(43), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PortOfLoadingEta
@@ -351,7 +351,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _ActualTimeDeparture;
-        [XafDisplayName("Actual Time Departure")]
+        [XafDisplayName("Closing Date/Time")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [Index(45), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime ActualTimeDeparture
@@ -364,7 +364,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _FinalDestinationETA;
-        [XafDisplayName("Final Destination ETA")]
+        [XafDisplayName("Final Destination Date ETA")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [Index(48), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime FinalDestinationETA
@@ -377,7 +377,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         }
 
         private DateTime _ActualTimeArrival;
-        [XafDisplayName("Actual Time Arrival")]
+        [XafDisplayName("Final Destination Actual Arrival Date/Time")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [Index(50), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime ActualTimeArrival
@@ -386,6 +386,30 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
             set
             {
                 SetPropertyValue("ActualTimeArrival", ref _ActualTimeArrival, value);
+            }
+        }
+
+        private string _Forwarder;
+        [XafDisplayName("Forwarder")]
+        [Index(53), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        public string Forwarder
+        {
+            get { return _Forwarder; }
+            set
+            {
+                SetPropertyValue("Forwarder", ref _Forwarder, value);
+            }
+        }
+
+        private string _PortOfLoading;
+        [XafDisplayName("Port Of Loading")]
+        [Index(55), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
+        public string PortOfLoading
+        {
+            get { return _PortOfLoading; }
+            set
+            {
+                SetPropertyValue("PortOfLoading", ref _PortOfLoading, value);
             }
         }
 

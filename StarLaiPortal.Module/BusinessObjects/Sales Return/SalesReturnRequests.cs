@@ -567,35 +567,35 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         // End ver 1.0.10
 
         // Start ver 1.0.34
-        private decimal _TotalQty;
-        [XafDisplayName("Total Qty")]
-        [Appearance("TotalQty", Enabled = false)]
-        [DbType("numeric(18,6)")]
-        [ModelDefault("DisplayFormat", "{0:N0}")]
-        [Index(33), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
-        public decimal TotalQty
-        {
-            get { return _TotalQty; }
-            set
-            {
-                SetPropertyValue("TotalQty", ref _TotalQty, value);
-            }
-        }
+        //private decimal _TotalQty;
+        //[XafDisplayName("Total Qty")]
+        //[Appearance("TotalQty", Enabled = false)]
+        //[DbType("numeric(18,6)")]
+        //[ModelDefault("DisplayFormat", "{0:N0}")]
+        //[Index(33), VisibleInListView(true), VisibleInDetailView(true), VisibleInLookupListView(false)]
+        //public decimal TotalQty
+        //{
+        //    get { return _TotalQty; }
+        //    set
+        //    {
+        //        SetPropertyValue("TotalQty", ref _TotalQty, value);
+        //    }
+        //}
 
-        private decimal _Total;
-        [XafDisplayName("Total Amt")]
-        [Appearance("Total", Enabled = false)]
-        [DbType("numeric(18,6)")]
-        [ModelDefault("DisplayFormat", "{0:n2}")]
-        [Index(35), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
-        public decimal Total
-        {
-            get { return _Total; }
-            set
-            {
-                SetPropertyValue("Total", ref _Total, value);
-            }
-        }
+        //private decimal _Total;
+        //[XafDisplayName("Total Amt")]
+        //[Appearance("Total", Enabled = false)]
+        //[DbType("numeric(18,6)")]
+        //[ModelDefault("DisplayFormat", "{0:n2}")]
+        //[Index(35), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
+        //public decimal Total
+        //{
+        //    get { return _Total; }
+        //    set
+        //    {
+        //        SetPropertyValue("Total", ref _Total, value);
+        //    }
+        //}
         // End ver 1.0.34
 
         // Start ver 1.0.18
@@ -1961,20 +1961,20 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         [Appearance("SalesReturnRequestDetails", Enabled = false, Criteria = "IsNew")]
         public XPCollection<SalesReturnRequestDetails> SalesReturnRequestDetails
         {
-            get
-            {
-                // Start ver 1.0.34
-                //get { return GetCollection<SalesReturnRequestDetails>("SalesReturnRequestDetails"); }
+            // Start ver 1.0.34
+            get { return GetCollection<SalesReturnRequestDetails>("SalesReturnRequestDetails"); }
+            //get
+            //{
 
-                var collection = GetCollection<SalesReturnRequestDetails>(
-                    nameof(SalesReturnRequestDetails));
+            //    var collection = GetCollection<SalesReturnRequestDetails>(
+            //        nameof(SalesReturnRequestDetails));
 
-                collection.CollectionChanged -= Details_CollectionChanged;
-                collection.CollectionChanged += Details_CollectionChanged;
+            //    collection.CollectionChanged -= Details_CollectionChanged;
+            //    collection.CollectionChanged += Details_CollectionChanged;
 
-                return collection;
-                // End ver 1.0.34
-            }
+            //    return collection;
+            //}
+            // End ver 1.0.34
         }
 
         [Association("SalesReturnRequests-SalesReturnRequestDocTrail")]
@@ -2062,16 +2062,16 @@ namespace StarLaiPortal.Module.BusinessObjects.Sales_Return
         }
 
         // Start ver 1.0.34
-        private void Details_CollectionChanged(object sender, XPCollectionChangedEventArgs e)
-        {
-            RecalculateTotals();
-        }
+        //private void Details_CollectionChanged(object sender, XPCollectionChangedEventArgs e)
+        //{
+        //    RecalculateTotals();
+        //}
 
-        public void RecalculateTotals()
-        {
-            Total = SalesReturnRequestDetails.Sum(x => x.Total);
-            TotalQty = SalesReturnRequestDetails.Sum(x => x.Quantity);
-        }
+        //public void RecalculateTotals()
+        //{
+        //    Total = SalesReturnRequestDetails.Sum(x => x.Total);
+        //    TotalQty = SalesReturnRequestDetails.Sum(x => x.Quantity);
+        //}
         // End ver 1.0.34
     }
 }
