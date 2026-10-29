@@ -111,7 +111,6 @@ namespace StarLaiPortal.Module.BusinessObjects.View
             get; set;
         }
 
-
         [XafDisplayName("U_LeadTimeBasis")]
         [Appearance("U_LeadTimeBasis", Enabled = false)]
         [Index(30)]
@@ -120,5 +119,15 @@ namespace StarLaiPortal.Module.BusinessObjects.View
             get; set;
         }
         // End ver 1.0.28
+
+        // Start ver 1.0.33
+        [XafDisplayName("U_EMContainer")]
+        [Appearance("U_EMContainer", Enabled = false)]
+        [Index(30)]
+        public string U_EMContainer
+        {
+            get; set;
+        }
+        // End ver 1.0.33 
     }
 }

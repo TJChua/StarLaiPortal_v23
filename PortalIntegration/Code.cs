@@ -1018,103 +1018,103 @@ namespace PortalIntegration
                     WriteLog("[INFO]", "--AR Downpayment Posting End--");
                 }
 
-                // Start ver 1.0.35
-                temp = ConfigurationManager.AppSettings["AutoPickingAfterDP"].ToString().ToUpper();
-                if (temp == "Y" || temp == "YES" || temp == "TRUE" || temp == "1")
-                {
-                    WriteLog("[INFO]", "--Automation Picking After DP Start--");
+                //// Start ver 1.0.35
+                //temp = ConfigurationManager.AppSettings["AutoPickingAfterDP"].ToString().ToUpper();
+                //if (temp == "Y" || temp == "YES" || temp == "TRUE" || temp == "1")
+                //{
+                //    WriteLog("[INFO]", "--Automation Picking After DP Start--");
 
-                    #region Automation Picking After AR Downpayment
-                    string getAutoSo = "EXEC sp_GetAutoPickList 'AutoAfterDP'";
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                    conn.Open();
-                    SqlCommand cmdauto = new SqlCommand(getAutoSo, conn);
-                    SqlDataReader readerauto = cmdauto.ExecuteReader();
-                    while (readerauto.Read())
-                    {
-                        IObjectSpace getSOos = ObjectSpaceProvider.CreateObjectSpace();
-                        SalesOrder getobj = getSOos.FindObject<SalesOrder>(new BinaryOperator("Oid", readerauto.GetInt32(0)));
+                //    #region Automation Picking After AR Downpayment
+                //    string getAutoSo = "EXEC sp_GetAutoPickList 'AutoAfterDP'";
+                //    if (conn.State == ConnectionState.Open)
+                //    {
+                //        conn.Close();
+                //    }
+                //    conn.Open();
+                //    SqlCommand cmdauto = new SqlCommand(getAutoSo, conn);
+                //    SqlDataReader readerauto = cmdauto.ExecuteReader();
+                //    while (readerauto.Read())
+                //    {
+                //        IObjectSpace getSOos = ObjectSpaceProvider.CreateObjectSpace();
+                //        SalesOrder getobj = getSOos.FindObject<SalesOrder>(new BinaryOperator("Oid", readerauto.GetInt32(0)));
 
-                        if (getobj != null)
-                        {
-                            #region Add Picking
-                            IObjectSpace autoplos = ObjectSpaceProvider.CreateObjectSpace();
-                            PickList newpl = autoplos.CreateObject<PickList>();
+                //        if (getobj != null)
+                //        {
+                //            #region Add Picking
+                //            IObjectSpace autoplos = ObjectSpaceProvider.CreateObjectSpace();
+                //            PickList newpl = autoplos.CreateObject<PickList>();
 
-                            GeneralControllers genCon = new GeneralControllers();
-                            string docprefix = GetDocPrefix();
-                            newpl.DocNum = genCon.GenerateDocNum(DocTypeList.PL, autoplos, TransferType.NA, 0, docprefix);
+                //            GeneralControllers genCon = new GeneralControllers();
+                //            string docprefix = GetDocPrefix();
+                //            newpl.DocNum = genCon.GenerateDocNum(DocTypeList.PL, autoplos, TransferType.NA, 0, docprefix);
 
-                            if (getobj.Transporter != null)
-                            {
-                                newpl.Transporter = newpl.Session.GetObjectByKey<vwTransporter>(getobj.Transporter.TransporterID);
-                            }
+                //            if (getobj.Transporter != null)
+                //            {
+                //                newpl.Transporter = newpl.Session.GetObjectByKey<vwTransporter>(getobj.Transporter.TransporterID);
+                //            }
 
-                            newpl.CustomerGroup = getobj.Customer.GroupName;
-                            newpl.Customer = getobj.Customer.BPCode;
-                            newpl.CustomerName = getobj.CustomerName;
-                            // Start ver 1.0.28
-                            newpl.DeliveryDate = getobj.DeliveryDate;
-                            // End ver 1.0.28
-                            newpl.SONumber = getobj.DocNum;
-                            newpl.SODeliveryDate = getobj.DeliveryDate.Date.ToString("dd/MM/yyyy");
-                            if (getobj.Priority != null)
-                            {
-                                newpl.Priority = newpl.Session.GetObjectByKey<PriorityType>(getobj.Priority.Oid);
-                            }
+                //            newpl.CustomerGroup = getobj.Customer.GroupName;
+                //            newpl.Customer = getobj.Customer.BPCode;
+                //            newpl.CustomerName = getobj.CustomerName;
+                //            // Start ver 1.0.28
+                //            newpl.DeliveryDate = getobj.DeliveryDate;
+                //            // End ver 1.0.28
+                //            newpl.SONumber = getobj.DocNum;
+                //            newpl.SODeliveryDate = getobj.DeliveryDate.Date.ToString("dd/MM/yyyy");
+                //            if (getobj.Priority != null)
+                //            {
+                //                newpl.Priority = newpl.Session.GetObjectByKey<PriorityType>(getobj.Priority.Oid);
+                //            }
 
-                            foreach (SalesOrderDetails dtl in getobj.SalesOrderDetails)
-                            {
-                                PickListDetails newpldetails = autoplos.CreateObject<PickListDetails>();
+                //            foreach (SalesOrderDetails dtl in getobj.SalesOrderDetails)
+                //            {
+                //                PickListDetails newpldetails = autoplos.CreateObject<PickListDetails>();
 
-                                newpldetails.ItemCode = newpldetails.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode.ItemCode);
-                                newpldetails.ItemDesc = dtl.ItemDesc;
-                                newpldetails.CatalogNo = dtl.CatalogNo;
-                                if (dtl.Location != null)
-                                {
-                                    newpldetails.Warehouse = newpldetails.Session.GetObjectByKey<vwWarehouse>(dtl.Location.WarehouseCode);
-                                    newpl.Warehouse = newpl.Session.GetObjectByKey<vwWarehouse>(dtl.Location.WarehouseCode);
-                                }
-                                newpldetails.PlanQty = dtl.Quantity;
-                                newpldetails.Customer = newpldetails.Session.GetObjectByKey<vwBusniessPartner>(getobj.Customer.BPCode);
-                                newpldetails.SOBaseDoc = getobj.DocNum;
-                                newpldetails.SOBaseId = dtl.Oid.ToString();
-                                newpldetails.SOCreateDate = DateTime.Parse(getobj.CreateDate.ToString());
-                                newpldetails.SOExpectedDate = getobj.PostingDate;
-                                newpldetails.SORemarks = getobj.Remarks;
-                                if (getobj.ContactPerson != null)
-                                {
-                                    newpldetails.SOSalesperson = getobj.ContactPerson.SlpName;
-                                }
-                                if (getobj.Transporter != null)
-                                {
-                                    newpldetails.SOTransporter = getobj.Transporter.TransporterName;
-                                }
-                                newpldetails.SODeliveryDate = getobj.DeliveryDate;
-                                if (getobj.Priority != null)
-                                {
-                                    newpldetails.Priority = newpldetails.Session.GetObjectByKey<PriorityType>(getobj.Priority.Oid);
-                                }
+                //                newpldetails.ItemCode = newpldetails.Session.GetObjectByKey<vwItemMasters>(dtl.ItemCode.ItemCode);
+                //                newpldetails.ItemDesc = dtl.ItemDesc;
+                //                newpldetails.CatalogNo = dtl.CatalogNo;
+                //                if (dtl.Location != null)
+                //                {
+                //                    newpldetails.Warehouse = newpldetails.Session.GetObjectByKey<vwWarehouse>(dtl.Location.WarehouseCode);
+                //                    newpl.Warehouse = newpl.Session.GetObjectByKey<vwWarehouse>(dtl.Location.WarehouseCode);
+                //                }
+                //                newpldetails.PlanQty = dtl.Quantity;
+                //                newpldetails.Customer = newpldetails.Session.GetObjectByKey<vwBusniessPartner>(getobj.Customer.BPCode);
+                //                newpldetails.SOBaseDoc = getobj.DocNum;
+                //                newpldetails.SOBaseId = dtl.Oid.ToString();
+                //                newpldetails.SOCreateDate = DateTime.Parse(getobj.CreateDate.ToString());
+                //                newpldetails.SOExpectedDate = getobj.PostingDate;
+                //                newpldetails.SORemarks = getobj.Remarks;
+                //                if (getobj.ContactPerson != null)
+                //                {
+                //                    newpldetails.SOSalesperson = getobj.ContactPerson.SlpName;
+                //                }
+                //                if (getobj.Transporter != null)
+                //                {
+                //                    newpldetails.SOTransporter = getobj.Transporter.TransporterName;
+                //                }
+                //                newpldetails.SODeliveryDate = getobj.DeliveryDate;
+                //                if (getobj.Priority != null)
+                //                {
+                //                    newpldetails.Priority = newpldetails.Session.GetObjectByKey<PriorityType>(getobj.Priority.Oid);
+                //                }
 
-                                newpl.PickListDetails.Add(newpldetails);
-                            }
+                //                newpl.PickListDetails.Add(newpldetails);
+                //            }
 
-                            autoplos.CommitChanges();
+                //            autoplos.CommitChanges();
 
-                            #endregion
-                        }
-                    }
-                    cmdauto.Dispose();
-                    conn.Close();
+                //            #endregion
+                //        }
+                //    }
+                //    cmdauto.Dispose();
+                //    conn.Close();
 
-                    #endregion
+                //    #endregion
 
-                    WriteLog("[INFO]", "--Automation Picking After DP End--");
-                }
-                // End ver 1.0.35
+                //    WriteLog("[INFO]", "--Automation Picking After DP End--");
+                //}
+                //// End ver 1.0.35
 
                 temp = ConfigurationManager.AppSettings["PickListPost"].ToString().ToUpper();
                 if (temp == "Y" || temp == "YES" || temp == "TRUE" || temp == "1")

@@ -141,7 +141,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         [NoForeignKey]
         [ImmediatePostData]
         [LookupEditorMode(LookupEditorMode.AllItems)]
-        [DataSourceCriteria("ValidFor = 'Y' and CardType = 'C' and IntercoType = 'EM'")]
+        [DataSourceCriteria("ValidFor = 'Y' and CardType = 'C' and Transporter.U_EMContainer = 'Y'")]
         [Appearance("Customer", Enabled = false, Criteria = "not IsNew")]
         [RuleRequiredField(DefaultContexts.Save)]
         [Index(5), VisibleInDetailView(true), VisibleInListView(true), VisibleInLookupListView(false)]
@@ -279,6 +279,8 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime _ActualArrivalDate;
         [XafDisplayName("Empty Container Actual Arrival Date/Time")]
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm tt")]
         [Index(30), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime ActualArrivalDate
         {
@@ -327,6 +329,8 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime _PullOutDate;
         [XafDisplayName("Pull Out Date/Time")]
+        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm tt")]
         [Index(40), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PullOutDate
         {
@@ -339,7 +343,6 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime _PortOfLoadingEta;
         [XafDisplayName("Port Of Loading Eta Date")]
-        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [Index(43), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime PortOfLoadingEta
         {
@@ -353,6 +356,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         private DateTime _ActualTimeDeparture;
         [XafDisplayName("Closing Date/Time")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm tt")]
         [Index(45), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime ActualTimeDeparture
         {
@@ -365,7 +369,6 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
 
         private DateTime _FinalDestinationETA;
         [XafDisplayName("Final Destination Date ETA")]
-        [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
         [Index(48), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime FinalDestinationETA
         {
@@ -379,6 +382,7 @@ namespace StarLaiPortal.Module.BusinessObjects.Delivery_Order
         private DateTime _ActualTimeArrival;
         [XafDisplayName("Final Destination Actual Arrival Date/Time")]
         [ModelDefault("DisplayFormat", "{0: dd/MM/yyyy hh:mm tt}")]
+        [ModelDefault("EditMask", "dd/MM/yyyy hh:mm tt")]
         [Index(50), VisibleInDetailView(true), VisibleInListView(false), VisibleInLookupListView(false)]
         public DateTime ActualTimeArrival
         {
